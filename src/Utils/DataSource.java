@@ -18,12 +18,12 @@ import java.util.logging.Logger;
 public class DataSource {
     private Connection con;
     private static DataSource data;
-    /*final String url = "jdbc:mysql://localhost:3306/Russie2018";
+    /*final String url = "jdbc:mysql://localhost:3306/WorldCup";
     final String user = "root";
     final String pwd = "root";*/
     final String url = "jdbc:mysql://sql101.epizy.com/epiz_21570305_WorldCup";
     final String user = "epiz_21570305";
-    final String pwd = "3VdPl8gk44JP";
+    final String pwd = "houssem1234";
     private DataSource() {
         try {
             con = DriverManager.getConnection(url,user,pwd);
@@ -37,9 +37,7 @@ public class DataSource {
     public Connection getCon() {
         return con;
     }
-    
-    
-
+	
     public static DataSource getInstance(){
         if(data == null){
             data = new DataSource();
