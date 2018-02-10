@@ -24,7 +24,6 @@ import java.util.logging.Logger;
  * @author Moez
  */
 
-//INSERT INTO `Team`(`name`, `Coach`, `President`, `Area`, `Participations`, `FifaDate`, `WcGroup`, `FlagPhoto`, `LogoPhoto`, `SquadPhoto`, `DescriptionPhoto`, `Description`, `Website`, `Video`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13],[value-14],[value-15],[value-16],[value-17],[value-18],[value-19],[value-20],[value-21],[value-22],[value-23])
 
 public class TeamCrud  {
     
@@ -72,7 +71,7 @@ public static void deleteTeam(Team t)
     }  
 
 
-public static void updateTeam(Team t,String colum ) {
+public static void updateTeam(Team t) {
     Connection con = DataSource.getInstance().getCon();
         String query = "UPDATE `Team` SET `name`=?,`Coach`=?,`President`=?,`Area`=?,`GamesPlayed`=?,`GoalScored`=?,`GoalAgainst`=?,`Participations`=?,`FifaDate`=?,`WcGroup`=?,`Win`=?,`Loose`=?,`Draw`=?,`Points`=?,`FifaRank`=?,`FlagPhoto`=?,`LogoPhoto`=?,`SquadPhoto`=?,`DescriptionPhoto`=?,`Description`=?,`Website`=?,`Video`=? WHERE id=?";
         
@@ -140,7 +139,6 @@ Connection con = DataSource.getInstance().getCon();
             ResultSet result = ste.executeQuery();
             while(result.next())
             {
-               // listTeam.add(new Team(result.getInt("id"),result.getString("name"),result.getString("coach"),result.getString("president"),result.getString("area"),result.getInt("gamePlayed"),result.getInt("goalScored"),result.getInt("goalAgainst"),result.getInt("participations"),result.getDate("fifaDate"),result.getString("wcGroup"),result.getInt("win"),result.getInt("loose"),result.getInt("draw"),result.getInt("fifaRank"),result.getString("flagPhoto"),result.getString("logoPhoto"),result.getString("squadPhoto"),result.getString("descriptionPhoto"),result.getString("description"),result.getString("website"),result.getString("video")));
              return new Team(result.getInt("id"),result.getString("name"),result.getString("coach"),result.getString("president"),result.getString("area"),result.getInt("gamePlayed"),result.getInt("goalScored"),result.getInt("goalAgainst"),result.getInt("participations"),result.getDate("fifaDate"),result.getString("wcGroup"),result.getInt("win"),result.getInt("loose"),result.getInt("draw"),result.getInt("fifaRank"),result.getString("flagPhoto"),result.getString("logoPhoto"),result.getString("squadPhoto"),result.getString("descriptionPhoto"),result.getString("description"),result.getString("website"),result.getString("video"));
             }
         } catch (SQLException ex) {
@@ -151,4 +149,4 @@ Connection con = DataSource.getInstance().getCon();
   }
      
 }
-//INSERT INTO `Team`(`id`, `name`, `Coach`, `President`, `Area`, `GamesPlayed`, `GoalScored`, `GoalAgainst`, `Participations`, `FifaDate`, `WcGroup`, `Win`, `Loose`, `Draw`, `Points`, `BestScorer`, `FifaRank`, `FlagPhoto`, `SquadPhoto`, `DescriptionPhoto`, `Description`, `Website`, `Video`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13],[value-14],[value-15],[value-16],[value-17],[value-18],[value-19],[value-20],[value-21],[value-22],[value-23])
+
