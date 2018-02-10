@@ -6,6 +6,7 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -32,6 +33,9 @@ public class Login_formController implements Initializable {
 	
 	@FXML
 	private JFXComboBox<String> nationality;
+	
+	@FXML
+	private JFXDatePicker birthdate;
 
 	/**
 	 * Initializes the controller class.
@@ -45,8 +49,6 @@ public class Login_formController implements Initializable {
 		loginform.setVisible(false);
 		signupform.setVisible(true);
 		ObservableList<String> cities = FXCollections.observableArrayList();
-		nationality = new JFXComboBox<String>();
-
 		String[] locales1 = Locale.getISOCountries();
 		for (String countrylist : locales1) {
 			Locale obj = new Locale("", countrylist);
@@ -55,6 +57,8 @@ public class Login_formController implements Initializable {
 				cities.add(obj.getDisplayCountry());
 			}
 		}
-		nationality.getItems().add("Tunisia");
+		nationality.setItems(cities);
+		nationality.setPromptText("Nationalité");
+		Locale.setDefault(Locale.FRANCE);
 	}
 }
