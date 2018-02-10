@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox accessibleText="gestionArticleNavBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="301.0" styleClass="navbar" stylesheets="@GestionArticlesNavbar.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GestionArticlesNavbarController">
+   <children>
+      <JFXButton accessibleText="menuPrincipale" prefHeight="47.0" prefWidth="301.0" text="Retourner au Menu Principal" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+      <Separator prefWidth="200.0" />
+      <JFXRippler />
+      <JFXButton accessibleText="ajouterArticle" prefHeight="52.0" prefWidth="301.0" text="Ajouter Article" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton accessibleText="consulterArticles" prefHeight="52.0" prefWidth="301.0" text="Consulter Les Articles" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+   </children>
+</VBox>

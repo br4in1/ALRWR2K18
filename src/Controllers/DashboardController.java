@@ -41,7 +41,7 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             VBox pane = FXMLLoader.load(getClass().getResource("/Views/navbar.fxml"));
-            VBox gstArticleNavBar = FXMLLoader.load(getClass().getResource("/Views/GestionArticle/navbar.fxml"));
+            VBox gstArticleNavBar = FXMLLoader.load(getClass().getResource("/Views/GestionArticlesNavbar.fxml"));
 
             drawer.setSidePane(pane);
             HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
@@ -62,9 +62,22 @@ public class DashboardController implements Initializable {
                         switch (node.getAccessibleText()) {
                             case "gestionArticle":
                                 drawer.setSidePane(gstArticleNavBar);
-                                hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
-                                    drawer.setSidePane(pane);
-                                });
+                                break;
+                            //TO DO: ajouter les autre case des button modules 1-4
+                        }
+                    });
+                }
+                for (Node node : gstArticleNavBar.getChildren()) {
+                    node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
+                        switch (node.getAccessibleText()) {
+                            case "menuPrincipale":
+                                drawer.setSidePane(pane);
+                                break;
+                            case "ajouterArticle":
+                                System.out.println("ajotuer Article is clicked");
+                                break;
+                            case "consulterArticles":
+                                System.out.println("consulter aarticles is clicked");
                                 break;
                         }
                     });

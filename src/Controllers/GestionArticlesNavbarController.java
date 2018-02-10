@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers.GestionArticle;
+package Controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author raiiz
  */
-public class NavbarController implements Initializable {
+public class GestionArticlesNavbarController implements Initializable {
 
     /**
      * Initializes the controller class.
