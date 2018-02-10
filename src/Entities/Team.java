@@ -12,12 +12,12 @@ import java.sql.Date;
  * @author Moez
  */
 public class Team {
-    private int id ; //
-    private String name ; //
-    private String coach ; //
-    private String president  ; //
-    private String area ; //
-    private int gamesPlayed ;//
+    private int id ; //1
+    private String name ; //2
+    private String coach ; //3
+    private String president  ; //4
+    private String area ; //5
+    private int gamesPlayed ;//6
     private int goalScored ;//
     private int goalAgainst ; //
     private int participations ;//
@@ -27,16 +27,16 @@ public class Team {
     private int loose ;// 
     private int draw ;//
     private int points ;//
-    private Player bestScorer ;//
     private int fifaRank ;//
     private String flagPhoto ; //
+    private String logoPhoto ;
     private String squadPhoto ;//
     private String descriptionPhoto ; //
     private String description ;//
     private String website ;//
     private String video ;//
 
-    public Team(int id, String name, String coach, String president, String area, int gamesPlayed, int goalScored, int goalAgainst, int participations, Date fifaDate, String wcGroup, int win, int loose, int draw, int points, Player bestScorer, int fifaRank, String flagPhoto, String squadPhoto, String descriptionPhoto, String description, String website, String video) {
+    public Team(int id, String name, String coach, String president, String area, int gamesPlayed, int goalScored, int goalAgainst, int participations, Date fifaDate, String wcGroup, int win, int loose, int draw, int points, int fifaRank, String flagPhoto, String logoPhoto, String squadPhoto, String descriptionPhoto, String description, String website, String video) {
         this.id = id;
         this.name = name;
         this.coach = coach;
@@ -52,14 +52,18 @@ public class Team {
         this.loose = loose;
         this.draw = draw;
         this.points = points;
-        this.bestScorer = bestScorer;
         this.fifaRank = fifaRank;
         this.flagPhoto = flagPhoto;
+        this.logoPhoto = logoPhoto;
         this.squadPhoto = squadPhoto;
         this.descriptionPhoto = descriptionPhoto;
         this.description = description;
         this.website = website;
         this.video = video;
+    }
+
+    public Team(int aInt, String string, String string0, String string1, String string2, int aInt0, int aInt1, int aInt2, int aInt3, Date date, String string3, int aInt4, int aInt5, int aInt6, int aInt7, String string4, String string5, String string6, String string7, String string8, String string9, String string10) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getId() {
@@ -182,14 +186,6 @@ public class Team {
         this.points = points;
     }
 
-    public Player getBestScorer() {
-        return bestScorer;
-    }
-
-    public void setBestScorer(Player bestScorer) {
-        this.bestScorer = bestScorer;
-    }
-
     public int getFifaRank() {
         return fifaRank;
     }
@@ -204,6 +200,14 @@ public class Team {
 
     public void setFlagPhoto(String flagPhoto) {
         this.flagPhoto = flagPhoto;
+    }
+
+    public String getLogoPhoto() {
+        return logoPhoto;
+    }
+
+    public void setLogoPhoto(String logoPhoto) {
+        this.logoPhoto = logoPhoto;
     }
 
     public String getSquadPhoto() {

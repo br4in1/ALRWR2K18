@@ -5,8 +5,6 @@
  */
 package Entities;
 
-import Entities.Team;
-
 /**
  *
  * @author Moez
@@ -195,6 +193,7 @@ public class Player {
     public void setVideo(String video) {
         this.video = video;
     }
+
     
     
 }
