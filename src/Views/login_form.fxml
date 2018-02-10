@@ -38,32 +38,32 @@
             </Pane>
             <Pane fx:id="signupform" prefHeight="363.0" prefWidth="531.0" visible="false">
                <children>
-                  <JFXTextField focusColor="#6fa840" layoutX="57.0" layoutY="40.0" prefHeight="27.0" prefWidth="172.0" promptText="Nom d'utilisateur">
+                  <JFXTextField fx:id="username" focusColor="#70a641" layoutX="57.0" layoutY="40.0" prefHeight="27.0" prefWidth="172.0" promptText="Nom d'utilisateur">
                      <font>
                         <Font name="Avenir Light" size="13.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField focusColor="#6fa840" layoutX="57.0" layoutY="98.0" prefHeight="27.0" prefWidth="172.0" promptText="Adresse électronique">
+                  <JFXTextField fx:id="email" focusColor="#6fa840" layoutX="57.0" layoutY="98.0" prefHeight="27.0" prefWidth="172.0" promptText="Adresse électronique">
       				<font>
                         <Font name="Avenir Light" size="13.0" />
       				</font>
       			</JFXTextField>
-                  <JFXTextField focusColor="#6fa840" layoutX="293.0" layoutY="40.0" prefHeight="27.0" prefWidth="172.0" promptText="Nom">
+                  <JFXTextField fx:id="lastname" focusColor="#6fa840" layoutX="293.0" layoutY="40.0" prefHeight="27.0" prefWidth="172.0" promptText="Nom">
                      <font>
                         <Font name="Avenir Light" size="13.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField focusColor="#6fa840" layoutX="293.0" layoutY="98.0" prefHeight="27.0" prefWidth="172.0" promptText="Prénom">
+                  <JFXTextField fx:id="firstname" focusColor="#6fa840" layoutX="293.0" layoutY="98.0" prefHeight="27.0" prefWidth="172.0" promptText="Prénom">
                      <font>
                         <Font name="Avenir Light" size="13.0" />
                      </font>
                   </JFXTextField>
-                  <JFXPasswordField focusColor="#6fa840" layoutX="57.0" layoutY="155.0" prefHeight="27.0" prefWidth="172.0" promptText="Mot de passe">
+                  <JFXPasswordField fx:id="password" focusColor="#6fa840" layoutX="57.0" layoutY="155.0" prefHeight="27.0" prefWidth="172.0" promptText="Mot de passe">
                      <font>
                         <Font name="Avenir Light" size="13.0" />
                      </font>
                   </JFXPasswordField>
-                  <JFXPasswordField focusColor="#6fa840" layoutX="293.0" layoutY="155.0" prefHeight="27.0" prefWidth="172.0" promptText="Confirmation de mot de passe">
+                  <JFXPasswordField fx:id="passwordConfirm" focusColor="#6fa840" layoutX="293.0" layoutY="155.0" prefHeight="27.0" prefWidth="172.0" promptText="Confirmation de mot de passe">
                      <font>
                         <Font name="Avenir Light" size="13.0" />
                      </font>
@@ -71,8 +71,8 @@
                   <JFXDatePicker fx:id="birthdate" defaultColor="#6fa840" layoutX="57.0" layoutY="213.0" overLay="true" promptText="Date de naissance">
 				</JFXDatePicker>
                   <JFXComboBox fx:id="nationality" focusColor="#6fa840" layoutX="293.0" layoutY="213.0" prefHeight="27.0" prefWidth="172.0" />
-                  <JFXButton buttonType="RAISED" layoutX="143.0" layoutY="289.0" prefHeight="35.0" prefWidth="89.0" ripplerFill="#6fa840" style="-fx-background-color: #6fa840;" text="Valider" textFill="WHITE" />
-                  <JFXButton buttonType="RAISED" layoutX="293.0" layoutY="289.0" prefHeight="35.0" prefWidth="89.0" ripplerFill="#6fa840" style="-fx-background-color: #6fa840;" text="Retour" textFill="WHITE" />
+                  <JFXButton fx:id="signupbtn" buttonType="RAISED" layoutX="143.0" layoutY="289.0" onAction="#SignUpUserStepOne" prefHeight="35.0" prefWidth="89.0" ripplerFill="#6fa840" style="-fx-background-color: #6fa840;" text="Valider" textFill="WHITE" />
+                  <JFXButton fx:id="backbtn" buttonType="RAISED" layoutX="293.0" layoutY="289.0" onAction="#hideSignUpForm" prefHeight="35.0" prefWidth="89.0" ripplerFill="#6fa840" style="-fx-background-color: #6fa840;" text="Retour" textFill="WHITE" />
                </children>
             </Pane>
          </children>
