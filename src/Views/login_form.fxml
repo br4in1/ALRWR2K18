@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Login_formController">
+<StackPane fx:id="welcomeSP" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Login_formController">
    <children>
       <AnchorPane id="AnchorPane" prefHeight="363.0" prefWidth="531.0" style="-fx-background-color: #fff;" styleClass="mainFxmlClass">
       	<stylesheets>

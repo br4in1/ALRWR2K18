@@ -23,9 +23,7 @@ public class DataSource {
     final String pwd = "root";
     private DataSource() {
         try {
-            con = DriverManager.getConnection(url,user,pwd);
-            System.out.println("TEST TEST");
-            
+            con = DriverManager.getConnection(url,user,pwd);   
         } catch (SQLException ex) {
             Logger.getLogger(DataSource.class.getName()).log(Level.SEVERE, null, ex);
         }

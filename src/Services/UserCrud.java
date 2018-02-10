@@ -5,6 +5,7 @@
  */
 package Services;
 
+import Entities.SimpleUser;
 import java.sql.Connection;
 import Utils.DataSource;
 import java.sql.ResultSet;
@@ -29,5 +30,22 @@ public class UserCrud {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }
 		return false;
+	}
+	
+	public static Boolean findUserByEmail(String email){
+		Connection con = DataSource.getInstance().getCon();
+		String query = "select * from User where email = '"+email+"'";
+        try {
+            Statement ste = con.createStatement();
+            ResultSet set = ste.executeQuery(query);
+            if(set.next()) return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return false;
+	}
+	
+	public static void AddUserToDataBaseStepOne(SimpleUser u){
+		
 	}
 }
