@@ -14,6 +14,7 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.events.JFXDialogEvent;
 import java.net.URL;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -26,6 +27,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -198,6 +200,19 @@ public class Login_formController implements Initializable {
 			Date today = Date.valueOf(LocalDate.now());
 			SimpleUser u = new SimpleUser(Date.valueOf(birthdate.getValue()), today, nationality.getSelectionModel().getSelectedItem(), false, 0, null, username.getText(), email.getText(), false, null, password.getText(), null, "ROLE_USER", firstname.getText(), lastname.getText());
 			UserCrud.AddUserToDataBaseStepOne(u);
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text("Tout est prêt ... ou presque !"));
+			content.setBody(new Text("Consultez votre boite email pour activer votre compte."));
+			JFXDialog check_username = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
+			check_username.show();
+			check_username.setOnDialogClosed(new EventHandler<JFXDialogEvent>(){
+				@Override
+				public void handle(JFXDialogEvent event) {
+					signupform.setVisible(false);
+					loginform.setVisible(true);
+				}
+				
+			});
 		}
 	}
 }
