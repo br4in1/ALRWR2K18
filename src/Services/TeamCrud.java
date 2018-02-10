@@ -69,7 +69,7 @@ public static void deleteTeam(Team t)
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }
+    }  
 
 
 public static void updateTeam(Team t,String colum ) {
