@@ -41,7 +41,7 @@ public class GameCrud {
             
             ste.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(CrudPersonne.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
