@@ -45,7 +45,7 @@ public class Login_formController implements Initializable {
 		loginform.setVisible(false);
 		signupform.setVisible(true);
 		ObservableList<String> cities = FXCollections.observableArrayList();
-		nationality = new JFXComboBox<String>(cities);
+		nationality = new JFXComboBox<String>();
 
 		String[] locales1 = Locale.getISOCountries();
 		for (String countrylist : locales1) {
