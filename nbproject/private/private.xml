@@ -3,16 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Services/UserCrud.java</file>
             <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Entities/SimpleUser.java</file>
             <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Entities/Moderator.java</file>
             <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/Login_formController.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Views/main.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Entities/Admin.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Views/login_form.fxml</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Views/login_form.css</file>
             <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Entities/User.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Services/GameCrud.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Utils/DataSource.java</file>
         </group>
     </open-files>
 </project-private>

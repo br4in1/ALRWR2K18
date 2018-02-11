@@ -33,8 +33,8 @@
                         <Font name="Avenir Light" size="13.0" />
                      </font>
                   </JFXPasswordField>
-                  <JFXButton fx:id="loginbtn" alignment="CENTER" layoutX="131.0" layoutY="168.0" onAction="#loginUser" prefHeight="27.0" prefWidth="270.0" ripplerFill="#62b518" text="Se connecter" textFill="#658c2e" />
-                  <JFXButton alignment="CENTER" layoutX="131.0" layoutY="294.0" onAction="#showSignUpForm" prefHeight="27.0" prefWidth="270.0" ripplerFill="#62862b" text="S'inscrire" textFill="#658c2e" />
+                  <JFXButton fx:id="loginbtn" alignment="CENTER" layoutX="131.0" layoutY="168.0" onAction="#loginUser" prefHeight="27.0" prefWidth="270.0" ripplerFill="#62b518" style="-fx-background-color: #6fa840;" text="Se connecter" textFill="WHITE" />
+                  <JFXButton alignment="CENTER" layoutX="131.0" layoutY="294.0" onAction="#showSignUpForm" prefHeight="27.0" prefWidth="270.0" ripplerFill="#62862b" style="-fx-background-color: #6fa840;" text="S'inscrire" textFill="WHITE" />
                   <JFXButton alignment="CENTER" layoutX="131.0" layoutY="209.0" prefHeight="27.0" prefWidth="270.0" ripplerFill="#2b5284" style="-fx-background-color: #2b5284;" text="Se connecter via Facebook" textAlignment="JUSTIFY" textFill="WHITE" />
                   <JFXButton layoutX="131.0" layoutY="251.0" prefHeight="27.0" prefWidth="270.0" ripplerFill="#bb4949" style="-fx-background-color: #bb4949;" text="Se connecter via Google" textFill="WHITE" />
                </children>
@@ -81,14 +81,14 @@
             <Pane fx:id="photopick" prefHeight="363.0" prefWidth="531.0" style="-fx-background-color: #fff;" visible="false">
                <children>
                   <ImageView fx:id="countryavatar" fitHeight="187.0" fitWidth="195.0" layoutX="44.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="uploadphoto" fitHeight="206.0" fitWidth="187.0" layoutX="304.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="uploadphoto" fitHeight="206.0" fitWidth="187.0" layoutX="303.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../assets/update.jpg" />
                      </image>
                   </ImageView>
-                  <JFXRadioButton layoutX="32.0" layoutY="240.0" text="Utiliser l'avatar de votre pays" />
-                  <JFXRadioButton layoutX="298.0" layoutY="240.0" text="Choisir une autre photo" />
-                  <JFXButton layoutX="424.0" layoutY="322.0" prefHeight="27.0" prefWidth="89.0" text="Continuer" />
+                  <JFXRadioButton fx:id="firstradio" layoutX="32.0" layoutY="266.0" onAction="#FirstIsSelected" text="Utiliser l'avatar de votre pays" wrapText="true" />
+                  <JFXRadioButton fx:id="secondradio" layoutX="296.0" layoutY="266.0" onAction="#SecondIsSelected" text="Choisir une autre photo" wrapText="true" />
+                  <JFXButton fx:id="uploadbtn" layoutX="424.0" layoutY="322.0" onAction="#UploadPhoto" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #6fa840;" text="Continuer" textFill="WHITE" />
                </children>
             </Pane>
          </children>

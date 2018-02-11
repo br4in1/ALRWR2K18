@@ -6,16 +6,24 @@
 package Controllers;
 
 import Entities.SimpleUser;
+import java.io.File;
+import java.util.Map;
+import com.cloudinary.*;
 import Entities.User;
 import Services.UserCrud;
+import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.events.JFXDialogEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URL;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -31,6 +39,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -41,6 +50,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Window;
+import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -49,6 +62,7 @@ import javafx.scene.text.Text;
  */
 public class Login_formController implements Initializable {
 
+	Cloudinary cloudinary;
 	@FXML
 	private Pane loginform;
 	@FXML
@@ -70,23 +84,33 @@ public class Login_formController implements Initializable {
 	@FXML
 	private Pane signupform;
 	@FXML
+	private JFXRadioButton firstradio;
+	@FXML
+	private JFXRadioButton secondradio;
+	@FXML
 	private Pane photopick;
 	@FXML
 	private JFXComboBox<String> nationality;
 	@FXML
 	private ImageView countryavatar;
 	@FXML
+	private ImageView uploadphoto;
+	@FXML
 	private JFXDatePicker birthdate;
 	@FXML
 	private JFXButton signupbtn;
 	@FXML
+	private JFXButton uploadbtn;
+	@FXML
 	private StackPane welcomeSP;
+	private static String current_username = null;
 
 	/**
 	 * Initializes the controller class.
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
 		username.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -240,7 +264,7 @@ public class Login_formController implements Initializable {
 			if (u.getRoles().equals("ROLE_ADMIN")) {
 				//TODO : redirect to admin dashboard + session handling
 			} else if (u.getRoles().equals("ROLE_MODERATOR")) {
-				if(u.getEnabled()){
+				if (u.getEnabled()) {
 					//TODO : redirect to moderator dashboard + session handling
 				} else {
 					JFXDialogLayout content = new JFXDialogLayout();
@@ -262,19 +286,76 @@ public class Login_formController implements Initializable {
 					confirmation_token.setOnAction(new EventHandler<ActionEvent>() {
 						@Override
 						public void handle(ActionEvent event) {
-							if(confirmation_token.getText().equals(UserCrud.getConfirmationToken(u.getUsername()))){
+							if (confirmation_token.getText().equals(UserCrud.getConfirmationToken(u.getUsername()))) {
 								UserCrud.enableSimpleUser(u.getUsername());
 								loginform.setVisible(false);
 								activateAccount.setVisible(false);
 								photopick.setVisible(true);
-								String filename = ((SimpleUser)(u)).getNationality();
+								String filename = ((SimpleUser) (u)).getNationality();
 								filename = filename.replace(" ", "_").toLowerCase();
-								countryavatar.setImage(new Image("assets/flags/"+filename+".png"));
+								countryavatar.setImage(new Image("assets/flags/" + filename + ".png"));
+								current_username = u.getUsername();
 							}
 						}
 					});
 				}
 			}
+		}
+	}
+
+	public void FirstIsSelected() {
+		firstradio.setSelected(true);
+		secondradio.setSelected(false);
+	}
+
+	public void SecondIsSelected() {
+		firstradio.setSelected(false);
+		secondradio.setSelected(true);
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Choisir une photo");
+		fileChooser.getExtensionFilters().addAll(
+				new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+		File f = fileChooser.showOpenDialog(null);
+		if (f != null) {
+			Image img = new Image(f.toURI().toString());
+			uploadphoto.setImage(img);
+		}
+	}
+
+	public void UploadPhoto() throws Exception {
+		if (!firstradio.isSelected() && !secondradio.isSelected()) {
+			
+		} else {
+			String user_os = System.getProperty("os.name");
+			String url1 = "";
+			if (firstradio.isSelected()) {
+				if(user_os.equals("Mac OS X")){
+					URL url = new URL(countryavatar.getImage().impl_getUrl());
+					BufferedImage img = ImageIO.read(url);
+					url1 = "/Applications/MAMP/htdocs/Web3A/pidev/web/img/userphotos/"+current_username+"_pphoto.png";
+					ImageIO.write(img, "png", new File(url1));
+				}
+				else{
+					URL url = new URL(countryavatar.getImage().impl_getUrl());
+					BufferedImage img = ImageIO.read(url);
+					url1 = "C:/wamp/www/pidev/web/img/userphotos/"+current_username+"_pphoto.png";
+					ImageIO.write(img, "png", new File(url1));
+				}
+			} else if (secondradio.isSelected() && uploadphoto.getImage().impl_getUrl() != "assets/update.png") {
+				if(user_os.equals("Mac OS X")){
+					URL url = new URL(uploadphoto.getImage().impl_getUrl());
+					BufferedImage img = ImageIO.read(url);
+					url1 = "/Applications/MAMP/htdocs/Web3A/pidev/web/img/userphotos/"+current_username+"_pphoto.png";
+					ImageIO.write(img, "png", new File(url1));
+				}
+				else{
+					URL url = new URL(uploadphoto.getImage().impl_getUrl());
+					BufferedImage img = ImageIO.read(url);
+					url1 = "C:/wamp/www/pidev/web/img/userphotos/"+current_username+"_pphoto.png";
+					ImageIO.write(img, "png", new File(url1));
+				}
+			}
+			UserCrud.UpdateUserPhoto(url1, current_username);
 		}
 	}
 }

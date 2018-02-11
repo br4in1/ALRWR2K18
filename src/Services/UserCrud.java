@@ -151,6 +151,18 @@ public class UserCrud {
 		} catch (SQLException ex) {
 			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}
-
+	}
+	
+	public static void UpdateUserPhoto(String url,String username){
+		Connection con = DataSource.getInstance().getCon();
+		String query = "update User set profile_picture = ? where username = ?";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+			ste.setString(1, url);
+			ste.setString(2, username);
+			ste.executeUpdate();
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 }
