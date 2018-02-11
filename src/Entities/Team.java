@@ -66,6 +66,9 @@ public class Team {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public Team() {
+    }
+
     public int getId() {
         return id;
     }
@@ -248,6 +251,11 @@ public class Team {
 
     public void setVideo(String video) {
         this.video = video;
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" + "id=" + id + ", name=" + name + ", coach=" + coach + ", president=" + president + ", area=" + area + ", gamesPlayed=" + gamesPlayed + ", goalScored=" + goalScored + ", goalAgainst=" + goalAgainst + ", participations=" + participations + ", fifaDate=" + fifaDate + ", wcGroup=" + wcGroup + ", win=" + win + ", loose=" + loose + ", draw=" + draw + ", points=" + points + ", fifaRank=" + fifaRank + ", flagPhoto=" + flagPhoto + ", logoPhoto=" + logoPhoto + ", squadPhoto=" + squadPhoto + ", descriptionPhoto=" + descriptionPhoto + ", description=" + description + ", website=" + website + ", video=" + video + '}';
     }
     
     
