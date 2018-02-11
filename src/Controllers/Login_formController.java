@@ -6,6 +6,7 @@
 package Controllers;
 
 import Entities.SimpleUser;
+import Entities.User;
 import Services.UserCrud;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -27,11 +28,14 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -50,6 +54,8 @@ public class Login_formController implements Initializable {
 	@FXML
 	private JFXTextField username;
 	@FXML
+	private JFXTextField username_login;
+	@FXML
 	private JFXTextField email;
 	@FXML
 	private JFXTextField lastname;
@@ -58,11 +64,17 @@ public class Login_formController implements Initializable {
 	@FXML
 	private JFXPasswordField password;
 	@FXML
+	private JFXPasswordField password_login;
+	@FXML
 	private JFXPasswordField passwordConfirm;
 	@FXML
 	private Pane signupform;
 	@FXML
+	private Pane photopick;
+	@FXML
 	private JFXComboBox<String> nationality;
+	@FXML
+	private ImageView countryavatar;
 	@FXML
 	private JFXDatePicker birthdate;
 	@FXML
@@ -205,14 +217,65 @@ public class Login_formController implements Initializable {
 			content.setBody(new Text("Consultez votre boite email pour activer votre compte."));
 			JFXDialog check_username = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
 			check_username.show();
-			check_username.setOnDialogClosed(new EventHandler<JFXDialogEvent>(){
+			check_username.setOnDialogClosed(new EventHandler<JFXDialogEvent>() {
 				@Override
 				public void handle(JFXDialogEvent event) {
 					signupform.setVisible(false);
 					loginform.setVisible(true);
 				}
-				
+
 			});
+		}
+	}
+
+	public void loginUser() {
+		User u = UserCrud.AuthenticateUser(username_login.getText(), password_login.getText());
+		if (u == null) {
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("Veuillez vérifier les informations saisies."));
+			JFXDialog check_data = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
+			check_data.show();
+		} else if (u != null && !u.getEnabled()) {
+			if (u.getRoles().equals("ROLE_ADMIN")) {
+				//TODO : redirect to admin dashboard + session handling
+			} else if (u.getRoles().equals("ROLE_MODERATOR")) {
+				if(u.getEnabled()){
+					//TODO : redirect to moderator dashboard + session handling
+				} else {
+					JFXDialogLayout content = new JFXDialogLayout();
+					content.setHeading(new Text("Veuillez contacter un administrateur."));
+					content.setBody(new Text("Votre compte est désactivé."));
+					JFXDialog activateAccount = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
+					activateAccount.show();
+				}
+			} else {
+				if (u.getEnabled()) {
+					//TODO : redirect to user screen + session handling
+				} else {
+					JFXDialogLayout content = new JFXDialogLayout();
+					content.setHeading(new Text("Veuillez saisir le code que vous avez reçu sur votre boite."));
+					JFXTextField confirmation_token = new JFXTextField();
+					content.setBody(confirmation_token);
+					JFXDialog activateAccount = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
+					activateAccount.show();
+					confirmation_token.setOnAction(new EventHandler<ActionEvent>() {
+						@Override
+						public void handle(ActionEvent event) {
+							if(confirmation_token.getText().equals(UserCrud.getConfirmationToken(u.getUsername()))){
+								UserCrud.enableSimpleUser(u.getUsername());
+								loginform.setVisible(false);
+								photopick.setVisible(true);
+								String filename = ((SimpleUser)(u)).getNationality();
+								filename.replace(" ", "_");
+								filename.toLowerCase();
+								
+								countryavatar.setImage(new Image("../assets.flags/"+filename+".png"));
+							}
+						}
+					});
+				}
+			}
 		}
 	}
 }

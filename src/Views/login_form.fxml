@@ -4,8 +4,11 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import java.net.URL?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
@@ -20,17 +23,17 @@
          <children>
             <Pane fx:id="loginform" prefHeight="337.0" prefWidth="531.0">
                <children>
-                  <JFXTextField focusColor="#6fa840" labelFloat="true" layoutX="56.0" layoutY="41.0" prefHeight="35.0" prefWidth="418.0" promptText="Nom d'utilisateur">
+                  <JFXTextField fx:id="username_login" focusColor="#6fa840" labelFloat="true" layoutX="56.0" layoutY="41.0" prefHeight="35.0" prefWidth="418.0" promptText="Nom d'utilisateur">
                      <font>
                         <Font name="Avenir Light" size="13.0" />
                      </font>
                   </JFXTextField>
-                  <JFXPasswordField focusColor="#6fa840" labelFloat="true" layoutX="56.0" layoutY="99.0" prefHeight="27.0" prefWidth="418.0" promptText="Mot de passe">
+                  <JFXPasswordField fx:id="password_login" focusColor="#6fa840" labelFloat="true" layoutX="56.0" layoutY="99.0" prefHeight="27.0" prefWidth="418.0" promptText="Mot de passe">
                      <font>
                         <Font name="Avenir Light" size="13.0" />
                      </font>
                   </JFXPasswordField>
-                  <JFXButton alignment="CENTER" layoutX="131.0" layoutY="168.0" prefHeight="27.0" prefWidth="270.0" ripplerFill="#62b518" text="Se connecter" textFill="#658c2e" />
+                  <JFXButton fx:id="loginbtn" alignment="CENTER" layoutX="131.0" layoutY="168.0" onAction="#loginUser" prefHeight="27.0" prefWidth="270.0" ripplerFill="#62b518" text="Se connecter" textFill="#658c2e" />
                   <JFXButton alignment="CENTER" layoutX="131.0" layoutY="294.0" onAction="#showSignUpForm" prefHeight="27.0" prefWidth="270.0" ripplerFill="#62862b" text="S'inscrire" textFill="#658c2e" />
                   <JFXButton alignment="CENTER" layoutX="131.0" layoutY="209.0" prefHeight="27.0" prefWidth="270.0" ripplerFill="#2b5284" style="-fx-background-color: #2b5284;" text="Se connecter via Facebook" textAlignment="JUSTIFY" textFill="WHITE" />
                   <JFXButton layoutX="131.0" layoutY="251.0" prefHeight="27.0" prefWidth="270.0" ripplerFill="#bb4949" style="-fx-background-color: #bb4949;" text="Se connecter via Google" textFill="WHITE" />
@@ -73,6 +76,19 @@
                   <JFXComboBox fx:id="nationality" focusColor="#6fa840" layoutX="293.0" layoutY="213.0" prefHeight="27.0" prefWidth="172.0" />
                   <JFXButton fx:id="signupbtn" buttonType="RAISED" layoutX="143.0" layoutY="289.0" onAction="#SignUpUserStepOne" prefHeight="35.0" prefWidth="89.0" ripplerFill="#6fa840" style="-fx-background-color: #6fa840;" text="Valider" textFill="WHITE" />
                   <JFXButton fx:id="backbtn" buttonType="RAISED" layoutX="293.0" layoutY="289.0" onAction="#hideSignUpForm" prefHeight="35.0" prefWidth="89.0" ripplerFill="#6fa840" style="-fx-background-color: #6fa840;" text="Retour" textFill="WHITE" />
+               </children>
+            </Pane>
+            <Pane fx:id="photopick" prefHeight="363.0" prefWidth="531.0" style="-fx-background-color: #fff;" visible="false">
+               <children>
+                  <ImageView fx:id="countryavatar" fitHeight="187.0" fitWidth="195.0" layoutX="44.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="uploadphoto" fitHeight="206.0" fitWidth="187.0" layoutX="304.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/update.jpg" />
+                     </image>
+                  </ImageView>
+                  <JFXRadioButton layoutX="32.0" layoutY="240.0" text="Utiliser l'avatar de votre pays" />
+                  <JFXRadioButton layoutX="298.0" layoutY="240.0" text="Choisir une autre photo" />
+                  <JFXButton layoutX="424.0" layoutY="322.0" prefHeight="27.0" prefWidth="89.0" text="Continuer" />
                </children>
             </Pane>
          </children>
