@@ -265,12 +265,11 @@ public class Login_formController implements Initializable {
 							if(confirmation_token.getText().equals(UserCrud.getConfirmationToken(u.getUsername()))){
 								UserCrud.enableSimpleUser(u.getUsername());
 								loginform.setVisible(false);
+								activateAccount.setVisible(false);
 								photopick.setVisible(true);
 								String filename = ((SimpleUser)(u)).getNationality();
-								filename.replace(" ", "_");
-								filename.toLowerCase();
-								
-								countryavatar.setImage(new Image("../assets.flags/"+filename+".png"));
+								filename = filename.replace(" ", "_").toLowerCase();
+								countryavatar.setImage(new Image("assets/flags/"+filename+".png"));
 							}
 						}
 					});
