@@ -32,7 +32,7 @@
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="body" stylesheets="@dashboard.css" BorderPane.alignment="CENTER">
          <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <Pane fx:id="mainField" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </center>
          <left>
             <JFXDrawer fx:id="drawer" defaultDrawerSize="301.0" prefHeight="920.0" prefWidth="0.0" BorderPane.alignment="CENTER" />

@@ -12,6 +12,8 @@ package Views;
  */
 
 
+import Utils.DataSource;
+import java.sql.Connection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,12 +24,12 @@ public class main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
-       
+        Parent root = FXMLLoader.load(getClass().getResource("login_form.fxml"));
         primaryStage.setTitle("Se connecter !");
         primaryStage.setScene(new Scene(root));
 		primaryStage.setResizable(false);
         primaryStage.show();
+        //
     }
 
 

@@ -5,8 +5,6 @@
  */
 package Entities;
 
-import Entities.Team;
-
 /**
  *
  * @author Moez
@@ -17,7 +15,7 @@ public class Player {
     private String lastName ; //
     private int age ; //
     private String club ; //
-    private Team nation ; //
+    private int nation ; //
     private double height ;//
     private double weight ;//
     private String position ; //
@@ -31,7 +29,7 @@ public class Player {
     private int shirtNb ; 
     private String video ; 
 
-    public Player(int id, String name, String lastName, int age, String club, Team nation, double height, double weight, String position, int goals, String description, String profilePhoto, String blanketPhoto, String descriptionPhoto, String fbLink, String twitterLink, int shirtNb, String video) {
+    public Player(int id, String name, String lastName, int age, String club, int nation, double height, double weight, String position, int goals, String description, String profilePhoto, String blanketPhoto, String descriptionPhoto, String fbLink, String twitterLink, int shirtNb, String video) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -92,11 +90,11 @@ public class Player {
         this.club = club;
     }
 
-    public Team getNation() {
+    public int getNation() {
         return nation;
     }
 
-    public void setNation(Team nation) {
+    public void setNation(int nation) {
         this.nation = nation;
     }
 
@@ -195,6 +193,7 @@ public class Player {
     public void setVideo(String video) {
         this.video = video;
     }
+
     
     
 }
