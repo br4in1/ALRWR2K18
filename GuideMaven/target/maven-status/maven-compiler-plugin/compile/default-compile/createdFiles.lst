@@ -1,0 +1,10 @@
+com\mycompany\Services\HotelCRUD.class
+com\mycompany\sofienepidev\Ajout_HotelController.class
+com\mycompany\sofienepidev\FXMLController.class
+com\mycompany\sofienepidev\MainApp.class
+com\mycompany\Entities\Stade.class
+com\mycompany\Entities\Divertissement.class
+com\mycompany\Entities\Hotel.class
+com\mycompany\sofienepidev\FXMLController$1.class
+com\mycompany\DataSource\DataSource.class
+com\mycompany\Entities\Evenement.class
