@@ -22,6 +22,7 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.events.JFXDialogEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URL;
@@ -36,6 +37,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -324,38 +326,20 @@ public class Login_formController implements Initializable {
 
 	public void UploadPhoto() throws Exception {
 		if (!firstradio.isSelected() && !secondradio.isSelected()) {
-			
+
 		} else {
-			String user_os = System.getProperty("os.name");
-			String url1 = "";
+			File toUpload = new File("toUpload.png");
 			if (firstradio.isSelected()) {
-				if(user_os.equals("Mac OS X")){
-					URL url = new URL(countryavatar.getImage().impl_getUrl());
-					BufferedImage img = ImageIO.read(url);
-					url1 = "/Applications/MAMP/htdocs/Web3A/pidev/web/img/userphotos/"+current_username+"_pphoto.png";
-					ImageIO.write(img, "png", new File(url1));
-				}
-				else{
-					URL url = new URL(countryavatar.getImage().impl_getUrl());
-					BufferedImage img = ImageIO.read(url);
-					url1 = "C:/wamp/www/pidev/web/img/userphotos/"+current_username+"_pphoto.png";
-					ImageIO.write(img, "png", new File(url1));
-				}
+				BufferedImage bf = SwingFXUtils.fromFXImage(countryavatar.getImage(), null);
+				ImageIO.write(bf, "png", toUpload);
 			} else if (secondradio.isSelected() && uploadphoto.getImage().impl_getUrl() != "assets/update.png") {
-				if(user_os.equals("Mac OS X")){
-					URL url = new URL(uploadphoto.getImage().impl_getUrl());
-					BufferedImage img = ImageIO.read(url);
-					url1 = "/Applications/MAMP/htdocs/Web3A/pidev/web/img/userphotos/"+current_username+"_pphoto.png";
-					ImageIO.write(img, "png", new File(url1));
-				}
-				else{
-					URL url = new URL(uploadphoto.getImage().impl_getUrl());
-					BufferedImage img = ImageIO.read(url);
-					url1 = "C:/wamp/www/pidev/web/img/userphotos/"+current_username+"_pphoto.png";
-					ImageIO.write(img, "png", new File(url1));
-				}
+				BufferedImage bf = SwingFXUtils.fromFXImage(uploadphoto.getImage(), null);
+				ImageIO.write(bf, "png", toUpload);
 			}
-			UserCrud.UpdateUserPhoto(url1, current_username);
+			System.out.println(toUpload.getPath());
+			Map uploadResult = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
+			toUpload.delete();
+			UserCrud.UpdateUserPhoto((String) uploadResult.get("url"), current_username);
 		}
 	}
 }
