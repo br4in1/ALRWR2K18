@@ -5,14 +5,32 @@
  */
 package Controllers;
 
+import com.lynden.gmapsfx.GoogleMapView;
+
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import com.lynden.gmapsfx.MapComponentInitializedListener;
+import com.lynden.gmapsfx.javascript.event.GMapMouseEvent;
+import com.lynden.gmapsfx.javascript.event.UIEventType;
+import com.lynden.gmapsfx.javascript.object.GoogleMap;
+import com.lynden.gmapsfx.javascript.object.InfoWindow;
+import com.lynden.gmapsfx.javascript.object.InfoWindowOptions;
+import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.MapOptions;
+import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
+import com.lynden.gmapsfx.javascript.object.Marker;
+import com.lynden.gmapsfx.service.directions.DirectionsServiceCallback;
+import com.lynden.gmapsfx.javascript.object.MarkerOptions;
+import com.lynden.gmapsfx.service.directions.DirectionStatus;
+import com.lynden.gmapsfx.service.directions.DirectionsResult;
+import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,15 +45,21 @@ import javafx.scene.layout.VBox;
  *
  * @author simo
  */
-public class DashboardController implements Initializable {
+public class DashboardController implements Initializable, MapComponentInitializedListener, DirectionsServiceCallback {
 
     @FXML
     private JFXHamburger hamburger;
     @FXML
     private JFXDrawer drawer;
+    @FXML
+    private GoogleMapView mapView;
+    private GoogleMap map;
+    private GeocodingService geocodingService;
+	@FXML
+	private Pane paneMere;
 
     /**
-     * Initializes the controller class.
+     * @FXML private Pane paneMere; Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -86,5 +110,42 @@ public class DashboardController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        mapView.addMapInializedListener(this);
+		
+    }
+
+    @Override
+    public void mapInitialized() {
+        geocodingService = new GeocodingService();
+
+        //Set the initial properties of the map.
+        MapOptions mapOptions = new MapOptions();
+
+        mapOptions.center(new LatLong(47.6097, -122.3331))
+                .mapType(MapTypeIdEnum.ROADMAP)
+                .overviewMapControl(false)
+                .panControl(false)
+                .rotateControl(false)
+                .scaleControl(false)
+                .streetViewControl(false)
+                .zoomControl(false)
+                .zoom(12);
+
+        map = mapView.createMap(mapOptions);
+		//paneMere.getChildren().add(mapView);
+        //Add markers to the map
+        InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
+        infoWindowOptions.content("<h2>Fred Wilkie</h2>"
+                + "Current Location: Safeway<br>"
+                + "ETA: 45 minutes");
+
+    }
+
+    @Override
+    public void directionsReceived(DirectionsResult dr, DirectionStatus ds) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // InfoWindow fredWilkeInfoWindow = new InfoWindow(infoWindowOptions);
+        //fredWilkeInfoWindow.open(map, joeSmithMarker);
+
     }
 }

@@ -24,10 +24,10 @@ public class main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("login_form.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
         primaryStage.setTitle("Se connecter !");
         primaryStage.setScene(new Scene(root));
-		primaryStage.setResizable(false);
+	primaryStage.setResizable(false);
         primaryStage.show();
         //
     }
