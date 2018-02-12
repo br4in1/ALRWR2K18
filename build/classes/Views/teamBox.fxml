@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="nav" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="241.0" styleClass="navbar" stylesheets="@tournementbox.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TeamBoxController">
+   <children>
+      <ImageView fitHeight="241.0" fitWidth="353.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/Admin.png" />
+         </image>
+         <VBox.margin>
+            <Insets bottom="15.0" top="15.0" />
+         </VBox.margin>
+      </ImageView>
+      <JFXButton fx:id="mainMenu" onMouseClicked="#gamesContent" prefHeight="53.0" prefWidth="241.0" text="Main Menu" textFill="WHITE" />
+      <JFXButton fx:id="Teams" onMouseClicked="#gamesContent" prefHeight="53.0" prefWidth="241.0" text="Manage Teams" textFill="WHITE" />
+      <JFXButton prefHeight="53.0" prefWidth="241.0" text="Manage Players" textFill="WHITE" />
+   </children>
+</VBox>

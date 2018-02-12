@@ -57,7 +57,6 @@ public class AddFormController implements Initializable {
 	private HashMap<String, Integer> map2;
 	Cloudinary cloudinary;
 	private File image;
-	private File videoo;
 
 	/**
 	 * Initializes the controller class.
@@ -75,8 +74,7 @@ public class AddFormController implements Initializable {
 	@FXML
 	private void submit(MouseEvent event) throws IOException {
 		Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap());
-		Map uploadResult2 = cloudinary.uploader().upload(videoo, ObjectUtils.emptyMap());
-		GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), String.valueOf(map1.get(HomeTeam.getSelectionModel().getSelectedItem())), String.valueOf(map1.get(AwayTeam.getSelectionModel().getSelectedItem())), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"),(String) uploadResult2.get("url"), Referee.getText()));
+		GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), String.valueOf(map1.get(HomeTeam.getSelectionModel().getSelectedItem())), String.valueOf(map1.get(AwayTeam.getSelectionModel().getSelectedItem())), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"),Highlights.getText(), Referee.getText()));
 	}
 
 	@FXML
@@ -87,16 +85,6 @@ public class AddFormController implements Initializable {
 				new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
 		image = fileChooser.showOpenDialog(null);
 		SummaryPhoto.setText(image.getPath());
-	}
-
-	@FXML
-	private void video(MouseEvent event) {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Choisir une video");
-		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter("Video Files", "*.mp4", "*.mpg", "*.avi"));
-		videoo = fileChooser.showOpenDialog(null);
-		Highlights.setText(videoo.getPath());
 	}
 
 }

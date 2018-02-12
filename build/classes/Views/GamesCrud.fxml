@@ -15,7 +15,7 @@
             <Pane prefHeight="35.0" prefWidth="958.0" BorderPane.alignment="CENTER" />
          </bottom>
          <center>
-            <TableView fx:id="tablev" BorderPane.alignment="CENTER">
+            <TableView fx:id="tablev" editable="true" BorderPane.alignment="CENTER">
                <columns>
                   <TableColumn fx:id="id" prefWidth="75.0" text="Id" />
                   <TableColumn fx:id="date" prefWidth="75.0" text="Date" />

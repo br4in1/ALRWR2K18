@@ -38,3 +38,8 @@ hs_err_pid*
 !/src/Libraries/httpclient-cache-4.5.3.jar
 !/src/Libraries/httpclient-4.5.3_1.jar
 !/src/Libraries/cloudinary-core-1.17.0.jar
+build/built-jar.properties
+nbproject/private/private.properties
+nbproject/private/private.properties
+nbproject/private/private.properties
+nbproject/private/private.xml

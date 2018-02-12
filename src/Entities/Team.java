@@ -13,28 +13,28 @@ import java.sql.Date;
  */
 public class Team {
     private int id ; //1
-    private String name ; //2
-    private String coach ; //3
-    private String president  ; //4
-    private String area ; //5
+    private String name ; //2 -
+    private String coach ; //3 -
+    private String president  ; //4 -
+    private String area ; //5 -
     private int gamesPlayed ;//6
-    private int goalScored ;//
-    private int goalAgainst ; //
-    private int participations ;//
-    private Date fifaDate ; //
-    private String wcGroup ; //
-    private int win ;//
-    private int loose ;// 
-    private int draw ;//
-    private int points ;//
-    private int fifaRank ;//
-    private String flagPhoto ; //
-    private String logoPhoto ;
-    private String squadPhoto ;//
-    private String descriptionPhoto ; //
-    private String description ;//
-    private String website ;//
-    private String video ;//
+    private int goalScored ;//7
+    private int goalAgainst ; //8
+    private int participations ;//9
+    private Date fifaDate ; //10
+    private String wcGroup ; //11
+    private int win ;//12
+    private int loose ;//13 
+    private int draw ;//14
+    private int points ;//15
+    private int fifaRank ;//16
+    private String flagPhoto ; //17
+    private String logoPhoto ;//18
+    private String squadPhoto ;//19
+    private String descriptionPhoto ; //20
+    private String description ;//21
+    private String website ;//22
+    private String video ;//23
 
     public Team(String name, String coach, String president, String area, int gamesPlayed, int goalScored, int goalAgainst, int participations, Date fifaDate, String wcGroup, int win, int loose, int draw, int points, int fifaRank, String flagPhoto, String logoPhoto, String squadPhoto, String descriptionPhoto, String description, String website, String video) {
        
@@ -52,6 +52,24 @@ public class Team {
         this.loose = loose;
         this.draw = draw;
         this.points = points;
+        this.fifaRank = fifaRank;
+        this.flagPhoto = flagPhoto;
+        this.logoPhoto = logoPhoto;
+        this.squadPhoto = squadPhoto;
+        this.descriptionPhoto = descriptionPhoto;
+        this.description = description;
+        this.website = website;
+        this.video = video;
+    }
+     public Team(String name, String coach, String president, String area,int participations, Date fifaDate, String wcGroup, int fifaRank, String flagPhoto, String logoPhoto, String squadPhoto, String descriptionPhoto, String description, String website, String video) {
+     
+        this.name = name;
+        this.coach = coach;
+        this.president = president;
+        this.area = area;
+        this.participations = participations;
+        this.fifaDate = fifaDate;
+        this.wcGroup = wcGroup;
         this.fifaRank = fifaRank;
         this.flagPhoto = flagPhoto;
         this.logoPhoto = logoPhoto;

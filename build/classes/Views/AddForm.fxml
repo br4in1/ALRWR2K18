@@ -29,7 +29,7 @@
             <VBox layoutX="411.0" layoutY="112.0" prefHeight="138.0" prefWidth="175.0">
                <children>
                   <JFXTextField fx:id="SummaryPhoto" onMouseClicked="#photo" prefHeight="46.0" prefWidth="175.0" promptText="Photo" />
-                  <JFXTextField fx:id="Highlights" onMouseClicked="#video" prefHeight="43.0" prefWidth="175.0" promptText="Video" />
+                  <JFXTextField fx:id="Highlights" prefHeight="43.0" prefWidth="175.0" promptText="Video" />
                   <JFXTextField fx:id="Referee" prefHeight="46.0" prefWidth="175.0" promptText="Ref" />
                </children>
             </VBox>

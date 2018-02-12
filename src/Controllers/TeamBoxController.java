@@ -8,41 +8,32 @@ package Controllers;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 
 /**
  * FXML Controller class
  *
- * @author simo
+ * @author Moez
  */
-public class TournementBoxController implements Initializable {
+public class TeamBoxController implements Initializable {
+
+    @FXML
+    private VBox nav;
+    @FXML
+    private JFXButton mainMenu;
+    @FXML
+    private JFXButton Teams;
 
     /**
      * Initializes the controller class.
      */
-    AnchorPane content;
-    BorderPane parent;
-    @FXML
-    public static VBox nav;
-    @FXML
-    private JFXButton mainMenu;
-    @FXML
-    private JFXButton games;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        // TODO
     }    
-    
-    
 
     @FXML
     private void gamesContent(MouseEvent event) {
