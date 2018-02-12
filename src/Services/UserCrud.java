@@ -20,9 +20,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.james.mime4j.field.datetime.DateTime;
 
 /**
  *
@@ -81,14 +83,6 @@ public class UserCrud {
 			ste.setInt(14, 0);
 			ste.setString(15, TokenGenerator.generateToken(u.getUsername()));
 			ste.executeUpdate();
-			/*if(ste.isCloseOnCompletion()){
-				String to = u.getEmail();
-				String from = "mymail";
-				String host = "smtp.gnet.tn";
-				Properties prop = System.getProperties();
-				prop.setProperty("mail.smtp.host", host);
-				Session session = 
-			}*/
 		} catch (SQLException ex) {
 			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -114,6 +108,7 @@ public class UserCrud {
 					u = new Admin(set.getString("phone_number"),set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), null, set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
 				}
 				if (found && BCrypt.checkpw(password, u.getPassword())) {
+					u.setId(set.getInt("id"));
 					return u;
 				} else {
 					return null;
@@ -164,5 +159,60 @@ public class UserCrud {
 		} catch (SQLException ex) {
 			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}
+	}
+	
+	public static SimpleUser GetMyData_SimpleUser(SimpleUser u){
+		Connection con = DataSource.getInstance().getCon();
+		String query = "select * from User where username = '" + u.getUsername() + "'";
+		try {
+			Statement ste = con.createStatement();
+			ResultSet set = ste.executeQuery(query);
+			if (set.next()) {
+				u.setRegistrationdate(set.getDate("registration_date"));
+				u.setBirthdate(set.getDate("birth_date"));
+				u.setFidaelitypoints(set.getInt("fidelity_points"));
+				u.setLoggedin(true);
+				u.setLast_login(new Timestamp(new Date().getTime()));
+				u.setNationality(set.getString("nationality"));
+				u.setFirstname(set.getString("firstname"));
+				u.setLastname(set.getString("lastname"));
+				return u;
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+	
+	public static Moderator GetMyData_Moderator(Moderator u){
+		Connection con = DataSource.getInstance().getCon();
+		String query = "select * from User where username = '" + u.getUsername() + "'";
+		try {
+			Statement ste = con.createStatement();
+			ResultSet set = ste.executeQuery(query);
+			if (set.next()) {
+				u.setPhonenumber(set.getString("phone_number"));
+				return u;
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+	
+	public static Admin GetMyData_Admin(Admin u){
+		Connection con = DataSource.getInstance().getCon();
+		String query = "select * from User where username = '" + u.getUsername() + "'";
+		try {
+			Statement ste = con.createStatement();
+			ResultSet set = ste.executeQuery(query);
+			if (set.next()) {
+				u.setPhonenumber(set.getString("phone_number"));
+				return u;
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
 	}
 }
