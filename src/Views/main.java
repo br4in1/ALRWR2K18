@@ -24,8 +24,8 @@ public class main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("login_form.fxml"));
-        primaryStage.setTitle("Se connecter !");
+        Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+        primaryStage.setTitle("World Cup 2018");
         primaryStage.setScene(new Scene(root));
 		primaryStage.setResizable(false);
         primaryStage.show();

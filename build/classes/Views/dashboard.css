@@ -10,9 +10,10 @@
 {
     -fx-background-image: url("/assets/blue.png");
 }
-.body
+
+.navbar
 {
-    -fx-background-image: url("/assets/white.png");
+    -fx-background-image: url("/assets/red.png");
 }
 
 
