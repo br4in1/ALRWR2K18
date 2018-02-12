@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import static Services.GalleryCrud.AjouterImage;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
@@ -33,6 +34,8 @@ public class DashboardController implements Initializable {
     private JFXHamburger hamburger;
     @FXML
     private JFXDrawer drawer;
+    @FXML
+    private Pane mainFeild;
 
     /**
      * Initializes the controller class.
@@ -42,7 +45,9 @@ public class DashboardController implements Initializable {
         try {
             VBox pane = FXMLLoader.load(getClass().getResource("/Views/navbar.fxml"));
             VBox gstArticleNavBar = FXMLLoader.load(getClass().getResource("/Views/GestionArticlesNavbar.fxml"));
-
+            VBox gestionImageNavBar = FXMLLoader.load(getClass().getResource("/Views/GestionImageNavbar.fxml"));
+            AnchorPane ajouterImage = FXMLLoader.load(getClass().getResource("/Views/AjouterImage.fxml"));
+            AnchorPane consulterImage = FXMLLoader.load(getClass().getResource("/Views/afficherImage.fxml"));
             drawer.setSidePane(pane);
             HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
             transition.setRate(-1);
@@ -63,6 +68,11 @@ public class DashboardController implements Initializable {
                             case "gestionArticle":
                                 drawer.setSidePane(gstArticleNavBar);
                                 break;
+                            case "gestionImage":
+                                drawer.setSidePane(gestionImageNavBar);
+                                break ; 
+                            
+
                             //TO DO: ajouter les autre case des button modules 1-4
                         }
                     });
@@ -82,6 +92,26 @@ public class DashboardController implements Initializable {
                         }
                     });
                 }
+                for (Node node : gestionImageNavBar.getChildren()) {
+                    node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
+                        switch (node.getAccessibleText()) {
+                            case "menuPrincipale":
+                                drawer.setSidePane(pane);
+                                break;
+                            case "ajouterImages":      
+                                mainFeild.getChildren().add(ajouterImage);
+                                 // drawer.setContent(ajouterImage);                                
+                                System.out.println("ajotuer Article is clicked");
+                                
+                                break;
+                            case "consulterImages":
+                                System.out.println("consulter aarticles is clicked");
+                                mainFeild.getChildren().add(consulterImage);
+                                break;
+                        }
+                    });
+                }
+                
             }
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);

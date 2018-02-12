@@ -22,3 +22,4 @@
 hs_err_pid*
 !/src/Libraries/fontawesomefx-8.9.jar
 !/src/Libraries/jfoenix-8.0.1.jar
+src/Controllers/AjouterImageController.java

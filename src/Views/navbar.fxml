@@ -30,7 +30,7 @@
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton prefHeight="52.0" prefWidth="301.0" text="Module 4" textFill="WHITE">
+      <JFXButton accessibleText="gestionImage" prefHeight="52.0" prefWidth="301.0" text="Gestion Images" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
