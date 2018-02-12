@@ -14,16 +14,16 @@ import java.sql.Date;
 public class Game {
     private int id;
     private Date date;
-    private int homeTeam;
-    private int awayTeam;
+    private String homeTeam;
+    private String awayTeam;
     private String result;
-    private int stadium;
+    private String stadium;
     private String summary;
     private String summaryPhoto;
     private String Highlights;
     private String Referee;
 
-    public Game(Date date, int homeTeam, int awayTeam, String result, int stadium, String summary, String summaryPhoto, String Highlights, String Referee) {
+    public Game(Date date, String homeTeam, String awayTeam, String result, String stadium, String summary, String summaryPhoto, String Highlights, String Referee) {
     
         this.date = date;
         this.homeTeam = homeTeam;
@@ -52,19 +52,19 @@ public class Game {
         this.date = date;
     }
 
-    public int getHomeTeam() {
+    public String getHomeTeam() {
         return homeTeam;
     }
 
-    public void setHomeTeam(int homeTeam) {
+    public void setHomeTeam(String homeTeam) {
         this.homeTeam = homeTeam;
     }
 
-    public int getAwayTeam() {
+    public String getAwayTeam() {
         return awayTeam;
     }
 
-    public void setAwayTeam(int awayTeam) {
+    public void setAwayTeam(String awayTeam) {
         this.awayTeam = awayTeam;
     }
 
@@ -76,11 +76,11 @@ public class Game {
         this.result = result;
     }
 
-    public int getStadium() {
+    public String getStadium() {
         return stadium;
     }
 
-    public void setStadium(int stadium) {
+    public void setStadium(String stadium) {
         this.stadium = stadium;
     }
 

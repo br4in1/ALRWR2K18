@@ -34,10 +34,10 @@ public class GameCrud {
 			PreparedStatement ste = con.prepareStatement(query);
 
 			ste.setDate(1, game.getDate());
-			ste.setInt(2, game.getHomeTeam());
-			ste.setInt(3, game.getAwayTeam());
+			ste.setInt(2, Integer.parseInt(game.getHomeTeam()));
+			ste.setInt(3, Integer.parseInt(game.getAwayTeam()));
 			ste.setString(4, game.getResult());
-			ste.setInt(5, game.getStadium());
+			ste.setInt(5, Integer.parseInt(game.getStadium()));
 			ste.setString(6, game.getSummary());
 			ste.setString(7, game.getSummaryPhoto());
 			ste.setString(8, game.getHighlights());
@@ -52,16 +52,18 @@ public class GameCrud {
 	public static List<Game> findAllGames() {
 		Connection con = DataSource.getInstance().getCon();
 		List result = new ArrayList<Game>();
-		String query = "select * from Game";
+		String query = "select g.*,t1.name 'nomaway',t2.name 'nomhome',s.name 'nomstade' from Game g join Team t1 on t1.id = g.HomeTeam join Team t2 on t2.id = g.AwayTeam join Stadium s on s.id = g.Stadium";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
 			while(set.next()){
-				Game g = new Game(set.getDate("Date"),set.getInt("HomeTeam"),set.getInt("AwayTeam"),set.getString("Result"),set.getInt("Stadium"), set.getString("Summary"), set.getString("SummaryPhoto"), set.getString("Highlights"), set.getString("Referee"));
+				Game g = new Game(set.getDate("Date"),set.getString("nomhome"),set.getString("nomaway"),set.getString("Result"),set.getString("nomstade"), set.getString("Summary"), set.getString("SummaryPhoto"), set.getString("Highlights"), set.getString("Referee"));
 				
 				g.setId(set.getInt("id"));
 				result.add(g);
 			}
+			
+			System.out.println(result);
 			return result;
 		} catch (SQLException ex) {
 			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
