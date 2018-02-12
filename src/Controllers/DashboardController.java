@@ -78,6 +78,7 @@ public class DashboardController implements Initializable {
             //Load all fxmls in a cache
         
             tournementBox = FXMLLoader.load(getClass().getResource("/Views/tournementBox.fxml"));
+			
             games = FXMLLoader.load(getClass().getResource("/Views/GamesCrud.fxml"));
             
             for (Node node : tournementBox.getChildren()) {
@@ -85,6 +86,8 @@ public class DashboardController implements Initializable {
                         switch (node.getId()) {
                             case "mainMenu":
                                 setNavNode(nav);
+								setContentNode(content);
+								
                                 break;
                             case "games":
                                 setContentNode(games);
