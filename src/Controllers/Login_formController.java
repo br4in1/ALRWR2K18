@@ -337,7 +337,6 @@ public class Login_formController implements Initializable {
 				BufferedImage bf = SwingFXUtils.fromFXImage(uploadphoto.getImage(), null);
 				ImageIO.write(bf, "png", toUpload);
 			}
-			System.out.println(toUpload.getPath());
 			Map uploadResult = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
 			toUpload.delete();
 			UserCrud.UpdateUserPhoto((String) uploadResult.get("url"), current_username);
