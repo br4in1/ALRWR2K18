@@ -37,4 +37,5 @@ hs_err_pid*
 !/src/Libraries/commons-logging-1.2.jar
 !/src/Libraries/httpclient-cache-4.5.3.jar
 !/src/Libraries/httpclient-4.5.3_1.jar
-!/src/Libraries/cloudinary-core-1.17.0.jar
+!/src/Libraries/cloudinary-core-1.17.0.jar!/src/Libraries/cloudinary-core-1.17.0.jar
+build/
