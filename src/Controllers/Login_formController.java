@@ -297,6 +297,7 @@ public class Login_formController implements Initializable {
 								filename = filename.replace(" ", "_").toLowerCase();
 								countryavatar.setImage(new Image("assets/flags/" + filename + ".png"));
 								current_username = u.getUsername();
+								SimpleUser.current_user = (SimpleUser) u;
 							}
 						}
 					});
@@ -340,6 +341,7 @@ public class Login_formController implements Initializable {
 			Map uploadResult = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
 			toUpload.delete();
 			UserCrud.UpdateUserPhoto((String) uploadResult.get("url"), current_username);
+			SimpleUser.current_user.setProfilepicture((String) uploadResult.get("url"));
 		}
 	}
 }

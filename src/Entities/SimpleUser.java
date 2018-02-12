@@ -12,6 +12,7 @@ import java.sql.Date;
  * @author br4in
  */
 public class SimpleUser extends User{
+	public static SimpleUser current_user = null;
 	private Date birthdate;
 	private Date registrationdate;
 	private String nationality;
