@@ -121,8 +121,10 @@ public static void updateTeam(Team t) {
             ResultSet result = ste.executeQuery();
             while(result.next())
             {
-                 listTeam.add(new Team(result.getInt("id"),result.getString("name"),result.getString("coach"),result.getString("president"),result.getString("area"),result.getInt("gamePlayed"),result.getInt("goalScored"),result.getInt("goalAgainst"),result.getInt("participations"),result.getDate("fifaDate"),result.getString("wcGroup"),result.getInt("win"),result.getInt("loose"),result.getInt("draw"),result.getInt("fifaRank"),result.getString("flagPhoto"),result.getString("logoPhoto"),result.getString("squadPhoto"),result.getString("descriptionPhoto"),result.getString("description"),result.getString("website"),result.getString("video")));
-                return listTeam ;
+                 listTeam.add(new Team(result.getString("name"),result.getString("coach"),result.getString("president"),result.getString("area"),result.getInt("gamePlayed"),result.getInt("goalScored"),result.getInt("goalAgainst"),result.getInt("participations"),result.getDate("fifaDate"),result.getString("wcGroup"),result.getInt("win"),result.getInt("loose"),result.getInt("draw"),result.getInt("points"),result.getInt("fifaRank"),result.getString("flagPhoto"),result.getString("logoPhoto"),result.getString("squadPhoto"),result.getString("descriptionPhoto"),result.getString("description"),result.getString("website"),result.getString("video")));
+                                                                                                                                            //String name, String coach, String president, String area, int gamesPlayed, int goalScored, int goalAgainst, int participations, Date fifaDate, String wcGroup, int win, int loose, int draw, int points, int fifaRank, String flagPhoto, String logoPhoto, String squadPhoto, String descriptionPhoto, String description, String website, String video
+                 
+                 return listTeam ;
             }
         } catch (SQLException ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
@@ -139,7 +141,7 @@ Connection con = DataSource.getInstance().getCon();
             ResultSet result = ste.executeQuery();
             while(result.next())
             {
-             return new Team(result.getInt("id"),result.getString("name"),result.getString("coach"),result.getString("president"),result.getString("area"),result.getInt("gamePlayed"),result.getInt("goalScored"),result.getInt("goalAgainst"),result.getInt("participations"),result.getDate("fifaDate"),result.getString("wcGroup"),result.getInt("win"),result.getInt("loose"),result.getInt("draw"),result.getInt("fifaRank"),result.getString("flagPhoto"),result.getString("logoPhoto"),result.getString("squadPhoto"),result.getString("descriptionPhoto"),result.getString("description"),result.getString("website"),result.getString("video"));
+             return new Team(result.getString("name"),result.getString("coach"),result.getString("president"),result.getString("area"),result.getInt("gamePlayed"),result.getInt("goalScored"),result.getInt("goalAgainst"),result.getInt("participations"),result.getDate("fifaDate"),result.getString("wcGroup"),result.getInt("win"),result.getInt("loose"),result.getInt("draw"),result.getInt("points"),result.getInt("fifaRank"),result.getString("flagPhoto"),result.getString("logoPhoto"),result.getString("squadPhoto"),result.getString("descriptionPhoto"),result.getString("description"),result.getString("website"),result.getString("video"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);

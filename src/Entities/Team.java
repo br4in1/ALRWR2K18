@@ -36,8 +36,8 @@ public class Team {
     private String website ;//
     private String video ;//
 
-    public Team(int id, String name, String coach, String president, String area, int gamesPlayed, int goalScored, int goalAgainst, int participations, Date fifaDate, String wcGroup, int win, int loose, int draw, int points, int fifaRank, String flagPhoto, String logoPhoto, String squadPhoto, String descriptionPhoto, String description, String website, String video) {
-        this.id = id;
+    public Team(String name, String coach, String president, String area, int gamesPlayed, int goalScored, int goalAgainst, int participations, Date fifaDate, String wcGroup, int win, int loose, int draw, int points, int fifaRank, String flagPhoto, String logoPhoto, String squadPhoto, String descriptionPhoto, String description, String website, String video) {
+       
         this.name = name;
         this.coach = coach;
         this.president = president;
@@ -61,10 +61,13 @@ public class Team {
         this.website = website;
         this.video = video;
     }
+              //String name,    String coach,  String president, String area, int gamesPlayed, int goalScored, int goalAgainst, int participations, Date fifaDate, String wcGroup, int win, int loose, int draw, int points, int fifaRank, String flagPhoto, String logoPhoto, String squadPhoto, String descriptionPhoto, String description, String website, String video
+   // public Team(String string, String string0, String string1, String string2, int aInt,       int aInt0,      int aInt1,       int aInt2,          Date date,     String string3, int aInt3, int aInt4, int aInt5, int aInt6, String string4, String string5, String string6, String string7, String string8, String string9, String string10) {
+     //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   // }
 
-    public Team(int aInt, String string, String string0, String string1, String string2, int aInt0, int aInt1, int aInt2, int aInt3, Date date, String string3, int aInt4, int aInt5, int aInt6, int aInt7, String string4, String string5, String string6, String string7, String string8, String string9, String string10) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+   
 
     public int getId() {
         return id;

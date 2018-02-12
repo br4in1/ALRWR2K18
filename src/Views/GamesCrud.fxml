@@ -24,6 +24,9 @@
          <center>
             <JFXTreeTableView BorderPane.alignment="CENTER" />
          </center>
+         <bottom>
+            <Pane prefHeight="35.0" prefWidth="958.0" BorderPane.alignment="CENTER" />
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>
