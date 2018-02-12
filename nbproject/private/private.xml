@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/Users/simo/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/GestionArticlesNavbarController.java</file>
             <file>file:/Users/simo/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/GamesCrudController.java</file>
             <file>file:/Users/simo/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Services/GameCrud.java</file>
@@ -10,6 +11,9 @@
             <file>file:/Users/simo/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/AddFormController.java</file>
             <file>file:/Users/simo/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/DashboardController.java</file>
             <file>file:/Users/simo/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/TournementBoxController.java</file>
+=======
+            <file>file:/C:/Users/dell/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Services/PlayerCrud.java</file>
+>>>>>>> cfac4c728ddc971f0c9f8b5a50b912dbb479219d
         </group>
     </open-files>
 </project-private>
