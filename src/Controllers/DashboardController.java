@@ -41,8 +41,8 @@ public class DashboardController implements Initializable {
     
     @FXML
     private Pane main;
-    AnchorPane games;
-    VBox tournementBox;
+    AnchorPane games,teams;
+    VBox tournementBox,teamBox;
 
     /**
      * Initializes the controller class.
@@ -78,16 +78,32 @@ public class DashboardController implements Initializable {
             //Load all fxmls in a cache
         
             tournementBox = FXMLLoader.load(getClass().getResource("/Views/tournementBox.fxml"));
-			
+            teamBox =FXMLLoader.load(getClass().getResource("/Views/teamBox.fxml"));
             games = FXMLLoader.load(getClass().getResource("/Views/GamesCrud.fxml"));
+            teams = FXMLLoader.load(getClass().getResource("/Views/teamsCrud.fxml")) ;
             
+               for (Node node : teamBox.getChildren()) {
+                    node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
+                        switch (node.getId()) {
+                            case "mainMenu":
+                                setNavNode(nav);
+                                setContentNode(content);
+                                break;
+                            case "Teams":
+                                setContentNode(teams);
+                            break;
+                            
+                        }
+                    });
+                }
+               
             for (Node node : tournementBox.getChildren()) {
                     node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
                         switch (node.getId()) {
                             case "mainMenu":
                                 setNavNode(nav);
-								setContentNode(content);
-								
+                               
+                               setContentNode(content);
                                 break;
                             case "games":
                                 setContentNode(games);
@@ -95,6 +111,7 @@ public class DashboardController implements Initializable {
                         }
                     });
                 }
+         
             
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -109,9 +126,7 @@ public class DashboardController implements Initializable {
     private void usersNavbar(MouseEvent event) {
     }
 
-    @FXML
-    private void teamsNavbar(MouseEvent event) {
-    }
+  
 
     @FXML
     private void newsNavbar(MouseEvent event) {
@@ -121,12 +136,20 @@ public class DashboardController implements Initializable {
     private void guideNavbar(MouseEvent event) {
     }
 
-    @FXML
-    private void tournementNavbar(MouseEvent event) {
-        setNavNode(tournementBox);
-    }
+    
 
     @FXML
     private void GalleryNavbar(MouseEvent event) {
+        
+    }
+
+    @FXML
+    private void teamsNavbar(MouseEvent event) {
+        setNavNode(teamBox);
+    }
+
+    @FXML
+    private void tournementNavbar(MouseEvent event) {
+        setNavNode(tournementBox);
     }
 }

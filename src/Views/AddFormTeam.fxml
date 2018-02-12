@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddFormTeamController">
+   <center>
+      <Pane prefHeight="47.0" prefWidth="600.0" styleClass="body" stylesheets="@dashboard.css" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton layoutX="322.0" layoutY="347.0" onMouseClicked="#submit" prefHeight="38.0" prefWidth="82.0" text="Submit" />
+            <HBox layoutX="112.0" layoutY="45.0" prefHeight="193.0" prefWidth="563.0">
+               <children>
+                  <VBox prefHeight="127.0" prefWidth="175.0">
+                     <children>
+                        <JFXTextField id="name" fx:id="name" promptText="Name" />
+                        <JFXTextField id="coach" fx:id="coach" promptText="Coach" />
+                        <JFXTextField id="president" fx:id="president" promptText="President" />
+                        <JFXTextField id="area" fx:id="area" promptText="Area" />
+                        <JFXTextField id="participations" fx:id="participation" promptText="Participations" />
+                     </children>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="127.0" prefWidth="175.0">
+                     <children>
+                        <DatePicker fx:id="date" />
+                        <JFXTextField id="wcgroupe" fx:id="wcgroupe" promptText="World cup groupe" />
+                        <JFXTextField id="fifarank" fx:id="fifarank" promptText="Fifa rank" />
+                        <JFXTextField id="flagphoto" fx:id="flagphoto" promptText="Flag photo" />
+                        <JFXTextField id="logo photo" fx:id="logophoto" promptText="Logo photo" />
+                     </children>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="127.0" prefWidth="175.0">
+                     <children>
+                        <JFXTextField id="squadphoto" fx:id="squadphoto" promptText="Squad photo" />
+                        <JFXTextField id="descriptionphoto" fx:id="descriptionphoto" promptText="Description photo" />
+                        <JFXTextField id="website" fx:id="website" promptText="Website" />
+                        <JFXTextField id="video" fx:id="video" promptText="Video" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <JFXTextArea fx:id="description" layoutX="257.0" layoutY="229.0" prefHeight="81.0" prefWidth="239.0" promptText="Description" />
+         </children>
+      </Pane>
+   </center>
+   <top>
+      <Pane prefHeight="50.0" prefWidth="600.0" styleClass="topbar" stylesheets="@dashboard.css" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="244.0" layoutY="11.0" text="New Game" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+</BorderPane>
