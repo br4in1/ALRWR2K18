@@ -8,10 +8,8 @@ package Controllers;
 import Entities.SimpleUser;
 import java.io.File;
 import java.util.Map;
-import com.cloudinary.*;
 import Entities.User;
 import Services.UserCrud;
-import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -64,7 +62,7 @@ import javax.imageio.ImageIO;
  */
 public class Login_formController implements Initializable {
 
-	Cloudinary cloudinary;
+	//Cloudinary cloudinary;
 	@FXML
 	private Pane loginform;
 	@FXML
@@ -112,7 +110,7 @@ public class Login_formController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
+		//cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
 		username.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -337,9 +335,9 @@ public class Login_formController implements Initializable {
 				ImageIO.write(bf, "png", toUpload);
 			}
 			System.out.println(toUpload.getPath());
-			Map uploadResult = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
+			//Map uploadResult = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
 			toUpload.delete();
-			UserCrud.UpdateUserPhoto((String) uploadResult.get("url"), current_username);
+			//UserCrud.UpdateUserPhoto((String) uploadResult.get("url"), current_username);
 		}
 	}
 }

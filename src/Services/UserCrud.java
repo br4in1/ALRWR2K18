@@ -10,17 +10,13 @@ import Entities.Moderator;
 import Entities.SimpleUser;
 import Entities.User;
 import Utils.BCrypt;
-import java.util.*;
-import javax.activation.*;
 import java.sql.Connection;
 import Utils.DataSource;
 import Utils.TokenGenerator;
-import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
