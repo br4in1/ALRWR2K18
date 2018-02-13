@@ -26,6 +26,10 @@ public class TeamBoxController implements Initializable {
     private JFXButton mainMenu;
     @FXML
     private JFXButton Teams;
+    @FXML
+    private JFXButton TeamStatics;
+    @FXML
+    private JFXButton Teams1;
 
     /**
      * Initializes the controller class.
@@ -37,6 +41,10 @@ public class TeamBoxController implements Initializable {
 
     @FXML
     private void gamesContent(MouseEvent event) {
+    }
+
+    @FXML
+    private void TeamStatics(MouseEvent event) {
     }
     
 }
