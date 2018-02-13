@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -107,18 +108,21 @@ public class TeamCrud {
 
 	public static List<Team> findAllTeam() {
 		List<Team> listTeam = new ArrayList<Team>();
-		listTeam = null;
 		Connection con = DataSource.getInstance().getCon();
-		String query = "SELECT * `Team` ";
+		String query = "SELECT * from `Team` ";
 		try {
-			PreparedStatement ste = con.prepareStatement(query);
-			ResultSet result = ste.executeQuery();
-			while (result.next()) {
-				listTeam.add(new Team(result.getString("name"), result.getString("coach"), result.getString("president"), result.getString("area"), result.getInt("gamePlayed"), result.getInt("goalScored"), result.getInt("goalAgainst"), result.getInt("participations"), result.getDate("fifaDate"), result.getString("wcGroup"), result.getInt("win"), result.getInt("loose"), result.getInt("draw"), result.getInt("points"), result.getInt("fifaRank"), result.getString("flagPhoto"), result.getString("logoPhoto"), result.getString("squadPhoto"), result.getString("descriptionPhoto"), result.getString("description"), result.getString("website"), result.getString("video")));
-				//String name, String coach, String president, String area, int gamesPlayed, int goalScored, int goalAgainst, int participations, Date fifaDate, String wcGroup, int win, int loose, int draw, int points, int fifaRank, String flagPhoto, String logoPhoto, String squadPhoto, String descriptionPhoto, String description, String website, String video
-
-				return listTeam;
+                    Statement ste = con.createStatement();
+			ResultSet set = ste.executeQuery(query);
+			while (set.next()) {
+                             //listTeam.add(new Team(set.getString("name"), set.getString("coach"), set.getString("president"), set.getString("area"), set.getInt("gamesPlayed"), set.getInt("goalScored"), set.getInt("goalAgainst"), set.getInt("participations"), set.getDate("fifaDate"), set.getString("wcGroup"), set.getInt("win"), set.getInt("loose"), set.getInt("draw"), set.getInt("points"), set.getInt("fifaRank"), set.getString("flagPhoto"), set.getString("logoPhoto"), set.getString("squadPhoto"), set.getString("descriptionPhoto"), set.getString("description"), set.getString("website"), set.getString("video")));
+                            
+                               Team T = new Team(set.getString("name"), set.getString("coach"), set.getString("president"), set.getString("area"), set.getInt("gamesPlayed"), set.getInt("goalScored"), set.getInt("goalAgainst"), set.getInt("participations"), set.getDate("fifaDate"), set.getString("wcGroup"), set.getInt("win"), set.getInt("loose"), set.getInt("draw"), set.getInt("points"), set.getInt("fifaRank"), set.getString("flagPhoto"), set.getString("logoPhoto"), set.getString("squadPhoto"), set.getString("descriptionPhoto"), set.getString("description"), set.getString("website"), set.getString("video"));
+                            T.setId(set.getInt("id")); 
+//String name, String coach, String president, String area, int gamesPlayed, int goalScored, int goalAgainst, int participations, Date fifaDate, String wcGroup, int win, int loose, int draw, int points, int fifaRank, String flagPhoto, String logoPhoto, String squadPhoto, String descriptionPhoto, String description, String website, String video
+                            listTeam.add(T);
+				
 			}
+                        return listTeam;
 		} catch (SQLException ex) {
 			Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -129,12 +133,12 @@ public class TeamCrud {
 
 	public static Team findById(int id) {
 		Connection con = DataSource.getInstance().getCon();
-		String query = "SELECT * from `Team` id = ? ";
+		String query = "SELECT * from `Team` where id = ? ";
 		try {
 			PreparedStatement ste = con.prepareStatement(query);
 			ResultSet result = ste.executeQuery();
 			while (result.next()) {
-				return new Team(result.getString("name"), result.getString("coach"), result.getString("president"), result.getString("area"), result.getInt("gamePlayed"), result.getInt("goalScored"), result.getInt("goalAgainst"), result.getInt("participations"), result.getDate("fifaDate"), result.getString("wcGroup"), result.getInt("win"), result.getInt("loose"), result.getInt("draw"), result.getInt("points"), result.getInt("fifaRank"), result.getString("flagPhoto"), result.getString("logoPhoto"), result.getString("squadPhoto"), result.getString("descriptionPhoto"), result.getString("description"), result.getString("website"), result.getString("video"));
+				return new Team(result.getString("name"), result.getString("coach"), result.getString("president"), result.getString("area"), result.getInt("gamesPlayed"), result.getInt("goalScored"), result.getInt("goalAgainst"), result.getInt("participations"), result.getDate("fifaDate"), result.getString("wcGroup"), result.getInt("win"), result.getInt("loose"), result.getInt("draw"), result.getInt("points"), result.getInt("fifaRank"), result.getString("flagPhoto"), result.getString("logoPhoto"), result.getString("squadPhoto"), result.getString("descriptionPhoto"), result.getString("description"), result.getString("website"), result.getString("video"));
 			}
 		} catch (SQLException ex) {
 			Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);

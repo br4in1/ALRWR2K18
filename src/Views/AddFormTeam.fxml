@@ -34,8 +34,8 @@
                         <DatePicker fx:id="date" />
                         <JFXTextField id="wcgroupe" fx:id="wcgroupe" promptText="World cup groupe" />
                         <JFXTextField id="fifarank" fx:id="fifarank" promptText="Fifa rank" />
-                        <JFXTextField id="flagphoto" fx:id="flagphoto" promptText="Flag photo" />
-                        <JFXTextField id="logo photo" fx:id="logophoto" promptText="Logo photo" />
+                        <JFXTextField id="flagphoto" fx:id="flagphoto" onMouseClicked="#photo" promptText="Flag photo" />
+                        <JFXTextField id="logo photo" fx:id="logophoto" onMouseClicked="#photologo" promptText="Logo photo" />
                      </children>
                      <HBox.margin>
                         <Insets right="20.0" />
@@ -43,8 +43,8 @@
                   </VBox>
                   <VBox prefHeight="127.0" prefWidth="175.0">
                      <children>
-                        <JFXTextField id="squadphoto" fx:id="squadphoto" promptText="Squad photo" />
-                        <JFXTextField id="descriptionphoto" fx:id="descriptionphoto" promptText="Description photo" />
+                        <JFXTextField id="squadphoto" fx:id="squadphoto" onMouseClicked="#photosquad" promptText="Squad photo" />
+                        <JFXTextField id="descriptionphoto" fx:id="descriptionphoto" onMouseClicked="#photodescription" promptText="Description photo" />
                         <JFXTextField id="website" fx:id="website" promptText="Website" />
                         <JFXTextField id="video" fx:id="video" promptText="Video" />
                      </children>

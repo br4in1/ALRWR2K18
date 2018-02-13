@@ -8,23 +8,45 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="740.0" prefWidth="959.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TeamsCrudController">
+<AnchorPane id="AnchorPane" prefHeight="680.0" prefWidth="978.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TeamsCrudController">
    <children>
-      <BorderPane layoutX="1.0" prefHeight="739.0" prefWidth="958.0">
-         <bottom>
-            <Pane prefHeight="35.0" prefWidth="958.0" BorderPane.alignment="CENTER" />
-         </bottom>
-         <center>
-            <JFXTreeTableView BorderPane.alignment="CENTER" />
-         </center>
-         <top>
-            <Pane prefHeight="68.0" prefWidth="958.0" BorderPane.alignment="CENTER">
+      <ScrollPane layoutX="48.0" layoutY="82.0" prefHeight="458.0" prefWidth="856.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="669.0" prefWidth="1207.0">
                <children>
-                  <JFXButton layoutX="791.0" layoutY="10.0" onMouseClicked="#newTeam" prefHeight="44.0" prefWidth="139.0" text="New Team" />
+                  <TableView fx:id="tableT" prefHeight="455.0" prefWidth="844.0">
+                    <columns>
+                      <TableColumn fx:id="id" prefWidth="75.0" text="id" />
+                      <TableColumn fx:id="name" prefWidth="75.0" text="name" />
+                        <TableColumn fx:id="coach" prefWidth="75.0" text="coach" />
+                        <TableColumn fx:id="president" prefWidth="75.0" text="president" />
+                        <TableColumn fx:id="area" prefWidth="75.0" text="area" />
+                        <TableColumn fx:id="gamesPlayed" prefWidth="75.0" text="games Played" />
+                        <TableColumn fx:id="goalScored" prefWidth="75.0" text="goal Scored" />
+                        <TableColumn fx:id="goalAgainst" prefWidth="75.0" text="goal Against" />
+                        <TableColumn fx:id="participations" prefWidth="75.0" text="participations" />
+                        <TableColumn fx:id="fifaDate" prefWidth="75.0" text="fifa Date" />
+                        <TableColumn fx:id="wcGroup" prefWidth="75.0" text="wcGroup" />
+                        <TableColumn fx:id="win" prefWidth="75.0" text="win" />
+                        <TableColumn fx:id="loose" prefWidth="75.0" text="loose" />
+                        <TableColumn fx:id="draw" prefWidth="75.0" text="draw" />
+                        <TableColumn fx:id="points" prefWidth="75.0" text="points" />
+                        <TableColumn fx:id="fifaRank" prefWidth="75.0" text="fifaRank" />
+                        <TableColumn fx:id="flagPhoto" prefWidth="75.0" text="flagPhoto" />
+                        <TableColumn fx:id="logoPhoto" prefWidth="75.0" text="logoPhoto" />
+                        <TableColumn fx:id="squadPhoto" prefWidth="75.0" text="squadPhoto" />
+                        <TableColumn fx:id="descriptionPhoto" prefWidth="75.0" text="descriptionPhoto" />
+                        <TableColumn fx:id="description" prefWidth="75.0" text="description" />
+                        <TableColumn fx:id="website" prefWidth="75.0" text="website" />
+                        <TableColumn fx:id="video" prefWidth="75.0" text="video" />
+                    </columns>
+                  </TableView>
                </children>
-            </Pane>
-         </top>
-      </BorderPane>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <JFXButton layoutX="752.0" layoutY="12.0" onMouseClicked="#newTeam" prefHeight="44.0" prefWidth="139.0" text="New Team" />
+      <JFXButton layoutX="660.0" layoutY="23.0" text="Delete Team" />
    </children>
    <stylesheets>
       <URL value="@gamescrud.css" />
