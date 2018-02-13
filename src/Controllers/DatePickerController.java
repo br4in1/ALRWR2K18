@@ -5,10 +5,12 @@
  */
 package Controllers;
 
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -17,6 +19,11 @@ import javafx.scene.input.MouseEvent;
  * @author simo
  */
 public class DatePickerController implements Initializable {
+
+	@FXML
+	private DatePicker date;
+	@FXML
+	private JFXButton sub;
 
 	/**
 	 * Initializes the controller class.

@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import Entities.Game;
 import Utils.DataSource;
 import com.sun.rowset.internal.Row;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -88,6 +89,23 @@ public class GameCrud {
 		}
 	}
 		public static void update(String row,int value, int id) {
+		Connection con = DataSource.getInstance().getCon();
+		String strSQLQuery=String.format("update game set %s = '%s' where id=%s", row, value, id);
+			System.out.println(strSQLQuery);
+		try {
+			PreparedStatement ste = con.prepareStatement(strSQLQuery);
+			ste.executeUpdate();
+			
+
+			
+
+		
+		} catch (SQLException ex) {
+			Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
+	public static void update(String row,Date value, int id) {
 		Connection con = DataSource.getInstance().getCon();
 		String strSQLQuery=String.format("update game set %s = '%s' where id=%s", row, value, id);
 			System.out.println(strSQLQuery);
