@@ -36,6 +36,33 @@ public class Team {
     private String website ;//22
     private String video ;//23
 
+    public Team(int id, String name, String coach, String president, String area, int gamesPlayed, int goalScored, int goalAgainst, int participations, Date fifaDate, String wcGroup, int win, int loose, int draw, int points, int fifaRank, String flagPhoto, String logoPhoto, String squadPhoto, String descriptionPhoto, String description, String website, String video) {
+        this.id = id;
+        this.name = name;
+        this.coach = coach;
+        this.president = president;
+        this.area = area;
+        this.gamesPlayed = gamesPlayed;
+        this.goalScored = goalScored;
+        this.goalAgainst = goalAgainst;
+        this.participations = participations;
+        this.fifaDate = fifaDate;
+        this.wcGroup = wcGroup;
+        this.win = win;
+        this.loose = loose;
+        this.draw = draw;
+        this.points = points;
+        this.fifaRank = fifaRank;
+        this.flagPhoto = flagPhoto;
+        this.logoPhoto = logoPhoto;
+        this.squadPhoto = squadPhoto;
+        this.descriptionPhoto = descriptionPhoto;
+        this.description = description;
+        this.website = website;
+        this.video = video;
+    }
+
+    
     public Team(String name, String coach, String president, String area, int gamesPlayed, int goalScored, int goalAgainst, int participations, Date fifaDate, String wcGroup, int win, int loose, int draw, int points, int fifaRank, String flagPhoto, String logoPhoto, String squadPhoto, String descriptionPhoto, String description, String website, String video) {
        
         this.name = name;
@@ -86,7 +113,7 @@ public class Team {
 
     
    
-
+    
     public int getId() {
         return id;
     }
