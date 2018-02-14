@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.Map;
 import com.cloudinary.*;
 import Entities.User;
+import Services.Browser;
 import Services.UserCrud;
 import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXButton;
@@ -29,10 +30,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
@@ -45,6 +48,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -56,6 +60,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import javax.imageio.ImageIO;
 
@@ -108,6 +113,10 @@ public class Login_formController implements Initializable {
 	@FXML
 	private StackPane welcomeSP;
 	private static String current_username = null;
+	@FXML
+	private JFXButton loginbtn;
+	@FXML
+	private JFXButton backbtn;
 
 	/**
 	 * Initializes the controller class.
@@ -172,6 +181,7 @@ public class Login_formController implements Initializable {
 		});
 	}
 
+	@FXML
 	public void showSignUpForm() {
 		loginform.setVisible(false);
 		signupform.setVisible(true);
@@ -189,6 +199,7 @@ public class Login_formController implements Initializable {
 		Locale.setDefault(Locale.FRANCE);
 	}
 
+	@FXML
 	public void hideSignUpForm() {
 		loginform.setVisible(true);
 		signupform.setVisible(false);
@@ -232,6 +243,7 @@ public class Login_formController implements Initializable {
 		return true;
 	}
 
+	@FXML
 	public void SignUpUserStepOne() {
 		Boolean B1 = CheckUsername();
 		Boolean B2 = CheckEmail();
@@ -256,6 +268,7 @@ public class Login_formController implements Initializable {
 		}
 	}
 
+	@FXML
 	public void loginUser() {
 		User u = UserCrud.AuthenticateUser(username_login.getText(), password_login.getText());
 		if (u == null) {
@@ -312,11 +325,13 @@ public class Login_formController implements Initializable {
 		}
 	}
 
+	@FXML
 	public void FirstIsSelected() {
 		firstradio.setSelected(true);
 		secondradio.setSelected(false);
 	}
 
+	@FXML
 	public void SecondIsSelected() {
 		firstradio.setSelected(false);
 		secondradio.setSelected(true);
@@ -331,6 +346,7 @@ public class Login_formController implements Initializable {
 		}
 	}
 
+	@FXML
 	public void UploadPhoto() throws Exception {
 		if (!firstradio.isSelected() && !secondradio.isSelected()) {
 			JFXDialogLayout content = new JFXDialogLayout();
@@ -353,5 +369,16 @@ public class Login_formController implements Initializable {
 			UserCrud.UpdateUserPhoto((String) uploadResult.get("url"), current_username);
 			SimpleUser.current_user.setProfilepicture((String) uploadResult.get("url"));
 		}
+	}
+
+	@FXML
+	private void AuthWithFacebook(ActionEvent event) {
+		Browser facebookBrowser = new Browser("2100597990159243", "819dc6dd91612fad4c43981e167ba986");
+		Scene fbloginwindow;
+		fbloginwindow = new Scene(facebookBrowser, 900, 600, Color.web("#666970"));
+		Stage st = new Stage();
+		st.setScene(fbloginwindow);
+		st.show();
+		facebookBrowser.showLogin();
 	}
 }
