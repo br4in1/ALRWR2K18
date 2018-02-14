@@ -15,7 +15,7 @@ public class Player {
     private String lastName ; //
     private int age ; //
     private String club ; //
-    private int nation ; //
+    private String nation ; //
     private double height ;//
     private double weight ;//
     private String position ; //
@@ -29,7 +29,7 @@ public class Player {
     private int shirtNb ; 
     private String video ; 
 
-    public Player(String name, String lastName, int age, String club, int nation, double height, double weight, String position, int goals, String description, String profilePhoto, String blanketPhoto, String descriptionPhoto, String fbLink, String twitterLink, int shirtNb, String video) {
+    public Player(String name, String lastName, int age, String club, String nation, double height, double weight, String position, int goals, String description, String profilePhoto, String blanketPhoto, String descriptionPhoto, String fbLink, String twitterLink, int shirtNb, String video) {
         
         this.name = name;
         this.lastName = lastName;
@@ -90,11 +90,11 @@ public class Player {
         this.club = club;
     }
 
-    public int getNation() {
+    public String getNation() {
         return nation;
     }
 
-    public void setNation(int nation) {
+    public void setNation(String nation) {
         this.nation = nation;
     }
 

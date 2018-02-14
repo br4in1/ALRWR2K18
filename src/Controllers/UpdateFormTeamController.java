@@ -98,7 +98,7 @@ public class UpdateFormTeamController implements Initializable {
         // TODO
            cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
    
-        list = TeamCrud.GeIdMap() ;
+        list = TeamCrud.GeIdlist() ;
         id.setItems(FXCollections.observableArrayList(list));
        
     }    

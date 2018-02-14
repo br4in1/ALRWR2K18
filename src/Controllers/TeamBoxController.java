@@ -30,6 +30,8 @@ public class TeamBoxController implements Initializable {
     private JFXButton TeamStatics;
     @FXML
     private JFXButton Teams1;
+    @FXML
+    private JFXButton Players;
 
     /**
      * Initializes the controller class.
@@ -45,6 +47,10 @@ public class TeamBoxController implements Initializable {
 
     @FXML
     private void TeamStatics(MouseEvent event) {
+    }
+
+    @FXML
+    private void teamsContent(MouseEvent event) {
     }
     
 }
