@@ -58,7 +58,7 @@
    <top>
       <Pane prefHeight="50.0" prefWidth="600.0" styleClass="topbar" stylesheets="@dashboard.css" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="244.0" layoutY="11.0" text="New Team" textFill="WHITE">
+            <Label layoutX="244.0" layoutY="11.0" text="New Game" textFill="WHITE">
                <font>
                   <Font size="22.0" />
                </font>
