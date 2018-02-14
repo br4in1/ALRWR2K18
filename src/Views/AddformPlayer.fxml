@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddformPlayerController">
+   <center>
+      <Pane prefHeight="47.0" prefWidth="600.0" styleClass="body" stylesheets="@dashboard.css" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton layoutX="322.0" layoutY="347.0" onMouseClicked="#submit" prefHeight="38.0" prefWidth="82.0" text="Submit" />
+            <HBox layoutX="112.0" layoutY="45.0" prefHeight="193.0" prefWidth="563.0">
+               <children>
+                  <VBox prefHeight="127.0" prefWidth="175.0">
+                     <children>
+                        <JFXTextField id="name" fx:id="name" promptText="Name" />
+                        <JFXTextField id="coach" fx:id="lastName" promptText="Last name" />
+                        <JFXTextField id="president" fx:id="age" promptText="Age" />
+                        <JFXComboBox fx:id="nation" onAction="#choixNation" promptText="Nation" />
+                        <JFXTextField id="area" fx:id="club" promptText="Club" />
+                     </children>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="127.0" prefWidth="175.0">
+                     <children>
+                        <JFXTextField id="wcgroupe" fx:id="height" promptText="Height" />
+                        <JFXTextField id="fifarank" fx:id="weight" promptText="Weight" />
+                        <JFXComboBox fx:id="position" onAction="#choixPosition" promptText="position" />
+                        <JFXTextField id="logo photo" fx:id="goals" promptText="Goals" />
+                        <JFXTextField fx:id="shirtNb" promptText="Shirt number" />
+                        <JFXTextField fx:id="video" promptText="video" />
+                     </children>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="127.0" prefWidth="175.0">
+                     <children>
+                        <JFXTextField id="squadphoto" fx:id="profilePhoto" onMouseClicked="#profilePhoto" promptText="Profile photo" />
+                        <JFXTextField id="descriptionphoto" fx:id="blanketPhoto" onMouseClicked="#blanketPhoto" promptText="Blanket photo" />
+                        <JFXTextField id="website" fx:id="descriptionPhoto" onMouseClicked="#DescriptionPhoto" promptText="DescriptionPhoto" />
+                        <JFXTextField id="video" fx:id="fbLink" promptText="Facebook link" />
+                        <JFXTextField fx:id="twitterLink" promptText="TwitterLink" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <JFXTextArea fx:id="description" layoutX="257.0" layoutY="229.0" prefHeight="81.0" prefWidth="239.0" promptText="Description" />
+         </children>
+      </Pane>
+   </center>
+   <top>
+      <Pane prefHeight="50.0" prefWidth="600.0" styleClass="topbar" stylesheets="@dashboard.css" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="244.0" layoutY="11.0" text="New Player" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+</BorderPane>

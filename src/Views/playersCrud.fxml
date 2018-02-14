@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="680.0" prefWidth="978.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PlayersCrudController">
+   <children>
+      <ScrollPane layoutX="48.0" layoutY="82.0" prefHeight="458.0" prefWidth="856.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="669.0" prefWidth="1207.0">
+               <children>
+                  <TableView fx:id="tableT" prefHeight="455.0" prefWidth="844.0">
+                     <columns>
+                        <TableColumn fx:id="id" prefWidth="75.0" text="id" />
+                        <TableColumn fx:id="name" prefWidth="75.0" text="name" />
+                        <TableColumn fx:id="lastName" prefWidth="75.0" text="last name" />
+                        <TableColumn fx:id="age" prefWidth="75.0" text="age" />
+                        <TableColumn fx:id="club" prefWidth="75.0" text="club" />
+                        <TableColumn fx:id="nation" prefWidth="75.0" text="nation" />
+                        <TableColumn fx:id="height" prefWidth="75.0" text="height" />
+                        <TableColumn fx:id="weight" prefWidth="75.0" text="weight" />
+                        <TableColumn fx:id="position" prefWidth="75.0" text="position" />
+                        <TableColumn fx:id="goals" prefWidth="75.0" text="goals" />
+                        <TableColumn fx:id="description" prefWidth="75.0" text="description" />
+                        <TableColumn fx:id="profilePhoto" prefWidth="75.0" text="profile Photo" />
+                        <TableColumn fx:id="blanketPhoto" prefWidth="75.0" text="blanket Photo" />
+                        <TableColumn fx:id="descriptionPhoto" prefWidth="75.0" text="description Photo" />
+                        <TableColumn fx:id="fbLink" prefWidth="75.0" text="fb Link" />
+                        <TableColumn fx:id="twitterLink" prefWidth="75.0" text="twitterLink" />
+                        <TableColumn fx:id="shirtNb" prefWidth="75.0" text="shirt number" />
+                        <TableColumn fx:id="video" prefWidth="75.0" text="video" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <JFXButton layoutX="752.0" layoutY="12.0" onMouseClicked="#newPlayer" prefHeight="44.0" prefWidth="139.0" text="New Player" />
+      <JFXButton layoutX="660.0" layoutY="23.0" onMouseClicked="#deletePlayer" text="Delete Player" />
+      <JFXButton layoutX="534.0" layoutY="24.0" onMouseClicked="#updatePlayer" text="Update Player" />
+   </children>
+   <stylesheets>
+      <URL value="@gamescrud.css" />
+   </stylesheets>
+</AnchorPane>

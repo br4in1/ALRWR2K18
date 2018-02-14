@@ -168,8 +168,8 @@ public class TeamCrud {
 		}
 		return null;
 	}
-        public static List<Integer> GeIdMap(){
-		HashMap<String,Integer> map = new HashMap<String,Integer>();
+        public static List<Integer> GeIdlist(){
+		
                 List<Integer> list = new ArrayList<>();
 		Connection con = DataSource.getInstance().getCon();
 		String query = "SELECT id from team";
@@ -178,6 +178,25 @@ public class TeamCrud {
 			ResultSet set = ste.executeQuery();
 			while (set.next()) {
 				list.add(set.getInt("id"));
+			}
+			return list;
+		} catch (SQLException ex) {
+			Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+
+		}
+		return null;
+	}
+         public static List<String> GetNamelist(){
+		
+                List<String> list = new ArrayList<>();
+		Connection con = DataSource.getInstance().getCon();
+		String query = "SELECT name from team";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+			ResultSet set = ste.executeQuery();
+			while (set.next()) {
+				list.add(set.getString("name"));
+                               // System.out.println(list);
 			}
 			return list;
 		} catch (SQLException ex) {

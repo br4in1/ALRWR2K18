@@ -33,7 +33,7 @@ public class PlayerCrud {
             ste.setString(2, P.getLastName());
             ste.setInt(3, P.getAge());
             ste.setString(4, P.getClub());
-            ste.setInt(5, P.getNation());
+            ste.setString(5, P.getNation());
             ste.setDouble(6, P.getHeight());
             ste.setDouble(7, P.getWeight());
             ste.setString(8, P.getPosition());
@@ -80,7 +80,7 @@ public static void updateTeam(Player P ) {
             ste.setString(2, P.getLastName());
             ste.setInt(3, P.getAge());
             ste.setString(4, P.getClub());
-            ste.setInt(5, P.getNation());
+            ste.setString(5, P.getNation());
             ste.setDouble(6, P.getHeight());
             ste.setDouble(7, P.getWeight());
             ste.setString(8, P.getPosition());
@@ -111,7 +111,7 @@ public static void updateTeam(Player P ) {
             ResultSet result = ste.executeQuery();
             while(result.next())
             {
-                 listPlayers.add(new Player(result.getString("name"),result.getString("lastName"),result.getInt("age"),result.getString("club"),result.getInt("nation"),result.getDouble("height"),result.getDouble("weight"),result.getString("position"),result.getInt("goals"),result.getString("description"),result.getString("profilePhoto"),result.getString("blanketPhoto"),result.getString("descriptionPhoto"),result.getString("fbLink"),result.getString("twitterLink"),result.getInt("shirtNb"),result.getString("video")));
+                 listPlayers.add(new Player(result.getString("name"),result.getString("lastName"),result.getInt("age"),result.getString("club"),result.getString("nation"),result.getDouble("height"),result.getDouble("weight"),result.getString("position"),result.getInt("goals"),result.getString("description"),result.getString("profilePhoto"),result.getString("blanketPhoto"),result.getString("descriptionPhoto"),result.getString("fbLink"),result.getString("twitterLink"),result.getInt("shirtNb"),result.getString("video")));
                  return listPlayers ;
             }
         } catch (SQLException ex) {
@@ -133,7 +133,7 @@ Connection con = DataSource.getInstance().getCon();
             while(result.next())
             {
 
-           return new  Player(result.getString("name"),result.getString("lastName"),result.getInt("age"),result.getString("club"),result.getInt("nation"),result.getDouble("height"),result.getDouble("weight"),result.getString("position"),result.getInt("goals"),result.getString("description"),result.getString("profilePhoto"),result.getString("blanketPhoto"),result.getString("descriptionPhoto"),result.getString("fbLink"),result.getString("twitterLink"),result.getInt("shirtNb"),result.getString("video"));
+           return new  Player(result.getString("name"),result.getString("lastName"),result.getInt("age"),result.getString("club"),result.getString("nation"),result.getDouble("height"),result.getDouble("weight"),result.getString("position"),result.getInt("goals"),result.getString("description"),result.getString("profilePhoto"),result.getString("blanketPhoto"),result.getString("descriptionPhoto"),result.getString("fbLink"),result.getString("twitterLink"),result.getInt("shirtNb"),result.getString("video"));
             
             
             }
@@ -143,5 +143,25 @@ Connection con = DataSource.getInstance().getCon();
         }
       return null ;
   }
+ 
+ 
+  public static List<Integer> GeIdlist(){
+		
+                List<Integer> list = new ArrayList<>();
+		Connection con = DataSource.getInstance().getCon();
+		String query = "SELECT id from `Player`";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+			ResultSet set = ste.executeQuery();
+			while (set.next()) {
+				list.add(set.getInt("id"));
+			}
+			return list;
+		} catch (SQLException ex) {
+			Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+
+		}
+		return null;
+	}
 }
   
