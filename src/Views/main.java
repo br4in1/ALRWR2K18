@@ -12,8 +12,6 @@ package Views;
  */
 
 
-import Utils.DataSource;
-import java.sql.Connection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

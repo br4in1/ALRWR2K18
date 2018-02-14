@@ -8,7 +8,6 @@ package Controllers;
 import Entities.Admin;
 import Entities.Moderator;
 import Entities.SimpleUser;
-import java.io.File;
 import java.util.Map;
 import com.cloudinary.*;
 import Entities.User;
@@ -25,17 +24,10 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.events.JFXDialogEvent;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.net.URL;
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
@@ -48,20 +40,17 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javax.imageio.ImageIO;
 
 /**
@@ -379,6 +368,14 @@ public class Login_formController implements Initializable {
 		Stage st = new Stage();
 		st.setScene(fbloginwindow);
 		st.show();
-		facebookBrowser.showLogin();
+		facebookBrowser.showLogin(st);
+		if(facebookBrowser.success == 1){
+			((Stage)(loginform.getScene().getWindow())).close();
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/FrontEnd.fxml"));
+			Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+		}
 	}
 }

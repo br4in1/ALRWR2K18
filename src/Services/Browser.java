@@ -43,6 +43,7 @@ import javafx.geometry.VPos;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 public class Browser extends Region {
 
@@ -50,6 +51,7 @@ public class Browser extends Region {
 	final WebView browser = new WebView();
 	final WebEngine webEngine = browser.getEngine();
 	private String code;
+	public int success;
 
 	private final String appId;
 
@@ -61,9 +63,10 @@ public class Browser extends Region {
 		this.appSecret = appSecret;
 		// add the web view to the scene
 		getChildren().add(browser);
+		success = 0;
 	}
 
-	public void showLogin() {
+	public void showLogin(Stage st) {
 		DefaultFacebookClient facebookClient = new DefaultFacebookClient(Version.LATEST);
 		ScopeBuilder scopes = new ScopeBuilder();
 		scopes.addPermission(FacebookPermissions.EMAIL);
@@ -79,25 +82,24 @@ public class Browser extends Region {
 					String myUrl = webEngine.getLocation();
 
 					if ("https://www.facebook.com/dialog/close".equals(myUrl)) {
-						System.out.println("dialog closed");
 						System.exit(0);
 					}
 					if (myUrl.startsWith(SUCCESS_URL)) {
+						st.hide();
 						int pos = myUrl.indexOf("code=");
 						code = myUrl.substring(pos + "code=".length());
 						FacebookClient.AccessToken token = facebookClient.obtainUserAccessToken(appId,
 								appSecret, SUCCESS_URL, code);
-						//System.out.println("Accesstoken: " + token.getAccessToken());
-						//System.out.println("Expires: " + token.getExpires());
 						u = new DefaultFacebookClient(token.getAccessToken()).fetchObject("me", User.class,Parameter.with("fields", "first_name,last_name,email,birthday,location,picture"));
 						System.out.println(u.toString());
 						if (u != null) {
+							success = 1;
 							if (UserCrud.findUserByEmail(u.getEmail())) {
-								System.out.println("test2");
+								
 							} else {
 								SimpleUser U = new SimpleUser(Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), (u.getLocation()!= null && u.getLocation().getName() != null) ? u.getLocation().getName() : "", true, 0, u.getPicture().getUrl(), u.getEmail(), u.getEmail(), false, "", u.getEmail() + u.getId(), Timestamp.valueOf(LocalDateTime.now()), "ROLE_USER", u.getLastName(), u.getFirstName());
 								UserCrud.AddUserToDataBaseStepOne(U);
-								System.out.println("test");
+								SimpleUser.current_user = U;
 							}
 						}
 					}
