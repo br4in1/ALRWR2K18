@@ -92,6 +92,7 @@ public static void updateTeam(Player P ) {
             ste.setString(15, P.getTwitterLink());
             ste.setInt(16, P.getShirtNb());
             ste.setString(17, P.getVideo());
+            ste.setInt(18, P.getId());
             
             ste.executeUpdate();
         } catch (SQLException ex) {
@@ -129,9 +130,10 @@ public static void updateTeam(Player P ) {
  
  public static Player findById(int id){
 Connection con = DataSource.getInstance().getCon();
-     String query = "SELECT * `Player` id = ? ";
+     String query = "SELECT * from `Player` where id = ? ";
       try {
             PreparedStatement ste = con.prepareStatement(query);
+            ste.setInt(1, id);
             ResultSet result = ste.executeQuery();
             while(result.next())
             {
@@ -148,7 +150,7 @@ Connection con = DataSource.getInstance().getCon();
   }
  
  
-  public static List<Integer> GeIdlist(){
+  public static List<Integer> GeIdlistPlayer(){
 		
                 List<Integer> list = new ArrayList<>();
 		Connection con = DataSource.getInstance().getCon();

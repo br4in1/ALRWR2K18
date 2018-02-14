@@ -29,6 +29,28 @@ public class Player {
     private int shirtNb ; 
     private String video ; 
 
+    public Player(int id, String name, String lastName, int age, String club, String nation, double height, double weight, String position, int goals, String description, String profilePhoto, String blanketPhoto, String descriptionPhoto, String fbLink, String twitterLink, int shirtNb, String video) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.age = age;
+        this.club = club;
+        this.nation = nation;
+        this.height = height;
+        this.weight = weight;
+        this.position = position;
+        this.goals = goals;
+        this.description = description;
+        this.profilePhoto = profilePhoto;
+        this.blanketPhoto = blanketPhoto;
+        this.descriptionPhoto = descriptionPhoto;
+        this.fbLink = fbLink;
+        this.twitterLink = twitterLink;
+        this.shirtNb = shirtNb;
+        this.video = video;
+    }
+
+    
     public Player(String name, String lastName, int age, String club, String nation, double height, double weight, String position, int goals, String description, String profilePhoto, String blanketPhoto, String descriptionPhoto, String fbLink, String twitterLink, int shirtNb, String video) {
         
         this.name = name;
