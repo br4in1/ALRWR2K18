@@ -12,6 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import Entities.Game;
 import Utils.DataSource;
+import Views.main;
+import com.sun.rowset.internal.Row;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -66,9 +69,67 @@ public class GameCrud {
 			System.out.println(result);
 			return result;
 		} catch (SQLException ex) {
-			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return null;
 	}
+		public static void update(String row,String value, int id) {
+		Connection con = DataSource.getInstance().getCon();
+		String strSQLQuery=String.format("update game set %s = '%s' where id=%s", row, value, id);
+			System.out.println(strSQLQuery);
+		try {
+			PreparedStatement ste = con.prepareStatement(strSQLQuery);
+			ste.executeUpdate();
+			
+
+			
+
+		
+		} catch (SQLException ex) {
+			Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+		public static void update(String row,int value, int id) {
+		Connection con = DataSource.getInstance().getCon();
+		String strSQLQuery=String.format("update game set %s = '%s' where id=%s", row, value, id);
+			System.out.println(strSQLQuery);
+		try {
+			PreparedStatement ste = con.prepareStatement(strSQLQuery);
+			ste.executeUpdate();
+			
+
+			
+
+		
+		} catch (SQLException ex) {
+			Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
+	public static void update(String row,Date value, int id) {
+		Connection con = DataSource.getInstance().getCon();
+		String strSQLQuery=String.format("update game set %s = '%s' where id=%s", row, value, id);
+			System.out.println(strSQLQuery);
+		try {
+			PreparedStatement ste = con.prepareStatement(strSQLQuery);
+			ste.executeUpdate();
+		
+		} catch (SQLException ex) {
+			Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
+	public static void removeGame(int id) {
+Connection con = DataSource.getInstance().getCon();
+		String query = "DELETE FROM `Game` WHERE id=?";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+
+			ste.setInt(1, id);
+
+			ste.executeUpdate();
+		} catch (SQLException ex) {
+			Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}	}
 
 }
