@@ -6,9 +6,13 @@
 package Controllers;
 
 import Entities.Player;
+import Entities.Team;
+import Services.PlayerCrud;
 import Services.TeamCrud;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -72,8 +77,10 @@ public class PlayersCrudController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        listDisplay();
     }    
 
+    
     @FXML
     private void newPlayer(MouseEvent event) {
         try {
@@ -90,7 +97,7 @@ public class PlayersCrudController implements Initializable {
 
     @FXML
     private void deletePlayer(MouseEvent event) {
-        TeamCrud.RemoveTeam(tableT.getSelectionModel().getSelectedItem().getId());
+        PlayerCrud.removePlayer(tableT.getSelectionModel().getSelectedItem().getId());
         tableT.getItems().removeAll(tableT.getSelectionModel().getSelectedItem());
     }
 
@@ -106,6 +113,77 @@ public class PlayersCrudController implements Initializable {
     } catch(Exception e) {
        e.printStackTrace();
       }
+    }
+    
+    
+    private void listDisplay()
+    {
+             
+        id.setCellValueFactory(
+            new PropertyValueFactory<>("id"));
+       name.setCellValueFactory(
+            new PropertyValueFactory<>("name"));
+       lastName.setCellValueFactory(
+            new PropertyValueFactory<>("lastName"));
+       age.setCellValueFactory(
+            new PropertyValueFactory<>("age"));
+       club.setCellValueFactory(
+            new PropertyValueFactory<>("club"));
+       nation.setCellValueFactory(
+            new PropertyValueFactory<>("nation"));
+       height.setCellValueFactory(
+            new PropertyValueFactory<>("height"));
+       weight.setCellValueFactory(
+            new PropertyValueFactory<>("weight"));
+       position.setCellValueFactory(
+            new PropertyValueFactory<>("position"));
+       goals.setCellValueFactory(
+            new PropertyValueFactory<>("goals"));
+       description.setCellValueFactory(
+            new PropertyValueFactory<>("description"));
+       profilePhoto.setCellValueFactory(
+            new PropertyValueFactory<>("profilePhoto"));
+       blanketPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("blanketPhoto"));
+       descriptionPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("descriptionPhoto"));
+        twitterLink.setCellValueFactory(
+            new PropertyValueFactory<>("twitterLink"));
+       shirtNb.setCellValueFactory(
+            new PropertyValueFactory<>("shirtNb"));
+       video.setCellValueFactory(
+            new PropertyValueFactory<>("video"));
+         ObservableList<Player> OL = FXCollections.observableList(PlayerCrud.findAllPlayers());
+		System.out.println(OL);
+		tableT.setItems(OL);
+                
+                
+                /*
+            private int id ;//
+    private String name ; //
+    private String lastName ; //
+    private int age ; //
+    private String club ; //
+    private String nation ; //
+    private double height ;//
+    private double weight ;//
+    private String position ; //
+    private int goals ; //
+    private String description ; //
+    private String profilePhoto ;//
+    private String blanketPhoto ;//
+    private String descriptionPhoto ;
+    private String fbLink ;
+    private String twitterLink ;
+    private int shirtNb ; 
+    private String video ; 
+        
+        */
+    }
+
+    @FXML
+    private void refreshList(MouseEvent event) {
+        listDisplay();
     }
     
 }

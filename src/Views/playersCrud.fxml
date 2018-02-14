@@ -43,6 +43,7 @@
       <JFXButton layoutX="752.0" layoutY="12.0" onMouseClicked="#newPlayer" prefHeight="44.0" prefWidth="139.0" text="New Player" />
       <JFXButton layoutX="660.0" layoutY="23.0" onMouseClicked="#deletePlayer" text="Delete Player" />
       <JFXButton layoutX="534.0" layoutY="24.0" onMouseClicked="#updatePlayer" text="Update Player" />
+      <JFXButton layoutX="416.0" layoutY="24.0" onMouseClicked="#refreshList" text="Refresh List" />
    </children>
    <stylesheets>
       <URL value="@gamescrud.css" />

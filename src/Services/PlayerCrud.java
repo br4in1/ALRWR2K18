@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -52,23 +53,21 @@ public class PlayerCrud {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }   
-  
-public static void deletePlayer(Player P)
-    {
-        Connection con = DataSource.getInstance().getCon();
-        String query = "DELETE FROM `Player` WHERE id=?";
-        try {
-            PreparedStatement ste = con.prepareStatement(query);
-            
-            ste.setInt(1, P.getId());
-           
-            ste.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }  
+    
+public static void removePlayer(int id) {
+		Connection con = DataSource.getInstance().getCon();
+		String query = "DELETE FROM `Player` WHERE id=?";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
 
+			ste.setInt(1, id);
+
+			ste.executeUpdate();
+		} catch (SQLException ex) {
+			Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+	}
 
 public static void updateTeam(Player P ) {
     Connection con = DataSource.getInstance().getCon();
@@ -103,26 +102,30 @@ public static void updateTeam(Player P ) {
  public static List<Player> findAllPlayers()
  {
      List<Player> listPlayers = new ArrayList<Player>() ;
-     listPlayers =null ; 
      Connection con = DataSource.getInstance().getCon();
-     String query = "SELECT * `Player` ";
-     try {
-            PreparedStatement ste = con.prepareStatement(query);
-            ResultSet result = ste.executeQuery();
-            while(result.next())
-            {
-                 listPlayers.add(new Player(result.getString("name"),result.getString("lastName"),result.getInt("age"),result.getString("club"),result.getString("nation"),result.getDouble("height"),result.getDouble("weight"),result.getString("position"),result.getInt("goals"),result.getString("description"),result.getString("profilePhoto"),result.getString("blanketPhoto"),result.getString("descriptionPhoto"),result.getString("fbLink"),result.getString("twitterLink"),result.getInt("shirtNb"),result.getString("video")));
-                 return listPlayers ;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
-            
-        }
-     return null ; 
+     String query = "SELECT * from `Player` ";
+    
+            try {
+                  Statement  ste = con.createStatement();
+			ResultSet set = ste.executeQuery(query);
+                        
+			while (set.next()) {
+                             //listTeam.add(new Team(set.getString("name"), set.getString("coach"), set.getString("president"), set.getString("area"), set.getInt("gamesPlayed"), set.getInt("goalScored"), set.getInt("goalAgainst"), set.getInt("participations"), set.getDate("fifaDate"), set.getString("wcGroup"), set.getInt("win"), set.getInt("loose"), set.getInt("draw"), set.getInt("points"), set.getInt("fifaRank"), set.getString("flagPhoto"), set.getString("logoPhoto"), set.getString("squadPhoto"), set.getString("descriptionPhoto"), set.getString("description"), set.getString("website"), set.getString("video")));
+                          Player P = new Player(set.getString("name"),set.getString("lastName"),set.getInt("age"),set.getString("club"),set.getString("nation"),set.getDouble("height"),set.getDouble("weight"),set.getString("position"),set.getInt("goals"),set.getString("description"),set.getString("profilePhoto"),set.getString("blanketPhoto"),set.getString("descriptionPhoto"),set.getString("fbLink"),set.getString("twitterLink"),set.getInt("shirtNb"),set.getString("video"));
+                 P.setId(set.getInt("id"));
+                 //listPlayers.add(new Player(result.getString("name"),result.getString("lastName"),result.getInt("age"),result.getString("club"),result.getString("nation"),result.getDouble("height"),result.getDouble("weight"),result.getString("position"),result.getInt("goals"),result.getString("description"),result.getString("profilePhoto"),result.getString("blanketPhoto"),result.getString("descriptionPhoto"),result.getString("fbLink"),result.getString("twitterLink"),result.getInt("shirtNb"),result.getString("video")));
+                 listPlayers.add(P) ;
+				
+			}
+                        return listPlayers;
+		} catch (SQLException ex) {
+			Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+
+		}
+		return null;
      
  }
 
- 
  
  public static Player findById(int id){
 Connection con = DataSource.getInstance().getCon();

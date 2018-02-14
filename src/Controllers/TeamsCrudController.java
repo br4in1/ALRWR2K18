@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -90,7 +91,50 @@ public class TeamsCrudController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-       id.setCellValueFactory(
+       listDisplay();
+    }     
+
+    @FXML
+    private void newTeam(MouseEvent event) {
+            try {
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/AddFormTeam.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+            
+    } catch(Exception e) {
+       e.printStackTrace();
+      }
+    }
+
+    @FXML
+    private void deleteTeam(MouseEvent event) {
+       
+        TeamCrud.RemoveTeam(tableT.getSelectionModel().getSelectedItem().getId());
+        tableT.getItems().removeAll(tableT.getSelectionModel().getSelectedItem());
+        
+        
+    }
+
+    @FXML
+    private void updateTeam(MouseEvent event) {
+               try {
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/UpdateFormTeam.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+            
+    } catch(Exception e) {
+       e.printStackTrace();
+      }
+    }
+
+    private void listDisplay()
+    {
+             
+        id.setCellValueFactory(
             new PropertyValueFactory<>("id"));
        name.setCellValueFactory(
             new PropertyValueFactory<>("name"));
@@ -136,72 +180,14 @@ public class TeamsCrudController implements Initializable {
             new PropertyValueFactory<>("website"));
        video.setCellValueFactory(
             new PropertyValueFactory<>("video"));
-      ObservableList<Team> OL = FXCollections.observableList(TeamCrud.findAllTeam());
+         ObservableList<Team> OL = FXCollections.observableList(TeamCrud.findAllTeam());
 		System.out.println(OL);
 		tableT.setItems(OL);
-        
-        /*
-          private int id ; //1
-    private String name ; //2 -
-    private String coach ; //3 -
-    private String president  ; //4 -
-    private String area ; //5 -
-    private int gamesPlayed ;//6
-    private int goalScored ;//7
-    private int goalAgainst ; //8
-    private int participations ;//9
-    private Date fifaDate ; //10
-    private String wcGroup ; //11
-    private int win ;//12
-    private int loose ;//13 
-    private int draw ;//14
-    private int points ;//15
-    private int fifaRank ;//16
-    private String flagPhoto ; //17
-    private String logoPhoto ;//18
-    private String squadPhoto ;//19
-    private String descriptionPhoto ; //20
-    private String description ;//21
-    private String website ;//22
-    private String video ;//23
-        */
-    }     
-
+    }
     @FXML
-    private void newTeam(MouseEvent event) {
-            try {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/AddFormTeam.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));  
-            stage.show();
-            
-    } catch(Exception e) {
-       e.printStackTrace();
-      }
+    private void refreshList(MouseEvent event) {
+            listDisplay();
     }
 
-    @FXML
-    private void deleteTeam(MouseEvent event) {
-       
-        TeamCrud.RemoveTeam(tableT.getSelectionModel().getSelectedItem().getId());
-        tableT.getItems().removeAll(tableT.getSelectionModel().getSelectedItem());
-        
-        
-    }
-
-    @FXML
-    private void updateTeam(MouseEvent event) {
-               try {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/UpdateFormTeam.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));  
-            stage.show();
-            
-    } catch(Exception e) {
-       e.printStackTrace();
-      }
-    }
     
 }
