@@ -75,14 +75,14 @@ public class AddFormController implements Initializable {
 	private void submit(MouseEvent event) throws IOException {
 		Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap());
 		GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), String.valueOf(map1.get(HomeTeam.getSelectionModel().getSelectedItem())), String.valueOf(map1.get(AwayTeam.getSelectionModel().getSelectedItem())), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"),Highlights.getText(), Referee.getText()));
-	
 	}
 
 	@FXML
 	private void photo(MouseEvent event) {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choisir une photo");
-		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+		fileChooser.getExtensionFilters().addAll(
+				new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
 		image = fileChooser.showOpenDialog(null);
 		SummaryPhoto.setText(image.getPath());
 	}

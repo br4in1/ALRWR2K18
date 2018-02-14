@@ -182,44 +182,4 @@ public class TeamsCrudController implements Initializable {
 		}
 	}
 
-<<<<<<< HEAD
-=======
-    @FXML
-    private void newTeam(MouseEvent event) {
-            try {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/AddFormTeam.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));  
-            stage.show();
-            
-    } catch(Exception e) {
-       e.printStackTrace();
-      }
-    }
-
-    @FXML
-    private void deleteTeam(MouseEvent event) {
-       
-        TeamCrud.RemoveTeam(tableT.getSelectionModel().getSelectedItem().getId());
-        tableT.getItems().removeAll(tableT.getSelectionModel().getSelectedItem());
-        
-        
-    }
-
-    @FXML
-    private void updateTeam(MouseEvent event) {
-               try {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/UpdateFormTeam.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));  
-            stage.show();
-            
-    } catch(Exception e) {
-       e.printStackTrace();
-      }
-    }
-    
->>>>>>> bf3b485093a7fc602321465bb773f42727787eda
 }

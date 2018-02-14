@@ -23,7 +23,5 @@
       <JFXButton fx:id="mainMenu" onMouseClicked="#gamesContent" prefHeight="53.0" prefWidth="241.0" text="Main Menu" textFill="WHITE" />
       <JFXButton fx:id="Teams" onMouseClicked="#gamesContent" prefHeight="53.0" prefWidth="241.0" text="Manage Teams" textFill="WHITE" />
       <JFXButton prefHeight="53.0" prefWidth="241.0" text="Manage Players" textFill="WHITE" />
-      <JFXButton fx:id="TeamStatics" onMouseClicked="#TeamStatics" prefHeight="53.0" prefWidth="241.0" text="Display Teams Statics " textFill="WHITE" />
-      <JFXButton fx:id="Teams1" onMouseClicked="#gamesContent" prefHeight="53.0" prefWidth="241.0" text="Display Player Statics" textFill="WHITE" />
    </children>
 </VBox>
