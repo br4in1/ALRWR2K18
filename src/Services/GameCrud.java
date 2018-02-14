@@ -111,6 +111,7 @@ public class GameCrud {
 		String strSQLQuery=String.format("update game set %s = '%s' where id=%s", row, value, id);
 			System.out.println(strSQLQuery);
 		try {
+			
 			PreparedStatement ste = con.prepareStatement(strSQLQuery);
 			ste.executeUpdate();
 		
