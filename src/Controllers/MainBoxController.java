@@ -12,9 +12,9 @@ import javafx.fxml.Initializable;
 /**
  * FXML Controller class
  *
- * @author raiiz
+ * @author simo
  */
-public class GestionArticlesNavbarController implements Initializable {
+public class MainBoxController implements Initializable {
 
     /**
      * Initializes the controller class.

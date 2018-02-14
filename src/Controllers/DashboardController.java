@@ -13,14 +13,18 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -30,69 +34,116 @@ import javafx.scene.layout.VBox;
 public class DashboardController implements Initializable {
 
     @FXML
-    private JFXHamburger hamburger;
+    private Pane content;
     @FXML
-    private JFXDrawer drawer;
-    @FXML
-    private Pane mainField;
+    private VBox nav;
 
+    @FXML
+    private Pane main;
+    AnchorPane games;
+    VBox tournementBox;
+    
+    VBox articlesBox;
+    AnchorPane ajouterArticle;
+    AnchorPane consulterArticles;
     /**
      * Initializes the controller class.
      */
+    private void setNavNode(Node node) {
+        main.getChildren().clear();
+        main.getChildren().add((Node) node);
+
+        FadeTransition ft = new FadeTransition(Duration.millis(1500));
+        ft.setNode(node);
+        ft.setFromValue(0.1);
+        ft.setToValue(1);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(false);
+        ft.play();
+    }
+
+    private void setContentNode(Node node) {
+        content.getChildren().clear();
+        content.getChildren().add((Node) node);
+
+        FadeTransition ft = new FadeTransition(Duration.millis(1500));
+        ft.setNode(node);
+        ft.setFromValue(0.1);
+        ft.setToValue(1);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(false);
+        ft.play();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            VBox pane = FXMLLoader.load(getClass().getResource("/Views/navbar.fxml"));
-            VBox gstArticleNavBar = FXMLLoader.load(getClass().getResource("/Views/GestionArticlesNavbar.fxml"));
-            ScrollPane ajouterArticle = FXMLLoader.load(getClass().getResource("/Views/AjouterArticle.fxml"));
-            
-            drawer.setSidePane(pane);
-            HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
-            transition.setRate(-1);
-            hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
-                transition.setRate(transition.getRate() * -1);
-                transition.play();
+            //Load all fxmls in a cache
 
-                if (drawer.isShown()) {
-                    drawer.close();
-                } else {
-                    drawer.open();
-                }
-            });
-            if (drawer.isHidden()) {
-                for (Node node : pane.getChildren()) {
-                    node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
-                        switch (node.getAccessibleText()) {
-                            case "gestionArticle":
-                                drawer.setSidePane(gstArticleNavBar);
-                                break;
-                            //TO DO: ajouter les autre case des button modules 1-4
-                        }
-                    });
-                }
-                /* Sub menu for Gestion Article*/
-                for (Node node : gstArticleNavBar.getChildren()) {
-                    node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
-                        switch (node.getAccessibleText()) {
-                            case "menuPrincipale":
-                                drawer.setSidePane(pane);
-                                break;
-                            case "ajouterArticle":
-                                if (!mainField.getChildren().contains(ajouterArticle))
-                                    mainField.getChildren().add(ajouterArticle); 
-                                System.out.println("ajotuer Article is clicked");
-                                break;
-                            case "consulterArticles":
-                                System.out.println("consulter aarticles is clicked");
-                                break;
-                        }
-                    });
-                }
-                
-                /* end Sub menu for Gestion Article */
+            tournementBox = FXMLLoader.load(getClass().getResource("/Views/tournementBox.fxml"));
+            games = FXMLLoader.load(getClass().getResource("/Views/GamesCrud.fxml"));
+           
+            articlesBox = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/articleBox.fxml"));
+            ajouterArticle = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/AjouterArticle.fxml"));
+            consulterArticles= FXMLLoader.load(getClass().getResource("/Views/GestionArticles/ConsulterArticles.fxml"));
+            for (Node node : tournementBox.getChildren()) {
+                node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
+                    switch (node.getId()) {
+                        case "mainMenu":
+                            setNavNode(nav);
+                            break;
+                        case "games":
+                            setContentNode(games);
+
+                    }
+                });
             }
+
+            for (Node node : articlesBox.getChildren()) {
+                node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
+                    switch (node.getId()) {
+                        case "mainMenu":
+                            setNavNode(nav);
+                            break;
+                        case "addArticle":
+                            setContentNode(ajouterArticle);
+                            break;
+                        case "showArticles":
+                            setContentNode(consulterArticles);
+                            break;
+                    }
+                });
+            }
+
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+    }
+
+    @FXML
+    private void usersNavbar(MouseEvent event) {
+    }
+
+    @FXML
+    private void teamsNavbar(MouseEvent event) {
+    }
+
+    @FXML
+    private void newsNavbar(MouseEvent event) {
+        setNavNode(articlesBox);
+    }
+
+    @FXML
+    private void guideNavbar(MouseEvent event) {
+    }
+
+    @FXML
+    private void tournementNavbar(MouseEvent event) {
+        setNavNode(tournementBox);
+    }
+
+    @FXML
+    private void GalleryNavbar(MouseEvent event) {
     }
 }

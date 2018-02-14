@@ -6,21 +6,22 @@
 package Entities;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
  * @author br4in
  */
 public class SimpleUser extends User{
-	public static SimpleUser current_user = null;
 	private Date birthdate;
 	private Date registrationdate;
 	private String nationality;
 	private Boolean loggedin;
 	private int fidaelitypoints;
 	private String profilepicture;
+	public static SimpleUser current_user = null;
 
-	public SimpleUser(Date birthdate, Date registrationdate, String nationality, Boolean loggedin, int fidaelitypoints, String profilepicture, String username, String email, Boolean enabled, String salt, String password, Date last_login, String roles, String firstname, String lastname) {
+	public SimpleUser(Date birthdate, Date registrationdate, String nationality, Boolean loggedin, int fidaelitypoints, String profilepicture, String username, String email, Boolean enabled, String salt, String password, Timestamp last_login, String roles, String firstname, String lastname) {
 		super(username, email, enabled, salt, password, last_login, roles, firstname, lastname);
 		this.birthdate = birthdate;
 		this.registrationdate = registrationdate;

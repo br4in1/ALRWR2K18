@@ -80,6 +80,28 @@ public class ArticleCrud {
 			return null;
 		}
 	}
+        
+        public static List<Article> findAllOrderDate() {
+		if (article == null) {
+			conn = DataSource.getInstance().getCon();
+		}
+		List<Article> list = new ArrayList<>();
+
+		String req = "select * from articles Order by datePublication Desc";
+		try {
+			PreparedStatement ste = conn.prepareStatement(req);
+			ResultSet result = ste.executeQuery();// select
+			while (result.next()) {
+				list.add(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+						result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
+						result.getDate("derniereModification"), result.getInt("auteur")));
+			}
+			return list;
+		} catch (SQLException e) {
+			System.out.println(e);
+			return null;
+		}
+	}
 
 	public static Article findById(int id) {
 		String sql = "SELECT * from articles where id = ?";
@@ -100,7 +122,7 @@ public class ArticleCrud {
 		}
 	}
 
-	public static Article update(int id, String column, int value) {
+	public static Article updateInts(int id, String column, int value) {
 		String sql = null;
 		if (column.equals("idEntity")) {
 			sql = "Update articles set idEntity= ?  where id  = ?";
@@ -131,7 +153,7 @@ public class ArticleCrud {
 		} else if (column.equals("typeEntity")) {
 			sql = "Update articles set typeEntity = ?  where id  = ?";
 		} else if (column.equals("idEntity") || column.equals("auteur")) {
-			update(id, column, Integer.parseInt(value));
+			updateInts(id, column, Integer.parseInt(value));
 			return findById(id);
 		} else if (column.equals("datePublication")) {
 			sql = "Update articles set datePublication = ?  where id  = ?";

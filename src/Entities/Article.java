@@ -20,7 +20,7 @@ public class Article {
     private Date datePublication;
     private Date derniereModification;
     private int auteur;
-
+    
     public Article(int id, String titre, String contenu, int idEntity, String typeEntity, Date datePublication, Date derniereModification, int auteur) {
         this.id = id;
         this.titre = titre;
@@ -34,7 +34,16 @@ public class Article {
 
     public Article() {
     }
-
+    public Article(Article a){
+        this.id = a.getId();
+        this.titre = a.getTitre();
+        this.contenu = a.getContenu();
+        this.idEntity = a.getIdEntity();
+        this.typeEntity = a.getTypeEntity();
+        this.datePublication = a.getDatePublication();
+        this.derniereModification = a.getDerniereModification();
+        this.auteur = a.getAuteur();
+    }
     public int getId() {
         return id;
     }

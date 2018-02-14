@@ -29,8 +29,8 @@ public class Player {
     private int shirtNb ; 
     private String video ; 
 
-    public Player(int id, String name, String lastName, int age, String club, int nation, double height, double weight, String position, int goals, String description, String profilePhoto, String blanketPhoto, String descriptionPhoto, String fbLink, String twitterLink, int shirtNb, String video) {
-        this.id = id;
+    public Player(String name, String lastName, int age, String club, int nation, double height, double weight, String position, int goals, String description, String profilePhoto, String blanketPhoto, String descriptionPhoto, String fbLink, String twitterLink, int shirtNb, String video) {
+        
         this.name = name;
         this.lastName = lastName;
         this.age = age;
@@ -197,3 +197,4 @@ public class Player {
     
     
 }
+    

@@ -5,29 +5,16 @@
  */
 package Controllers;
 
-import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.web.HTMLEditor;
 
 /**
  * FXML Controller class
  *
- * @author raiiz
+ * @author simo
  */
-public class AjouterArticleController implements Initializable {
-
-    @FXML
-    private ScrollPane ajouterArticlePane;
-    @FXML
-    private JFXTextField tfTitre;
-    @FXML
-    private HTMLEditor contenu;
-
+public class FrontEndController implements Initializable {
 
     /**
      * Initializes the controller class.

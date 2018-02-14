@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.HTMLEditor?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="506.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GestionArticles.SendArticleController">
+   <children>
+      <Label layoutX="266.0" layoutY="14.0" text="Send Article as Mail" textFill="#a11919">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Separator layoutX="253.0" layoutY="41.0" prefWidth="200.0" />
+      <JFXTextField fx:id="tfArticleTitle" disable="true" labelFloat="true" layoutX="37.0" layoutY="59.0" promptText="Article title" />
+      <JFXCheckBox fx:id="chechEditArticle" checkedColor="#a11414" layoutX="189.0" layoutY="63.0" text="Edit title of the Article" />
+      <HTMLEditor fx:id="contenu" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="50.0" layoutY="117.0" prefHeight="303.0" prefWidth="607.0" />
+      <Separator layoutX="24.0" layoutY="100.0" prefHeight="3.0" prefWidth="656.0" />
+      <Separator layoutX="348.0" layoutY="52.0" orientation="VERTICAL" prefHeight="39.0" prefWidth="7.0" />
+      <JFXTextField fx:id="tfRecipient" focusColor="#ab3733" labelFloat="true" layoutX="373.0" layoutY="60.0" promptText="Recipient" />
+      <JFXButton fx:id="btMoreRecipient" buttonType="RAISED" layoutX="535.0" layoutY="60.0" style="-fx-background-color: #a11919;" text="Add More Recipient" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btSend" buttonType="RAISED" layoutX="524.0" layoutY="432.0" onMouseClicked="#sendMailClicked" prefHeight="29.0" prefWidth="133.0" style="-fx-background-color: #a11919;" text="Send" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

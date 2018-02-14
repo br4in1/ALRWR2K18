@@ -5,6 +5,8 @@
  */
 package Controllers;
 
+import Entities.Admin;
+import Entities.Moderator;
 import Entities.SimpleUser;
 import java.io.File;
 import java.util.Map;
@@ -264,10 +266,12 @@ public class Login_formController implements Initializable {
 			check_data.show();
 		} else if (u != null && !u.getEnabled()) {
 			if (u.getRoles().equals("ROLE_ADMIN")) {
-				//TODO : redirect to admin dashboard + session handling
+				Admin.current_user = (Admin)(u);
+				Admin.current_user = UserCrud.GetMyData_Admin(Admin.current_user);
 			} else if (u.getRoles().equals("ROLE_MODERATOR")) {
 				if (u.getEnabled()) {
-					//TODO : redirect to moderator dashboard + session handling
+					Moderator.current_user = (Moderator)(u);
+					Moderator.current_user = UserCrud.GetMyData_Moderator(Moderator.current_user);
 				} else {
 					JFXDialogLayout content = new JFXDialogLayout();
 					content.setHeading(new Text("Veuillez contacter un administrateur."));
@@ -277,7 +281,8 @@ public class Login_formController implements Initializable {
 				}
 			} else {
 				if (u.getEnabled()) {
-					//TODO : redirect to user screen + session handling
+					SimpleUser.current_user = (SimpleUser)(u);
+					SimpleUser.current_user = UserCrud.GetMyData_SimpleUser(SimpleUser.current_user);
 				} else {
 					JFXDialogLayout content = new JFXDialogLayout();
 					content.setHeading(new Text("Veuillez saisir le code que vous avez reçu sur votre boite."));
@@ -297,7 +302,8 @@ public class Login_formController implements Initializable {
 								filename = filename.replace(" ", "_").toLowerCase();
 								countryavatar.setImage(new Image("assets/flags/" + filename + ".png"));
 								current_username = u.getUsername();
-								SimpleUser.current_user = (SimpleUser) u;
+								SimpleUser.current_user = (SimpleUser)(u);
+								SimpleUser.current_user = UserCrud.GetMyData_SimpleUser(SimpleUser.current_user);
 							}
 						}
 					});
@@ -327,7 +333,11 @@ public class Login_formController implements Initializable {
 
 	public void UploadPhoto() throws Exception {
 		if (!firstradio.isSelected() && !secondradio.isSelected()) {
-
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("Vous devez choisir une des options."));
+			JFXDialog check_data = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
+			check_data.show();
 		} else {
 			File toUpload = new File("toUpload.png");
 			if (firstradio.isSelected()) {
@@ -337,6 +347,7 @@ public class Login_formController implements Initializable {
 				BufferedImage bf = SwingFXUtils.fromFXImage(uploadphoto.getImage(), null);
 				ImageIO.write(bf, "png", toUpload);
 			}
+			System.out.println(toUpload.getPath());
 			Map uploadResult = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
 			toUpload.delete();
 			UserCrud.UpdateUserPhoto((String) uploadResult.get("url"), current_username);

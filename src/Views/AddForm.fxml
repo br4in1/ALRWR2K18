@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddFormController">
+   <center>
+      <Pane prefHeight="47.0" prefWidth="600.0" styleClass="body" stylesheets="@dashboard.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutX="14.0" layoutY="112.0" prefHeight="127.0" prefWidth="175.0">
+               <children>
+                  <DatePicker fx:id="GameDate" prefHeight="47.0" prefWidth="218.0" promptText="Date" />
+                  <JFXComboBox fx:id="HomeTeam" prefHeight="41.0" prefWidth="189.0" promptText="              Home Team" />
+                  <JFXComboBox fx:id="AwayTeam" prefHeight="41.0" prefWidth="189.0" promptText="              Away Team" />
+                  <JFXComboBox fx:id="Stadium" prefHeight="41.0" prefWidth="189.0" promptText="                 Stadium" />
+                  <JFXTextField fx:id="Result" prefHeight="47.0" prefWidth="175.0" promptText="Result" />
+               </children>
+            </VBox>
+            <VBox layoutX="213.0" layoutY="112.0" prefHeight="131.0" prefWidth="175.0">
+               <children>
+                  <JFXTextArea fx:id="Summary" prefHeight="138.0" prefWidth="175.0" promptText="Summary" />
+               </children>
+            </VBox>
+            <VBox layoutX="411.0" layoutY="112.0" prefHeight="138.0" prefWidth="175.0">
+               <children>
+                  <JFXTextField fx:id="SummaryPhoto" prefHeight="46.0" prefWidth="175.0" promptText="Photo" />
+                  <JFXTextField fx:id="Highlights" prefHeight="43.0" prefWidth="175.0" promptText="Video" />
+                  <JFXTextField fx:id="Referee" prefHeight="46.0" prefWidth="175.0" promptText="Ref" />
+               </children>
+            </VBox>
+            <JFXButton layoutX="260.0" layoutY="298.0" onMouseClicked="#submit" prefHeight="38.0" prefWidth="82.0" text="Submit" />
+         </children></Pane>
+   </center>
+   <top>
+      <Pane prefHeight="50.0" prefWidth="600.0" styleClass="topbar" stylesheets="@dashboard.css" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="244.0" layoutY="11.0" text="New Game" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+</BorderPane>

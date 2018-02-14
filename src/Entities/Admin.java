@@ -6,6 +6,7 @@
 package Entities;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -13,7 +14,9 @@ import java.sql.Date;
  */
 public class Admin extends Moderator{
 
-	public Admin(String phonenumber, String username, String email, Boolean enabled, String salt, String password, Date last_login, String roles, String firstname, String lastname) {
+	public static Admin current_user = null;
+	
+	public Admin(String phonenumber, String username, String email, Boolean enabled, String salt, String password, Timestamp last_login, String roles, String firstname, String lastname) {
 		super(phonenumber, username, email, enabled, salt, password, last_login, roles, firstname, lastname);
 	}
 }

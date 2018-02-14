@@ -6,6 +6,7 @@
 package Entities;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -18,12 +19,12 @@ public class User {
 	protected Boolean enabled;
 	protected String salt;
 	protected String password;
-	protected Date last_login;
+	protected Timestamp last_login;
 	protected String roles;
 	protected String firstname;
 	protected String lastname;
 
-	public User(String username, String email, Boolean enabled, String salt, String password, Date last_login, String roles, String firstname, String lastname) {
+	public User(String username, String email, Boolean enabled, String salt, String password, Timestamp last_login, String roles, String firstname, String lastname) {
 		this.username = username;
 		this.email = email;
 		this.enabled = enabled;
@@ -83,11 +84,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Date getLast_login() {
+	public Timestamp getLast_login() {
 		return last_login;
 	}
 
-	public void setLast_login(Date last_login) {
+	public void setLast_login(Timestamp last_login) {
 		this.last_login = last_login;
 	}
 

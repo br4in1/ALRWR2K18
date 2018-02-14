@@ -14,17 +14,20 @@ import java.sql.Date;
 public class Game {
     private int id;
     private Date date;
-    private Team homeTeam;
-    private Team awayTeam;
+    private int homeTeam;
+    private int awayTeam;
     private String result;
-    private Stadium stadium;
+    private int stadium;
     private String summary;
     private String summaryPhoto;
     private String Highlights;
     private String Referee;
 
-    public Game(int id, Date date, Team homeTeam, Team awayTeam, String result, Stadium stadium, String summary, String summaryPhoto, String Highlights, String Referee) {
-        this.id = id;
+    public Game() {
+    }
+
+    public Game(Date date, int homeTeam, int awayTeam, String result, int stadium, String summary, String summaryPhoto, String Highlights, String Referee) {
+    
         this.date = date;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
@@ -52,19 +55,19 @@ public class Game {
         this.date = date;
     }
 
-    public Team getHomeTeam() {
+    public int getHomeTeam() {
         return homeTeam;
     }
 
-    public void setHomeTeam(Team homeTeam) {
+    public void setHomeTeam(int homeTeam) {
         this.homeTeam = homeTeam;
     }
 
-    public Team getAwayTeam() {
+    public int getAwayTeam() {
         return awayTeam;
     }
 
-    public void setAwayTeam(Team awayTeam) {
+    public void setAwayTeam(int awayTeam) {
         this.awayTeam = awayTeam;
     }
 
@@ -76,11 +79,11 @@ public class Game {
         this.result = result;
     }
 
-    public Stadium getStadium() {
+    public int getStadium() {
         return stadium;
     }
 
-    public void setStadium(Stadium stadium) {
+    public void setStadium(int stadium) {
         this.stadium = stadium;
     }
 

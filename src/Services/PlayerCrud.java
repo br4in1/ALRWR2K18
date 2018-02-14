@@ -111,7 +111,7 @@ public static void updateTeam(Player P ) {
             ResultSet result = ste.executeQuery();
             while(result.next())
             {
-                 listPlayers.add(new Player(result.getInt("id"),result.getString("name"),result.getString("lastName"),result.getInt("age"),result.getString("club"),result.getInt("nation"),result.getDouble("height"),result.getDouble("weight"),result.getString("position"),result.getInt("goals"),result.getString("description"),result.getString("profilePhoto"),result.getString("blanketPhoto"),result.getString("descriptionPhoto"),result.getString("fbLink"),result.getString("twitterLink"),result.getInt("shirtNb"),result.getString("video")));
+                 listPlayers.add(new Player(result.getString("name"),result.getString("lastName"),result.getInt("age"),result.getString("club"),result.getInt("nation"),result.getDouble("height"),result.getDouble("weight"),result.getString("position"),result.getInt("goals"),result.getString("description"),result.getString("profilePhoto"),result.getString("blanketPhoto"),result.getString("descriptionPhoto"),result.getString("fbLink"),result.getString("twitterLink"),result.getInt("shirtNb"),result.getString("video")));
                  return listPlayers ;
             }
         } catch (SQLException ex) {
@@ -133,7 +133,7 @@ Connection con = DataSource.getInstance().getCon();
             while(result.next())
             {
 
-           return new  Player(result.getInt("id"),result.getString("name"),result.getString("lastName"),result.getInt("age"),result.getString("club"),result.getInt("nation"),result.getDouble("height"),result.getDouble("weight"),result.getString("position"),result.getInt("goals"),result.getString("description"),result.getString("profilePhoto"),result.getString("blanketPhoto"),result.getString("descriptionPhoto"),result.getString("fbLink"),result.getString("twitterLink"),result.getInt("shirtNb"),result.getString("video"));
+           return new  Player(result.getString("name"),result.getString("lastName"),result.getInt("age"),result.getString("club"),result.getInt("nation"),result.getDouble("height"),result.getDouble("weight"),result.getString("position"),result.getInt("goals"),result.getString("description"),result.getString("profilePhoto"),result.getString("blanketPhoto"),result.getString("descriptionPhoto"),result.getString("fbLink"),result.getString("twitterLink"),result.getInt("shirtNb"),result.getString("video"));
             
             
             }
@@ -144,3 +144,4 @@ Connection con = DataSource.getInstance().getCon();
       return null ;
   }
 }
+  
