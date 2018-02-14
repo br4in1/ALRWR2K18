@@ -33,6 +33,7 @@ import javafx.util.Duration;
  */
 public class DashboardController implements Initializable {
 
+<<<<<<< HEAD
 	@FXML
 	private Pane content;
 	@FXML
@@ -144,4 +145,129 @@ public class DashboardController implements Initializable {
 	private void tournementNavbar(MouseEvent event) {
 		setNavNode(tournementBox);
 	}
+=======
+    @FXML
+    private Pane content;
+    @FXML
+    private VBox nav;
+
+    
+    @FXML
+    private Pane main;
+    AnchorPane games,teams,teamStatics;
+    VBox tournementBox,teamBox;
+
+    /**
+     * Initializes the controller class.
+     */
+     private void setNavNode(Node node) {
+        main.getChildren().clear();
+        main.getChildren().add((Node) node);
+
+        FadeTransition ft = new FadeTransition(Duration.millis(1500));
+        ft.setNode(node);
+        ft.setFromValue(0.1);
+        ft.setToValue(1);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(false);
+        ft.play();
+    }
+      private void setContentNode(Node node) {
+        content.getChildren().clear();
+        content.getChildren().add((Node) node);
+
+        FadeTransition ft = new FadeTransition(Duration.millis(1500));
+        ft.setNode(node);
+        ft.setFromValue(0.1);
+        ft.setToValue(1);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(false);
+        ft.play();
+    }
+     
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        try {
+            //Load all fxmls in a cache
+        
+            tournementBox = FXMLLoader.load(getClass().getResource("/Views/tournementBox.fxml"));
+            teamBox =FXMLLoader.load(getClass().getResource("/Views/teamBox.fxml"));
+            games = FXMLLoader.load(getClass().getResource("/Views/GamesCrud.fxml"));
+            teams = FXMLLoader.load(getClass().getResource("/Views/teamsCrud.fxml")) ;
+            teamStatics = FXMLLoader.load(getClass().getResource("/Views/teamStatics.fxml")) ;
+            
+               for (Node node : teamBox.getChildren()) {
+                    node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
+                        switch (node.getId()) {
+                            case "mainMenu":
+                                setNavNode(nav);
+                                setContentNode(content);
+                                break;
+                            case "Teams":
+                                setContentNode(teams);
+                            break;
+                            case "TeamStatics":
+                                setContentNode(teamStatics);
+                                    break;
+                            
+                        }
+                    });
+                }
+               
+            for (Node node : tournementBox.getChildren()) {
+                    node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
+                        switch (node.getId()) {
+                            case "mainMenu":
+                                setNavNode(nav);
+                               
+                               setContentNode(content);
+                                break;
+                            case "games":
+                                setContentNode(games);
+                            
+                        }
+                    });
+                }
+         
+            
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+     
+    
+    }
+    
+
+    @FXML
+    private void usersNavbar(MouseEvent event) {
+    }
+
+  
+
+    @FXML
+    private void newsNavbar(MouseEvent event) {
+    }
+
+    @FXML
+    private void guideNavbar(MouseEvent event) {
+    }
+
+    
+
+    @FXML
+    private void GalleryNavbar(MouseEvent event) {
+        
+    }
+
+    @FXML
+    private void teamsNavbar(MouseEvent event) {
+        setNavNode(teamBox);
+    }
+
+    @FXML
+    private void tournementNavbar(MouseEvent event) {
+        setNavNode(tournementBox);
+    }
+>>>>>>> bf3b485093a7fc602321465bb773f42727787eda
 }
