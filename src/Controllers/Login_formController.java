@@ -25,6 +25,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.events.JFXDialogEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -361,7 +362,7 @@ public class Login_formController implements Initializable {
 	}
 
 	@FXML
-	private void AuthWithFacebook(ActionEvent event) {
+	private void AuthWithFacebook(ActionEvent event) throws IOException {
 		Browser facebookBrowser = new Browser("2100597990159243", "819dc6dd91612fad4c43981e167ba986");
 		Scene fbloginwindow;
 		fbloginwindow = new Scene(facebookBrowser, 900, 600, Color.web("#666970"));
