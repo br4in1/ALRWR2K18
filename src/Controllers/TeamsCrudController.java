@@ -32,116 +32,115 @@ import javafx.scene.layout.Pane;
  */
 public class TeamsCrudController implements Initializable {
 
-	@FXML
-	private TableColumn<?, ?> id;
-	@FXML
-	private TableColumn<?, ?> name;
-	@FXML
-	private TableColumn<?, ?> coach;
-	@FXML
-	private TableColumn<?, ?> president;
-	@FXML
-	private TableColumn<?, ?> area;
-	@FXML
-	private TableColumn<?, ?> gamesPlayed;
-	@FXML
-	private TableColumn<?, ?> goalScored;
-	@FXML
-	private TableColumn<?, ?> goalAgainst;
-	@FXML
-	private TableColumn<?, ?> participations;
-	@FXML
-	private TableColumn<?, ?> fifaDate;
-	@FXML
-	private TableColumn<?, ?> wcGroup;
-	@FXML
-	private TableColumn<?, ?> win;
-	@FXML
-	private TableColumn<?, ?> loose;
-	@FXML
-	private TableColumn<?, ?> draw;
-	@FXML
-	private TableColumn<?, ?> points;
-	@FXML
-	private TableColumn<?, ?> fifaRank;
-	@FXML
-	private TableColumn<?, ?> flagPhoto;
-	@FXML
-	private TableColumn<?, ?> logoPhoto;
-	@FXML
-	private TableColumn<?, ?> squadPhoto;
-	@FXML
-	private TableColumn<?, ?> descriptionPhoto;
-	@FXML
-	private TableColumn<?, ?> description;
-	@FXML
-	private TableColumn<?, ?> website;
-	@FXML
-	private TableColumn<?, ?> video;
+    @FXML
+    private TableColumn<?, ?> id;
+    @FXML
+    private TableColumn<?, ?> name;
+    @FXML
+    private TableColumn<?, ?> coach;
+    @FXML
+    private TableColumn<?, ?> president;
+    @FXML
+    private TableColumn<?, ?> area;
+    @FXML
+    private TableColumn<?, ?> gamesPlayed;
+    @FXML
+    private TableColumn<?, ?> goalScored;
+    @FXML
+    private TableColumn<?, ?> goalAgainst;
+    @FXML
+    private TableColumn<?, ?> participations;
+    @FXML
+    private TableColumn<?, ?> fifaDate;
+    @FXML
+    private TableColumn<?, ?> wcGroup;
+    @FXML
+    private TableColumn<?, ?> win;
+    @FXML
+    private TableColumn<?, ?> loose;
+    @FXML
+    private TableColumn<?, ?> draw;
+    @FXML
+    private TableColumn<?, ?> points;
+    @FXML
+    private TableColumn<?, ?> fifaRank;
+    @FXML
+    private TableColumn<?, ?> flagPhoto;
+    @FXML
+    private TableColumn<?, ?> logoPhoto;
+    @FXML
+    private TableColumn<?, ?> squadPhoto;
+    @FXML
+    private TableColumn<?, ?> descriptionPhoto;
+    @FXML
+    private TableColumn<?, ?> description;
+    @FXML
+    private TableColumn<?, ?> website;
+    @FXML
+    private TableColumn<?, ?> video;
 
-	@FXML
-	private TableView<Team> tableT;
-
-	/**
-	 * Initializes the controller class.
-	 *
-	 * @param url
-	 * @param rb
-	 */
-	@Override
-	public void initialize(URL url, ResourceBundle rb) {
-		// TODO
-		id.setCellValueFactory(
-				new PropertyValueFactory<>("id"));
-		name.setCellValueFactory(
-				new PropertyValueFactory<>("name"));
-		coach.setCellValueFactory(
-				new PropertyValueFactory<>("coach"));
-		president.setCellValueFactory(
-				new PropertyValueFactory<>("president"));
-		area.setCellValueFactory(
-				new PropertyValueFactory<>("area"));
-		gamesPlayed.setCellValueFactory(
-				new PropertyValueFactory<>("gamesPlayed"));
-		goalScored.setCellValueFactory(
-				new PropertyValueFactory<>("goalScored"));
-		goalAgainst.setCellValueFactory(
-				new PropertyValueFactory<>("goalAgainst"));
-		participations.setCellValueFactory(
-				new PropertyValueFactory<>("participations"));
-		fifaDate.setCellValueFactory(
-				new PropertyValueFactory<>("fifaDate"));
-		wcGroup.setCellValueFactory(
-				new PropertyValueFactory<>("wcGroup"));
-		win.setCellValueFactory(
-				new PropertyValueFactory<>("win"));
-		loose.setCellValueFactory(
-				new PropertyValueFactory<>("loose"));
-		draw.setCellValueFactory(
-				new PropertyValueFactory<>("draw"));
-		points.setCellValueFactory(
-				new PropertyValueFactory<>("points"));
-		fifaRank.setCellValueFactory(
-				new PropertyValueFactory<>("fifaRank"));
-		flagPhoto.setCellValueFactory(
-				new PropertyValueFactory<>("flagPhoto"));
-		logoPhoto.setCellValueFactory(
-				new PropertyValueFactory<>("logoPhoto"));
-		squadPhoto.setCellValueFactory(
-				new PropertyValueFactory<>("squadPhoto"));
-		descriptionPhoto.setCellValueFactory(
-				new PropertyValueFactory<>("descriptionPhoto"));
-		description.setCellValueFactory(
-				new PropertyValueFactory<>("description"));
-		website.setCellValueFactory(
-				new PropertyValueFactory<>("website"));
-		video.setCellValueFactory(
-				new PropertyValueFactory<>("video"));
-		ObservableList<Team> OL = FXCollections.observableList(TeamCrud.findAllTeam());
+    @FXML
+    private TableView<Team> tableT;
+     
+    /**
+     * Initializes the controller class.
+     * @param url
+     * @param rb
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+       id.setCellValueFactory(
+            new PropertyValueFactory<>("id"));
+       name.setCellValueFactory(
+            new PropertyValueFactory<>("name"));
+       coach.setCellValueFactory(
+            new PropertyValueFactory<>("coach"));
+       president.setCellValueFactory(
+            new PropertyValueFactory<>("president"));
+       area.setCellValueFactory(
+            new PropertyValueFactory<>("area"));
+       gamesPlayed.setCellValueFactory(
+            new PropertyValueFactory<>("gamesPlayed"));
+       goalScored.setCellValueFactory(
+            new PropertyValueFactory<>("goalScored"));
+       goalAgainst.setCellValueFactory(
+            new PropertyValueFactory<>("goalAgainst"));
+       participations.setCellValueFactory(
+            new PropertyValueFactory<>("participations"));
+       fifaDate.setCellValueFactory(
+            new PropertyValueFactory<>("fifaDate"));
+       wcGroup.setCellValueFactory(
+            new PropertyValueFactory<>("wcGroup"));
+       win.setCellValueFactory(
+            new PropertyValueFactory<>("win"));
+       loose.setCellValueFactory(
+            new PropertyValueFactory<>("loose"));
+       draw.setCellValueFactory(
+            new PropertyValueFactory<>("draw"));
+        points.setCellValueFactory(
+            new PropertyValueFactory<>("points"));
+       fifaRank.setCellValueFactory(
+            new PropertyValueFactory<>("fifaRank"));
+       flagPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("flagPhoto"));
+       logoPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("logoPhoto"));
+       squadPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("squadPhoto"));
+       descriptionPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("descriptionPhoto"));
+       description.setCellValueFactory(
+            new PropertyValueFactory<>("description"));
+       website.setCellValueFactory(
+            new PropertyValueFactory<>("website"));
+       video.setCellValueFactory(
+            new PropertyValueFactory<>("video"));
+      ObservableList<Team> OL = FXCollections.observableList(TeamCrud.findAllTeam());
 		System.out.println(OL);
 		tableT.setItems(OL);
-
-		/*
+        
+        /*
           private int id ; //1
     private String name ; //2 -
     private String coach ; //3 -
@@ -165,21 +164,44 @@ public class TeamsCrudController implements Initializable {
     private String description ;//21
     private String website ;//22
     private String video ;//23
-		 */
-	}
+        */
+    }     
 
-	@FXML
-	private void newTeam(MouseEvent event) {
-		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/AddFormTeam.fxml"));
-			Parent root = (Parent) fxmlLoader.load();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.show();
+    @FXML
+    private void newTeam(MouseEvent event) {
+            try {
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/AddFormTeam.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+            
+    } catch(Exception e) {
+       e.printStackTrace();
+      }
+    }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    @FXML
+    private void deleteTeam(MouseEvent event) {
+       
+        TeamCrud.RemoveTeam(tableT.getSelectionModel().getSelectedItem().getId());
+        tableT.getItems().removeAll(tableT.getSelectionModel().getSelectedItem());
+        
+        
+    }
 
+    @FXML
+    private void updateTeam(MouseEvent event) {
+               try {
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/UpdateFormTeam.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+            
+    } catch(Exception e) {
+       e.printStackTrace();
+      }
+    }
+    
 }
