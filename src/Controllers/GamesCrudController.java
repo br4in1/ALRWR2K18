@@ -66,43 +66,42 @@ public class GamesCrudController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		id.setCellValueFactory(
-            new PropertyValueFactory<>("id"));
+				new PropertyValueFactory<>("id"));
 		date.setCellValueFactory(
-            new PropertyValueFactory<>("date"));
+				new PropertyValueFactory<>("date"));
 		home.setCellValueFactory(
-            new PropertyValueFactory<>("HomeTeam"));
+				new PropertyValueFactory<>("HomeTeam"));
 		away.setCellValueFactory(
-            new PropertyValueFactory<>("AwayTeam"));
+				new PropertyValueFactory<>("AwayTeam"));
 		result.setCellValueFactory(
-            new PropertyValueFactory<>("result"));
+				new PropertyValueFactory<>("result"));
 		stadium.setCellValueFactory(
-            new PropertyValueFactory<>("stadium"));
+				new PropertyValueFactory<>("stadium"));
 		summary.setCellValueFactory(
-            new PropertyValueFactory<>("summary"));
+				new PropertyValueFactory<>("summary"));
 		summaryPhoto.setCellValueFactory(
-            new PropertyValueFactory<>("summaryPhoto"));
+				new PropertyValueFactory<>("summaryPhoto"));
 		highlights.setCellValueFactory(
-            new PropertyValueFactory<>("highlights"));
+				new PropertyValueFactory<>("highlights"));
 		referee.setCellValueFactory(
-            new PropertyValueFactory<>("referee"));
+				new PropertyValueFactory<>("referee"));
 		ObservableList<Game> OL = FXCollections.observableList(GameCrud.findAllGames());
 		System.out.println(OL);
 		tablev.setItems(OL);
-	}	
+	}
 
 	@FXML
 	private void newGame(MouseEvent event) {
-         try {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/AddForm.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));  
-            stage.show();
-            
-    } catch(Exception e) {
-       e.printStackTrace();
-	}
-    }
-	
-}
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/AddForm.fxml"));
+			Parent root = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.show();
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}

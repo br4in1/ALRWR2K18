@@ -35,7 +35,7 @@
                   </JFXPasswordField>
                   <JFXButton fx:id="loginbtn" alignment="CENTER" layoutX="131.0" layoutY="168.0" onAction="#loginUser" prefHeight="27.0" prefWidth="270.0" ripplerFill="#62b518" style="-fx-background-color: #6fa840;" text="Se connecter" textFill="WHITE" />
                   <JFXButton alignment="CENTER" layoutX="131.0" layoutY="294.0" onAction="#showSignUpForm" prefHeight="27.0" prefWidth="270.0" ripplerFill="#62862b" style="-fx-background-color: #6fa840;" text="S'inscrire" textFill="WHITE" />
-                  <JFXButton alignment="CENTER" layoutX="131.0" layoutY="209.0" prefHeight="27.0" prefWidth="270.0" ripplerFill="#2b5284" style="-fx-background-color: #2b5284;" text="Se connecter via Facebook" textAlignment="JUSTIFY" textFill="WHITE" />
+                  <JFXButton alignment="CENTER" layoutX="131.0" layoutY="209.0" onAction="#AuthWithFacebook" prefHeight="27.0" prefWidth="270.0" ripplerFill="#2b5284" style="-fx-background-color: #2b5284;" text="Se connecter via Facebook" textAlignment="JUSTIFY" textFill="WHITE" />
                   <JFXButton layoutX="131.0" layoutY="251.0" prefHeight="27.0" prefWidth="270.0" ripplerFill="#bb4949" style="-fx-background-color: #bb4949;" text="Se connecter via Google" textFill="WHITE" />
                </children>
             </Pane>
