@@ -31,6 +31,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -259,7 +261,7 @@ public class Login_formController implements Initializable {
 	}
 
 	@FXML
-	public void loginUser() {
+	public void loginUser() throws IOException {
 		User u = UserCrud.AuthenticateUser(username_login.getText(), password_login.getText());
 		if (u == null) {
 			JFXDialogLayout content = new JFXDialogLayout();
@@ -269,12 +271,14 @@ public class Login_formController implements Initializable {
 			check_data.show();
 		} else if (u != null && !u.getEnabled()) {
 			if (u.getRoles().equals("ROLE_ADMIN")) {
-				Admin.current_user = (Admin)(u);
+				Admin.current_user = (Admin) (u);
 				Admin.current_user = UserCrud.GetMyData_Admin(Admin.current_user);
+				ShowDashboard();
 			} else if (u.getRoles().equals("ROLE_MODERATOR")) {
 				if (u.getEnabled()) {
-					Moderator.current_user = (Moderator)(u);
+					Moderator.current_user = (Moderator) (u);
 					Moderator.current_user = UserCrud.GetMyData_Moderator(Moderator.current_user);
+					ShowDashboard();
 				} else {
 					JFXDialogLayout content = new JFXDialogLayout();
 					content.setHeading(new Text("Veuillez contacter un administrateur."));
@@ -284,8 +288,9 @@ public class Login_formController implements Initializable {
 				}
 			} else {
 				if (u.getEnabled()) {
-					SimpleUser.current_user = (SimpleUser)(u);
+					SimpleUser.current_user = (SimpleUser) (u);
 					SimpleUser.current_user = UserCrud.GetMyData_SimpleUser(SimpleUser.current_user);
+					ShowFrontEnd();
 				} else {
 					JFXDialogLayout content = new JFXDialogLayout();
 					content.setHeading(new Text("Veuillez saisir le code que vous avez reçu sur votre boite."));
@@ -305,8 +310,13 @@ public class Login_formController implements Initializable {
 								filename = filename.replace(" ", "_").toLowerCase();
 								countryavatar.setImage(new Image("assets/flags/" + filename + ".png"));
 								current_username = u.getUsername();
-								SimpleUser.current_user = (SimpleUser)(u);
+								SimpleUser.current_user = (SimpleUser) (u);
 								SimpleUser.current_user = UserCrud.GetMyData_SimpleUser(SimpleUser.current_user);
+								try {
+									ShowFrontEnd();
+								} catch (IOException ex) {
+									Logger.getLogger(Login_formController.class.getName()).log(Level.SEVERE, null, ex);
+								}
 							}
 						}
 					});
@@ -369,14 +379,24 @@ public class Login_formController implements Initializable {
 		Stage st = new Stage();
 		st.setScene(fbloginwindow);
 		st.show();
-		facebookBrowser.showLogin(st);
-		if(facebookBrowser.success == 1){
-			((Stage)(loginform.getScene().getWindow())).close();
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/FrontEnd.fxml"));
-			Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));  
-            stage.show();
-		}
+		facebookBrowser.showLogin(st,this);
+	}
+
+	public void ShowFrontEnd() throws IOException {
+		((Stage) (loginform.getScene().getWindow())).close();
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/FrontEnd.fxml"));
+		Parent root = (Parent) fxmlLoader.load();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.show();
+	}
+	
+	public void ShowDashboard() throws IOException{
+		((Stage) (loginform.getScene().getWindow())).close();
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/Dashboard.fxml"));
+		Parent root = (Parent) fxmlLoader.load();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.show();
 	}
 }

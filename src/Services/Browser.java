@@ -23,6 +23,7 @@
  */
 package Services;
 
+import Controllers.Login_formController;
 import Entities.SimpleUser;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -31,10 +32,13 @@ import com.restfb.Version;
 import com.restfb.scope.FacebookPermissions;
 import com.restfb.scope.ScopeBuilder;
 import com.restfb.types.User;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
@@ -51,7 +55,7 @@ public class Browser extends Region {
 	final WebView browser = new WebView();
 	final WebEngine webEngine = browser.getEngine();
 	private String code;
-	public int success;
+	public Integer success;
 
 	private final String appId;
 
@@ -63,10 +67,10 @@ public class Browser extends Region {
 		this.appSecret = appSecret;
 		// add the web view to the scene
 		getChildren().add(browser);
-		success = 0;
+		success = null;
 	}
 
-	public void showLogin(Stage st) {
+	public void showLogin(Stage st,Login_formController lfc) {
 		DefaultFacebookClient facebookClient = new DefaultFacebookClient(Version.LATEST);
 		ScopeBuilder scopes = new ScopeBuilder();
 		scopes.addPermission(FacebookPermissions.EMAIL);
@@ -95,15 +99,25 @@ public class Browser extends Region {
 						if (u != null) {
 							success = 1;
 							if (UserCrud.findUserByEmail(u.getEmail())) {
-								
+								SimpleUser U = new SimpleUser(Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), (u.getLocation()!= null && u.getLocation().getName() != null) ? u.getLocation().getName() : "", true, 0, u.getPicture().getUrl(), u.getEmail(), u.getEmail(), false, "", u.getEmail() + u.getId(), Timestamp.valueOf(LocalDateTime.now()), "ROLE_USER", u.getLastName(), u.getFirstName());
+								SimpleUser.current_user = U;
 							} else {
 								SimpleUser U = new SimpleUser(Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), (u.getLocation()!= null && u.getLocation().getName() != null) ? u.getLocation().getName() : "", true, 0, u.getPicture().getUrl(), u.getEmail(), u.getEmail(), false, "", u.getEmail() + u.getId(), Timestamp.valueOf(LocalDateTime.now()), "ROLE_USER", u.getLastName(), u.getFirstName());
 								UserCrud.AddUserToDataBaseStepOne(U);
 								SimpleUser.current_user = U;
 							}
+							try {
+								lfc.ShowFrontEnd();
+							} catch (IOException ex) {
+								Logger.getLogger(Browser.class.getName()).log(Level.SEVERE, null, ex);
+							}
 						}
 					}
 				});
+	}
+	
+	public boolean checkSuccess(){
+		return (success != null && success == 1);
 	}
 
 	@Override
