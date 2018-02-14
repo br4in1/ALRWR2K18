@@ -39,9 +39,8 @@ public class TeamStaticsController implements Initializable {
                 new PieChart.Data("looses",23) ,
                 new PieChart.Data("draws",50) 
         );
-        pieChart.setData(pieChartDatas);    
+        pieChart.setData(pieChartDatas);
     }    
     
     
 }
-  

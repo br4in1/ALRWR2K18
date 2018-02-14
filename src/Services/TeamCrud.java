@@ -54,13 +54,13 @@ public class TeamCrud {
 		}
 	}
 
-	public static void deleteTeam(Team t) {
+	public static void RemoveTeam(int id) {
 		Connection con = DataSource.getInstance().getCon();
 		String query = "DELETE FROM `Team` WHERE id=?";
 		try {
 			PreparedStatement ste = con.prepareStatement(query);
 
-			ste.setInt(1, t.getId());
+			ste.setInt(1, id);
 
 			ste.executeUpdate();
 		} catch (SQLException ex) {
@@ -72,7 +72,8 @@ public class TeamCrud {
 	public static void updateTeam(Team t) {
 		Connection con = DataSource.getInstance().getCon();
 		String query = "UPDATE `Team` SET `name`=?,`Coach`=?,`President`=?,`Area`=?,`GamesPlayed`=?,`GoalScored`=?,`GoalAgainst`=?,`Participations`=?,`FifaDate`=?,`WcGroup`=?,`Win`=?,`Loose`=?,`Draw`=?,`Points`=?,`FifaRank`=?,`FlagPhoto`=?,`LogoPhoto`=?,`SquadPhoto`=?,`DescriptionPhoto`=?,`Description`=?,`Website`=?,`Video`=? WHERE id=?";
-
+// TeamCrud.updateTeam(new Team(name.getText(),coach.getText(),president.getText(),area.getText(),Integer.parseInt(gamesPlayed.getText()),Integer.parseInt(goalScored.getText()),Integer.parseInt(goalAgainst.getText()),Integer.parseInt(participation.getText()),Date.valueOf(date.getValue()),wcgroupe.getText(),Integer.parseInt(win.getText()),Integer.parseInt(loose.getText()),Integer.parseInt(draw.getText()),Integer.parseInt(points.getText()),Integer.parseInt(fifarank.getText()),(String) uploadResult.get("url"),(String) uploadResult.get("url"),(String) uploadResult.get("url"),(String) uploadResult.get("url"),description.getText(),website.getText(),video.getText()));
+    
 		try {
 			PreparedStatement ste = con.prepareStatement(query);
 
@@ -113,6 +114,7 @@ public class TeamCrud {
 		try {
                     Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
+                        
 			while (set.next()) {
                              //listTeam.add(new Team(set.getString("name"), set.getString("coach"), set.getString("president"), set.getString("area"), set.getInt("gamesPlayed"), set.getInt("goalScored"), set.getInt("goalAgainst"), set.getInt("participations"), set.getDate("fifaDate"), set.getString("wcGroup"), set.getInt("win"), set.getInt("loose"), set.getInt("draw"), set.getInt("points"), set.getInt("fifaRank"), set.getString("flagPhoto"), set.getString("logoPhoto"), set.getString("squadPhoto"), set.getString("descriptionPhoto"), set.getString("description"), set.getString("website"), set.getString("video")));
                             
@@ -136,7 +138,9 @@ public class TeamCrud {
 		String query = "SELECT * from `Team` where id = ? ";
 		try {
 			PreparedStatement ste = con.prepareStatement(query);
+                        ste.setInt(1, id);
 			ResultSet result = ste.executeQuery();
+                        
 			while (result.next()) {
 				return new Team(result.getString("name"), result.getString("coach"), result.getString("president"), result.getString("area"), result.getInt("gamesPlayed"), result.getInt("goalScored"), result.getInt("goalAgainst"), result.getInt("participations"), result.getDate("fifaDate"), result.getString("wcGroup"), result.getInt("win"), result.getInt("loose"), result.getInt("draw"), result.getInt("points"), result.getInt("fifaRank"), result.getString("flagPhoto"), result.getString("logoPhoto"), result.getString("squadPhoto"), result.getString("descriptionPhoto"), result.getString("description"), result.getString("website"), result.getString("video"));
 			}
@@ -158,6 +162,24 @@ public class TeamCrud {
 				map.put(set.getString("name"), set.getInt("id"));
 			}
 			return map;
+		} catch (SQLException ex) {
+			Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+
+		}
+		return null;
+	}
+        public static List<Integer> GeIdMap(){
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+                List<Integer> list = new ArrayList<>();
+		Connection con = DataSource.getInstance().getCon();
+		String query = "SELECT id from team";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+			ResultSet set = ste.executeQuery();
+			while (set.next()) {
+				list.add(set.getInt("id"));
+			}
+			return list;
 		} catch (SQLException ex) {
 			Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
 
