@@ -46,3 +46,7 @@ nbproject/private/private.properties
 nbproject/private/private.xml
 !/src/Libraries/restfb-2.1.1.jar
 /dist/
+<<<<<<< HEAD
+=======
+!/src/Libraries/jxl.jar
+>>>>>>> 94a87103d330e4e1b319b9b159181cfaae6b25db
