@@ -33,7 +33,18 @@
          <top>
             <Pane fx:id="pane" prefHeight="68.0" prefWidth="958.0" BorderPane.alignment="CENTER">
                <children>
+<<<<<<< HEAD
+                  <HBox layoutX="539.0" layoutY="5.0" prefHeight="59.0" prefWidth="414.0">
+                     <children>
+                        <JFXButton onMouseClicked="#export" prefHeight="44.0" prefWidth="139.0" text="Export Data" />
+                        <JFXButton onMouseClicked="#refresh" prefHeight="44.0" prefWidth="139.0" text="Refresh" />
+                        <JFXButton onMouseClicked="#delete" prefHeight="44.0" prefWidth="139.0" text="Delete Game" />
+                        <JFXButton onMouseClicked="#newGame" prefHeight="44.0" prefWidth="139.0" text="New Game" />
+                     </children>
+                  </HBox>
+=======
                   <JFXButton layoutX="791.0" layoutY="10.0" onMouseClicked="#newGame" prefHeight="44.0" prefWidth="139.0" text="New Game" />
+>>>>>>> f513716b55f7c201024f39b35e31be9912eed3d4
                </children>
             </Pane>
          </top>
