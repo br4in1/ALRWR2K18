@@ -269,7 +269,7 @@ public class Login_formController implements Initializable {
 			content.setBody(new Text("Veuillez vérifier les informations saisies."));
 			JFXDialog check_data = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
 			check_data.show();
-		} else if (u != null && !u.getEnabled()) {
+		} else if (u != null) {
 			if (u.getRoles().equals("ROLE_ADMIN")) {
 				Admin.current_user = (Admin) (u);
 				Admin.current_user = UserCrud.GetMyData_Admin(Admin.current_user);
