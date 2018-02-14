@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.net.*?>
 <?import java.lang.*?>
@@ -34,6 +35,7 @@
             <Pane fx:id="pane" prefHeight="68.0" prefWidth="958.0" BorderPane.alignment="CENTER">
                <children>
                   <JFXButton layoutX="791.0" layoutY="10.0" onMouseClicked="#newGame" prefHeight="44.0" prefWidth="139.0" text="New Game" />
+                  <JFXButton layoutX="96.0" layoutY="15.0" onMouseClicked="#refresh" prefHeight="36.0" prefWidth="82.0" text="Refresh" wrapText="true" />
                </children>
             </Pane>
          </top>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="116.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DatePickerController">
+   <children>
+      <DatePicker fx:id="date" layoutY="-2.0" prefHeight="27.0" prefWidth="116.0" />
+      <JFXButton fx:id="sub" layoutX="-1.0" layoutY="25.0" onMouseClicked="#submitDate" prefHeight="27.0" prefWidth="116.0" text="Submit" />
+   </children>
+</Pane>
