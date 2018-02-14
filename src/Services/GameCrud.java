@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 import Entities.Game;
 import Utils.DataSource;
 import com.sun.rowset.internal.Row;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -105,6 +104,7 @@ public class GameCrud {
 		}
 	}
 
+<<<<<<< HEAD
 	public static void update(String row,Date value, int id) {
 		Connection con = DataSource.getInstance().getCon();
 		String strSQLQuery=String.format("update game set %s = '%s' where id=%s", row, value, id);
@@ -132,5 +132,6 @@ Connection con = DataSource.getInstance().getCon();
 			Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}	}
 
-
+=======
+>>>>>>> 11d6757d9adeeb15434e83751fd1874f463126cc
 }
