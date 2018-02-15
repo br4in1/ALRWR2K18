@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.input.MouseEvent;
@@ -75,7 +76,7 @@ public class AddFormController implements Initializable {
 	private void submit(MouseEvent event) throws IOException {
 		Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap());
 		GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), String.valueOf(map1.get(HomeTeam.getSelectionModel().getSelectedItem())), String.valueOf(map1.get(AwayTeam.getSelectionModel().getSelectedItem())), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"),Highlights.getText(), Referee.getText()));
-	
+		
 	}
 
 	@FXML
