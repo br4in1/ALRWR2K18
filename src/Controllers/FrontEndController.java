@@ -139,5 +139,4 @@ public class FrontEndController implements Initializable {
 		if(!current_page.equals("contact"))
 			contactbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
 	}
-
 }
