@@ -9,30 +9,44 @@ import Entities.Player;
 import Services.PlayerCrud;
 import Services.TeamCrud;
 import com.jfoenix.controls.JFXComboBox;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.security.SecureRandom;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -155,5 +169,25 @@ public class SquadsController implements Initializable {
 
 		tablev.getSelectionModel().clearSelection();
 	}
+
+	@FXML
+	private void snap(MouseEvent event) {
+		
+				BufferedImage bufferedImage = new BufferedImage(550, 400, BufferedImage.TYPE_INT_ARGB);
+				File file = new File("/Users/simo/Desktop/myfile.png");
+			WritableImage snapshot =middle.snapshot(new SnapshotParameters(),null);
+			BufferedImage image;
+    image = javafx.embed.swing.SwingFXUtils.fromFXImage(snapshot, bufferedImage);
+    try {
+        Graphics2D gd = (Graphics2D) image.getGraphics();
+        gd.translate(middle.getWidth(), middle.getHeight());
+        ImageIO.write(image, "png", file);
+    } catch (IOException ex) {
+        Logger.getLogger(SquadsController.class.getName()).log(Level.SEVERE, null, ex);
+    };
+  }
+			
+		
+	
 
 }

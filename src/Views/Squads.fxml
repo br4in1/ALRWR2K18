@@ -18,7 +18,10 @@
             <Pane prefHeight="35.0" prefWidth="958.0" BorderPane.alignment="CENTER" />
          </bottom>
          <top>
-            <Pane fx:id="pane" prefHeight="68.0" prefWidth="958.0" BorderPane.alignment="CENTER" />
+            <Pane fx:id="pane" prefHeight="68.0" prefWidth="958.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton layoutX="111.0" layoutY="21.0" onMouseClicked="#snap" text="Save" />
+               </children></Pane>
          </top>
          <center>
             <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
