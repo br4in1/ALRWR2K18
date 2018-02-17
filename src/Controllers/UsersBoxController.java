@@ -25,11 +25,13 @@ public class UsersBoxController implements Initializable {
 	@FXML
 	private VBox nav;
 	@FXML
-	private JFXButton mainMenu;
-	@FXML
 	private JFXButton users;
 	@FXML
 	private JFXButton moderators;
+	@FXML
+	private JFXButton mainMenu1;
+	@FXML
+	private JFXButton usersStatics;
 
 	/**
 	 * Initializes the controller class.

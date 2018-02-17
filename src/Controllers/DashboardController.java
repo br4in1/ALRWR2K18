@@ -61,7 +61,7 @@ public class DashboardController implements Initializable {
 
 	private void setContentNode(Node node) {
 		content.getChildren().clear();
-		content.getChildren().add((Node) node);
+		if(!node.getId().equals("content")) content.getChildren().add((Node) node);
 
 		FadeTransition ft = new FadeTransition(Duration.millis(1500));
 		ft.setNode(node);
@@ -78,16 +78,16 @@ public class DashboardController implements Initializable {
 			//Load all fxmls in a cache
 
 			tournementBox = FXMLLoader.load(getClass().getResource("/Views/tournementBox.fxml"));
-			UsersBox = FXMLLoader.load(getClass().getResource("/Views/UsersBox.fxml"));
 			teamBox = FXMLLoader.load(getClass().getResource("/Views/teamBox.fxml"));
 			games = FXMLLoader.load(getClass().getResource("/Views/GamesCrud.fxml"));
-			users = FXMLLoader.load(getClass().getResource("/Views/UsersCrud.fxml"));
 			teams = FXMLLoader.load(getClass().getResource("/Views/teamsCrud.fxml"));
 			teamStatics = FXMLLoader.load(getClass().getResource("/Views/teamStatics.fxml"));
 			players = FXMLLoader.load(getClass().getResource("/Views/playersCrud.fxml"));
+			UsersBox = FXMLLoader.load(getClass().getResource("/Views/UsersBox.fxml"));
+			users = FXMLLoader.load(getClass().getResource("/Views/UsersCrud.fxml"));
 
 			for (Node node : teamBox.getChildren()) {
-				node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
+				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
 					switch (node.getId()) {
 						case "mainMenu":
 							setNavNode(nav);
@@ -108,7 +108,7 @@ public class DashboardController implements Initializable {
 			}
 
 			for (Node node : tournementBox.getChildren()) {
-				node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
+				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
 					switch (node.getId()) {
 						case "mainMenu":
 							setNavNode(nav);
@@ -123,7 +123,7 @@ public class DashboardController implements Initializable {
 			}
 			
 			for(Node node : UsersBox.getChildren()){
-				node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
+				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
 					switch (node.getId()) {
 						case "mainMenu":
 							setNavNode(nav);
@@ -135,7 +135,6 @@ public class DashboardController implements Initializable {
 							setContentNode(users);
 						case "moderators":
 							setContentNode(users);
-
 					}
 				});
 			}
