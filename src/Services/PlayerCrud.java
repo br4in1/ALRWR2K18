@@ -148,6 +148,28 @@ Connection con = DataSource.getInstance().getCon();
         }
       return null ;
   }
+ public static List<Player> findPlayersByNation(int teamid) {
+		Connection con = DataSource.getInstance().getCon();
+		List result = new ArrayList<Player>();
+		String query = "select * from player where nation = ? ";
+		try {
+			Statement ste = con.createStatement();
+			ResultSet set = ste.executeQuery(query);
+			while (set.next()) {
+				Player p = new Player(set.getString("Name"),set.getString("LastName"),set.getString("position"));
+				result.add(p);
+				System.out.println(p);
+			}
+			return result;
+			
+		} catch (SQLException ex) {
+			System.out.println(result);
+			Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+ 
+ 
  
  
   public static List<Integer> GeIdlistPlayer(){

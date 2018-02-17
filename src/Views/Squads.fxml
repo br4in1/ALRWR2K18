@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
@@ -7,8 +10,62 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SquadsController">
-	<stylesheets>
-		<URL value="@squads.css"/>
-	</stylesheets>
+<AnchorPane id="AnchorPane" prefHeight="740.0" prefWidth="959.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SquadsController">
+   <children>
+      <BorderPane layoutX="1.0" prefHeight="739.0" prefWidth="958.0">
+         <bottom>
+            <Pane prefHeight="35.0" prefWidth="958.0" BorderPane.alignment="CENTER" />
+         </bottom>
+         <top>
+            <Pane fx:id="pane" prefHeight="68.0" prefWidth="958.0" BorderPane.alignment="CENTER" />
+         </top>
+         <center>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="636.0" prefWidth="600.0">
+                     <children>
+                        <JFXComboBox fx:id="HomeTeam" prefHeight="40.0" prefWidth="272.0" />
+                        <ScrollPane prefHeight="595.0" prefWidth="268.0">
+                           <content>
+                              <TableView prefHeight="593.0" prefWidth="266.0">
+                                <columns>
+                                  <TableColumn fx:id="positionHome" prefWidth="57.318546533584595" text="Position" />
+                                  <TableColumn fx:id="nameHome" prefWidth="156.68141555786133" text="Name" />
+                                    <TableColumn fx:id="iconHome" prefWidth="52.44256591796875" text="Icon" />
+                                </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+                  <AnchorPane prefHeight="636.0" prefWidth="563.0">
+                     <children>
+                        <ImageView fitHeight="421.0" fitWidth="622.0" layoutX="-100.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.leftAnchor="-100.0" AnchorPane.rightAnchor="-100.0">
+                           <image>
+                              <Image url="@../assets/field.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <VBox prefHeight="636.0" prefWidth="600.0">
+                     <children>
+                        <JFXComboBox fx:id="AwayTeam" prefHeight="40.0" prefWidth="271.0" />
+                        <ScrollPane prefHeight="595.0" prefWidth="268.0">
+                           <content>
+                              <TableView prefHeight="593.0" prefWidth="266.0">
+                                <columns>
+                                  <TableColumn fx:id="positionAway" prefWidth="57.318546533584595" text="Position" />
+                                  <TableColumn fx:id="NameAway" prefWidth="156.68141555786133" text="Name" />
+                                    <TableColumn fx:id="IconAway" prefWidth="52.44256591796875" text="Icon" />
+                                </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </center>
+      </BorderPane>
+   </children>
 </AnchorPane>
