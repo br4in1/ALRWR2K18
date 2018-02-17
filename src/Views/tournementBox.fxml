@@ -22,6 +22,6 @@
       </ImageView>
       <JFXButton fx:id="mainMenu" onMouseClicked="#gamesContent" prefHeight="53.0" prefWidth="241.0" text="Main Menu" textFill="WHITE" />
       <JFXButton fx:id="games" onMouseClicked="#gamesContent" prefHeight="53.0" prefWidth="241.0" text="Manage Games" textFill="WHITE" />
-      <JFXButton prefHeight="53.0" prefWidth="241.0" text="Manage Squads " textFill="WHITE" />
+      <JFXButton fx:id="squads" prefHeight="53.0" prefWidth="241.0" text="Manage Squads " textFill="WHITE" />
    </children>
 </VBox>

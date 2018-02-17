@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import com.jfoenix.controls.*?>
@@ -27,20 +28,19 @@
                         <JFXComboBox fx:id="HomeTeam" prefHeight="40.0" prefWidth="272.0" />
                         <ScrollPane prefHeight="595.0" prefWidth="268.0">
                            <content>
-                              <TableView prefHeight="593.0" prefWidth="266.0">
+                              <TableView fx:id="tablev" onMouseClicked="#spawn" prefHeight="593.0" prefWidth="266.0">
                                 <columns>
-                                  <TableColumn fx:id="positionHome" prefWidth="57.318546533584595" text="Position" />
-                                  <TableColumn fx:id="nameHome" prefWidth="156.68141555786133" text="Name" />
-                                    <TableColumn fx:id="iconHome" prefWidth="52.44256591796875" text="Icon" />
+                                  <TableColumn fx:id="positionHome" minWidth="120.0" prefWidth="57.318546533584595" text="Position" />
+                                  <TableColumn fx:id="nameHome" minWidth="147.0" prefWidth="147.0" text="Name" />
                                 </columns>
                               </TableView>
                            </content>
                         </ScrollPane>
                      </children>
                   </VBox>
-                  <AnchorPane prefHeight="636.0" prefWidth="563.0">
+                  <AnchorPane fx:id="middle" prefHeight="636.0" prefWidth="563.0">
                      <children>
-                        <ImageView fitHeight="421.0" fitWidth="622.0" layoutX="-100.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.leftAnchor="-100.0" AnchorPane.rightAnchor="-100.0">
+                        <ImageView fx:id="field" fitHeight="421.0" fitWidth="622.0" layoutX="-100.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.leftAnchor="-100.0" AnchorPane.rightAnchor="-100.0">
                            <image>
                               <Image url="@../assets/field.png" />
                            </image>
@@ -54,9 +54,8 @@
                            <content>
                               <TableView prefHeight="593.0" prefWidth="266.0">
                                 <columns>
-                                  <TableColumn fx:id="positionAway" prefWidth="57.318546533584595" text="Position" />
-                                  <TableColumn fx:id="NameAway" prefWidth="156.68141555786133" text="Name" />
-                                    <TableColumn fx:id="IconAway" prefWidth="52.44256591796875" text="Icon" />
+                                  <TableColumn fx:id="positionAway" prefWidth="120.0" text="Position" />
+                                  <TableColumn fx:id="NameAway" prefWidth="147.0" text="Name" />
                                 </columns>
                               </TableView>
                            </content>

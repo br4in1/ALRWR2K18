@@ -151,10 +151,13 @@ Connection con = DataSource.getInstance().getCon();
  public static List<Player> findPlayersByNation(int teamid) {
 		Connection con = DataSource.getInstance().getCon();
 		List result = new ArrayList<Player>();
+		
 		String query = "select * from player where nation = ? ";
 		try {
-			Statement ste = con.createStatement();
-			ResultSet set = ste.executeQuery(query);
+			PreparedStatement ste = con.prepareStatement(query);
+			ste.setInt(1, teamid);
+			ResultSet set = ste.executeQuery();
+			
 			while (set.next()) {
 				Player p = new Player(set.getString("Name"),set.getString("LastName"),set.getString("position"));
 				result.add(p);

@@ -5,6 +5,8 @@
  */
 package Entities;
 
+import javafx.scene.shape.Circle;
+
 /**
  *
  * @author Moez
@@ -222,7 +224,10 @@ public class Player {
         this.video = video;
     }
 
-    
+	public String getFullName()
+	{
+		return name+" "+lastName;
+	}
     
 }
     
