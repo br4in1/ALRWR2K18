@@ -5,8 +5,14 @@
  */
 package Entities;
 
+import Services.UserCrud;
 import java.sql.Date;
 import java.sql.Timestamp;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -77,5 +83,31 @@ public class SimpleUser extends User{
 
 	public void setProfilepicture(String profilepicture) {
 		this.profilepicture = profilepicture;
+	}
+	
+	public ImageView getEnabledStatus(){
+		ImageView ret = new ImageView((this.enabled) ? "assets/greencircle.png" : "assets/redcircle.png");
+		ret.setFitHeight(10);
+		ret.setFitWidth(10);
+		return ret;
+	}
+	
+	public ImageView getLoggedinStatus(){
+		ImageView ret = new ImageView((this.loggedin) ? "assets/greencircle.png" : "assets/redcircle.png");
+		ret.setFitHeight(10);
+		ret.setFitWidth(10);
+		return ret;
+	}
+	
+	public Button getBanButton(){
+		Button ret = new Button("Ban");
+		ret.setPrefWidth(40);
+		ret.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				UserCrud.BanSimpleUser(username);
+			}
+		});
+		return ret;
 	}
 }

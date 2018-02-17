@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -95,13 +96,13 @@ public class UserCrud {
 			if (set.next()) {
 				if (set.getString("roles").equals("ROLE_USER")) {
 					found = true;
-					u = new SimpleUser(set.getDate("birth_date"), set.getDate("registration_date"), set.getString("nationality"), true, set.getInt("fidelity_points"), set.getString("profile_picture"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), null, set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
+					u = new SimpleUser(set.getDate("birth_date"), set.getDate("registration_date"), set.getString("nationality"), true, set.getInt("fidelity_points"), set.getString("profile_picture"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
 				} else if (set.getString("roles").equals("ROLE_MODERATOR")) {
 					found = true;
-					u = new Moderator(set.getString("phone_number"),set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), null, set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
+					u = new Moderator(set.getString("phone_number"),set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
 				} else {
 					found = true;
-					u = new Admin(set.getString("phone_number"),set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), null, set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
+					u = new Admin(set.getString("phone_number"),set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
 				}
 				if (found && BCrypt.checkpw(password, u.getPassword())) {
 					u.setId(set.getInt("id"));
@@ -210,5 +211,35 @@ public class UserCrud {
 			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return null;
+	}
+	
+	public static List<SimpleUser> getAllSimpleUsers(){
+		Connection con = DataSource.getInstance().getCon();
+		List users = new ArrayList<SimpleUser>();
+		String query = "select * from User where roles = 'ROLE_USER'";
+		try {
+			Statement ste = con.createStatement();
+			ResultSet set = ste.executeQuery(query);
+			while(set.next()) {
+				SimpleUser u = new SimpleUser(set.getDate("birth_date"), set.getDate("registration_date"), set.getString("nationality"), true, set.getInt("fidelity_points"), set.getString("profile_picture"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
+				users.add(u);
+			}
+			return users;
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+	
+	public static void BanSimpleUser(String username){
+		Connection con = DataSource.getInstance().getCon();
+		String query = "update User set enabled = 0 where username = ?";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+			ste.setString(1, username);
+			ste.executeUpdate();
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 }

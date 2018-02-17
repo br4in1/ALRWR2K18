@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" prefHeight="740.0" prefWidth="958.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UsersCrudController">
+	<stylesheets>
+		<URL value="@userscrud.css" />
+	</stylesheets>
+   <children>
+      <Pane layoutX="-2.0" layoutY="-3.0" prefHeight="87.0" prefWidth="960.0">
+         <children>
+            <JFXButton fx:id="refreshBtn" layoutX="841.0" layoutY="25.0" onAction="#RefreshData" prefHeight="33.0" prefWidth="88.0" text="Refresh" />
+         </children>
+      </Pane>
+      <Pane layoutX="-4.0" layoutY="571.0" prefHeight="173.0" prefWidth="963.0" />
+      <TableView fx:id="tvUsers" layoutX="4.0" layoutY="83.0" onMouseClicked="#ShowProfile" prefHeight="475.0" prefWidth="951.0">
+        <columns>
+          <TableColumn fx:id="usernameCol" prefWidth="75.0" text="Username" />
+          <TableColumn fx:id="EmailCol" prefWidth="75.0" text="Email" />
+            <TableColumn fx:id="firstnameCol" prefWidth="97.00859069824219" text="First Name" />
+            <TableColumn fx:id="lastnameCol" prefWidth="92.01519775390625" text="Last Name" />
+            <TableColumn fx:id="birthdateCol" prefWidth="99.016357421875" text="Birth Date" />
+            <TableColumn fx:id="registerdateCol" prefWidth="145.0" text="Registration Date" />
+            <TableColumn fx:id="nationalityCol" prefWidth="102.0" text="Nationality" />
+            <TableColumn fx:id="statusCol" editable="false" prefWidth="86.0" sortable="false" text="Status" />
+            <TableColumn fx:id="enabledCol" editable="false" prefWidth="85.0" sortable="false" text="Enabled" />
+            <TableColumn fx:id="banCol" prefWidth="91.0" text="Ban" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

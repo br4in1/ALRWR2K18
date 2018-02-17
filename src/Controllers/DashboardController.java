@@ -40,8 +40,8 @@ public class DashboardController implements Initializable {
 
 	@FXML
 	private Pane main;
-	AnchorPane games, teams, teamStatics, players;
-	VBox tournementBox, teamBox;
+	AnchorPane games, teams, teamStatics, players,users;
+	VBox tournementBox, teamBox, UsersBox;
 
 	/**
 	 * Initializes the controller class.
@@ -78,8 +78,10 @@ public class DashboardController implements Initializable {
 			//Load all fxmls in a cache
 
 			tournementBox = FXMLLoader.load(getClass().getResource("/Views/tournementBox.fxml"));
+			UsersBox = FXMLLoader.load(getClass().getResource("/Views/UsersBox.fxml"));
 			teamBox = FXMLLoader.load(getClass().getResource("/Views/teamBox.fxml"));
 			games = FXMLLoader.load(getClass().getResource("/Views/GamesCrud.fxml"));
+			users = FXMLLoader.load(getClass().getResource("/Views/UsersCrud.fxml"));
 			teams = FXMLLoader.load(getClass().getResource("/Views/teamsCrud.fxml"));
 			teamStatics = FXMLLoader.load(getClass().getResource("/Views/teamStatics.fxml"));
 			players = FXMLLoader.load(getClass().getResource("/Views/playersCrud.fxml"));
@@ -119,6 +121,24 @@ public class DashboardController implements Initializable {
 					}
 				});
 			}
+			
+			for(Node node : UsersBox.getChildren()){
+				node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
+					switch (node.getId()) {
+						case "mainMenu":
+							setNavNode(nav);
+							setContentNode(content);
+							break;
+						case "users":
+							setContentNode(users);
+						case "usersStatistics":
+							setContentNode(users);
+						case "moderators":
+							setContentNode(users);
+
+					}
+				});
+			}
 
 		} catch (IOException ex) {
 			Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -128,6 +148,7 @@ public class DashboardController implements Initializable {
 
 	@FXML
 	private void usersNavbar(MouseEvent event) {
+		setNavNode(UsersBox);
 	}
 
 	@FXML
