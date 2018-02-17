@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+
+<AnchorPane id="AnchorPane" fx:id="main" prefHeight="740.0" prefWidth="958.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ModeratorsCrudController">
+	<children>
+      <StackPane fx:id="stack1" prefHeight="740.0" prefWidth="962.0" visible="false" />
+      <AnchorPane fx:id="main2" prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane fx:id="main1" prefHeight="741.0" prefWidth="958.0">
+         <children>
+            <Pane prefHeight="87.0" prefWidth="960.0">
+               <children>
+                  <JFXButton fx:id="refreshBtn" layoutX="841.0" layoutY="25.0" onAction="#RefreshData" prefHeight="33.0" prefWidth="88.0" text="Refresh" />
+                  <JFXButton fx:id="AddBtn" layoutX="695.0" layoutY="25.0" onAction="#AddModerator" prefHeight="33.0" prefWidth="126.0" text="New Moderator" />
+               </children>
+            </Pane>
+            <TableView fx:id="tvUsers" layoutX="5.0" layoutY="85.0" onMouseClicked="#ShowProfile" prefHeight="543.0" prefWidth="951.0">
+              <columns>
+                <TableColumn fx:id="usernameCol" prefWidth="75.0" text="Username" />
+                <TableColumn fx:id="EmailCol" prefWidth="198.0" text="Email" />
+                  <TableColumn fx:id="firstnameCol" prefWidth="133.0" text="First Name" />
+                  <TableColumn fx:id="lastnameCol" prefWidth="133.0" text="Last Name" />
+                  <TableColumn fx:id="phoneCol" editable="false" prefWidth="174.0" sortable="false" text="Phone Number" />
+                  <TableColumn fx:id="enabledCol" editable="false" prefWidth="127.0" sortable="false" text="Enabled" />
+                  <TableColumn fx:id="banCol" prefWidth="110.0" text="Ban" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

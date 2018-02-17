@@ -5,8 +5,13 @@
  */
 package Entities;
 
+import Services.UserCrud;
 import java.sql.Date;
 import java.sql.Timestamp;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -27,5 +32,24 @@ public class Moderator extends User{
 
 	public void setPhonenumber(String phonenumber) {
 		this.phonenumber = phonenumber;
+	}
+	
+	public Button getBanButton(){
+		Button ret = new Button("Ban");
+		ret.setPrefWidth(40);
+		ret.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				UserCrud.BanModerator(username);
+			}
+		});
+		return ret;
+	}
+	
+	public ImageView getEnabledStatus(){
+		ImageView ret = new ImageView((this.enabled) ? "assets/greencircle.png" : "assets/redcircle.png");
+		ret.setFitHeight(10);
+		ret.setFitWidth(10);
+		return ret;
 	}
 }

@@ -294,6 +294,7 @@ public class UserCrud {
 		}
 		return null;
 	}
+	
 	public static HashMap<Integer,Integer> GetAgesChartData(){
 		Connection con = DataSource.getInstance().getCon();
 		HashMap<Integer,Integer> ret = new HashMap<Integer,Integer>();
@@ -309,5 +310,35 @@ public class UserCrud {
 			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return null;
+	}
+	
+	public static List<Moderator> getAllModerators() {
+		Connection con = DataSource.getInstance().getCon();
+		List users = new ArrayList<Moderator>();
+		String query = "select * from User where roles = 'ROLE_MODERATOR'";
+		try {
+			Statement ste = con.createStatement();
+			ResultSet set = ste.executeQuery(query);
+			while (set.next()) {
+				Moderator u = new Moderator(set.getString("phonenumber"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), "", "", set.getTimestamp("last_login"), "ROLE_MODERATOR", set.getString("firstname"), set.getString("lastname"));
+				users.add(u);
+			}
+			return users;
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+	
+	public static void BanModerator(String username) {
+		Connection con = DataSource.getInstance().getCon();
+		String query = "update User set enabled = 0 where username = ?";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+			ste.setString(1, username);
+			ste.executeUpdate();
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 }

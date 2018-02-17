@@ -40,7 +40,7 @@ public class DashboardController implements Initializable {
 
 	@FXML
 	private Pane main;
-	AnchorPane games, teams, teamStatics, players,users,userStatistics,squads;
+	AnchorPane games, teams, teamStatics, players,users,userStatistics,squads,moderators;
 	VBox tournementBox, teamBox, UsersBox;
 
 	
@@ -88,6 +88,7 @@ public class DashboardController implements Initializable {
 			users = FXMLLoader.load(getClass().getResource("/Views/UsersCrud.fxml"));
 			squads = FXMLLoader.load(getClass().getResource("/Views/squads.fxml"));
 			userStatistics = FXMLLoader.load(getClass().getResource("/Views/UsersStatistics.fxml"));
+			moderators = FXMLLoader.load(getClass().getResource("/Views/ModeratorsCrud.fxml"));
 
 			for (Node node : teamBox.getChildren()) {
 				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
@@ -144,7 +145,7 @@ public class DashboardController implements Initializable {
 							setContentNode(userStatistics);
 							break;
 						case "moderators":
-							setContentNode(users);
+							setContentNode(moderators);
 							break;
 					}
 				});

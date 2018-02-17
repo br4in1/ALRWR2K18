@@ -295,7 +295,7 @@ public class Login_formController implements Initializable {
 					JFXDialogLayout content = new JFXDialogLayout();
 					content.setHeading(new Text("Veuillez saisir le code que vous avez reçu sur votre boite."));
 					JFXTextField confirmation_token = new JFXTextField();
-					content.setBody(confirmation_token);
+					content.setBody(confirmation_token); 
 					JFXDialog activateAccount = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
 					activateAccount.show();
 					confirmation_token.setOnAction(new EventHandler<ActionEvent>() {
