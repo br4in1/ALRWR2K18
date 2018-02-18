@@ -35,12 +35,13 @@ public class Moderator extends User{
 	}
 	
 	public Button getBanButton(){
-		Button ret = new Button("Ban");
-		ret.setPrefWidth(40);
+		Button ret = new Button((this.enabled) ? "Ban" : "Unban");
+		//ret.setPrefWidth(40);
 		ret.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				UserCrud.BanModerator(username);
+				if(enabled) UserCrud.BanModerator(username);
+				else UserCrud.UnbanModerator(username);
 			}
 		});
 		return ret;

@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Entities.Moderator;
 import Services.UserCrud;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -16,8 +17,11 @@ import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -29,7 +33,7 @@ import javafx.stage.Stage;
  * @author br4in
  */
 public class AddModeratorController implements Initializable {
-
+	
 	@FXML
 	private JFXTextField username;
 	@FXML
@@ -48,6 +52,8 @@ public class AddModeratorController implements Initializable {
 	private JFXButton addbutton;
 	@FXML
 	private JFXButton resetbutton;
+	@FXML
+	private StackPane errorDialog;
 
 	/**
 	 * Initializes the controller class.
@@ -67,7 +73,7 @@ public class AddModeratorController implements Initializable {
 				}
 			}
 		});
-
+		
 		email.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -81,7 +87,7 @@ public class AddModeratorController implements Initializable {
 				}
 			}
 		});
-
+		
 		password.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -90,13 +96,13 @@ public class AddModeratorController implements Initializable {
 						JFXDialogLayout content = new JFXDialogLayout();
 						content.setHeading(new Text(""));
 						content.setBody(new Text("Le mot de passe doit contenir au moins 7 caractères"));
-						JFXDialog check_username = new JFXDialog((StackPane) username.getParent(), content, JFXDialog.DialogTransition.CENTER);
+						JFXDialog check_username = new JFXDialog(errorDialog, content, JFXDialog.DialogTransition.CENTER);
 						check_username.show();
 					}
 				}
 			}
 		});
-
+		
 		confirmpassword.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -109,14 +115,75 @@ public class AddModeratorController implements Initializable {
 				}
 			}
 		});
-	}	
-
+	}
+	
 	@FXML
 	private void addAction(ActionEvent event) {
-		Stage stage = (Stage) username.getScene().getWindow();
-		stage.close();
+		if (UserCrud.findUserByUsername(username.getText())) {
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("This username already exists."));
+			JFXDialog check_username = new JFXDialog(errorDialog, content, JFXDialog.DialogTransition.CENTER);
+			check_username.show();
+		} else if (UserCrud.findUserByEmail(email.getText())) {
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("This email address already exists."));
+			JFXDialog check_username = new JFXDialog(errorDialog, content, JFXDialog.DialogTransition.CENTER);
+			check_username.show();
+		} else if (firstname.getText().equals("") || lastname.getText().equals("")) {
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("Firstname and lastname are required."));
+			JFXDialog check_username = new JFXDialog(errorDialog, content, JFXDialog.DialogTransition.CENTER);
+			check_username.show();
+		} else if (password.getText().length() < 7) {
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("The password must contains at least 7 characters."));
+			JFXDialog check_username = new JFXDialog(errorDialog, content, JFXDialog.DialogTransition.CENTER);
+			check_username.show();
+		} else if (!confirmpassword.getText().equals(password.getText())) {
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("Please check your password confirmation."));
+			JFXDialog check_username = new JFXDialog(errorDialog, content, JFXDialog.DialogTransition.CENTER);
+			check_username.show();
+		} else if (phonenumber.getText().equals("")) {
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("Phone number is required."));
+			JFXDialog check_username = new JFXDialog(errorDialog, content, JFXDialog.DialogTransition.CENTER);
+			check_username.show();
+		} else {
+			Moderator m = new Moderator(phonenumber.getText(), username.getText(), email.getText(), true, "", password.getText(), null, "ROLE_MODERATOR", firstname.getText(), lastname.getText());
+			if (UserCrud.AddModeratorToDb(m)) {
+				JFXDialogLayout content = new JFXDialogLayout();
+				content.setHeading(new Text(""));
+				JFXButton valider = new JFXButton("OK");
+				valider.setStyle("-fx-background-color :  #396ec9; -fx-text-fill : white");
+				Stage stage = (Stage) username.getScene().getWindow();
+				valider.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+						stage.close();
+					}
+				});
+				content.setBody(new Text("The moderator was added succesfully."));
+				content.getBody().add(valider);
+				valider.setAlignment(Pos.BOTTOM_RIGHT);
+				JFXDialog check_username = new JFXDialog(errorDialog, content, JFXDialog.DialogTransition.CENTER);
+				check_username.show();
+			} else {
+				JFXDialogLayout content = new JFXDialogLayout();
+				content.setHeading(new Text(""));
+				content.setBody(new Text("A problem occured. Please try again."));
+				JFXDialog check_username = new JFXDialog(errorDialog, content, JFXDialog.DialogTransition.CENTER);
+				check_username.show();
+			}
+		}
 	}
-
+	
 	@FXML
 	private void resetfields(ActionEvent event) {
 		username.setText("");

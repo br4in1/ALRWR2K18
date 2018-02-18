@@ -320,7 +320,7 @@ public class UserCrud {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
 			while (set.next()) {
-				Moderator u = new Moderator(set.getString("phonenumber"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), "", "", set.getTimestamp("last_login"), "ROLE_MODERATOR", set.getString("firstname"), set.getString("lastname"));
+				Moderator u = new Moderator(set.getString("phone_number"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), "", "", set.getTimestamp("last_login"), "ROLE_MODERATOR", set.getString("firstname"), set.getString("lastname"));
 				users.add(u);
 			}
 			return users;
@@ -333,6 +333,41 @@ public class UserCrud {
 	public static void BanModerator(String username) {
 		Connection con = DataSource.getInstance().getCon();
 		String query = "update User set enabled = 0 where username = ?";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+			ste.setString(1, username);
+			ste.executeUpdate();
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+	
+	public static boolean AddModeratorToDb(Moderator u){
+		Connection con = DataSource.getInstance().getCon();
+		String query = "INSERT INTO User(username,username_canonical,email,email_canonical,enabled,password,roles,lastname,firstname,phone_number) VALUES(?,?,?,?,?,?,?,?,?,?)";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+			ste.setString(1, u.getUsername());
+			ste.setString(2, u.getUsername());
+			ste.setString(3, u.getEmail());
+			ste.setString(4, u.getEmail());
+			ste.setInt(5, (u.getEnabled()) ? 1 : 0);
+			ste.setString(6, BCrypt.hashpw(u.getPassword(), BCrypt.gensalt(12)));
+			ste.setString(7, u.getRoles());
+			ste.setString(8, u.getLastname());
+			ste.setString(9, u.getFirstname());
+			ste.setString(10, u.getPhonenumber());
+			ste.executeUpdate();
+			return true;
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return false;
+	}
+	
+	public static void UnbanModerator(String username) {
+		Connection con = DataSource.getInstance().getCon();
+		String query = "update User set enabled = 1 where username = ?";
 		try {
 			PreparedStatement ste = con.prepareStatement(query);
 			ste.setString(1, username);
