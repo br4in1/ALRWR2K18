@@ -40,10 +40,15 @@ public class DashboardController implements Initializable {
 
 	@FXML
 	private Pane main;
-	AnchorPane games, teams, teamStatics, players,users,userStatistics,squads,moderators;
+	AnchorPane games, teams, teamStatics, players, users, userStatistics, squads, moderators;
 	VBox tournementBox, teamBox, UsersBox;
+	AnchorPane add;
+	AnchorPane manageGallery;
+	AnchorPane show1;
+	AnchorPane show2;
+	AnchorPane show3;
+	VBox GalleryBox; 
 
-	
 	/**
 	 * Initializes the controller class.
 	 */
@@ -62,7 +67,9 @@ public class DashboardController implements Initializable {
 
 	private void setContentNode(Node node) {
 		content.getChildren().clear();
-		if(!node.getId().equals("content")) content.getChildren().add((Node) node);
+		if (!node.getId().equals("content")) {
+			content.getChildren().add((Node) node);
+		}
 
 		FadeTransition ft = new FadeTransition(Duration.millis(1500));
 		ft.setNode(node);
@@ -89,6 +96,11 @@ public class DashboardController implements Initializable {
 			squads = FXMLLoader.load(getClass().getResource("/Views/squads.fxml"));
 			userStatistics = FXMLLoader.load(getClass().getResource("/Views/UsersStatistics.fxml"));
 			moderators = FXMLLoader.load(getClass().getResource("/Views/ModeratorsCrud.fxml"));
+			add = FXMLLoader.load(getClass().getResource("/Views/AddImage.fxml"));
+			manageGallery = FXMLLoader.load(getClass().getResource("/Views/DisplayI.fxml"));
+			show1 = FXMLLoader.load(getClass().getResource("/Views/Showall.fxml"));
+			show2 = FXMLLoader.load(getClass().getResource("/Views/DisplayO.fxml"));
+			show3 = FXMLLoader.load(getClass().getResource("/Views/ChartP.fxml"));
 
 			for (Node node : teamBox.getChildren()) {
 				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
@@ -129,8 +141,36 @@ public class DashboardController implements Initializable {
 					}
 				});
 			}
-			
-			for(Node node : UsersBox.getChildren()){
+
+			for (Node node : GalleryBox.getChildren()) {
+				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
+					switch (node.getId()) {
+						case "mainMenu":
+							setNavNode(nav);
+							break;
+						case "Add":
+							setContentNode(add);
+							break;
+
+						case "managegallery":
+							setContentNode(manageGallery);
+							break;
+
+						case "Showw":
+							setContentNode(show1);
+							break;
+						case "Showw3":
+							setContentNode(show2);
+							break;
+						case "stat":
+							setContentNode(show3);
+							break;
+
+					}
+				});
+			}
+
+			for (Node node : UsersBox.getChildren()) {
 				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
 					switch (node.getId()) {
 						case "mainMenu":

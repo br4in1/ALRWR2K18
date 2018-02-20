@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="988.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DisplayIController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="572.0" layoutX="5.0" layoutY="14.0" stroke="#b23d3d" strokeLineCap="ROUND" strokeWidth="4.0" width="966.0" />
+      <TableView fx:id="tableView" layoutX="32.0" layoutY="42.0" onMouseClicked="#CLicked" prefHeight="202.0" prefWidth="584.0" style="-fx-border-color: #b23d3d;">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="iduser" prefWidth="75.0" text="IdUser" />
+            <TableColumn fx:id="ville" prefWidth="75.0" text="Ville" />
+            <TableColumn fx:id="lieu" prefWidth="75.0" text="Lieu" />
+            <TableColumn fx:id="description" prefWidth="98.0" text="Description" />
+            <TableColumn fx:id="url" prefWidth="129.0" text="Url" />
+            <TableColumn fx:id="etat" prefWidth="42.0" text="Etat" />
+        </columns>
+      </TableView>
+      <ImageView fx:id="img_view" fitHeight="188.0" fitWidth="194.0" layoutX="646.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="Etat" layoutX="134.0" layoutY="358.0" prefHeight="25.0" prefWidth="107.0" />
+      <TextField fx:id="Id" editable="false" layoutX="394.0" layoutY="383.0" prefHeight="25.0" prefWidth="97.0" />
+      <TextField fx:id="iD" editable="false" layoutX="134.0" layoutY="413.0" prefHeight="25.0" prefWidth="107.0" />
+      <Separator layoutX="279.0" layoutY="289.0" orientation="VERTICAL" prefHeight="230.0" prefWidth="23.0" />
+      <PieChart fx:id="piechart2" layoutX="550.0" layoutY="257.0" prefHeight="277.0" prefWidth="387.0" />
+      <Label layoutX="39.0" layoutY="417.0" prefHeight="17.0" prefWidth="70.0" text="Id image :">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="317.0" layoutY="387.0" prefHeight="17.0" prefWidth="70.0" text="Id image :">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="32.0" layoutY="362.0" prefHeight="17.0" prefWidth="107.0" text="Etat image :">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Line endX="100.0" layoutX="743.0" layoutY="244.0" startX="-100.0" stroke="#b23d3d" strokeWidth="4.0" />
+      <Label layoutX="656.0" layoutY="25.0" prefHeight="17.0" prefWidth="107.0" text="Ci joint l'image : ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Line endX="100.0" endY="500.0" layoutX="435.0" layoutY="57.0" opacity="0.83" startX="100.0" startY="200.0" stroke="#b23d3d" strokeMiterLimit="5.0" strokeWidth="4.0" />
+      <ImageView fitHeight="55.0" fitWidth="49.0" layoutX="50.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/27747018_1615934998485377_160869558_o.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="317.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/téléchargé.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="btn1" layoutX="436.0" layoutY="266.0" onMouseClicked="#Actualiser" prefHeight="25.0" prefWidth="81.0" style="-fx-background-color: #b23d3d;" text="Actualiser" />
+      <JFXButton fx:id="supprimer" layoutX="402.0" layoutY="463.0" onAction="#suprimerI" prefHeight="25.0" prefWidth="81.0" style="-fx-background-color: #b23d3d;" text="Supprimer" />
+      <JFXButton fx:id="modifier" layoutX="155.0" layoutY="463.0" onAction="#modifierI" prefHeight="25.0" prefWidth="81.0" style="-fx-background-color: #b23d3d;" text="Modifier" />
+      <ImageView fitHeight="49.0" fitWidth="43.0" layoutX="386.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/actu.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="next" layoutX="867.0" layoutY="553.0" onAction="#Next" prefHeight="25.0" prefWidth="81.0" style="-fx-background-color: #b23d3d;" text="Next" />
+   </children>
+</AnchorPane>

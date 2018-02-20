@@ -5,6 +5,8 @@
  */
 package Entities;
 
+import javafx.scene.text.Text;
+
 /**
  *
  * @author dell
@@ -13,24 +15,42 @@ public class Gallery {
 
     private int id;
     private int idUser;
-    private String url;
-    private String Emplacement;
-    private String Description;
+	private String ville ; 
+    private String lieu;
+    private String description;
+    private String image;
+    private String etat ; 
 
-    public Gallery() {
-    }
 
-    public Gallery(int id, int idUser, String url, String Emplacement, String Description) {
+	public Gallery() {
+		
+	}
+   
+    public Gallery(int id,int idUser,String ville , String lieu,String description,String image,String etat) {
         this.id = id;
         this.idUser = idUser;
-        this.url = url;
-        this.Emplacement = Emplacement;
-        this.Description = Description;
-    }
+		this.ville=ville;
+        this.lieu = lieu;
+        this.description = description;
+        this.image = image;
+        this.etat = etat;
+	}
+	public Gallery(int idUser,String ville , String lieu,String description,String image,String etat) {
+        this.idUser = idUser;
+		this.ville=ville ; 
+        this.lieu = lieu;
+        this.description = description;
+        this.image = image;
+        this.etat = etat;
+	}
+	
+	 public Gallery(String etat) {
+        this.etat = etat;
+	}
 
-    public Gallery(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
+	 
+
 
     public int getId() {
         return id;
@@ -48,28 +68,57 @@ public class Gallery {
         this.idUser = idUser;
     }
 
-    public String getUrl() {
-        return url;
+   
+
+    public String getLieu() {
+        return lieu;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getEmplacement() {
-        return Emplacement;
-    }
-
-    public void setEmplacement(String Emplacement) {
-        this.Emplacement = Emplacement;
+    public void setLieu(String lieu) {
+        this.lieu = lieu;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
-    public void setDescription(String Description) {
-        this.Description = Description;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+
+    public String getEtat() {
+        return etat;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
+    }
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+	public String getAvis() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+    
+    
+    
+
+    
 
 }
