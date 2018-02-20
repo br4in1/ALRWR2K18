@@ -100,7 +100,8 @@ public class DashboardController implements Initializable {
 			manageGallery = FXMLLoader.load(getClass().getResource("/Views/DisplayI.fxml"));
 			show1 = FXMLLoader.load(getClass().getResource("/Views/Showall.fxml"));
 			show2 = FXMLLoader.load(getClass().getResource("/Views/DisplayO.fxml"));
-			show3 = FXMLLoader.load(getClass().getResource("/Views/ChartP.fxml"));
+			//show3 = FXMLLoader.load(getClass().getResource("/Views/chartP.fxml"));
+			GalleryBox = FXMLLoader.load(getClass().getResource("/Views/GalleryBox.fxml"));
 
 			for (Node node : teamBox.getChildren()) {
 				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
@@ -151,7 +152,6 @@ public class DashboardController implements Initializable {
 						case "Add":
 							setContentNode(add);
 							break;
-
 						case "managegallery":
 							setContentNode(manageGallery);
 							break;
@@ -163,7 +163,7 @@ public class DashboardController implements Initializable {
 							setContentNode(show2);
 							break;
 						case "stat":
-							setContentNode(show3);
+							//setContentNode(show3);
 							break;
 
 					}
@@ -181,7 +181,6 @@ public class DashboardController implements Initializable {
 							setContentNode(users);
 							break;
 						case "usersStatistics":
-							System.out.println("test");
 							setContentNode(userStatistics);
 							break;
 						case "moderators":
@@ -212,7 +211,7 @@ public class DashboardController implements Initializable {
 
 	@FXML
 	private void GalleryNavbar(MouseEvent event) {
-
+		setNavNode(GalleryBox);
 	}
 
 	@FXML

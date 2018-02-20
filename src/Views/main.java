@@ -23,6 +23,7 @@ import java.awt.Point;
 import java.awt.RadialGradientPaint;
 import java.awt.geom.Point2D;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

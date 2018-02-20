@@ -25,7 +25,6 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
-
 /**
  * FXML Controller class
  *
@@ -42,20 +41,19 @@ public class ChartPController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
-		
-			PieDataset dataset = createDataset();
+
+		PieDataset dataset = createDataset();
 		JFreeChart chart = createChart(dataset);
-	//	ChartViewer viewer = new ChartViewer(chart);
+		//	ChartViewer viewer = new ChartViewer(chart);
 		//grid.add(imageHouse, 0, 0, 1, 2);
 		swing1.setContent(
-      new ChartPanel(
-			  createChart(dataset)
-      )      
-    );
-		
-		
-		
-	}	
+				new ChartPanel(
+						createChart(dataset)
+				)
+		);
+
+	}
+
 	private static PieDataset createDataset() {
 		DefaultPieDataset dataset = new DefaultPieDataset();
 		dataset.setValue("Win", new Double(27.8));
@@ -64,8 +62,7 @@ public class ChartPController implements Initializable {
 		dataset.setValue("Draw", new Double(17.1));
 		return dataset;
 	}
-	
-	
+
 	private static JFreeChart createChart(PieDataset dataset) {
 
 		JFreeChart chart = ChartFactory.createPieChart(
@@ -91,11 +88,10 @@ public class ChartPController implements Initializable {
 		plot.setSectionPaint("Win", createGradientPaint(new Color(255, 200, 200), Color.RED));
 		plot.setSectionPaint("Draw", createGradientPaint(new Color(200, 255, 200), Color.GREEN));
 		plot.setSectionPaint("Loose", createGradientPaint(new Color(200, 255, 200), Color.YELLOW));
-		
-		
+
 		//plot.setDefaultSectionOutlinePaint(Color.WHITE);
 		plot.setSectionOutlinesVisible(true);
-	//	plot.setDefaultSectionOutlineStroke(new BasicStroke(2.0f));
+		//	plot.setDefaultSectionOutlineStroke(new BasicStroke(2.0f));
 
 		// customise the section label appearance
 		plot.setLabelFont(new Font("Courier New", Font.BOLD, 20));
@@ -115,6 +111,7 @@ public class ChartPController implements Initializable {
 		return chart;
 
 	}
+
 	private static RadialGradientPaint createGradientPaint(Color c1, Color c2) {
 		Point2D center = new Point2D.Float(0, 0);
 		float radius = 200;
@@ -122,10 +119,5 @@ public class ChartPController implements Initializable {
 		return new RadialGradientPaint(center, radius, dist,
 				new Color[]{c1, c2});
 	}
-	
-	
-	
-	
-	
-	
+
 }

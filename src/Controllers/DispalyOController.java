@@ -11,11 +11,12 @@ import Services.GalleryCrud;
 import Services.OpinionsCrud;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
-import com.sun.org.apache.xpath.internal.compiler.OpCodes;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -46,7 +47,6 @@ import javafx.scene.shape.Rectangle;
  */
 public class DispalyOController implements Initializable {
 
-	
 	@FXML
 	private TableView<Opinions> table_view2;
 	@FXML
@@ -64,8 +64,7 @@ public class DispalyOController implements Initializable {
 	@FXML
 	private JFXButton supprimer;
 	@FXML
-	private LineChart<String,Integer> line;
-	
+	private LineChart<String, Integer> line;
 
 	/**
 	 * Initializes the controller class.
@@ -74,44 +73,41 @@ public class DispalyOController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		affichage();
 		XYChart.Series<String, Integer> series = new XYChart.Series<>();
-		
-		series.getData().add(new XYChart.Data("1",5));
-	    series.getData().add(new XYChart.Data("2",4));
-		series.getData().add(new XYChart.Data("3",1));
-		series.getData().add(new XYChart.Data("4",5));
+		HashMap<Integer, String> data;
 
-        line.getData().addAll(series);
-		
-		
-		
-		
-		
-	}	
+		try {
+			data = OpinionsCrud.AfficherEtoiles();
+			for (Entry<Integer, String> e : data.entrySet()) {
+				series.getData().add(new XYChart.Data(String.valueOf(e.getKey()), Integer.parseInt(e.getValue())));
+			}
+
+			line.getData().addAll(series);
+		} catch (SQLException ex) {
+			Logger.getLogger(DispalyOController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
 	public void affichage() {
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		idUser.setCellValueFactory(new PropertyValueFactory<>("idUser"));
 		avis.setCellValueFactory(new PropertyValueFactory<>("avis"));
 		notes.setCellValueFactory(new PropertyValueFactory<>("nbreEtoiles"));
-	
-		ObservableList<Opinions> ol = FXCollections.observableArrayList(OpinionsCrud.DisplayAllOpinions());
-		System.out.println(ol);
-	    table_view2.setItems(ol);
-	}
 
+		ObservableList<Opinions> ol = FXCollections.observableArrayList(OpinionsCrud.DisplayAllOpinions());
+		table_view2.setItems(ol);
+	}
 
 	@FXML
 	private void click(MouseEvent event) {
-		    OpinionsCrud g1 = new OpinionsCrud();
+		OpinionsCrud g1 = new OpinionsCrud();
 		//List<String> Liste = g1.DisplayImageFromDB();
-		
-		Opinions o = (Opinions) table_view2.getItems().get(table_view2.getSelectionModel().getSelectedIndex());
+
+		Opinions o = table_view2.getSelectionModel().getSelectedItem();
 		String avis = o.getAvis();
 		Avis.setText(avis);
 		String id = Integer.toString(o.getId());
 		Id.setText(id);
-		
-		
-  
+
 	}
 
 	@FXML
@@ -129,10 +125,10 @@ public class DispalyOController implements Initializable {
 			alert.setTitle("Information ");
 			alert.setHeaderText(null);
 			alert.setContentText("Suppression effectué !");
-			alert.show();		
+			alert.show();
 			affichage();
 			//changeStat();
 		}
 	}
-	
+
 }

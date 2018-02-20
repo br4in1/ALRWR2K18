@@ -173,6 +173,7 @@ public class UserCrud {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
 			if (set.next()) {
+				u.setId(set.getInt("id"));
 				u.setRegistrationdate(set.getDate("registration_date"));
 				u.setBirthdate(set.getDate("birth_date"));
 				u.setFidaelitypoints(set.getInt("fidelity_points"));
@@ -196,6 +197,7 @@ public class UserCrud {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
 			if (set.next()) {
+				u.setId(set.getInt("id"));
 				u.setPhonenumber(set.getString("phone_number"));
 				return u;
 			}
@@ -212,6 +214,7 @@ public class UserCrud {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
 			if (set.next()) {
+				u.setId(set.getInt("id"));
 				u.setPhonenumber(set.getString("phone_number"));
 				return u;
 			}
@@ -262,8 +265,8 @@ public class UserCrud {
 			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-	
-	public static int GetLoggedInNumber(){
+
+	public static int GetLoggedInNumber() {
 		Connection con = DataSource.getInstance().getCon();
 		String query = "select count(*) as nb from User where roles='ROLE_USER' and loggedin = 1";
 		try {
@@ -277,10 +280,10 @@ public class UserCrud {
 		}
 		return 0;
 	}
-	
-	public static HashMap<String,Integer> GetCountriesChartData(){
+
+	public static HashMap<String, Integer> GetCountriesChartData() {
 		Connection con = DataSource.getInstance().getCon();
-		HashMap<String,Integer> ret = new HashMap<String,Integer>();
+		HashMap<String, Integer> ret = new HashMap<String, Integer>();
 		String query = "select nationality,count(*) as nb from User where roles='ROLE_USER' group by nationality having nationality != '' limit 5";
 		try {
 			Statement ste = con.createStatement();
@@ -294,16 +297,16 @@ public class UserCrud {
 		}
 		return null;
 	}
-	
-	public static HashMap<Integer,Integer> GetAgesChartData(){
+
+	public static HashMap<Integer, Integer> GetAgesChartData() {
 		Connection con = DataSource.getInstance().getCon();
-		HashMap<Integer,Integer> ret = new HashMap<Integer,Integer>();
+		HashMap<Integer, Integer> ret = new HashMap<Integer, Integer>();
 		String query = "select YEAR(STR_TO_DATE(birth_date, '%Y-%m-%d')) as year,count(*) as nb from User where roles='ROLE_USER' group by YEAR(STR_TO_DATE(birth_date, '%Y-%m-%d')) having year IS NOT NULL limit 5";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
 			while (set.next()) {
-				ret.put(Math.abs(LocalDateTime.now().getYear()-set.getInt("year")), set.getInt("nb"));
+				ret.put(Math.abs(LocalDateTime.now().getYear() - set.getInt("year")), set.getInt("nb"));
 			}
 			return ret;
 		} catch (SQLException ex) {
@@ -311,7 +314,7 @@ public class UserCrud {
 		}
 		return null;
 	}
-	
+
 	public static List<Moderator> getAllModerators() {
 		Connection con = DataSource.getInstance().getCon();
 		List users = new ArrayList<Moderator>();
@@ -329,7 +332,7 @@ public class UserCrud {
 		}
 		return null;
 	}
-	
+
 	public static void BanModerator(String username) {
 		Connection con = DataSource.getInstance().getCon();
 		String query = "update User set enabled = 0 where username = ?";
@@ -341,8 +344,8 @@ public class UserCrud {
 			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-	
-	public static boolean AddModeratorToDb(Moderator u){
+
+	public static boolean AddModeratorToDb(Moderator u) {
 		Connection con = DataSource.getInstance().getCon();
 		String query = "INSERT INTO User(username,username_canonical,email,email_canonical,enabled,password,roles,lastname,firstname,phone_number) VALUES(?,?,?,?,?,?,?,?,?,?)";
 		try {
@@ -364,7 +367,7 @@ public class UserCrud {
 		}
 		return false;
 	}
-	
+
 	public static void UnbanModerator(String username) {
 		Connection con = DataSource.getInstance().getCon();
 		String query = "update User set enabled = 1 where username = ?";
@@ -375,5 +378,23 @@ public class UserCrud {
 		} catch (SQLException ex) {
 			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}
+	}
+
+	public static List<SimpleUser> searchSimpleUsers(String term) {
+		Connection con = DataSource.getInstance().getCon();
+		List users = new ArrayList<Moderator>();
+		String query = "select * from User where roles = 'ROLE_USER' and (email like '%" + term + "%' or username like '%" + term + "%' or nationality like '%" + term + "%' or firstname like '%" + term + "%' or lastname like '%" + term + "%')";
+		try {
+			Statement ste = con.createStatement();
+			ResultSet set = ste.executeQuery(query);
+			while (set.next()) {
+				SimpleUser u = new SimpleUser(set.getDate("birth_date"), set.getDate("registration_date"), set.getString("nationality"), true, set.getInt("fidelity_points"), set.getString("profile_picture"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
+				users.add(u);
+			}
+			return users;
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
 	}
 }

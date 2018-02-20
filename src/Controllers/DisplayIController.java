@@ -139,7 +139,6 @@ public class DisplayIController implements Initializable {
 		etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
 
 		ObservableList<Gallery> ol = FXCollections.observableArrayList(GalleryCrud.DisplayAll());
-		System.out.println(ol);
 		tableView.setItems(ol);
 	}
 

@@ -8,6 +8,7 @@ package Controllers;
 import Entities.SimpleUser;
 import Services.UserCrud;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
@@ -25,6 +26,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
@@ -60,7 +62,7 @@ public class UsersCrudController implements Initializable {
 	@FXML
 	private JFXButton refreshBtn;
 	@FXML
-	private TableColumn<?, ?> fidelityptsCol;
+	private JFXTextField searchfield;
 
 	/**
 	 * Initializes the controller class.
@@ -103,6 +105,35 @@ public class UsersCrudController implements Initializable {
 		banCol.setCellValueFactory(
 				new PropertyValueFactory<>("banButton"));
 		ObservableList<SimpleUser> OL = FXCollections.observableList(UserCrud.getAllSimpleUsers());
+		tvUsers.setItems(OL);
+	}
+
+	@FXML
+	private void searchItems(KeyEvent event) {
+		tvUsers.getItems().clear();
+		usernameCol.setCellValueFactory(
+				new PropertyValueFactory<>("username"));
+		EmailCol.setCellValueFactory(
+				new PropertyValueFactory<>("email"));
+		firstnameCol.setCellValueFactory(
+				new PropertyValueFactory<>("firstname"));
+		lastnameCol.setCellValueFactory(
+				new PropertyValueFactory<>("lastname"));
+		registerdateCol.setCellValueFactory(
+				new PropertyValueFactory<>("registrationdate"));
+		birthdateCol.setCellValueFactory(
+				new PropertyValueFactory<>("birthdate"));
+		//fidelityptsCol.setCellValueFactory(
+				//new PropertyValueFactory<>("fidaelitypoints"));
+		nationalityCol.setCellValueFactory(
+				new PropertyValueFactory<>("nationality"));
+		enabledCol.setCellValueFactory(
+				new PropertyValueFactory<>("enabledStatus"));
+		statusCol.setCellValueFactory(
+				new PropertyValueFactory<>("loggedinStatus"));
+		banCol.setCellValueFactory(
+				new PropertyValueFactory<>("banButton"));
+		ObservableList<SimpleUser> OL = FXCollections.observableList(UserCrud.searchSimpleUsers(searchfield.getText()));
 		tvUsers.setItems(OL);
 	}
 }

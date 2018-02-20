@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Entities.Admin;
 import Entities.Gallery;
 import Entities.Opinions;
 import Services.GalleryCrud;
@@ -117,7 +118,6 @@ public class AddImageController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				rat.setText(newValue.toString());
-				System.out.println(rat);
 			}
 		});
 		browse1.getChildren().add(rating);
@@ -203,9 +203,9 @@ public class AddImageController implements Initializable {
 		if (result.get() == ButtonType.OK) {
 			GalleryCrud g = new GalleryCrud();
 			OpinionsCrud o = new OpinionsCrud();
-			Gallery g1 = new Gallery(0, villeCombo.getValue(), Li.getText(), Dc.getText(), insertionIm.getText(), "0");
+			Gallery g1 = new Gallery(Admin.current_user.getId(), villeCombo.getValue(), Li.getText(), Dc.getText(), (String) uploadResult.get("url"), "0");
 			GalleryCrud.AddImage(g1);
-			Opinions o1 = new Opinions(0, Av.getText(), rat.getText());
+			Opinions o1 = new Opinions(Admin.current_user.getId(), Av.getText(), rat.getText());
 			OpinionsCrud.AddOpinion(o1);
 			JFXDialogLayout content = new JFXDialogLayout();
 			content.setHeading(new Text(""));

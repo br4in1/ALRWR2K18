@@ -5,7 +5,9 @@
  */
 package Services;
 
+import Entities.Admin;
 import Entities.Gallery;
+import Entities.SimpleUser;
 import Utils.DataSource;
 import static com.mysql.jdbc.Messages.getString;
 import static com.sun.javafx.fxml.expression.Expression.set;
