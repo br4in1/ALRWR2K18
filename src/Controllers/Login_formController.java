@@ -295,7 +295,7 @@ public class Login_formController implements Initializable {
 					JFXDialogLayout content = new JFXDialogLayout();
 					content.setHeading(new Text("Veuillez saisir le code que vous avez reçu sur votre boite."));
 					JFXTextField confirmation_token = new JFXTextField();
-					content.setBody(confirmation_token); 
+					content.setBody(confirmation_token);
 					JFXDialog activateAccount = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
 					activateAccount.show();
 					confirmation_token.setOnAction(new EventHandler<ActionEvent>() {
@@ -312,11 +312,6 @@ public class Login_formController implements Initializable {
 								current_username = u.getUsername();
 								SimpleUser.current_user = (SimpleUser) (u);
 								SimpleUser.current_user = UserCrud.GetMyData_SimpleUser(SimpleUser.current_user);
-								try {
-									ShowFrontEnd();
-								} catch (IOException ex) {
-									Logger.getLogger(Login_formController.class.getName()).log(Level.SEVERE, null, ex);
-								}
 							}
 						}
 					});
@@ -368,6 +363,11 @@ public class Login_formController implements Initializable {
 			toUpload.delete();
 			UserCrud.UpdateUserPhoto((String) uploadResult.get("url"), current_username);
 			SimpleUser.current_user.setProfilepicture((String) uploadResult.get("url"));
+			try {
+				ShowFrontEnd();
+			} catch (IOException ex) {
+				Logger.getLogger(Login_formController.class.getName()).log(Level.SEVERE, null, ex);
+			}
 		}
 	}
 
@@ -379,7 +379,7 @@ public class Login_formController implements Initializable {
 		Stage st = new Stage();
 		st.setScene(fbloginwindow);
 		st.show();
-		facebookBrowser.showLogin(st,this);
+		facebookBrowser.showLogin(st, this);
 	}
 
 	public void ShowFrontEnd() throws IOException {
@@ -390,8 +390,8 @@ public class Login_formController implements Initializable {
 		stage.setScene(new Scene(root));
 		stage.show();
 	}
-	
-	public void ShowDashboard() throws IOException{
+
+	public void ShowDashboard() throws IOException {
 		((Stage) (loginform.getScene().getWindow())).close();
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/Dashboard.fxml"));
 		Parent root = (Parent) fxmlLoader.load();
