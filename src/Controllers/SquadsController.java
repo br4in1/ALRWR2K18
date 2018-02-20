@@ -45,6 +45,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javax.imageio.ImageIO;
 
@@ -79,6 +80,7 @@ public class SquadsController implements Initializable {
 	double orgTranslateX, orgTranslateY;
 
 	HashMap<String, Entry<Integer, Integer>> exist;
+	HashMap<String, Entry<Integer, Integer>> exist2;
 
 	EventHandler<MouseEvent> circleOnMousePressedEventHandler
 			= new EventHandler<MouseEvent>() {
@@ -112,9 +114,12 @@ public class SquadsController implements Initializable {
 	private AnchorPane middle;
 	@FXML
 	private ImageView field;
+	@FXML
+	private TableView<Player> tablev2;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+
 		exist = new HashMap<String, Entry<Integer, Integer>>();
 		map = TeamCrud.GetNameIdMap();
 		HomeTeam.setItems(FXCollections.observableArrayList(map.keySet()));
@@ -123,12 +128,24 @@ public class SquadsController implements Initializable {
 				new PropertyValueFactory<>("position"));
 		nameHome.setCellValueFactory(
 				new PropertyValueFactory<>("fullName"));
-
+       positionAway.setCellValueFactory(
+				new PropertyValueFactory<>("position"));
+		NameAway.setCellValueFactory(
+				new PropertyValueFactory<>("fullName"));
 		HomeTeam.setOnAction((event) -> {
 			ObservableList<Player> OL = FXCollections.observableList(PlayerCrud.findPlayersByNation(map.get(HomeTeam.getSelectionModel().getSelectedItem())));
 			tablev.setItems(OL);
 			for (int i = 0; i < OL.size(); i++) {
 				exist.put(OL.get(i).getLastName(), new AbstractMap.SimpleEntry<Integer, Integer>(0, 0));
+				
+			}
+		});
+		AwayTeam.setOnAction((event) -> {
+			ObservableList<Player> OL2 = FXCollections.observableList(PlayerCrud.findPlayersByNation(map.get(AwayTeam.getSelectionModel().getSelectedItem())));
+			tablev2.setItems(OL2);
+			for (int i = 0; i < OL2.size(); i++) {
+				exist.put(OL2.get(i).getLastName(), new AbstractMap.SimpleEntry<Integer, Integer>(0, 0));
+				
 			}
 		});
 	}
@@ -136,8 +153,9 @@ public class SquadsController implements Initializable {
 	@FXML
 	private void spawn(MouseEvent event) {
 
-		Circle circle = new Circle(15.0f, Color.RED);
+		Circle circle = new Circle(30.0f, Color.RED);
 		circle.setCursor(Cursor.HAND);
+		
 		Label name = new Label(tablev.getSelectionModel().getSelectedItem().getLastName());
 		VBox playerbox = new VBox(circle, name);
 		playerbox.setId(String.valueOf(tablev.getSelectionModel().getSelectedIndex()));
@@ -145,14 +163,16 @@ public class SquadsController implements Initializable {
 		name.setAlignment(Pos.CENTER);
 		exist.get(name.getText()).setValue(tablev.getSelectionModel().getSelectedIndex());
 		if (exist.get(name.getText()).getKey() == 0) {
+			Image im = new Image("https://cc-media-foxit.fichub.com/image/fox-it-foxsports/9c0211fe-d0b1-402a-a581-199a1b8f65d3/cristiano-ronaldo-128x128.png",false);
+			circle.setFill(new ImagePattern(im));
 			playerbox.setOnMousePressed(circleOnMousePressedEventHandler);
 			playerbox.setOnMouseDragged(circleOnMouseDraggedEventHandler);
 			middle.getChildren().add(playerbox);
 			exist.put(name.getText(), new AbstractMap.SimpleEntry<Integer, Integer>(1, tablev.getSelectionModel().getSelectedIndex()));
 		}
 
-		playerbox.addEventHandler(MouseEvent.MOUSE_RELEASED, (k1) -> {
-			if ((k1.getScreenX() <= tablev.getLayoutX() + 241 + tablev.getWidth()) && k1.getScreenX() >= tablev.getLayoutX() && k1.getScreenY() <= tablev.getLayoutY() + tablev.getHeight() && k1.getScreenY() >= tablev.getLayoutY()) {
+		playerbox.addEventHandler(MouseEvent.MOUSE_CLICKED, (k1) -> {
+			if (k1.getClickCount()==2) {
 				for (Node node : middle.getChildren()) {
 					if (node.getId().equals(playerbox.getId())) {
 						for (Entry<String, Entry<Integer, Integer>> a : exist.entrySet()) {
