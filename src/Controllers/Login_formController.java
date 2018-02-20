@@ -310,6 +310,7 @@ public class Login_formController implements Initializable {
 								filename = filename.replace(" ", "_").toLowerCase();
 								countryavatar.setImage(new Image("assets/flags/" + filename + ".png"));
 								current_username = u.getUsername();
+								SimpleUser.current_user = UserCrud.getSimpleUserByUsername(current_username);
 								SimpleUser.current_user = (SimpleUser) (u);
 								SimpleUser.current_user = UserCrud.GetMyData_SimpleUser(SimpleUser.current_user);
 							}

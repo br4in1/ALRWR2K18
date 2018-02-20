@@ -44,6 +44,22 @@ public class UserCrud {
 		return false;
 	}
 
+	public static SimpleUser getSimpleUserByUsername(String username) {
+		Connection con = DataSource.getInstance().getCon();
+		String query = "select * from User where username = '" + username + "'";
+		try {
+			Statement ste = con.createStatement();
+			ResultSet set = ste.executeQuery(query);
+			if (set.next()) {
+				SimpleUser u = new SimpleUser(set.getDate("birth_date"), set.getDate("registration_date"), set.getString("nationality"), true, set.getInt("fidelity_points"), set.getString("profile_picture"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
+				return u;
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+
 	public static Boolean findUserByEmail(String email) {
 		Connection con = DataSource.getInstance().getCon();
 		String query = "select * from User where email = '" + email + "'";
