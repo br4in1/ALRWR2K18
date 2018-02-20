@@ -11,6 +11,8 @@ import Services.TeamCrud;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.io.File;
@@ -24,8 +26,11 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 /**
@@ -81,6 +86,8 @@ public class UpdateFormPlayerController implements Initializable {
     private List<String> list ;
     private List<String> Listposition = new ArrayList<String>();
     private List<Integer> listId ;
+	@FXML
+	private StackPane playerSP;
     /**
      * Initializes the controller class.
      */
@@ -103,14 +110,44 @@ public class UpdateFormPlayerController implements Initializable {
     }    
     @FXML
     private void submit(MouseEvent event) throws IOException {
-         Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap()); //profilephoto
-        Map uploadResult1 = cloudinary.uploader().upload(image2, ObjectUtils.emptyMap()); //blanketphoto
-        Map uploadResult2 = cloudinary.uploader().upload(image3, ObjectUtils.emptyMap());//Descriptionphoto
-       // PlayerCrud.addPlayer(new Player(name.getText(), lastName.getText(), Integer.parseInt(age.getText()), club.getText(), nation.getValue(), Double.parseDouble(height.getText()), Double.parseDouble(weight.getText()), position.getValue(), Integer.parseInt(goals.getText()), description.getText(), (String) uploadResult.get("url"), (String) uploadResult1.get("url"), (String) uploadResult2.get("url"), fbLink.getText(), twitterLink.getText(), Integer.parseInt(shirtNb.getText()), video.getText()));
-        // TeamCrud.updateTeam(new Team(id.getValue(),name.getText(),coach.getText(),president.getText(),area.getText(),Integer.parseInt(gamesPlayed.getText()),Integer.parseInt(goalScored.getText()),Integer.parseInt(goalAgainst.getText()),Integer.parseInt(participation.getText()),Date.valueOf(date.getValue()),wcgroupe.getText(),Integer.parseInt(win.getText()),Integer.parseInt(loose.getText()),Integer.parseInt(draw.getText()),Integer.parseInt(points.getText()),Integer.parseInt(fifarank.getText()),(String) uploadResult.get("url"),(String) uploadResult2.get("url"),(String) uploadResult1.get("url"),(String) uploadResult3.get("url"),description.getText(),website.getText(),video.getText()));
-     System.out.println(id.getValue()+ " "+" yyyyyy ");   
-        PlayerCrud.updateTeam(new Player(id.getValue(),name.getText(), lastName.getText(), Integer.parseInt(age.getText()), club.getText(), nation.getValue(), Double.parseDouble(height.getText()), Double.parseDouble(weight.getText()), position.getValue(), Integer.parseInt(goals.getText()), description.getText(), (String) uploadResult.get("url"), (String) uploadResult1.get("url"), (String) uploadResult2.get("url"), fbLink.getText(), twitterLink.getText(), Integer.parseInt(shirtNb.getText()), video.getText()));
-         
+		
+		if(id.getValue()==null)
+		{
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text("Error !"));
+			content.setBody(new Text("Please select an id"));
+			JFXDialog check_username = new JFXDialog(playerSP, content, JFXDialog.DialogTransition.CENTER);
+			check_username.show();
+		}
+		else 
+		{
+			if((height.getText().matches("(([1-9][0-9]*)|0)?(\\.[0-9]*)?") && weight.getText().matches("(([1-9][0-9]*)|0)?(\\.[0-9]*)?"))==false)
+			{
+				JFXDialogLayout content = new JFXDialogLayout();
+                               content.setHeading(new Text("Error !"));
+                               content.setBody(new Text("Height and weight have to be double !"));
+                               JFXDialog check_username = new JFXDialog(playerSP, content, JFXDialog.DialogTransition.CENTER);
+                               check_username.show();
+			}
+			else{
+				
+				Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap()); //profilephoto
+			   Map uploadResult1 = cloudinary.uploader().upload(image2, ObjectUtils.emptyMap()); //blanketphoto
+			   Map uploadResult2 = cloudinary.uploader().upload(image3, ObjectUtils.emptyMap());//Descriptionphoto
+			  // PlayerCrud.addPlayer(new Player(name.getText(), lastName.getText(), Integer.parseInt(age.getText()), club.getText(), nation.getValue(), Double.parseDouble(height.getText()), Double.parseDouble(weight.getText()), position.getValue(), Integer.parseInt(goals.getText()), description.getText(), (String) uploadResult.get("url"), (String) uploadResult1.get("url"), (String) uploadResult2.get("url"), fbLink.getText(), twitterLink.getText(), Integer.parseInt(shirtNb.getText()), video.getText()));
+			   // TeamCrud.updateTeam(new Team(id.getValue(),name.getText(),coach.getText(),president.getText(),area.getText(),Integer.parseInt(gamesPlayed.getText()),Integer.parseInt(goalScored.getText()),Integer.parseInt(goalAgainst.getText()),Integer.parseInt(participation.getText()),Date.valueOf(date.getValue()),wcgroupe.getText(),Integer.parseInt(win.getText()),Integer.parseInt(loose.getText()),Integer.parseInt(draw.getText()),Integer.parseInt(points.getText()),Integer.parseInt(fifarank.getText()),(String) uploadResult.get("url"),(String) uploadResult2.get("url"),(String) uploadResult1.get("url"),(String) uploadResult3.get("url"),description.getText(),website.getText(),video.getText()));
+			   System.out.println(id.getValue()+ " "+" yyyyyy ");   
+			   PlayerCrud.updateTeam(new Player(id.getValue(),name.getText(), lastName.getText(), Integer.parseInt(age.getText()), club.getText(), nation.getValue(), Double.parseDouble(height.getText()), Double.parseDouble(weight.getText()), position.getValue(), Integer.parseInt(goals.getText()), description.getText(), (String) uploadResult.get("url"), (String) uploadResult1.get("url"), (String) uploadResult2.get("url"), fbLink.getText(), twitterLink.getText(), Integer.parseInt(shirtNb.getText()), video.getText()));
+
+			   Alert alert = new Alert(Alert.AlertType.INFORMATION);
+					alert.setTitle("Information Dialog");
+					alert.setHeaderText("Congratulation");
+					alert.setContentText("successfully done !");
+					alert.showAndWait();
+			}
+		}
+		
+             
     }
 
     @FXML

@@ -7,12 +7,12 @@ package Controllers;
 
 import Entities.Team;
 import Services.TeamCrud;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
-import java.sql.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,15 +23,18 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
+import javafx.scene.Node;
+import java.util.List;
+import javafx.print.Printer;
+import javafx.print.PrinterJob;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
  *
  * @author Moez
  */
-public class TeamsCrudController implements Initializable {
+public class TeamsCrudController  implements Initializable {
 
     @FXML
     private TableColumn<?, ?> id;
@@ -82,6 +85,10 @@ public class TeamsCrudController implements Initializable {
 
     @FXML
     private TableView<Team> tableT;
+	
+	private List<String> list;
+	@FXML
+	private JFXComboBox<String> findName;
      
     /**
      * Initializes the controller class.
@@ -92,6 +99,9 @@ public class TeamsCrudController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
        listDisplay();
+	   list = TeamCrud.GetNamelist();
+	   findName.setItems(FXCollections.observableArrayList(list));
+
     }     
 
     @FXML
@@ -184,10 +194,193 @@ public class TeamsCrudController implements Initializable {
 		System.out.println(OL);
 		tableT.setItems(OL);
     }
+	
+	 private void listDisplaySortName()
+    {
+             
+        id.setCellValueFactory(
+            new PropertyValueFactory<>("id"));
+       name.setCellValueFactory(
+            new PropertyValueFactory<>("name"));
+       coach.setCellValueFactory(
+            new PropertyValueFactory<>("coach"));
+       president.setCellValueFactory(
+            new PropertyValueFactory<>("president"));
+       area.setCellValueFactory(
+            new PropertyValueFactory<>("area"));
+       gamesPlayed.setCellValueFactory(
+            new PropertyValueFactory<>("gamesPlayed"));
+       goalScored.setCellValueFactory(
+            new PropertyValueFactory<>("goalScored"));
+       goalAgainst.setCellValueFactory(
+            new PropertyValueFactory<>("goalAgainst"));
+       participations.setCellValueFactory(
+            new PropertyValueFactory<>("participations"));
+       fifaDate.setCellValueFactory(
+            new PropertyValueFactory<>("fifaDate"));
+       wcGroup.setCellValueFactory(
+            new PropertyValueFactory<>("wcGroup"));
+       win.setCellValueFactory(
+            new PropertyValueFactory<>("win"));
+       loose.setCellValueFactory(
+            new PropertyValueFactory<>("loose"));
+       draw.setCellValueFactory(
+            new PropertyValueFactory<>("draw"));
+        points.setCellValueFactory(
+            new PropertyValueFactory<>("points"));
+       fifaRank.setCellValueFactory(
+            new PropertyValueFactory<>("fifaRank"));
+       flagPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("flagPhoto"));
+       logoPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("logoPhoto"));
+       squadPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("squadPhoto"));
+       descriptionPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("descriptionPhoto"));
+       description.setCellValueFactory(
+            new PropertyValueFactory<>("description"));
+       website.setCellValueFactory(
+            new PropertyValueFactory<>("website"));
+       video.setCellValueFactory(
+            new PropertyValueFactory<>("video"));
+         ObservableList<Team> OL = FXCollections.observableList(TeamCrud.findAllTeamSortedByName());
+		System.out.println(OL);
+		tableT.setItems(OL);
+    }
+	 
+	  private void listDisplayGroupByArea()
+    {
+             
+        id.setCellValueFactory(
+            new PropertyValueFactory<>("id"));
+       name.setCellValueFactory(
+            new PropertyValueFactory<>("name"));
+       coach.setCellValueFactory(
+            new PropertyValueFactory<>("coach"));
+       president.setCellValueFactory(
+            new PropertyValueFactory<>("president"));
+       area.setCellValueFactory(
+            new PropertyValueFactory<>("area"));
+       gamesPlayed.setCellValueFactory(
+            new PropertyValueFactory<>("gamesPlayed"));
+       goalScored.setCellValueFactory(
+            new PropertyValueFactory<>("goalScored"));
+       goalAgainst.setCellValueFactory(
+            new PropertyValueFactory<>("goalAgainst"));
+       participations.setCellValueFactory(
+            new PropertyValueFactory<>("participations"));
+       fifaDate.setCellValueFactory(
+            new PropertyValueFactory<>("fifaDate"));
+       wcGroup.setCellValueFactory(
+            new PropertyValueFactory<>("wcGroup"));
+       win.setCellValueFactory(
+            new PropertyValueFactory<>("win"));
+       loose.setCellValueFactory(
+            new PropertyValueFactory<>("loose"));
+       draw.setCellValueFactory(
+            new PropertyValueFactory<>("draw"));
+        points.setCellValueFactory(
+            new PropertyValueFactory<>("points"));
+       fifaRank.setCellValueFactory(
+            new PropertyValueFactory<>("fifaRank"));
+       flagPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("flagPhoto"));
+       logoPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("logoPhoto"));
+       squadPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("squadPhoto"));
+       descriptionPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("descriptionPhoto"));
+       description.setCellValueFactory(
+            new PropertyValueFactory<>("description"));
+       website.setCellValueFactory(
+            new PropertyValueFactory<>("website"));
+       video.setCellValueFactory(
+            new PropertyValueFactory<>("video"));
+         ObservableList<Team> OL = FXCollections.observableList(TeamCrud.findAllTeamGroupByArea());
+		System.out.println(OL);
+		tableT.setItems(OL);
+    }
+	
+	 private void listDisplayOnce()
+    {
+             
+        id.setCellValueFactory(
+            new PropertyValueFactory<>("id"));
+       name.setCellValueFactory(
+            new PropertyValueFactory<>("name"));
+       coach.setCellValueFactory(
+            new PropertyValueFactory<>("coach"));
+       president.setCellValueFactory(
+            new PropertyValueFactory<>("president"));
+       area.setCellValueFactory(
+            new PropertyValueFactory<>("area"));
+       gamesPlayed.setCellValueFactory(
+            new PropertyValueFactory<>("gamesPlayed"));
+       goalScored.setCellValueFactory(
+            new PropertyValueFactory<>("goalScored"));
+       goalAgainst.setCellValueFactory(
+            new PropertyValueFactory<>("goalAgainst"));
+       participations.setCellValueFactory(
+            new PropertyValueFactory<>("participations"));
+       fifaDate.setCellValueFactory(
+            new PropertyValueFactory<>("fifaDate"));
+       wcGroup.setCellValueFactory(
+            new PropertyValueFactory<>("wcGroup"));
+       win.setCellValueFactory(
+            new PropertyValueFactory<>("win"));
+       loose.setCellValueFactory(
+            new PropertyValueFactory<>("loose"));
+       draw.setCellValueFactory(
+            new PropertyValueFactory<>("draw"));
+        points.setCellValueFactory(
+            new PropertyValueFactory<>("points"));
+       fifaRank.setCellValueFactory(
+            new PropertyValueFactory<>("fifaRank"));
+       flagPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("flagPhoto"));
+       logoPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("logoPhoto"));
+       squadPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("squadPhoto"));
+       descriptionPhoto.setCellValueFactory(
+            new PropertyValueFactory<>("descriptionPhoto"));
+       description.setCellValueFactory(
+            new PropertyValueFactory<>("description"));
+       website.setCellValueFactory(
+            new PropertyValueFactory<>("website"));
+       video.setCellValueFactory(
+            new PropertyValueFactory<>("video"));
+	   ObservableList<Team> OL = FXCollections.observableList(TeamCrud.findTeamByNameList(findName.getValue().toString()));
+	   
+		System.out.println(OL);
+		tableT.setItems(OL);
+    }
+	
     @FXML
     private void refreshList(MouseEvent event) {
             listDisplay();
     }
+	
+	@FXML
+		private void GroupeByArea(MouseEvent event) {
+		listDisplayGroupByArea();
+		}	
 
-    
-}
+	
+	@FXML
+	private void sortTable(MouseEvent event) {
+		listDisplaySortName();
+	}
+
+
+	@FXML
+	private void choixId(MouseEvent event) {
+		System.out.println(findName.getValue().toString());
+		listDisplayOnce();
+	}
+	}
+	
+	
+

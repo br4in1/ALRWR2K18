@@ -71,5 +71,6 @@
       </HBox>
       <JFXTextArea fx:id="description" layoutX="277.0" layoutY="357.0" prefHeight="81.0" prefWidth="239.0" promptText="Description" />
       <JFXButton layoutX="341.0" layoutY="485.0" onMouseClicked="#submit" prefHeight="38.0" prefWidth="82.0" text="Submit" />
+      <StackPane fx:id="TeamSP" layoutX="59.0" layoutY="348.0" prefHeight="150.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

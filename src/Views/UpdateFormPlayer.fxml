@@ -55,6 +55,7 @@
                </children>
             </HBox>
             <JFXTextArea fx:id="description" layoutX="257.0" layoutY="229.0" prefHeight="81.0" prefWidth="239.0" promptText="Description" />
+            <StackPane fx:id="playerSP" layoutX="58.0" layoutY="260.0" prefHeight="87.0" prefWidth="168.0" />
          </children>
       </Pane>
    </center>
