@@ -52,6 +52,7 @@
                </children>
             </HBox>
             <JFXTextArea fx:id="description" layoutX="257.0" layoutY="229.0" prefHeight="81.0" prefWidth="239.0" promptText="Description" />
+            <StackPane fx:id="TeamSP" layoutX="14.0" layoutY="238.0" prefHeight="130.0" prefWidth="209.0" />
          </children>
       </Pane>
    </center>

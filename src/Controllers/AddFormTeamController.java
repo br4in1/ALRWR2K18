@@ -8,6 +8,8 @@ import Entities.Team;
 import Services.TeamCrud;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.io.File;
@@ -16,11 +18,18 @@ import java.net.URL;
 import java.sql.Date;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.DatePicker;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -60,11 +69,14 @@ public class AddFormTeamController implements Initializable {
     @FXML
     private JFXTextArea description;
     
+    
     Cloudinary cloudinary;
     private File image; //flagphoto
     private File image2; //squadphoto
     private File image3; //logophoto
     private File image4;//descriptionphoto
+    @FXML
+    private StackPane TeamSP;
     /**
      * Initializes the controller class.
      */
@@ -76,15 +88,73 @@ public class AddFormTeamController implements Initializable {
 
     @FXML
     private void submit(MouseEvent event) throws IOException {
-        Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap()); //flagphoto
-        Map uploadResult1 = cloudinary.uploader().upload(image2, ObjectUtils.emptyMap()); //squadphoto
-        Map uploadResult2 = cloudinary.uploader().upload(image3, ObjectUtils.emptyMap());//logophoto
-        Map uploadResult3 = cloudinary.uploader().upload(image4, ObjectUtils.emptyMap());//descriptionphoto
-        //(String) uploadResult.get("url")                                                                                                                                                                                      //,`FlagPhoto`, `LogoPhoto`, `SquadPhoto`, `DescriptionPhoto`,
-        TeamCrud.addTeam(new Team(name.getText(),coach.getText(),president.getText(),area.getText(),Integer.parseInt(participation.getText()),Date.valueOf(date.getValue()),wcgroupe.getText(),Integer.parseInt(fifarank.getText()),(String) uploadResult.get("url"),(String) uploadResult2.get("url"),(String) uploadResult1.get("url"),(String) uploadResult3.get("url"),description.getText(),website.getText(),video.getText()));
-      // TeamCrud.addTeam(new Team(name.getText(),coach.getText(),president.getText(),area.getText(),Integer.parseInt(participation.getText()),Date.valueOf(date.getValue()),wcgroupe.getText(),Integer.parseInt(fifarank.getText()),flagphoto.getText(),logophoto.getText(),squadphoto.getText(),descriptionphoto.getText(),description.getText(),website.getText(),video.getText()));
-    
-    
+     // Notifications.create().title("kkk").text("success").show(); 
+	  
+        //(String) uploadResult.get("url")           
+        //,`FlagPhoto`, `LogoPhoto`, `SquadPhoto`, `DescriptionPhoto`,
+        
+        //condition on the existance of the team's name 
+        
+       // if(name.getText().trim()==null && coach.getText()==null && president.getText()==null && area.getText()==null && participation.getText()==null && date.getValue()== null && wcgroupe.getText()==null && fifarank.getText()==null && uploadResult.get("url")==null && uploadResult2.get("url")==null && uploadResult1.get("url")==null && uploadResult3.get("url")==null && description.getText()==null && website.getText()==null&& video.getText()==null)
+       if(name.getText().trim().isEmpty() || coach.getText().trim().isEmpty() || president.getText().trim().isEmpty() || area.getText().trim().isEmpty() || participation.getText().trim().isEmpty()   || date.getValue()==null || wcgroupe.getText().trim().isEmpty()  || fifarank.getText().trim().isEmpty()    || flagphoto.getText().trim().isEmpty() || logophoto.getText().trim().isEmpty() || squadphoto.getText().trim().isEmpty() || descriptionphoto.getText().trim().isEmpty() || description.getText().trim().isEmpty() || video.getText().trim().isEmpty() )
+       {
+            JFXDialogLayout content = new JFXDialogLayout();
+                               content.setHeading(new Text("Error !"));
+                               content.setBody(new Text("Please fill all the fields !"));
+                               JFXDialog check_username = new JFXDialog(TeamSP, content, JFXDialog.DialogTransition.CENTER);
+                               check_username.show();
+        } 
+       else {
+            if((participation.getText().matches("[0-9]*") && fifarank.getText().matches("[0-9]*"))==false)
+            {//f || t
+                 JFXDialogLayout content = new JFXDialogLayout();
+                               content.setHeading(new Text("Error !"));
+                               content.setBody(new Text("Participations and fifa rank have to be numbers !"));
+                               JFXDialog check_username = new JFXDialog(TeamSP, content, JFXDialog.DialogTransition.CENTER);
+                               check_username.show();
+            }
+            else
+            {
+               Boolean ok = TeamCrud.findTeamByName(name.getText());
+                if(ok)
+                   {
+                       JFXDialogLayout content = new JFXDialogLayout();
+                                   content.setHeading(new Text("Error !"));
+                                   content.setBody(new Text("Sorry, this team's name already exist !"));
+                                   JFXDialog check_username = new JFXDialog(TeamSP, content, JFXDialog.DialogTransition.CENTER);
+                                   check_username.show();
+                    }
+                   else 
+                   {
+                       Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap()); //flagphoto
+                       Map uploadResult1 = cloudinary.uploader().upload(image2, ObjectUtils.emptyMap()); //squadphoto
+                       Map uploadResult2 = cloudinary.uploader().upload(image3, ObjectUtils.emptyMap());//logophoto
+                       Map uploadResult3 = cloudinary.uploader().upload(image4, ObjectUtils.emptyMap());//descriptionphoto
+                       TeamCrud.addTeam(new Team(name.getText(),coach.getText(),president.getText(),area.getText(),Integer.parseInt(participation.getText()),Date.valueOf(date.getValue()),wcgroupe.getText(),Integer.parseInt(fifarank.getText()),(String) uploadResult.get("url"),(String) uploadResult2.get("url"),(String) uploadResult1.get("url"),(String) uploadResult3.get("url"),description.getText(),website.getText(),video.getText()));
+                 // TeamCrud.addTeam(new Team(name.getText(),coach.getText(),president.getText(),area.getText(),Integer.parseInt(participation.getText()),Date.valueOf(date.getValue()),wcgroupe.getText(),Integer.parseInt(fifarank.getText()),flagphoto.getText(),logophoto.getText(),squadphoto.getText(),descriptionphoto.getText(),description.getText(),website.getText(),video.getText()));
+				
+	  
+	  Notifications notificationBuilder = 
+					 Notifications.create().title("Avertissment")
+					.text("Votre team  a été ajouter avec succes ") 
+					.hideAfter(Duration.seconds(15))
+					.position(Pos.TOP_RIGHT) 
+							.onAction((ActionEvent event1) -> {
+								// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+								System.out.println("Clicked on notification !");
+	  }) ;
+							
+						  notificationBuilder.showInformation();
+					///
+					
+					/////
+					
+                   } 
+            }
+            
+            
+        }
+        
     } 
    //String name, String coach, String president, String area,int participations, Date fifaDate, String wcGroup,                           int fifaRank, String flagPhoto, String logoPhoto, String squadPhoto, String descriptionPhoto, String description, String website, String video
     @FXML

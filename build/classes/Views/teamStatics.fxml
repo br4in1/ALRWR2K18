@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.embed.swing.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.chart.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
@@ -8,11 +11,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="463.0" prefWidth="653.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controllers.TeamStaticsController">
+<AnchorPane id="AnchorPane" fx:id="view" prefHeight="569.0" prefWidth="653.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TeamStaticsController">
     <stylesheets>
         <URL value="@teamstatics.css" />
     </stylesheets>
    <children>
+      <SwingNode fx:id="staticSwigNode" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="100.0" />
       <PieChart fx:id="pieChart" layoutX="83.0" layoutY="14.0" title="Team Statics" />
+      <JFXButton fx:id="screen" layoutX="408.0" layoutY="500.0" onAction="#doScreen" text="Take a screen shot" />
+      <JFXComboBox fx:id="id" layoutX="112.0" layoutY="500.0" onAction="#ChoixChart" promptText="Select an id" />
    </children>
 </AnchorPane>
