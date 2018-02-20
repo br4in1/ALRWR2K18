@@ -137,9 +137,9 @@ private List<Integer> list;
 		plot.setSectionPaint("Loose", Color.getHSBColor(120, 81, 89));
 		//plot.setSectionPaint("Loose", Color.getHSBColor(100, 100, 100));
 		
-		plot.setDefaultSectionOutlinePaint(Color.WHITE);
+	//	plot.setDefaultSectionOutlinePaint(Color.WHITE);
 		plot.setSectionOutlinesVisible(true);
-		plot.setDefaultSectionOutlineStroke(new BasicStroke(2.0f));
+	//	plot.setDefaultSectionOutlineStroke(new BasicStroke(2.0f));
 
 
 		// add a subtitle giving the data source

@@ -9,6 +9,10 @@ import Entities.Team;
 import Services.TeamCrud;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.sun.rowset.internal.Row;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -25,9 +29,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import java.util.List;
+import javafx.application.Platform;
 import javafx.print.Printer;
 import javafx.print.PrinterJob;
 import javafx.stage.StageStyle;
+import jxl.Sheet;
+import jxl.Workbook;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+//import org.apache.poi.ss.usermodel.Row;
+
 
 /**
  * FXML Controller class
@@ -359,8 +371,30 @@ public class TeamsCrudController  implements Initializable {
     }
 	
     @FXML
-    private void refreshList(MouseEvent event) {
+    private void refreshList(MouseEvent event) throws FileNotFoundException, IOException {
             listDisplay();
+			HSSFWorkbook workbook = new HSSFWorkbook(); 
+			HSSFSheet spreadsheet = workbook.createSheet("sample");
+				HSSFRow row = spreadsheet.createRow(0);
+				
+				for (int j = 0; j < tableT.getColumns().size(); j++) {
+            row.createCell(j).setCellValue(tableT.getColumns().get(j).getText());
+        }
+				for (int i = 0; i < tableT.getItems().size(); i++) {
+            row = spreadsheet.createRow(i + 1);
+            for (int j = 0; j < tableT.getColumns().size(); j++) {
+                if(tableT.getColumns().get(j).getCellData(i) != null) { 
+                    row.createCell(j).setCellValue(tableT.getColumns().get(j).getCellData(i).toString()); 
+                }
+                else {
+                    row.createCell(j).setCellValue("");
+                }   
+            }
+        }
+				
+				FileOutputStream fileOut = new FileOutputStream("workbook.xls");
+			 workbook.write(fileOut);
+			 fileOut.close();
     }
 	
 	@FXML
