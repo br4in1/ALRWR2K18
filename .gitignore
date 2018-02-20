@@ -46,3 +46,4 @@ nbproject/private/private.xml
 /dist/
 !/src/Libraries/jxl.jar
 .DS_Store
+!/src/Libraries/poi-3.7.jar
