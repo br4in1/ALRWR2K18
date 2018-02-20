@@ -153,14 +153,9 @@ public class DisplayIController implements Initializable {
 		String id1 = Integer.toString(g.getId());
 		iD.setText(id1);
 		
-        File file = new File(g.getImage());
-        
-        try {
-            Image im = new Image(file.toURI().toURL().toExternalForm());
-            img_view.setImage(im);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(DisplayIController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+		// File file = new File(g.getImage());
+		Image im = new Image(g.getImage());
+		img_view.setImage(im);
         
 
 	}
@@ -198,6 +193,7 @@ public class DisplayIController implements Initializable {
 	   }
    });
    notificationBuilder.showError();
+   Id.setText("");
 	}
 
 	@FXML
@@ -216,6 +212,8 @@ public class DisplayIController implements Initializable {
         afficher();
 		changeStat();
 		}
+	iD.setText("");
+	Etat.setText("");
 	}
 
 	@FXML

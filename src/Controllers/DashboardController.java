@@ -100,7 +100,7 @@ public class DashboardController implements Initializable {
 			manageGallery = FXMLLoader.load(getClass().getResource("/Views/DisplayI.fxml"));
 			show1 = FXMLLoader.load(getClass().getResource("/Views/Showall.fxml"));
 			show2 = FXMLLoader.load(getClass().getResource("/Views/DisplayO.fxml"));
-			//show3 = FXMLLoader.load(getClass().getResource("/Views/chartP.fxml"));
+			show3 = FXMLLoader.load(getClass().getResource("/Views/chartP.fxml"));
 			GalleryBox = FXMLLoader.load(getClass().getResource("/Views/GalleryBox.fxml"));
 
 			for (Node node : teamBox.getChildren()) {
@@ -163,7 +163,7 @@ public class DashboardController implements Initializable {
 							setContentNode(show2);
 							break;
 						case "stat":
-							//setContentNode(show3);
+							setContentNode(show3);
 							break;
 
 					}

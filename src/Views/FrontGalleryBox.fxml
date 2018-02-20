@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="284.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontGalleryBoxController">
+	<stylesheets>
+		<URL value="@frontuserbox.css" />
+	</stylesheets>
+   <children>
+      <VBox prefHeight="700.0" prefWidth="284.0">
+         <children>
+            <Label fx:id="AddPhoto" onMouseEntered="#highlightAdd" onMouseExited="#unhighlightAdd" prefHeight="43.0" prefWidth="233.0" text="Ajouter une image dans la galerie" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets left="30.0" right="30.0" top="50.0" />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets left="10.0" />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <cursor>
+                 <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label fx:id="ShowImage" contentDisplay="CENTER" layoutX="40.0" layoutY="60.0" onMouseEntered="#highlightConsulter" onMouseExited="#unhighlighConsulter" prefHeight="43.0" prefWidth="233.0" text="Cosulter la galerie" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets left="30.0" right="30.0" top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label fx:id="myPhotos" contentDisplay="CENTER" layoutX="40.0" layoutY="166.0" onMouseEntered="#highlightConsulter2" onMouseExited="#unhighlightConsulter2" prefHeight="43.0" prefWidth="233.0" text="Consulter mes photos" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets left="30.0" right="30.0" top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

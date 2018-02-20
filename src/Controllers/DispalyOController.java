@@ -29,6 +29,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -65,6 +66,8 @@ public class DispalyOController implements Initializable {
 	private JFXButton supprimer;
 	@FXML
 	private LineChart<String, Integer> line;
+	@FXML
+	private JFXButton actualiser;
 
 	/**
 	 * Initializes the controller class.
@@ -72,7 +75,13 @@ public class DispalyOController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		affichage();
-		XYChart.Series<String, Integer> series = new XYChart.Series<>();
+		
+
+	
+	}
+	public void changeStat1()
+		{
+			XYChart.Series<String, Integer> series = new XYChart.Series<>();
 		HashMap<Integer, String> data;
 
 		try {
@@ -85,7 +94,7 @@ public class DispalyOController implements Initializable {
 		} catch (SQLException ex) {
 			Logger.getLogger(DispalyOController.class.getName()).log(Level.SEVERE, null, ex);
 		}
-	}
+		}
 
 	public void affichage() {
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -125,10 +134,17 @@ public class DispalyOController implements Initializable {
 			alert.setTitle("Information ");
 			alert.setHeaderText(null);
 			alert.setContentText("Suppression effectué !");
-			alert.show();
+			alert.show();			
 			affichage();
-			//changeStat();
+			changeStat1();
 		}
+		Id.setText(null);
+	}
+
+	@FXML
+	private void Actu(ActionEvent event) {
+		    affichage();
+			changeStat1();
 	}
 
 }

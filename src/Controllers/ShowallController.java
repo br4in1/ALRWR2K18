@@ -81,7 +81,7 @@ public class ShowallController implements Initializable {
 
 		int y = 1;
 		List<Gallery> Liste = g.DisplayAll();
-
+		anch.getChildren().clear();
 		for (int i = 0; i < Liste.size(); i++) {
 
 			if ("1".equals(Liste.get(i).getEtat())) {
@@ -126,7 +126,7 @@ public class ShowallController implements Initializable {
 				Rating rating = new Rating();
 				rating.setOrientation(Orientation.VERTICAL);
 
-				img2.setId("" + Liste.get(i).getId() + " " + Liste.get(i).getVille());
+				img2.setId("" + Liste.get(i).getId() + "" + Liste.get(i).getVille());
 				img2.setOnMouseClicked(new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent event2) {
@@ -139,8 +139,7 @@ public class ShowallController implements Initializable {
 							img2.setFitWidth(145 * 1.5);
 							img2.setFitHeight(145 * 1.5);
 							img2.setStyle("-fx-border-color: BLACK");
-							//a1.setText("Vous avez likeer");
-							//a3.setVisible(false);
+							
 							Image im1 = new Image("/Views/like.png");
 							double y = img2.getLayoutX() - 50;
 							ImageView img3 = new ImageView(im1);

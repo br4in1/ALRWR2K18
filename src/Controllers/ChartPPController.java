@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Services.GalleryCrud;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -16,6 +17,9 @@ import java.awt.GradientPaint;
 import java.awt.Point;
 import java.awt.RadialGradientPaint;
 import java.awt.geom.Point2D;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.embed.swing.SwingNode;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -30,10 +34,10 @@ import org.jfree.data.general.PieDataset;
  *
  * @author dell
  */
-public class ChartPController implements Initializable {
+public class ChartPPController implements Initializable {
 
 	@FXML
-	private SwingNode swing1;
+	private SwingNode swing2;
 
 	/**
 	 * Initializes the controller class.
@@ -42,11 +46,16 @@ public class ChartPController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
 
-		PieDataset dataset = createDataset();
+		PieDataset dataset = null;
+		try {
+			dataset = createDataset();
+		} catch (SQLException ex) {
+			Logger.getLogger(ChartPPController.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		JFreeChart chart = createChart(dataset);
 		//	ChartViewer viewer = new ChartViewer(chart);
 		//grid.add(imageHouse, 0, 0, 1, 2);
-		swing1.setContent(
+		swing2.setContent(
 				new ChartPanel(
 						createChart(dataset)
 				)
@@ -54,23 +63,28 @@ public class ChartPController implements Initializable {
 
 	}
 
-	private static PieDataset createDataset() {
+	private static PieDataset createDataset() throws SQLException {
+		GalleryCrud g = new GalleryCrud();
+       int x = 0;
+	   int y=0;
+			x = g.returnEtat0();
+			y = g.returnEtat1();
+		
 		DefaultPieDataset dataset = new DefaultPieDataset();
-		dataset.setValue("Win", new Double(27.8));
-		dataset.setValue("Others", new Double(55.3));
-		dataset.setValue("Loose", new Double(16.8));
-		dataset.setValue("Draw", new Double(17.1));
+		dataset.setValue("Etat (0)", new Double(x));
+		dataset.setValue("Etat (1) ", new Double(y));
 		return dataset;
 	}
 
 	private static JFreeChart createChart(PieDataset dataset) {
-
+		
+        
 		JFreeChart chart = ChartFactory.createPieChart(
-				"Smart Phones Manufactured / Q3 2011", dataset);
+				"", dataset);
 
 		// set a custom background for the chart
 		chart.setBackgroundPaint(new GradientPaint(new Point(0, 0),
-				new Color(20, 20, 20), new Point(400, 200), Color.DARK_GRAY));
+				new Color(20, 20, 20), new Point(400, 200), Color.WHITE));
 
 		// customise the title position and font
 		TextTitle t = chart.getTitle();
@@ -86,8 +100,7 @@ public class ChartPController implements Initializable {
 		// use gradients and white borders for the section colours
 		plot.setSectionPaint("Others", createGradientPaint(new Color(200, 200, 255), Color.BLUE));
 		plot.setSectionPaint("Win", createGradientPaint(new Color(255, 200, 200), Color.RED));
-		plot.setSectionPaint("Draw", createGradientPaint(new Color(200, 255, 200), Color.GREEN));
-		plot.setSectionPaint("Loose", createGradientPaint(new Color(200, 255, 200), Color.YELLOW));
+		
 
 		//plot.setDefaultSectionOutlinePaint(Color.WHITE);
 		plot.setSectionOutlinesVisible(true);
@@ -102,7 +115,7 @@ public class ChartPController implements Initializable {
 		plot.setLabelBackgroundPaint(null);
 
 		// add a subtitle giving the data source
-		TextTitle source = new TextTitle("Source: http://www.bbc.co.uk/news/business-15489523",
+		TextTitle source = new TextTitle("Stat sur les états des images postés",
 				new Font("Courier New", Font.PLAIN, 12));
 		source.setPaint(Color.WHITE);
 //        source.setPosition(RectangleEdge.BOTTOM);

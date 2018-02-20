@@ -20,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -49,7 +50,8 @@ public class FrontEndController implements Initializable {
 	@FXML
 	private Circle profilepic;
 	private String current_page;
-	AnchorPane userBox;
+	AnchorPane userBox,gallerybox;
+	Pane  add;
 	@FXML
 	private AnchorPane sidebar;
 	@FXML
@@ -60,6 +62,14 @@ public class FrontEndController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		
+		
+		try {
+			add = FXMLLoader.load(getClass().getResource("/Views/AddImage.fxml"));
+		} catch (IOException ex) {
+			Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	
 		current_page = "home";
 		homebutton.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
 		firstlastname.setText(SimpleUser.current_user.getUsername());
@@ -72,6 +82,27 @@ public class FrontEndController implements Initializable {
 					switch (node.getId()) {
 						case "myProfile":
 							//setContentNode(content);
+							break;
+						case "editData":
+							//setContentNode(teams);
+							break;
+						case "favoris":
+							//setContentNode(teamStatics);
+							break;
+						case "myPhotos":
+							//setContentNode(players);
+							break;
+
+					}
+				});
+			}
+			gallerybox = FXMLLoader.load(getClass().getResource("/Views/FrontGalleryBox.fxml"));
+			for (Node node : gallerybox.getChildren()) {
+				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
+					switch (node.getId()) {
+						case "AddPhoto":
+							System.out.println("aa");
+							setContentNav(add);
 							break;
 						case "editData":
 							//setContentNode(teams);
@@ -202,5 +233,13 @@ public class FrontEndController implements Initializable {
 		teamsbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
 		homebutton.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
 		fixturesbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+	}
+
+	@FXML
+	private void GalerieCliked(MouseEvent event) throws IOException {
+		unhighlightAll();
+		current_page = "gallery";
+		gallerybox = FXMLLoader.load(getClass().getResource("/Views/FrontGalleryBox.fxml"));
+		setNavNode(gallerybox);
 	}
 }
