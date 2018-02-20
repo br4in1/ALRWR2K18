@@ -9,17 +9,24 @@ import Entities.Article;
 import Entities.Game;
 import Services.ArticleCrud;
 import Services.GameCrud;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
+import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.javafx.webkit.Accessor;
+import com.sun.webkit.WebPage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
@@ -33,12 +40,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.web.HTMLEditor;
+import javafx.scene.web.WebView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javax.mail.Message;
@@ -61,8 +71,6 @@ public class AjouterArticleController implements Initializable {
     @FXML
     private HTMLEditor contenu;
     @FXML
-    private JFXTextField tfAuteurId;
-    @FXML
     private JFXButton btAjouter;
     @FXML
     private JFXComboBox<String> typeEntite;
@@ -74,12 +82,18 @@ public class AjouterArticleController implements Initializable {
     private JFXCheckBox checkPublier;
     @FXML
     private JFXButton btSendMail;
+    @FXML
+    private JFXButton btAjouterImage;
+
+    Cloudinary cloudinary;
+    private File image;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        cloudinary = new Cloudinary("cloudinary://187685892358282:rL27N346tuXqVQyA5sR1oDLFJag@pidev");
         ObservableList<String> entitesList = FXCollections.observableArrayList("Match", "Joueur", "Equipe", "Evenement", "Stade", "None");
         typeEntite.setItems(entitesList);
 
@@ -142,10 +156,10 @@ public class AjouterArticleController implements Initializable {
 
     @FXML
     private void ajouterArticle(MouseEvent event) {
-        if (idEntite.getValue() == null || contenu.getHtmlText() == null || contenu.getHtmlText().equals("") || tfAuteurId.getText().equals("") || tfAuteurId.getText() == null || tfTitre.getText().equals("") || tfTitre.getText() == null || !checkPublier.isSelected()) {
+        if (idEntite.getValue() == null || contenu.getHtmlText() == null || contenu.getHtmlText().equals("") || tfTitre.getText().equals("") || tfTitre.getText() == null || !checkPublier.isSelected()) {
             showDialog("Error", "Veuillez verifier que vous avez remplis tous les champs");
         } else {
-            Article a = new Article(1, tfTitre.getText(), contenu.getHtmlText(), idEntite.getValue().getId(), typeEntite.getValue(), new Date(Calendar.getInstance().getTime().getTime()), null, Integer.parseInt(tfAuteurId.getText()));
+            Article a = new Article(1, tfTitre.getText(), contenu.getHtmlText(), idEntite.getValue().getId(), typeEntite.getValue(), new Date(Calendar.getInstance().getTime().getTime()), null, 1);
             if (ArticleCrud.getRepository().add(a)) {
                 showDialog("Success", "Votre articles a ete ajouter avec success");
 
@@ -192,6 +206,20 @@ public class AjouterArticleController implements Initializable {
         controller.setTitle(tfTitre.getText());
         primaryStage.show();
 
+    }
+
+    @FXML
+    private void addImageClicked(MouseEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisir une photo");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+        image = fileChooser.showOpenDialog(null);
+        if (image != null) {
+            Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap());
+            WebView webView = (WebView) contenu.lookup(".web-view");
+            WebPage webPage = Accessor.getPageFor(webView.getEngine());
+            webPage.executeCommand("insertHTML", "<img src=" + uploadResult.get("url") + " width=200 height=200 />");
+        }
     }
 
 }
