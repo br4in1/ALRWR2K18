@@ -228,6 +228,12 @@ public class Player {
 	{
 		return name+" "+lastName;
 	}
+
+	@Override
+	public String toString() {
+		return "Player{" + "id=" + id + ", name=" + name + ", lastName=" + lastName + ", age=" + age + ", club=" + club + ", nation=" + nation + ", height=" + height + ", weight=" + weight + ", position=" + position + ", goals=" + goals + ", description=" + description + ", profilePhoto=" + profilePhoto + ", blanketPhoto=" + blanketPhoto + ", descriptionPhoto=" + descriptionPhoto + ", fbLink=" + fbLink + ", twitterLink=" + twitterLink + ", shirtNb=" + shirtNb + ", video=" + video + '}';
+	}
+	
     
 }
     

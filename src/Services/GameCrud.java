@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import Entities.Game;
 import Utils.DataSource;
+import com.sun.rowset.internal.Row;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -63,7 +64,23 @@ public class GameCrud {
 				g.setId(set.getInt("id"));
 				result.add(g);
 			}
+			return result;
+		} catch (SQLException ex) {
+			Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
 
+	public static List<Date> findDatesByTeams(int team1, int team2) {
+		Connection con = DataSource.getInstance().getCon();
+		List result = new ArrayList<Date>();
+		String strSQLQuery = String.format("select date from game where HomeTeam= %s and awayTeam= %s", team1, team2);
+		try {
+			Statement ste = con.createStatement();
+			ResultSet set = ste.executeQuery(strSQLQuery);
+			while (set.next()) {
+				result.add(set.getDate("Date"));
+			}
 			System.out.println(result);
 			return result;
 		} catch (SQLException ex) {
@@ -75,7 +92,6 @@ public class GameCrud {
 	public static void update(String row, String value, int id) {
 		Connection con = DataSource.getInstance().getCon();
 		String strSQLQuery = String.format("update game set %s = '%s' where id=%s", row, value, id);
-		System.out.println(strSQLQuery);
 		try {
 			PreparedStatement ste = con.prepareStatement(strSQLQuery);
 			ste.executeUpdate();
@@ -105,6 +121,21 @@ public class GameCrud {
 		try {
 
 			PreparedStatement ste = con.prepareStatement(strSQLQuery);
+			ste.executeUpdate();
+
+		} catch (SQLException ex) {
+			Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
+	public static void updateSquad(String row, String value, Date date) {
+		Connection con = DataSource.getInstance().getCon();
+		String strSQLQuery = String.format("update game set %s = '%s' where date=?", row, value);
+		System.out.println(strSQLQuery);
+		try {
+
+			PreparedStatement ste = con.prepareStatement(strSQLQuery);
+			ste.setDate(1, date);
 			ste.executeUpdate();
 
 		} catch (SQLException ex) {

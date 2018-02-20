@@ -9,6 +9,7 @@ import Entities.Game;
 import Services.GameCrud;
 import Services.StadiumCrud;
 import Services.TeamCrud;
+import Views.main;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXComboBox;
@@ -26,7 +27,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 
 /**
@@ -58,6 +61,10 @@ public class AddFormController implements Initializable {
 	private HashMap<String, Integer> map2;
 	Cloudinary cloudinary;
 	private File image;
+	@FXML
+	private BorderPane main;
+	@FXML
+	private Label error;
 
 	/**
 	 * Initializes the controller class.
@@ -74,8 +81,12 @@ public class AddFormController implements Initializable {
 
 	@FXML
 	private void submit(MouseEvent event) throws IOException {
-		Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap());
-		GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), String.valueOf(map1.get(HomeTeam.getSelectionModel().getSelectedItem())), String.valueOf(map1.get(AwayTeam.getSelectionModel().getSelectedItem())), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"),Highlights.getText(), Referee.getText()));
+			if (HomeTeam.getSelectionModel().getSelectedItem() == AwayTeam.getSelectionModel().getSelectedItem()) {
+				error.setText("Cannot Have a game with both teams the same");
+			} else {
+				Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap());
+				GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), String.valueOf(map1.get(HomeTeam.getSelectionModel().getSelectedItem())), String.valueOf(map1.get(AwayTeam.getSelectionModel().getSelectedItem())), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"), Highlights.getText(), Referee.getText()));
+			}
 		
 	}
 

@@ -6,8 +6,11 @@
 package Controllers;
 
 import Entities.Player;
+import Services.GameCrud;
 import Services.PlayerCrud;
 import Services.TeamCrud;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXComboBox;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -17,9 +20,18 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.security.SecureRandom;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +45,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -55,7 +68,7 @@ import javax.imageio.ImageIO;
  * @author simo
  */
 public class SquadsController implements Initializable {
-
+Cloudinary cloudinary;
 	@FXML
 	private Pane pane;
 	@FXML
@@ -128,7 +141,7 @@ public class SquadsController implements Initializable {
 				new PropertyValueFactory<>("position"));
 		nameHome.setCellValueFactory(
 				new PropertyValueFactory<>("fullName"));
-       positionAway.setCellValueFactory(
+		positionAway.setCellValueFactory(
 				new PropertyValueFactory<>("position"));
 		NameAway.setCellValueFactory(
 				new PropertyValueFactory<>("fullName"));
@@ -137,7 +150,7 @@ public class SquadsController implements Initializable {
 			tablev.setItems(OL);
 			for (int i = 0; i < OL.size(); i++) {
 				exist.put(OL.get(i).getLastName(), new AbstractMap.SimpleEntry<Integer, Integer>(0, 0));
-				
+
 			}
 		});
 		AwayTeam.setOnAction((event) -> {
@@ -145,17 +158,17 @@ public class SquadsController implements Initializable {
 			tablev2.setItems(OL2);
 			for (int i = 0; i < OL2.size(); i++) {
 				exist.put(OL2.get(i).getLastName(), new AbstractMap.SimpleEntry<Integer, Integer>(0, 0));
-				
+
 			}
 		});
 	}
 
 	@FXML
 	private void spawn(MouseEvent event) {
-
-		Circle circle = new Circle(30.0f, Color.RED);
+		System.out.println("/assets/Players/'" + tablev.getSelectionModel().getSelectedItem().getName() + "'_'" + tablev.getSelectionModel().getSelectedItem().getLastName() + "'.png");
+		Circle circle = new Circle(20.0f, Color.RED);
 		circle.setCursor(Cursor.HAND);
-		
+
 		Label name = new Label(tablev.getSelectionModel().getSelectedItem().getLastName());
 		VBox playerbox = new VBox(circle, name);
 		playerbox.setId(String.valueOf(tablev.getSelectionModel().getSelectedIndex()));
@@ -163,7 +176,8 @@ public class SquadsController implements Initializable {
 		name.setAlignment(Pos.CENTER);
 		exist.get(name.getText()).setValue(tablev.getSelectionModel().getSelectedIndex());
 		if (exist.get(name.getText()).getKey() == 0) {
-			Image im = new Image("https://cc-media-foxit.fichub.com/image/fox-it-foxsports/9c0211fe-d0b1-402a-a581-199a1b8f65d3/cristiano-ronaldo-128x128.png",false);
+			Image im;
+			im = new Image(String.format("/assets/Players/%s_%s.png", tablev.getSelectionModel().getSelectedItem().getName(), tablev.getSelectionModel().getSelectedItem().getLastName()));
 			circle.setFill(new ImagePattern(im));
 			playerbox.setOnMousePressed(circleOnMousePressedEventHandler);
 			playerbox.setOnMouseDragged(circleOnMouseDraggedEventHandler);
@@ -172,7 +186,7 @@ public class SquadsController implements Initializable {
 		}
 
 		playerbox.addEventHandler(MouseEvent.MOUSE_CLICKED, (k1) -> {
-			if (k1.getClickCount()==2) {
+			if (k1.getClickCount() == 2) {
 				for (Node node : middle.getChildren()) {
 					if (node.getId().equals(playerbox.getId())) {
 						for (Entry<String, Entry<Integer, Integer>> a : exist.entrySet()) {
@@ -191,23 +205,35 @@ public class SquadsController implements Initializable {
 	}
 
 	@FXML
-	private void snap(MouseEvent event) {
-		
-				BufferedImage bufferedImage = new BufferedImage(550, 400, BufferedImage.TYPE_INT_ARGB);
-				File file = new File("/Users/simo/Desktop/myfile.png");
-			WritableImage snapshot =middle.snapshot(new SnapshotParameters(),null);
-			BufferedImage image;
-    image = javafx.embed.swing.SwingFXUtils.fromFXImage(snapshot, bufferedImage);
-    try {
-        Graphics2D gd = (Graphics2D) image.getGraphics();
-        gd.translate(middle.getWidth(), middle.getHeight());
-        ImageIO.write(image, "png", file);
-    } catch (IOException ex) {
-        Logger.getLogger(SquadsController.class.getName()).log(Level.SEVERE, null, ex);
-    };
-  }
-			
-		
-	
+	private void snap(MouseEvent event) throws IOException, ParseException {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+		List<String> choices = new ArrayList<>();
+		List<Date> dates = new ArrayList<>(GameCrud.findDatesByTeams(map.get(HomeTeam.getSelectionModel().getSelectedItem()),map.get(AwayTeam.getSelectionModel().getSelectedItem())));
+		for (Date date : dates) {
+			choices.add(formatter.format(date));
+		}
+		ChoiceDialog<String> dialog = new ChoiceDialog<>("Date", choices);
+		dialog.setTitle("Choose a game");
+		dialog.setContentText("Game Date:");
 
+		Optional<String> result = dialog.showAndWait();
+		if (result.isPresent()){
+
+		BufferedImage bufferedImage = new BufferedImage(550, 400, BufferedImage.TYPE_INT_ARGB);
+		File file = new File("/Users/simo/Desktop/myfile.png");
+		WritableImage snapshot = middle.snapshot(new SnapshotParameters(), null);
+		BufferedImage image;
+		image = javafx.embed.swing.SwingFXUtils.fromFXImage(snapshot, bufferedImage);
+		try {
+			Graphics2D gd = (Graphics2D) image.getGraphics();
+			gd.translate(middle.getWidth(), middle.getHeight());
+			ImageIO.write(image, "png", file);	
+		//	Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+			GameCrud.updateSquad("Squads",file.getAbsolutePath(), (Date) Date.valueOf(result.get()));
+		} catch (IOException ex) {
+			Logger.getLogger(SquadsController.class.getName()).log(Level.SEVERE, null, ex);
+		};
+	}
+	}
 }

@@ -253,6 +253,23 @@ public class TeamCrud {
 		}
 		return null;
 	}
+	public static HashMap<String,Integer> GetDateIdMap(){
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		Connection con = DataSource.getInstance().getCon();
+		String query = "SELECT id,date from team";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+			ResultSet set = ste.executeQuery();
+			while (set.next()) {
+			//	map.put(set.date, set.getInt("id"));
+			}
+			return map;
+		} catch (SQLException ex) {
+			Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+
+		}
+		return null;
+	}
         public static List<Integer> GeIdlist(){
 		
                 List<Integer> list = new ArrayList<>();
