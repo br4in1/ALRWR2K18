@@ -71,7 +71,7 @@ public class FrontEndController implements Initializable {
 				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
 					switch (node.getId()) {
 						case "myProfile":
-							setContentNode(content);
+							//setContentNode(content);
 							break;
 						case "editData":
 							//setContentNode(teams);
