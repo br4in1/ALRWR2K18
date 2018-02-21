@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
@@ -42,10 +43,17 @@ public class DashboardController implements Initializable {
     private Pane main;
     AnchorPane games;
     VBox tournementBox;
-    
+
     VBox articlesBox;
+    VBox newslettersBox;
     AnchorPane ajouterArticle;
     AnchorPane consulterArticles;
+
+    AnchorPane ajouterNewsletter;
+    AnchorPane consulterNewsletter;
+    @FXML
+    private JFXButton Articles;
+
     /**
      * Initializes the controller class.
      */
@@ -82,10 +90,14 @@ public class DashboardController implements Initializable {
 
             tournementBox = FXMLLoader.load(getClass().getResource("/Views/tournementBox.fxml"));
             games = FXMLLoader.load(getClass().getResource("/Views/GamesCrud.fxml"));
-           
+
             articlesBox = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/articleBox.fxml"));
+            newslettersBox = FXMLLoader.load(getClass().getResource("/Views/GestionNewsletters/newslettersBox.fxml"));
             ajouterArticle = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/AjouterArticle.fxml"));
-            consulterArticles= FXMLLoader.load(getClass().getResource("/Views/GestionArticles/ConsulterArticles.fxml"));
+            consulterArticles = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/ConsulterArticles.fxml"));
+            ajouterNewsletter = FXMLLoader.load(getClass().getResource("/Views/GestionNewsletters/ajouterNewsletter.fxml"));
+            //consulterNewsletter = FXMLLoader.load(getClass().getResource("/Views/GestionNewsletters/ConsulterArticles.fxml"));
+
             for (Node node : tournementBox.getChildren()) {
                 node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
                     switch (node.getId()) {
@@ -94,7 +106,6 @@ public class DashboardController implements Initializable {
                             break;
                         case "games":
                             setContentNode(games);
-
                     }
                 });
             }
@@ -109,6 +120,22 @@ public class DashboardController implements Initializable {
                             setContentNode(ajouterArticle);
                             break;
                         case "showArticles":
+                            setContentNode(consulterArticles);
+                            break;
+                    }
+                });
+            }
+
+            for (Node node : newslettersBox.getChildren()) {
+                node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
+                    switch (node.getId()) {
+                        case "mainMenu":
+                            setNavNode(nav);
+                            break;
+                        case "addNewsLetter":
+                            setContentNode(ajouterNewsletter);
+                            break;
+                        case "showNewsLetters":
                             setContentNode(consulterArticles);
                             break;
                     }
@@ -145,5 +172,11 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void GalleryNavbar(MouseEvent event) {
+    }
+
+    @FXML
+    private void NewsLettersNavbar(MouseEvent event) {
+        setNavNode(newslettersBox);
+
     }
 }

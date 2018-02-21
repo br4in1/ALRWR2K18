@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.text.*?>
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DashboardController">
    <top>
       <Pane prefHeight="80.0" prefWidth="200.0" styleClass="topbar" stylesheets="@dashboard.css" BorderPane.alignment="CENTER">
          <children>
@@ -48,6 +44,7 @@
                   <JFXButton fx:id="Articles" onMouseClicked="#newsNavbar" prefHeight="50.0" prefWidth="254.0" text="News" textFill="WHITE" />
                   <JFXButton onMouseClicked="#guideNavbar" prefHeight="50.0" prefWidth="254.0" text="Guide" textFill="WHITE" />
                   <JFXButton onMouseClicked="#GalleryNavbar" prefHeight="50.0" prefWidth="254.0" text="Gallery" textFill="WHITE" />
+                  <JFXButton layoutX="10.0" layoutY="521.0" onMouseClicked="#NewsLettersNavbar" prefHeight="50.0" prefWidth="254.0" text="NewsLetters" textFill="WHITE" />
                </children>
             </VBox>
          </children>
