@@ -5,8 +5,8 @@
  */
 package Controllers.GestionNewsletters;
 
-import Entities.Article;
-import Services.ArticleCrud;
+import Entities.Newsletter;
+import Services.NewsletterCrud;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXButton;
@@ -20,12 +20,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -36,12 +33,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -141,6 +135,8 @@ public class AjouterNewsletterController implements Initializable {
         });
         actionColumn.setStyle("-fx-alignment: CENTER;");
         emailColumn.setStyle("-fx-alignment: CENTER;");
+        actionColumn.prefWidthProperty().bind(tableEmails.widthProperty().multiply(0.2));
+        emailColumn.prefWidthProperty().bind(tableEmails.widthProperty().multiply(0.8));
 
         tableEmails.getColumns().addAll(emailColumn, actionColumn);
 
@@ -160,7 +156,7 @@ public class AjouterNewsletterController implements Initializable {
     @FXML
     private void addEmailClicked(MouseEvent event) {
         String email = tfEmail.getText();
-        if (email.equals("") || email == null || !email.contains("@")){
+        if (email.equals("") || email == null || !email.contains("@")) {
             showDialog("Error", "Veuillez saisir une adresse mail valide");
             return;
         }
@@ -182,7 +178,7 @@ public class AjouterNewsletterController implements Initializable {
             webPage.executeCommand("insertHTML", "<img src=" + uploadResult.get("url") + " width=200 height=200 />");
         }
     }
-    
+
     private void showDialog(String titre, String contenu) {
         Stage stage = (Stage) ajouterNewsletterPane.getScene().getWindow();
         JFXDialogLayout content = new JFXDialogLayout();
@@ -208,23 +204,30 @@ public class AjouterNewsletterController implements Initializable {
 
     @FXML
     private void sendMailClicked(MouseEvent event) {
-        if (tfTitre.getText() == null || tfTitre.equals("") || contenu.getHtmlText().equals("") || contenu.getHtmlText() == null || data.isEmpty() || !checkPublier.isSelected()){
+        if (tfTitre.getText() == null || tfTitre.equals("") || contenu.getHtmlText().equals("") || contenu.getHtmlText() == null || data.isEmpty() || !checkPublier.isSelected()) {
             showDialog("Error", "Veuillez verifier que vous avez remplis tout les champs");
             return;
         }
         String USER_NAME = "raiizowqw";  // GMail user name (just the part before "@gmail.com")
-        String PASSWORD = "kaisbahloul199659"; // GMail password
+        String PASSWORD = ""; // GMail password
         ArrayList<String> a = new ArrayList<>();
         a.addAll(data);
         String from = USER_NAME;
         String pass = PASSWORD;
         String subject = tfTitre.getText();
         String body = contenu.getHtmlText();
-        sendFromGMail(from, pass, a, subject, body);
+        if (sendFromGMail(from, pass, a, subject, body)) {
+            a.forEach(e -> {
+                if (!NewsletterCrud.add(new Newsletter(1, e, body, 2))) {
+                    showDialog("Error", "La newsletter ne peut pas etre sauvegarder dans la base de données");
+                } else {
+                    showDialog("Success", "La newsletter a ete sauvegarder dans la base de données");
+                }
+            });
+        }
     }
 
-    
-     private void sendFromGMail(String from, String pass, ArrayList<String> to, String subject, String body) {
+    private boolean sendFromGMail(String from, String pass, ArrayList<String> to, String subject, String body) {
         Properties props = System.getProperties();
         String host = "smtp.gmail.com";
         props.put("mail.smtp.starttls.enable", "true");
@@ -257,12 +260,15 @@ public class AjouterNewsletterController implements Initializable {
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
             showDialog("Success", "Le newsletter a ete envoyer avec success");
+            return true;
         } catch (AddressException ae) {
             showDialog("Error", "Un error est subis lors de l'envoie de mail");
             ae.printStackTrace();
+            return false;
         } catch (MessagingException me) {
             showDialog("Error", "Un error est subis lors de l'envoie de mail");
             me.printStackTrace();
+            return false;
         }
     }
 }

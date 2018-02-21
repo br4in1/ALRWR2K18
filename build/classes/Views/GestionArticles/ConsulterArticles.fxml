@@ -8,6 +8,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
@@ -65,7 +67,15 @@
                      </font>
                   </JFXCheckBox>
                   <Separator layoutX="529.0" layoutY="21.0" orientation="VERTICAL" prefHeight="63.0" prefWidth="0.0" />
-                  <JFXButton buttonType="RAISED" layoutX="654.0" layoutY="494.0" prefHeight="31.0" prefWidth="92.0" text="Button" />
+                  <JFXButton fx:id="btShare" buttonType="RAISED" layoutX="660.0" layoutY="488.0" onMouseClicked="#shareClicked" prefHeight="31.0" prefWidth="92.0" ripplerFill="#e8e8e8" style="-fx-background-color: #335fd0;" text="     Share " textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/f.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                     </children>
                 </Pane>
             </center>

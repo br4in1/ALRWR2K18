@@ -48,7 +48,7 @@ public class DashboardController implements Initializable {
     VBox newslettersBox;
     AnchorPane ajouterArticle;
     AnchorPane consulterArticles;
-
+    
     AnchorPane ajouterNewsletter;
     AnchorPane consulterNewsletter;
     @FXML
@@ -96,7 +96,7 @@ public class DashboardController implements Initializable {
             ajouterArticle = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/AjouterArticle.fxml"));
             consulterArticles = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/ConsulterArticles.fxml"));
             ajouterNewsletter = FXMLLoader.load(getClass().getResource("/Views/GestionNewsletters/ajouterNewsletter.fxml"));
-            //consulterNewsletter = FXMLLoader.load(getClass().getResource("/Views/GestionNewsletters/ConsulterArticles.fxml"));
+            consulterNewsletter = FXMLLoader.load(getClass().getResource("/Views/GestionNewsletters/consulterNewsletters.fxml"));
 
             for (Node node : tournementBox.getChildren()) {
                 node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
@@ -136,7 +136,7 @@ public class DashboardController implements Initializable {
                             setContentNode(ajouterNewsletter);
                             break;
                         case "showNewsLetters":
-                            setContentNode(consulterArticles);
+                            setContentNode(consulterNewsletter);
                             break;
                     }
                 });

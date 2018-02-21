@@ -7,13 +7,22 @@ package Controllers.GestionArticles;
 
 import Entities.Article;
 import Services.ArticleCrud;
+import Services.UserCrud;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXScrollPane;
 import com.jfoenix.controls.JFXTreeView;
+import facebook4j.Account;
+import facebook4j.Facebook;
+import facebook4j.FacebookException;
+import facebook4j.FacebookFactory;
+import facebook4j.PostUpdate;
+import facebook4j.ResponseList;
+import facebook4j.auth.AccessToken;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
@@ -76,6 +85,9 @@ public class ConsulterArticlesController implements Initializable {
     private JFXButton btSupprimer;
     @FXML
     private JFXCheckBox checkSupprimer;
+    @FXML
+    private JFXButton btShare;
+    private Facebook facebook;
 
     /**
      * Initializes the controller class.
@@ -213,5 +225,36 @@ public class ConsulterArticlesController implements Initializable {
                 }
             }
         }
+    }
+
+    @FXML
+    private void shareClicked(MouseEvent event) throws FacebookException, MalformedURLException {
+        // Generate facebook instance.
+        facebook = new FacebookFactory().getInstance();
+        // Use default values for oauth app id.
+        facebook.setOAuthAppId("", "");
+        // Get an access token from: 
+        // https://developers.facebook.com/tools/explorer
+        // Copy and paste it below.
+        String accessTokenString = "EAACEdEose0cBALc2dX7YmPhZCMylXh6C36SKskJtgc1g8zT1F8QROtwOE6ooJTzp3YbkTINmRcOuzxKRpTXuYHfpTragFewFhjex6N2ZBmssxqm60YnQEEdQmKJTG5paYR6kE93GVDCc0ilIdsT9GpqVMKXXRFX4Q7lgInAOhcxdwwnF8OO6pJQVUg8asEtIysuQzbTKvTbrbUzx3Y";
+        AccessToken at = new AccessToken(accessTokenString);
+        // Set access token.
+        facebook.setOAuthAccessToken(at);
+
+        // We're done.
+        // Access group feeds.
+        // You can get the group ID from:
+        // https://developers.facebook.com/tools/explorer
+        ResponseList<Account> accounts = facebook.getAccounts();
+        Account yourPageAccount = accounts.get(0);  // if index 0 is your page account.
+        String pageAccessToken = yourPageAccount.getAccessToken();
+
+        PostUpdate post = new PostUpdate(new URL("http://facebook4j.org"))
+                .picture(new URL("http://facebook4j.org/images/hero.png"))
+                .name(toVisualize.getTitre()+"-Par "+toVisualize.getAuteur())
+                .caption(toVisualize.getTitre())
+                .description(toVisualize.getContenu());
+        facebook.postFeed(post);
+        
     }
 }
