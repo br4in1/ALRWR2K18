@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.xml.internal.org.jvnet.mimepull.MIMEMessage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -19,7 +20,6 @@ import java.sql.Date;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -29,7 +29,16 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
+import javax.naming.NamingException;
 import org.controlsfx.control.Notifications;
+import java.util.Properties ;
+import javax.mail.Message ; 
+import javax.mail.MessagingException ;
+import javax.mail.PasswordAuthentication ;
+import javax.mail.* ;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -84,10 +93,13 @@ public class AddFormTeamController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
+		
     }    
 
     @FXML
-    private void submit(MouseEvent event) throws IOException {
+    private void submit(MouseEvent event) throws IOException, NamingException {
+		
+					   
      // Notifications.create().title("kkk").text("success").show(); 
 	  
         //(String) uploadResult.get("url")           
@@ -131,13 +143,44 @@ public class AddFormTeamController implements Initializable {
                        Map uploadResult2 = cloudinary.uploader().upload(image3, ObjectUtils.emptyMap());//logophoto
                        Map uploadResult3 = cloudinary.uploader().upload(image4, ObjectUtils.emptyMap());//descriptionphoto
                        TeamCrud.addTeam(new Team(name.getText(),coach.getText(),president.getText(),area.getText(),Integer.parseInt(participation.getText()),Date.valueOf(date.getValue()),wcgroupe.getText(),Integer.parseInt(fifarank.getText()),(String) uploadResult.get("url"),(String) uploadResult2.get("url"),(String) uploadResult1.get("url"),(String) uploadResult3.get("url"),description.getText(),website.getText(),video.getText()));
-                 // TeamCrud.addTeam(new Team(name.getText(),coach.getText(),president.getText(),area.getText(),Integer.parseInt(participation.getText()),Date.valueOf(date.getValue()),wcgroupe.getText(),Integer.parseInt(fifarank.getText()),flagphoto.getText(),logophoto.getText(),squadphoto.getText(),descriptionphoto.getText(),description.getText(),website.getText(),video.getText()));
+					   
+
+					   Properties props = new Properties();
+					   props.put("mail.smtp.host", "smtp.gmail.com");
+					   props.put("mail.smtp.socketFactory.port", "465");
+					   props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+					   props.put("mail.smtp.auth", "true");
+					   props.put("mail.smtp.prot", "465");
+					   
+					   Session session = Session.getDefaultInstance(props,
+					   
+					   new javax.mail.Authenticator() {
+					   protected  PasswordAuthentication getPasswordAuthentication(){
+					   
+					   return new PasswordAuthentication("moez.haddad@esprit.tn", "moezmoezhaddad71126429118");
+					   }
+					   }
+					   );
+					   try {
+					   Message message =new MimeMessage(session) ;
+					   message.setFrom(new InternetAddress("moez.haddad@esprit.tn"));
+					   message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("moezhdd@gmail.com"));
+					   message.setSubject("New add !");
+					   message.setText("You have added new team in your desktop application !");
+					   Transport.send(message);
+					   
+					   
+					   } catch (Exception e) {
+					   JOptionPane.showMessageDialog(null, e);
+					   }
+					   
+// *TeamCrud.addTeam(new Team(name.getText(),coach.getText(),president.getText(),area.getText(),Integer.parseInt(participation.getText()),Date.valueOf(date.getValue()),wcgroupe.getText(),Integer.parseInt(fifarank.getText()),flagphoto.getText(),logophoto.getText(),squadphoto.getText(),descriptionphoto.getText(),description.getText(),website.getText(),video.getText()));
 				
 	  
 	  Notifications notificationBuilder = 
 					 Notifications.create().title("Avertissment")
 					.text("Votre team  a été ajouter avec succes ") 
-					.hideAfter(Duration.seconds(15))
+					.hideAfter(Duration.seconds(3))
 					.position(Pos.TOP_RIGHT) 
 							.onAction((ActionEvent event1) -> {
 								// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -47,3 +47,4 @@ nbproject/private/private.xml
 !/src/Libraries/jxl.jar
 .DS_Store
 !/src/Libraries/poi-3.7.jar
+!/src/Libraries/javax.mail.jar
