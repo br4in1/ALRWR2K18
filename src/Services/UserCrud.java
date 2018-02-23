@@ -20,6 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -116,10 +117,11 @@ public class UserCrud {
 				if (set.getString("roles").equals("ROLE_USER")) {
 					found = true;
 					u = new SimpleUser(set.getDate("birth_date"), set.getDate("registration_date"), set.getString("nationality"), true, set.getInt("fidelity_points"), set.getString("profile_picture"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
-					String q = "update User set loggedin = 1 where username = ?";
+					String q = "update User set loggedin = 1,last_login = ? where username = ?";
 					try {
 						PreparedStatement ste1 = con.prepareStatement(q);
-						ste1.setString(1, username);
+						ste1.setTimestamp(1, java.sql.Timestamp.valueOf(LocalDateTime.now()));
+						ste1.setString(2, username);
 						ste1.executeUpdate();
 					} catch (SQLException ex) {
 						Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
