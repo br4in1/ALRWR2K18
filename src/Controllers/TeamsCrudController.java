@@ -28,11 +28,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import java.util.List;
+import java.util.Optional;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.print.Printer;
 import javafx.print.PrinterJob;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import jxl.Sheet;
@@ -149,8 +152,26 @@ public class TeamsCrudController implements Initializable {
 
 			notificationBuilder.showInformation();
 		} else {
-			TeamCrud.RemoveTeam(tableT.getSelectionModel().getSelectedItem().getId());
-			tableT.getItems().removeAll(tableT.getSelectionModel().getSelectedItem());
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			alert.setTitle("Delete Team confirmation");
+			alert.setHeaderText("Are you sure about deleting this team ?");
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK) {
+				TeamCrud.RemoveTeam(tableT.getSelectionModel().getSelectedItem().getId());
+				tableT.getItems().removeAll(tableT.getSelectionModel().getSelectedItem());
+				Notifications notificationBuilder
+						= Notifications.create().title("Avertissment")
+								.text("the team has been deleted ! ")
+								.hideAfter(Duration.seconds(3))
+								.position(Pos.TOP_RIGHT)
+								.onAction((ActionEvent event1) -> {
+									// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+									System.out.println("Clicked on notification !");
+								});
+
+				notificationBuilder.showInformation();
+			}
+
 		}
 
 	}

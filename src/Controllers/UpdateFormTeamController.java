@@ -21,13 +21,16 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,6 +38,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -43,8 +48,6 @@ import javafx.stage.FileChooser;
  */
 public class UpdateFormTeamController implements Initializable {
 
-	
-	
 	@FXML
 	private JFXTextField name;
 	@FXML
@@ -108,11 +111,12 @@ public class UpdateFormTeamController implements Initializable {
     private File image2; //squadphoto
     private File image3; //logophoto
     private File image4;//descriptionphoto
-	*/
-	private boolean flagP =false ;
-	private boolean squadP =false ;
-	private boolean logoP = false ;
-	private boolean descriptionP = false ;
+	 */
+	private boolean flagP = false;
+	private boolean squadP = false;
+	private boolean logoP = false;
+	private boolean descriptionP = false;
+
 	/**
 	 * Initializes the controller class.
 	 */
@@ -122,12 +126,11 @@ public class UpdateFormTeamController implements Initializable {
 		cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
 
 		list = TeamCrud.GeIdlist();
-	//	id.setItems(FXCollections.observableArrayList(list));
-		System.out.println(TeamsCrudController.x); 
+		//	id.setItems(FXCollections.observableArrayList(list));
+		System.out.println(TeamsCrudController.x);
 		id.getItems().add(TeamsCrudController.x);
 		id.getSelectionModel().selectFirst();
-		
-		
+
 		name.setText(TeamCrud.findById(id.getValue()).getName());
 		coach.setText(TeamCrud.findById(id.getValue()).getCoach());
 		president.setText(TeamCrud.findById(id.getValue()).getPresident());
@@ -161,7 +164,6 @@ public class UpdateFormTeamController implements Initializable {
 		System.out.println("Click on textfield");
 		}) ;*/
 		System.out.println(flagP + " flag photo bool");
-				
 
 		if (id.getValue() == null) {
 			JFXDialogLayout content = new JFXDialogLayout();
@@ -189,31 +191,40 @@ public class UpdateFormTeamController implements Initializable {
 					JFXDialog check_team = new JFXDialog(TeamSP, content, JFXDialog.DialogTransition.CENTER);
 					check_team.show();
 				} else {
-					if(flagP && squadP && logoP && descriptionP )
-					{
-						System.out.println(id.getValue() + " " + " xxxxx ");
-					Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap()); //flagphoto
-					Map uploadResult1 = cloudinary.uploader().upload(image2, ObjectUtils.emptyMap()); //squadphoto
-					Map uploadResult2 = cloudinary.uploader().upload(image3, ObjectUtils.emptyMap());//logophoto
-					Map uploadResult3 = cloudinary.uploader().upload(image4, ObjectUtils.emptyMap());//descriptionphoto
-					System.out.println(id.getValue() + " " + " xxxxx ");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         //  ,`FlagPhoto`, `LogoPhoto`, `SquadPhoto`, `DescriptionPhoto`,                                         
-					TeamCrud.updateTeam(new Team(id.getValue(), name.getText(), coach.getText(), president.getText(), area.getText(), Integer.parseInt(gamesPlayed.getText()), Integer.parseInt(goalScored.getText()), Integer.parseInt(goalAgainst.getText()), Integer.parseInt(participation.getText()), Date.valueOf(date.getValue()), wcgroupe.getText(), Integer.parseInt(win.getText()), Integer.parseInt(loose.getText()), Integer.parseInt(draw.getText()), Integer.parseInt(points.getText()), Integer.parseInt(fifarank.getText()), (String) uploadResult.get("url"), (String) uploadResult2.get("url"), (String) uploadResult1.get("url"), (String) uploadResult3.get("url"), description.getText(), website.getText(), video.getText()));
-				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-					alert.setTitle("Information Dialog");
-					alert.setHeaderText("Congratulation");
-					alert.setContentText("successfully done !");
-					alert.showAndWait();
-						
-					}
-					else {
+					if (flagP && squadP && logoP && descriptionP) {
+						Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+						alert.setTitle("Update team confirmation");
+						alert.setHeaderText("Are you sure about updating this team ?");
+						Optional<ButtonType> result = alert.showAndWait();
+						if (result.get() == ButtonType.OK) {
+							System.out.println(id.getValue() + " " + " xxxxx ");
+							Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap()); //flagphoto
+							Map uploadResult1 = cloudinary.uploader().upload(image2, ObjectUtils.emptyMap()); //squadphoto
+							Map uploadResult2 = cloudinary.uploader().upload(image3, ObjectUtils.emptyMap());//logophoto
+							Map uploadResult3 = cloudinary.uploader().upload(image4, ObjectUtils.emptyMap());//descriptionphoto
+							System.out.println(id.getValue() + " " + " xxxxx ");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         //  ,`FlagPhoto`, `LogoPhoto`, `SquadPhoto`, `DescriptionPhoto`,                                         
+							TeamCrud.updateTeam(new Team(id.getValue(), name.getText(), coach.getText(), president.getText(), area.getText(), Integer.parseInt(gamesPlayed.getText()), Integer.parseInt(goalScored.getText()), Integer.parseInt(goalAgainst.getText()), Integer.parseInt(participation.getText()), Date.valueOf(date.getValue()), wcgroupe.getText(), Integer.parseInt(win.getText()), Integer.parseInt(loose.getText()), Integer.parseInt(draw.getText()), Integer.parseInt(points.getText()), Integer.parseInt(fifarank.getText()), (String) uploadResult.get("url"), (String) uploadResult2.get("url"), (String) uploadResult1.get("url"), (String) uploadResult3.get("url"), description.getText(), website.getText(), video.getText()));
+							Notifications notificationBuilder
+									= Notifications.create().title("Avertissment")
+											.text("the team has been updated ! ")
+											.hideAfter(Duration.seconds(3))
+											.position(Pos.TOP_RIGHT)
+											.onAction((ActionEvent event1) -> {
+												// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+												System.out.println("Clicked on notification !");
+											});
+
+							notificationBuilder.showInformation();
+						}
+
+					} else {
 						JFXDialogLayout content = new JFXDialogLayout();
-					content.setHeading(new Text("Error !"));
-					content.setBody(new Text("Please reinsert all photos"));
-					JFXDialog check_team = new JFXDialog(TeamSP, content, JFXDialog.DialogTransition.CENTER);
-					check_team.show();
+						content.setHeading(new Text("Error !"));
+						content.setBody(new Text("Please reinsert all photos"));
+						JFXDialog check_team = new JFXDialog(TeamSP, content, JFXDialog.DialogTransition.CENTER);
+						check_team.show();
 					}
-					
-				
+
 				}
 			}
 		}
@@ -232,7 +243,7 @@ public class UpdateFormTeamController implements Initializable {
 		flagphoto.setText(image.getPath());
 		Image image = new Image(new File(flagphoto.getText()).toURI().toString());
 		TeamImageView.setImage(image);
-			flagP =true ;
+		flagP = true;
 	}
 
 	@FXML
@@ -245,9 +256,9 @@ public class UpdateFormTeamController implements Initializable {
 		image2 = fileChooser.showOpenDialog(null);
 
 		squadphoto.setText(image2.getPath());
-Image image = new Image(new File(squadphoto.getText()).toURI().toString());
+		Image image = new Image(new File(squadphoto.getText()).toURI().toString());
 		TeamImageView.setImage(image);
-		squadP =true ;
+		squadP = true;
 	}
 
 	@FXML
@@ -262,7 +273,7 @@ Image image = new Image(new File(squadphoto.getText()).toURI().toString());
 		logophoto.setText(image3.getPath());
 		Image image = new Image(new File(logophoto.getText()).toURI().toString());
 		TeamImageView.setImage(image);
-		logoP =true ; 
+		logoP = true;
 
 	}
 
@@ -278,10 +289,9 @@ Image image = new Image(new File(squadphoto.getText()).toURI().toString());
 		descriptionphoto.setText(image4.getPath());
 		Image image = new Image(new File(descriptionphoto.getText()).toURI().toString());
 		TeamImageView.setImage(image);
-		descriptionP =true ;
+		descriptionP = true;
 
 	}
-	
 
 	@FXML
 	private void ChoixId(ActionEvent event) {

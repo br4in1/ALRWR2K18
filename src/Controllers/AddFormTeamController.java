@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,6 +33,8 @@ import javafx.util.Duration;
 import javax.naming.NamingException;
 import org.controlsfx.control.Notifications;
 import java.util.Properties;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javax.mail.Message;
@@ -131,52 +134,58 @@ public class AddFormTeamController implements Initializable {
 					JFXDialog check_team = new JFXDialog(TeamSP, content, JFXDialog.DialogTransition.CENTER);
 					check_team.show();
 				} else {
-					Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap()); //flagphoto
-					Map uploadResult1 = cloudinary.uploader().upload(image2, ObjectUtils.emptyMap()); //squadphoto
-					Map uploadResult2 = cloudinary.uploader().upload(image3, ObjectUtils.emptyMap());//logophoto
-					Map uploadResult3 = cloudinary.uploader().upload(image4, ObjectUtils.emptyMap());//descriptionphoto
-					TeamCrud.addTeam(new Team(name.getText(), coach.getText(), president.getText(), area.getText(), Integer.parseInt(participation.getText()), Date.valueOf(date.getValue()), wcgroupe.getText(), Integer.parseInt(fifarank.getText()), (String) uploadResult.get("url"), (String) uploadResult2.get("url"), (String) uploadResult1.get("url"), (String) uploadResult3.get("url"), description.getText(), website.getText(), video.getText()));
 
-					Properties props = new Properties();
-					props.put("mail.smtp.host", "smtp.gmail.com");
-					props.put("mail.smtp.socketFactory.port", "465");
-					props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-					props.put("mail.smtp.auth", "true");
-					props.put("mail.smtp.prot", "465");
+					Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+					alert.setTitle("Add confirmation");
+					alert.setHeaderText("Are you sure about adding this team ?");
+					Optional<ButtonType> result = alert.showAndWait();
+					if (result.get() == ButtonType.OK) {
+						Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap()); //flagphoto
+						Map uploadResult1 = cloudinary.uploader().upload(image2, ObjectUtils.emptyMap()); //squadphoto
+						Map uploadResult2 = cloudinary.uploader().upload(image3, ObjectUtils.emptyMap());//logophoto
+						Map uploadResult3 = cloudinary.uploader().upload(image4, ObjectUtils.emptyMap());//descriptionphoto
+						TeamCrud.addTeam(new Team(name.getText(), coach.getText(), president.getText(), area.getText(), Integer.parseInt(participation.getText()), Date.valueOf(date.getValue()), wcgroupe.getText(), Integer.parseInt(fifarank.getText()), (String) uploadResult.get("url"), (String) uploadResult2.get("url"), (String) uploadResult1.get("url"), (String) uploadResult3.get("url"), description.getText(), website.getText(), video.getText()));
+						Properties props = new Properties();
+						props.put("mail.smtp.host", "smtp.gmail.com");
+						props.put("mail.smtp.socketFactory.port", "465");
+						props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+						props.put("mail.smtp.auth", "true");
+						props.put("mail.smtp.prot", "465");
 
-					Session session = Session.getDefaultInstance(props,
-							new javax.mail.Authenticator() {
-						protected PasswordAuthentication getPasswordAuthentication() {
+						Session session = Session.getDefaultInstance(props,
+								new javax.mail.Authenticator() {
+							protected PasswordAuthentication getPasswordAuthentication() {
 
-							return new PasswordAuthentication("moez.haddad@esprit.tn", "moezmoezhaddad71126429118");
+								return new PasswordAuthentication("moez.haddad@esprit.tn", "moezmoezhaddad71126429118");
+							}
 						}
-					}
-					);
-					try {
-						Message message = new MimeMessage(session);
-						message.setFrom(new InternetAddress("moez.haddad@esprit.tn"));
-						message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("moezhdd@gmail.com"));
-						message.setSubject("New add !");
-						message.setText("You have added new team in your desktop application !");
-						Transport.send(message);
+						);
+						try {
+							Message message = new MimeMessage(session);
+							message.setFrom(new InternetAddress("moez.haddad@esprit.tn"));
+							message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("moezhdd@gmail.com"));
+							message.setSubject("New add !");
+							message.setText("You have added new team in your desktop application !");
+							Transport.send(message);
 
-					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, e);
-					}
+						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null, e);
+						}
 
 // *TeamCrud.addTeam(new Team(name.getText(),coach.getText(),president.getText(),area.getText(),Integer.parseInt(participation.getText()),Date.valueOf(date.getValue()),wcgroupe.getText(),Integer.parseInt(fifarank.getText()),flagphoto.getText(),logophoto.getText(),squadphoto.getText(),descriptionphoto.getText(),description.getText(),website.getText(),video.getText()));
-					Notifications notificationBuilder
-							= Notifications.create().title("Avertissment")
-									.text("Votre team  a été ajouter avec succes ")
-									.hideAfter(Duration.seconds(3))
-									.position(Pos.TOP_RIGHT)
-									.onAction((ActionEvent event1) -> {
-										// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-										System.out.println("Clicked on notification !");
-									});
+						Notifications notificationBuilder
+								= Notifications.create().title("Avertissment")
+										.text("the team has been added ! ")
+										.hideAfter(Duration.seconds(3))
+										.position(Pos.TOP_RIGHT)
+										.onAction((ActionEvent event1) -> {
+											// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+											System.out.println("Clicked on notification !");
+										});
 
-					notificationBuilder.showInformation();
-					
+						notificationBuilder.showInformation();
+					}
+
 				}
 			}
 
