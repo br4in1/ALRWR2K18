@@ -3,15 +3,47 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Views/FrontUserBox.fxml</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/FrontUserBoxController.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/FrontEndController.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/DashboardController.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Services/GalleryCrud.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Services/Browser.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/Login_formController.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Views/frontuserbox.css</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Utils/DataSource.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/UpdateFormTeamController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Entities/Team.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/teamscrud.css</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/TeamStaticsController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/playerscrud.css</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/main.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/frontend.css</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/PlayersCrudController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/AddformPlayerController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/GroupsFrontController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Entities/Player.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/groupsfront.css</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/playersCrud.fxml</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Services/ArticleCrud.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/AddformPlayer.fxml</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/FrontEndController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/DashboardController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/TeamsCrud.fxml</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Services/StadiumCrud.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/SquadsController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/GamesCrudController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/FrontEnd.fxml</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/AddFormController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/TeamBoxController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/UpdateFormPlayerController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Services/PlayerCrud.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Services/TeamCrud.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Utils/DataSource.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/AddModeratorController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/TeamsCrudController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/UpdateFormPlayer.fxml</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/updateformplayer.css</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/Login_formController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/groupsFront.fxml</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/UsersCrudController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/AddFormTeamController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/addformplayer.css</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/AjouterArticleController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/UsersBoxController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Services/UserCrud.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/FrontUserBoxController.java</file>
         </group>
     </open-files>
 </project-private>

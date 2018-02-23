@@ -40,6 +40,8 @@ import javafx.stage.FileChooser;
  */
 public class UpdateFormTeamController implements Initializable {
 
+	
+	
 	@FXML
 	private JFXTextField name;
 	@FXML
@@ -106,8 +108,36 @@ public class UpdateFormTeamController implements Initializable {
 		cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
 
 		list = TeamCrud.GeIdlist();
-		id.setItems(FXCollections.observableArrayList(list));
+	//	id.setItems(FXCollections.observableArrayList(list));
+		System.out.println(TeamsCrudController.x); 
+		id.getItems().add(TeamsCrudController.x);
+		id.getSelectionModel().selectFirst();
+		
+		
+		name.setText(TeamCrud.findById(id.getValue()).getName());
+		coach.setText(TeamCrud.findById(id.getValue()).getCoach());
+		president.setText(TeamCrud.findById(id.getValue()).getPresident());
+		area.setText(TeamCrud.findById(id.getValue()).getArea());
+		gamesPlayed.setText(Integer.toString(TeamCrud.findById(id.getValue()).getGamesPlayed()));
+		goalScored.setText(Integer.toString(TeamCrud.findById(id.getValue()).getGoalScored()));
+		goalAgainst.setText(Integer.toString(TeamCrud.findById(id.getValue()).getGoalAgainst()));
+		participation.setText(Integer.toString(TeamCrud.findById(id.getValue()).getParticipations()));
 
+		date.setValue(TeamCrud.findById(id.getValue()).getFifaDate().toLocalDate());
+		wcgroupe.setText(TeamCrud.findById(id.getValue()).getWcGroup());
+		win.setText(Integer.toString(TeamCrud.findById(id.getValue()).getWin()));
+
+		loose.setText(Integer.toString(TeamCrud.findById(id.getValue()).getLoose()));
+		draw.setText(Integer.toString(TeamCrud.findById(id.getValue()).getDraw()));
+		points.setText(Integer.toString(TeamCrud.findById(id.getValue()).getPoints()));
+		fifarank.setText(Integer.toString(TeamCrud.findById(id.getValue()).getFifaRank()));
+		flagphoto.setText(TeamCrud.findById(id.getValue()).getFlagPhoto());
+		logophoto.setText(TeamCrud.findById(id.getValue()).getLogoPhoto());
+		squadphoto.setText(TeamCrud.findById(id.getValue()).getSquadPhoto());
+		descriptionphoto.setText(TeamCrud.findById(id.getValue()).getDescriptionPhoto());
+		website.setText(TeamCrud.findById(id.getValue()).getWebsite());
+		description.setText(TeamCrud.findById(id.getValue()).getDescription());
+		video.setText(TeamCrud.findById(id.getValue()).getVideo());
 	}
 
 	@FXML
@@ -211,34 +241,10 @@ public class UpdateFormTeamController implements Initializable {
 		descriptionphoto.setText(image4.getPath());
 
 	}
+	
 
 	@FXML
 	private void ChoixId(ActionEvent event) {
-		System.out.println(id.getValue());
-		name.setText(TeamCrud.findById(id.getValue()).getName());
-		coach.setText(TeamCrud.findById(id.getValue()).getCoach());
-		president.setText(TeamCrud.findById(id.getValue()).getPresident());
-		area.setText(TeamCrud.findById(id.getValue()).getArea());
-		gamesPlayed.setText(Integer.toString(TeamCrud.findById(id.getValue()).getGamesPlayed()));
-		goalScored.setText(Integer.toString(TeamCrud.findById(id.getValue()).getGoalScored()));
-		goalAgainst.setText(Integer.toString(TeamCrud.findById(id.getValue()).getGoalAgainst()));
-		participation.setText(Integer.toString(TeamCrud.findById(id.getValue()).getParticipations()));
-
-		date.setValue(TeamCrud.findById(id.getValue()).getFifaDate().toLocalDate());
-		wcgroupe.setText(TeamCrud.findById(id.getValue()).getWcGroup());
-		win.setText(Integer.toString(TeamCrud.findById(id.getValue()).getWin()));
-
-		loose.setText(Integer.toString(TeamCrud.findById(id.getValue()).getLoose()));
-		draw.setText(Integer.toString(TeamCrud.findById(id.getValue()).getDraw()));
-		points.setText(Integer.toString(TeamCrud.findById(id.getValue()).getPoints()));
-		fifarank.setText(Integer.toString(TeamCrud.findById(id.getValue()).getFifaRank()));
-		flagphoto.setText(TeamCrud.findById(id.getValue()).getFlagPhoto());
-		logophoto.setText(TeamCrud.findById(id.getValue()).getLogoPhoto());
-		squadphoto.setText(TeamCrud.findById(id.getValue()).getSquadPhoto());
-		descriptionphoto.setText(TeamCrud.findById(id.getValue()).getDescriptionPhoto());
-		website.setText(TeamCrud.findById(id.getValue()).getWebsite());
-		video.setText(TeamCrud.findById(id.getValue()).getVideo());
-
 	}
 
 }

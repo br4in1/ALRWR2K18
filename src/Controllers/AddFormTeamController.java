@@ -77,7 +77,7 @@ public class AddFormTeamController implements Initializable {
     private JFXTextField video;
     @FXML
     private JFXTextArea description;
-    
+    public static int x=0 ;
     
     Cloudinary cloudinary;
     private File image; //flagphoto

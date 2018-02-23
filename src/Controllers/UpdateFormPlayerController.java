@@ -103,8 +103,29 @@ public class UpdateFormPlayerController implements Initializable {
         Listposition.add("Middle");
         position.setItems(FXCollections.observableArrayList(Listposition));
         
-        listId = PlayerCrud.GeIdlistPlayer();
-        id.setItems(FXCollections.observableArrayList(listId));
+        //listId = PlayerCrud.GeIdlistPlayer();
+       // id.setItems(FXCollections.observableArrayList(listId));
+	   System.out.println(TeamsCrudController.x); 
+		id.getItems().add(PlayersCrudController.x);
+		id.getSelectionModel().selectFirst();
+		
+		name.setText(PlayerCrud.findById(id.getValue()).getName());
+        lastName.setText(PlayerCrud.findById(id.getValue()).getLastName());
+        age.setText(Integer.toString(PlayerCrud.findById(id.getValue()).getAge()));
+        club.setText(PlayerCrud.findById(id.getValue()).getClub());
+        nation.setValue(PlayerCrud.findById(id.getValue()).getNation());
+        height.setText(Double.toString(PlayerCrud.findById(id.getValue()).getHeight()));
+        weight.setText(Double.toString(PlayerCrud.findById(id.getValue()).getWeight()));
+        position.setValue(PlayerCrud.findById(id.getValue()).getPosition());
+        goals.setText(Integer.toString(PlayerCrud.findById(id.getValue()).getGoals()));
+        description.setText(PlayerCrud.findById(id.getValue()).getDescription());
+        profilePhoto.setText(PlayerCrud.findById(id.getValue()).getProfilePhoto());
+        blanketPhoto.setText(PlayerCrud.findById(id.getValue()).getBlanketPhoto());
+        descriptionPhoto.setText(PlayerCrud.findById(id.getValue()).getDescriptionPhoto());
+        fbLink.setText(PlayerCrud.findById(id.getValue()).getFbLink());
+        twitterLink.setText(PlayerCrud.findById(id.getValue()).getTwitterLink());
+        shirtNb.setText(Integer.toString(PlayerCrud.findById(id.getValue()).getShirtNb()));
+        video.setText(PlayerCrud.findById(id.getValue()).getVideo());
        
         
     }    
@@ -164,24 +185,7 @@ public class UpdateFormPlayerController implements Initializable {
     @FXML
     private void choixId(ActionEvent event) {
 
-        System.out.println(id.getValue());
-        name.setText(PlayerCrud.findById(id.getValue()).getName());
-        lastName.setText(PlayerCrud.findById(id.getValue()).getLastName());
-        age.setText(Integer.toString(PlayerCrud.findById(id.getValue()).getAge()));
-        club.setText(PlayerCrud.findById(id.getValue()).getClub());
-        nation.setValue(PlayerCrud.findById(id.getValue()).getNation());
-        height.setText(Double.toString(PlayerCrud.findById(id.getValue()).getHeight()));
-        weight.setText(Double.toString(PlayerCrud.findById(id.getValue()).getWeight()));
-        position.setValue(PlayerCrud.findById(id.getValue()).getPosition());
-        goals.setText(Integer.toString(PlayerCrud.findById(id.getValue()).getGoals()));
-        description.setText(PlayerCrud.findById(id.getValue()).getDescription());
-        profilePhoto.setText(PlayerCrud.findById(id.getValue()).getProfilePhoto());
-        blanketPhoto.setText(PlayerCrud.findById(id.getValue()).getBlanketPhoto());
-        descriptionPhoto.setText(PlayerCrud.findById(id.getValue()).getDescriptionPhoto());
-        fbLink.setText(PlayerCrud.findById(id.getValue()).getFbLink());
-        twitterLink.setText(PlayerCrud.findById(id.getValue()).getTwitterLink());
-        shirtNb.setText(Integer.toString(PlayerCrud.findById(id.getValue()).getShirtNb()));
-        video.setText(PlayerCrud.findById(id.getValue()).getVideo());
+      
     }
 
     @FXML
