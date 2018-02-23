@@ -37,6 +37,7 @@ import javafx.util.Callback;
  */
 public class UsersCrudController implements Initializable {
 
+	public static UsersCrudController thisController;
 	@FXML
 	private TableView<SimpleUser> tvUsers;
 	@FXML
@@ -69,6 +70,7 @@ public class UsersCrudController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		thisController = this;
 		enabledCol.setStyle("-fx-alignment: CENTER;");
 		statusCol.setStyle("-fx-alignment: CENTER;");
 		banCol.setStyle("-fx-alignment: CENTER;");
@@ -80,7 +82,7 @@ public class UsersCrudController implements Initializable {
 	}
 
 	@FXML
-	private void RefreshData(ActionEvent event) {
+	public void RefreshData(ActionEvent event) {
 		tvUsers.getItems().clear();
 		usernameCol.setCellValueFactory(
 				new PropertyValueFactory<>("username"));

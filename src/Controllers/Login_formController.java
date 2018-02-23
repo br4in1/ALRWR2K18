@@ -30,6 +30,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,6 +48,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -55,6 +58,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import static jdk.nashorn.internal.objects.NativeJava.to;
 
 /**
  * FXML Controller class
@@ -340,6 +351,37 @@ public class Login_formController implements Initializable {
 		}
 	}
 
+	public static void SendConfirmationToken(String dest, String confirmationToken) {
+		String host = "smtp.mail.yahoo.com";
+		final String user = "pidevrussiealpha@yahoo.com";
+		final String password = "projetpi2018";
+		Properties props = new Properties();
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		Session session = Session.getDefaultInstance(props,
+				new javax.mail.Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(user, password);
+			}
+		});
+
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(user));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(dest));
+			message.setSubject("Account Activation");
+			message.setText("Thank you for signing up on our platform. Please use this code to enable your account. " + confirmationToken);
+
+			//send the message  
+			Transport.send(message);
+
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@FXML
 	public void UploadPhoto() throws Exception {
 		if (!firstradio.isSelected() && !secondradio.isSelected()) {
@@ -362,7 +404,6 @@ public class Login_formController implements Initializable {
 			toUpload.delete();
 			UserCrud.UpdateUserPhoto((String) uploadResult.get("url"), current_username);
 			SimpleUser.current_user = UserCrud.getSimpleUserByUsername(current_username);
-			System.out.println(current_username);
 			SimpleUser.current_user.setProfilepicture((String) uploadResult.get("url"));
 			try {
 				ShowFrontEnd();
@@ -399,5 +440,10 @@ public class Login_formController implements Initializable {
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
 		stage.show();
+	}
+
+	@FXML
+	private void loginUserByKeyboard(KeyEvent event) throws IOException {
+		if(event.getCode() == KeyCode.ENTER) loginUser();
 	}
 }

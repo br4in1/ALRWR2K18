@@ -12,7 +12,6 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import com.sun.xml.internal.org.jvnet.mimepull.MIMEMessage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;

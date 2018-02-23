@@ -15,8 +15,8 @@
             <JFXButton fx:id="refreshBtn" layoutX="841.0" layoutY="25.0" onAction="#RefreshData" prefHeight="33.0" prefWidth="88.0" text="Refresh" />
          </children>
       </Pane>
-      <PieChart fx:id="countrieschart" layoutX="21.0" layoutY="207.0" prefHeight="282.0" prefWidth="289.0" title="Countries Repartition" />
-      <PieChart fx:id="agechart" layoutX="646.0" layoutY="222.0" prefHeight="282.0" prefWidth="289.0" />
+      <PieChart fx:id="countrieschart" layoutX="21.0" layoutY="115.0" prefHeight="509.0" prefWidth="289.0" />
+      <PieChart fx:id="agechart" layoutX="646.0" layoutY="110.0" prefHeight="509.0" prefWidth="289.0" />
       <Separator layoutX="321.0" layoutY="263.0" orientation="VERTICAL" prefHeight="200.0" />
       <Separator layoutX="632.0" layoutY="272.0" orientation="VERTICAL" prefHeight="200.0" />
       <Label layoutX="367.0" layoutY="421.0" text="Logged In Users">

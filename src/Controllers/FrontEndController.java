@@ -21,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -50,8 +51,8 @@ public class FrontEndController implements Initializable {
 	@FXML
 	private Circle profilepic;
 	private String current_page;
-	AnchorPane userBox,gallerybox;
-	Pane  add;
+	VBox userBox, gallerybox;
+	Pane add, profile;
 	@FXML
 	private AnchorPane sidebar;
 	@FXML
@@ -62,26 +63,21 @@ public class FrontEndController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
-		
-		try {
-			add = FXMLLoader.load(getClass().getResource("/Views/AddImage.fxml"));
-		} catch (IOException ex) {
-			Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	
 		current_page = "home";
 		homebutton.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
 		firstlastname.setText(SimpleUser.current_user.getUsername());
 		profilepic.setFill(new ImagePattern(new Image(SimpleUser.current_user.getProfilepicture())));
-		
+
 		try {
 			userBox = FXMLLoader.load(getClass().getResource("/Views/FrontUserBox.fxml"));
+			profile = FXMLLoader.load(getClass().getResource("/Views/myProfile.fxml"));
 			for (Node node : userBox.getChildren()) {
 				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
 					switch (node.getId()) {
 						case "myProfile":
-							//setContentNode(content);
+							MyProfileController.current_username = SimpleUser.current_user.getUsername();
+							MyProfileController.thisController.show();
+							setContentNode(profile);
 							break;
 						case "editData":
 							//setContentNode(teams);
@@ -96,13 +92,13 @@ public class FrontEndController implements Initializable {
 					}
 				});
 			}
+			add = FXMLLoader.load(getClass().getResource("/Views/AddImage.fxml"));
 			gallerybox = FXMLLoader.load(getClass().getResource("/Views/FrontGalleryBox.fxml"));
 			for (Node node : gallerybox.getChildren()) {
 				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
 					switch (node.getId()) {
 						case "AddPhoto":
-							System.out.println("aa");
-							setContentNav(add);
+							setContentNode(add);
 							break;
 						case "editData":
 							//setContentNode(teams);
@@ -124,108 +120,126 @@ public class FrontEndController implements Initializable {
 
 	@FXML
 	private void highlightFixturesbtn(MouseEvent event) {
-		if(!current_page.equals("fixtures"))
+		if (!current_page.equals("fixtures")) {
 			fixturesbtn.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
+		}
 	}
 
 	@FXML
 	private void unhighlightFixturesbtn(MouseEvent event) {
-		if(!current_page.equals("fixtures"))
+		if (!current_page.equals("fixtures")) {
 			fixturesbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		}
 	}
 
 	@FXML
 	private void unhighlighthomebtn(MouseEvent event) {
-		if(!current_page.equals("home"))
+		if (!current_page.equals("home")) {
 			homebutton.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
-		
+		}
+
 	}
 
 	@FXML
 	private void highlighthomebtn(MouseEvent event) {
-		if(!current_page.equals("home"))
+		if (!current_page.equals("home")) {
 			homebutton.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
+		}
 	}
 
 	@FXML
 	private void unhighlightteamsbtn(MouseEvent event) {
-		if(!current_page.equals("teams"))
+		if (!current_page.equals("teams")) {
 			teamsbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		}
 	}
 
 	@FXML
 	private void highlightteamsbtn(MouseEvent event) {
-		if(!current_page.equals("teams"))
+		if (!current_page.equals("teams")) {
 			teamsbtn.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
+		}
 	}
 
 	@FXML
 	private void unhighlighthotelsbtn(MouseEvent event) {
-		if(!current_page.equals("hotels"))
+		if (!current_page.equals("hotels")) {
 			hotelsbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		}
 	}
 
 	@FXML
 	private void highlighthotelsbtn(MouseEvent event) {
-		if(!current_page.equals("hotels"))
+		if (!current_page.equals("hotels")) {
 			hotelsbtn.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
+		}
 	}
 
 	@FXML
 	private void unhighlightstadesbtn(MouseEvent event) {
-		if(!current_page.equals("stades"))
+		if (!current_page.equals("stades")) {
 			stadesbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		}
 	}
 
 	@FXML
 	private void highlightstadesbtn(MouseEvent event) {
-		if(!current_page.equals("stades"))
+		if (!current_page.equals("stades")) {
 			stadesbtn.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
+		}
 	}
 
 	@FXML
 	private void unhighlightgallerybtn(MouseEvent event) {
-		if(!current_page.equals("gallery"))
+		if (!current_page.equals("gallery")) {
 			gallerybtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		}
 	}
 
 	@FXML
 	private void highlightgallerybtn(MouseEvent event) {
-		if(!current_page.equals("gallery"))
+		if (!current_page.equals("gallery")) {
 			gallerybtn.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
+		}
 	}
 
 	@FXML
 	private void highlightcontactbtn(MouseEvent event) {
-		if(!current_page.equals("contact"))
+		if (!current_page.equals("contact")) {
 			contactbtn.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
+		}
 	}
 
 	@FXML
 	private void unhighlightcontactbtn(MouseEvent event) {
-		if(!current_page.equals("contact"))
+		if (!current_page.equals("contact")) {
 			contactbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		}
 	}
-	
-	private void setNavNode(Node node){
+
+	private void setNavNode(Node node) {
 		sidebar.getChildren().clear();
 		sidebar.getChildren().add((Node) node);
 	}
-	
-	private void setContentNav(Node node){
+
+	private void setContentNode(Node node) {
 		mainContent.getChildren().clear();
-		if(!node.getId().equals("mainContent")) mainContent.getChildren().add((Node) node);
+		if (!node.getId().equals("mainContent")) {
+			mainContent.getChildren().add((Node) node);
+		}
 	}
 
 	@FXML
 	private void myProfileClicked(MouseEvent event) throws IOException {
 		unhighlightAll();
 		current_page = "profile";
-		userBox = FXMLLoader.load(getClass().getResource("/Views/FrontUserBox.fxml"));
 		setNavNode(userBox);
+		MyProfileController.current_username = SimpleUser.current_user.getUsername();
+		MyProfileController.thisController.show();
+		setContentNode(profile);
 	}
-	
-	private void unhighlightAll(){
+
+	private void unhighlightAll() {
 		contactbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
 		gallerybtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
 		stadesbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");

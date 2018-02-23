@@ -5,6 +5,7 @@
  */
 package Services;
 
+import Controllers.Login_formController;
 import Entities.Admin;
 import Entities.Moderator;
 import Entities.SimpleUser;
@@ -94,8 +95,10 @@ public class UserCrud {
 			ste.setString(12, u.getNationality());
 			ste.setInt(13, (u.getLoggedin()) ? 1 : 0);
 			ste.setInt(14, 0);
-			ste.setString(15, TokenGenerator.generateToken(u.getUsername()));
+			String confirmationToken = TokenGenerator.generateToken(u.getUsername());
+			ste.setString(15, confirmationToken);
 			ste.executeUpdate();
+			Login_formController.SendConfirmationToken(u.getEmail(), confirmationToken);
 		} catch (SQLException ex) {
 			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -260,7 +263,19 @@ public class UserCrud {
 
 	public static void BanSimpleUser(String username) {
 		Connection con = DataSource.getInstance().getCon();
-		String query = "update User set enabled = 0 where username = ?";
+		String query = "update User set enabled = 0,loggedin = 0 where username = ?";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+			ste.setString(1, username);
+			ste.executeUpdate();
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+	
+	public static void UnBanSimpleUser(String username) {
+		Connection con = DataSource.getInstance().getCon();
+		String query = "update User set enabled = 1 where username = ?";
 		try {
 			PreparedStatement ste = con.prepareStatement(query);
 			ste.setString(1, username);
@@ -408,6 +423,21 @@ public class UserCrud {
 				users.add(u);
 			}
 			return users;
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+	
+	public static Integer getNumberOfUsers(){
+		Connection con = DataSource.getInstance().getCon();
+		String query = "select count(*) as nb from User where roles = 'ROLE_USER'";
+		try {
+			Statement ste = con.createStatement();
+			ResultSet set = ste.executeQuery(query);
+			if (set.next()) {
+				return set.getInt("nb");
+			}
 		} catch (SQLException ex) {
 			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}

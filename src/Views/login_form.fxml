@@ -23,12 +23,12 @@
          <children>
             <Pane fx:id="loginform" prefHeight="337.0" prefWidth="531.0">
                <children>
-                  <JFXTextField fx:id="username_login" focusColor="#6fa840" labelFloat="true" layoutX="56.0" layoutY="41.0" prefHeight="35.0" prefWidth="418.0" promptText="Nom d'utilisateur">
+                  <JFXTextField fx:id="username_login" focusColor="#6fa840" labelFloat="true" layoutX="56.0" layoutY="41.0" onKeyReleased="#loginUserByKeyboard" prefHeight="35.0" prefWidth="418.0" promptText="Nom d'utilisateur">
                      <font>
                         <Font name="Avenir Light" size="13.0" />
                      </font>
                   </JFXTextField>
-                  <JFXPasswordField fx:id="password_login" focusColor="#6fa840" labelFloat="true" layoutX="56.0" layoutY="99.0" prefHeight="27.0" prefWidth="418.0" promptText="Mot de passe">
+                  <JFXPasswordField fx:id="password_login" focusColor="#6fa840" labelFloat="true" layoutX="56.0" layoutY="99.0" onKeyReleased="#loginUserByKeyboard" prefHeight="27.0" prefWidth="418.0" promptText="Mot de passe">
                      <font>
                         <Font name="Avenir Light" size="13.0" />
                      </font>
