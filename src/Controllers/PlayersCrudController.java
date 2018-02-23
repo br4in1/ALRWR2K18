@@ -179,6 +179,8 @@ public class PlayersCrudController implements Initializable {
 				new PropertyValueFactory<>("blanketPhoto"));
 		descriptionPhoto.setCellValueFactory(
 				new PropertyValueFactory<>("descriptionPhoto"));
+		fbLink.setCellValueFactory(
+				new PropertyValueFactory<>("fbLink"));
 		twitterLink.setCellValueFactory(
 				new PropertyValueFactory<>("twitterLink"));
 		shirtNb.setCellValueFactory(
