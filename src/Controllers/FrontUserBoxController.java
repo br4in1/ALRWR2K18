@@ -5,12 +5,15 @@
  */
 package Controllers;
 
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -20,6 +23,8 @@ import javafx.scene.input.MouseEvent;
 public class FrontUserBoxController implements Initializable {
 
 	@FXML
+	private VBox nav;
+	@FXML
 	private Label myProfile;
 	@FXML
 	private Label editData;
@@ -28,11 +33,13 @@ public class FrontUserBoxController implements Initializable {
 	@FXML
 	private Label myPhotos;
 	private String selected;
+	public static FrontUserBoxController thisController;
 	/**
 	 * Initializes the controller class.
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		thisController = this;
 		selected = "myprofile";
 		myProfile.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
 	}	
@@ -83,6 +90,10 @@ public class FrontUserBoxController implements Initializable {
 	private void highlightPhotos(MouseEvent event) {
 		if(!selected.equals("photos"))
 			myPhotos.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
+	}
+
+	@FXML
+	private void getContent(MouseEvent event) {
 	}
 	
 }

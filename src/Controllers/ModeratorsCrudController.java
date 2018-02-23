@@ -43,6 +43,7 @@ import javafx.stage.Stage;
  */
 public class ModeratorsCrudController implements Initializable {
 
+	public static ModeratorsCrudController thisController;
 	@FXML
 	private JFXButton refreshBtn;
 	@FXML
@@ -79,13 +80,14 @@ public class ModeratorsCrudController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		thisController = this;
 		enabledCol.setStyle("-fx-alignment: CENTER;");
 		banCol.setStyle("-fx-alignment: CENTER;");
 		RefreshData(new ActionEvent());
 	}
 
 	@FXML
-	private void RefreshData(ActionEvent event) {
+	public void RefreshData(ActionEvent event) {
 		tvUsers.getItems().clear();
 		usernameCol.setCellValueFactory(
 				new PropertyValueFactory<>("username"));

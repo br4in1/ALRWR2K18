@@ -188,7 +188,6 @@ public class PlayersCrudController implements Initializable {
 		video.setCellValueFactory(
 				new PropertyValueFactory<>("video"));
 		ObservableList<Player> OL = FXCollections.observableList(PlayerCrud.findAllPlayers());
-		System.out.println(OL);
 		tableT.setItems(OL);
 
 		/*

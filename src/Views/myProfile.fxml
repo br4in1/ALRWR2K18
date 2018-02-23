@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<FlowPane fx:id="profileContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="973.0" style="-fx-border-color: gray; -fx-border-radius: 7; -fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MyProfileController">
+   <children>
+      <VBox prefHeight="234.0" prefWidth="1035.0">
+         <children>
+            <HBox prefHeight="260.0" prefWidth="1035.0">
+               <children>
+                  <Circle fx:id="pic" fill="DODGERBLUE" radius="100.0" stroke="BLACK" strokeType="INSIDE">
+                     <HBox.margin>
+                        <Insets left="30.0" top="32.0" />
+                     </HBox.margin>
+                  </Circle>
+                  <VBox prefHeight="205.0" prefWidth="779.0">
+                     <children>
+                        <Label fx:id="lastname" contentDisplay="CENTER" maxWidth="-Infinity" prefHeight="74.0" prefWidth="345.0" text="Nom" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="Ubuntu" size="56.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="firstname" contentDisplay="CENTER" maxWidth="-Infinity" prefHeight="74.0" prefWidth="372.0" text="Prénom" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="Ubuntu" size="56.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="40.0" top="55.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <Separator prefHeight="0.0" prefWidth="797.0">
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </Separator>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets right="20.0" />
+   </padding>
+</FlowPane>

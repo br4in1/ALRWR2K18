@@ -236,7 +236,6 @@ public class TeamsCrudController implements Initializable {
 		video.setCellValueFactory(
 				new PropertyValueFactory<>("video"));
 		ObservableList<Team> OL = FXCollections.observableList(TeamCrud.findAllTeam());
-		System.out.println(OL);
 		tableT.setItems(OL);
 	}
 

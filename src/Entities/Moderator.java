@@ -5,6 +5,7 @@
  */
 package Entities;
 
+import Controllers.ModeratorsCrudController;
 import Services.UserCrud;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -42,6 +43,7 @@ public class Moderator extends User{
 			public void handle(ActionEvent event) {
 				if(enabled) UserCrud.BanModerator(username);
 				else UserCrud.UnbanModerator(username);
+				ModeratorsCrudController.thisController.RefreshData(event);
 			}
 		});
 		return ret;

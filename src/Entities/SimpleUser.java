@@ -5,6 +5,8 @@
  */
 package Entities;
 
+import Controllers.UsersCrudController;
+import Controllers.UsersStatisticsController;
 import Services.UserCrud;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -100,12 +102,21 @@ public class SimpleUser extends User{
 	}
 	
 	public Button getBanButton(){
-		Button ret = new Button("Ban");
-		ret.setPrefWidth(40);
+		Button ret = new Button((enabled) ? "Ban" : "Unban");
+		ret.setPrefWidth(70);
 		ret.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				UserCrud.BanSimpleUser(username);
+				if(enabled){
+					UserCrud.BanSimpleUser(username);
+					ret.setText("Unban");
+				}
+				else{
+					UserCrud.UnBanSimpleUser(username);
+					ret.setText("Ban");
+				}
+				UsersCrudController.thisController.RefreshData(new ActionEvent());
+				UsersStatisticsController.thisController.RefreshData(new ActionEvent());
 			}
 		});
 		return ret;
