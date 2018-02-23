@@ -28,6 +28,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -88,6 +90,8 @@ public class UpdateFormPlayerController implements Initializable {
     private List<Integer> listId ;
 	@FXML
 	private StackPane playerSP;
+	@FXML
+	private ImageView PlayerImageView;
     /**
      * Initializes the controller class.
      */
@@ -205,6 +209,8 @@ public class UpdateFormPlayerController implements Initializable {
 		image = fileChooser.showOpenDialog(null);
                 
 		profilePhoto.setText(image.getPath());
+		Image image = new Image(new File(profilePhoto.getText()).toURI().toString());
+		PlayerImageView.setImage(image);
     }
 
     @FXML
@@ -216,6 +222,8 @@ public class UpdateFormPlayerController implements Initializable {
 		image2 = fileChooser.showOpenDialog(null);
                 
 		blanketPhoto.setText(image2.getPath());
+		Image image = new Image(new File(blanketPhoto.getText()).toURI().toString());
+		PlayerImageView.setImage(image);
     }
 
     @FXML
@@ -227,6 +235,8 @@ public class UpdateFormPlayerController implements Initializable {
 		image3 = fileChooser.showOpenDialog(null);
                 
 		descriptionPhoto.setText(image3.getPath());
+		Image image = new Image(new File(descriptionPhoto.getText()).toURI().toString());
+		PlayerImageView.setImage(image);
     }
     
 }

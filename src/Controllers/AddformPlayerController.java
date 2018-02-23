@@ -29,6 +29,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -106,6 +108,8 @@ public class AddformPlayerController implements Initializable {
     private List<String> Listposition = new ArrayList<String>();
 	@FXML
 	private StackPane PlayerSP;
+	@FXML
+	private ImageView PlayerImageView;
     
     /**
      * Initializes the controller class.
@@ -193,6 +197,8 @@ public class AddformPlayerController implements Initializable {
 		image = fileChooser.showOpenDialog(null);
                 
 		profilePhoto.setText(image.getPath());
+		Image image = new Image(new File(profilePhoto.getText()).toURI().toString());
+		PlayerImageView.setImage(image);
     }
 
     @FXML
@@ -204,6 +210,8 @@ public class AddformPlayerController implements Initializable {
 		image2 = fileChooser.showOpenDialog(null);
                 
 		blanketPhoto.setText(image2.getPath());
+		Image image = new Image(new File(blanketPhoto.getText()).toURI().toString());
+		PlayerImageView.setImage(image);
     }
 
     @FXML
@@ -215,6 +223,8 @@ public class AddformPlayerController implements Initializable {
 		image3 = fileChooser.showOpenDialog(null);
                 
 		descriptionPhoto.setText(image3.getPath());
+		Image image = new Image(new File(descriptionPhoto.getText()).toURI().toString());
+		PlayerImageView.setImage(image);
     }
 
 

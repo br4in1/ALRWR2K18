@@ -28,6 +28,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -98,6 +100,8 @@ public class UpdateFormTeamController implements Initializable {
 	private File image4;
 	@FXML
 	private StackPane TeamSP;
+	@FXML
+	private ImageView TeamImageView;
 
 	/**
 	 * Initializes the controller class.
@@ -200,6 +204,8 @@ public class UpdateFormTeamController implements Initializable {
 		image = fileChooser.showOpenDialog(null);
 
 		flagphoto.setText(image.getPath());
+		Image image = new Image(new File(flagphoto.getText()).toURI().toString());
+		TeamImageView.setImage(image);
 
 	}
 
@@ -213,7 +219,8 @@ public class UpdateFormTeamController implements Initializable {
 		image2 = fileChooser.showOpenDialog(null);
 
 		squadphoto.setText(image2.getPath());
-
+Image image = new Image(new File(squadphoto.getText()).toURI().toString());
+		TeamImageView.setImage(image);
 	}
 
 	@FXML
@@ -226,6 +233,8 @@ public class UpdateFormTeamController implements Initializable {
 		image3 = fileChooser.showOpenDialog(null);
 
 		logophoto.setText(image3.getPath());
+		Image image = new Image(new File(logophoto.getText()).toURI().toString());
+		TeamImageView.setImage(image);
 
 	}
 
@@ -239,6 +248,8 @@ public class UpdateFormTeamController implements Initializable {
 		image4 = fileChooser.showOpenDialog(null);
 
 		descriptionphoto.setText(image4.getPath());
+		Image image = new Image(new File(descriptionphoto.getText()).toURI().toString());
+		TeamImageView.setImage(image);
 
 	}
 	

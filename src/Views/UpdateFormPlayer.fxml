@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
@@ -56,6 +57,7 @@
             </HBox>
             <JFXTextArea fx:id="description" layoutX="257.0" layoutY="229.0" prefHeight="81.0" prefWidth="239.0" promptText="Description" />
             <StackPane fx:id="playerSP" layoutX="58.0" layoutY="260.0" prefHeight="87.0" prefWidth="168.0" />
+            <ImageView fx:id="PlayerImageView" fitHeight="150.0" fitWidth="200.0" layoutX="519.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
    </center>
