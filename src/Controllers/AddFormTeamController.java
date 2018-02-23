@@ -32,6 +32,8 @@ import javafx.util.Duration;
 import javax.naming.NamingException;
 import org.controlsfx.control.Notifications;
 import java.util.Properties ;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javax.mail.Message ; 
 import javax.mail.MessagingException ;
 import javax.mail.PasswordAuthentication ;
@@ -86,6 +88,8 @@ public class AddFormTeamController implements Initializable {
     private File image4;//descriptionphoto
     @FXML
     private StackPane TeamSP;
+	@FXML
+	private ImageView TeamImageView;
     /**
      * Initializes the controller class.
      */
@@ -210,7 +214,11 @@ public class AddFormTeamController implements Initializable {
 		image = fileChooser.showOpenDialog(null);
                 
 		flagphoto.setText(image.getPath());
-                
+		System.out.println(flagphoto.getText());
+		Image image = new Image(new File(flagphoto.getText()).toURI().toString());
+		TeamImageView.setImage(image);
+		
+	        
 	} 
      @FXML
 	private void photosquad(MouseEvent event) {
@@ -221,7 +229,9 @@ public class AddFormTeamController implements Initializable {
 				new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
 		image2 = fileChooser.showOpenDialog(null);
                 
-		squadphoto.setText(image2.getPath());      
+		squadphoto.setText(image2.getPath());     
+		Image image = new Image(new File(squadphoto.getText()).toURI().toString());
+		TeamImageView.setImage(image);
 
 	} 
         
@@ -235,6 +245,9 @@ public class AddFormTeamController implements Initializable {
 		image3 = fileChooser.showOpenDialog(null);
                 
 		logophoto.setText(image3.getPath()); 
+		
+		Image image = new Image(new File(logophoto.getText()).toURI().toString());
+		TeamImageView.setImage(image);
                 
 	} 
         
@@ -249,7 +262,8 @@ public class AddFormTeamController implements Initializable {
 		image4 = fileChooser.showOpenDialog(null);
                 
 		descriptionphoto.setText(image4.getPath());       
-	
+	Image image = new Image(new File(descriptionphoto.getText()).toURI().toString());
+		TeamImageView.setImage(image);
         
         } 
         
