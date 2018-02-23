@@ -85,6 +85,11 @@ public class UpdateFormPlayerController implements Initializable {
     private File image2; //blanketphoto
     private File image3; //Descriptionphoto
     
+	private boolean profileP =false ;
+	private boolean blanketP =false ;
+	private boolean DescriptionP = false ;
+	
+	
     private List<String> list ;
     private List<String> Listposition = new ArrayList<String>();
     private List<Integer> listId ;
@@ -141,8 +146,8 @@ public class UpdateFormPlayerController implements Initializable {
 			JFXDialogLayout content = new JFXDialogLayout();
 			content.setHeading(new Text("Error !"));
 			content.setBody(new Text("Please select an id"));
-			JFXDialog check_username = new JFXDialog(playerSP, content, JFXDialog.DialogTransition.CENTER);
-			check_username.show();
+			JFXDialog check_player = new JFXDialog(playerSP, content, JFXDialog.DialogTransition.CENTER);
+			check_player.show();
 		}
 		else 
 		{
@@ -151,8 +156,8 @@ public class UpdateFormPlayerController implements Initializable {
 				JFXDialogLayout content = new JFXDialogLayout();
 			content.setHeading(new Text("Error !"));
 			content.setBody(new Text("Age, shirt number and goals have to be numbers "));
-			JFXDialog check_username = new JFXDialog(playerSP, content, JFXDialog.DialogTransition.CENTER);
-			check_username.show();
+			JFXDialog check_player = new JFXDialog(playerSP, content, JFXDialog.DialogTransition.CENTER);
+			check_player.show();
 			}
 			else{
 					if((height.getText().matches("(([1-9][0-9]*)|0)?(\\.[0-9]*)?") && weight.getText().matches("(([1-9][0-9]*)|0)?(\\.[0-9]*)?"))==false)
@@ -160,12 +165,13 @@ public class UpdateFormPlayerController implements Initializable {
 						JFXDialogLayout content = new JFXDialogLayout();
 									   content.setHeading(new Text("Error !"));
 									   content.setBody(new Text("Height and weight have to be double !"));
-									   JFXDialog check_username = new JFXDialog(playerSP, content, JFXDialog.DialogTransition.CENTER);
-									   check_username.show();
+									   JFXDialog check_player = new JFXDialog(playerSP, content, JFXDialog.DialogTransition.CENTER);
+									   check_player.show();
 					}
 					else{
-
-						Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap()); //profilephoto
+						if(profileP && blanketP && DescriptionP)
+						{
+							Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap()); //profilephoto
 					   Map uploadResult1 = cloudinary.uploader().upload(image2, ObjectUtils.emptyMap()); //blanketphoto
 					   Map uploadResult2 = cloudinary.uploader().upload(image3, ObjectUtils.emptyMap());//Descriptionphoto
 					  // PlayerCrud.addPlayer(new Player(name.getText(), lastName.getText(), Integer.parseInt(age.getText()), club.getText(), nation.getValue(), Double.parseDouble(height.getText()), Double.parseDouble(weight.getText()), position.getValue(), Integer.parseInt(goals.getText()), description.getText(), (String) uploadResult.get("url"), (String) uploadResult1.get("url"), (String) uploadResult2.get("url"), fbLink.getText(), twitterLink.getText(), Integer.parseInt(shirtNb.getText()), video.getText()));
@@ -178,6 +184,16 @@ public class UpdateFormPlayerController implements Initializable {
 							alert.setHeaderText("Congratulation");
 							alert.setContentText("successfully done !");
 							alert.showAndWait();
+						}
+						else 
+						{
+							JFXDialogLayout content = new JFXDialogLayout();
+									   content.setHeading(new Text("Error !"));
+									   content.setBody(new Text("Please reinsert allß photos !"));
+									   JFXDialog check_player = new JFXDialog(playerSP, content, JFXDialog.DialogTransition.CENTER);
+									   check_player.show();
+						}
+						
 					}
 			}
 			
@@ -211,6 +227,8 @@ public class UpdateFormPlayerController implements Initializable {
 		profilePhoto.setText(image.getPath());
 		Image image = new Image(new File(profilePhoto.getText()).toURI().toString());
 		PlayerImageView.setImage(image);
+		profileP =true ;
+		
     }
 
     @FXML
@@ -224,6 +242,8 @@ public class UpdateFormPlayerController implements Initializable {
 		blanketPhoto.setText(image2.getPath());
 		Image image = new Image(new File(blanketPhoto.getText()).toURI().toString());
 		PlayerImageView.setImage(image);
+		blanketP =true ;
+		
     }
 
     @FXML
@@ -237,6 +257,7 @@ public class UpdateFormPlayerController implements Initializable {
 		descriptionPhoto.setText(image3.getPath());
 		Image image = new Image(new File(descriptionPhoto.getText()).toURI().toString());
 		PlayerImageView.setImage(image);
+		DescriptionP =true ;
     }
     
 }

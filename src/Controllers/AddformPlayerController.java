@@ -138,8 +138,8 @@ public class AddformPlayerController implements Initializable {
 			JFXDialogLayout content = new JFXDialogLayout();
 			content.setHeading(new Text("Error !"));
 			content.setBody(new Text("Please fill all the fields"));
-			JFXDialog check_username = new JFXDialog(PlayerSP, content, JFXDialog.DialogTransition.CENTER);
-			check_username.show();
+			JFXDialog check_player = new JFXDialog(PlayerSP, content, JFXDialog.DialogTransition.CENTER);
+			check_player.show();
 
 		} else { //[0-9]{<range>}(\\.[0-9]*)?
 				//&& height.getText().matches("-?[0-9](?:\\.[0-9]+)?") && weight.getText().matches("-?[0-9](?:\\.[0-9]+)?")
@@ -148,8 +148,8 @@ public class AddformPlayerController implements Initializable {
 					JFXDialogLayout content = new JFXDialogLayout();
                                content.setHeading(new Text("Error !"));
                                content.setBody(new Text("Age ,goals and shirt number have to be numbers !"));
-                               JFXDialog check_username = new JFXDialog(PlayerSP, content, JFXDialog.DialogTransition.CENTER);
-                               check_username.show();
+                               JFXDialog check_player = new JFXDialog(PlayerSP, content, JFXDialog.DialogTransition.CENTER);
+                               check_player.show();
 				}
 				else
 				{//-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?
@@ -158,8 +158,8 @@ public class AddformPlayerController implements Initializable {
 						JFXDialogLayout content = new JFXDialogLayout();
                                content.setHeading(new Text("Error !"));
                                content.setBody(new Text("Height and weight have to be double !"));
-                               JFXDialog check_username = new JFXDialog(PlayerSP, content, JFXDialog.DialogTransition.CENTER);
-                               check_username.show();
+                               JFXDialog check_player = new JFXDialog(PlayerSP, content, JFXDialog.DialogTransition.CENTER);
+                               check_player.show();
 					}
 					else{
 						Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap()); //profilephoto
