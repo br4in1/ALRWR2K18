@@ -21,18 +21,25 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -41,37 +48,37 @@ import javafx.stage.FileChooser;
  */
 public class AddformPlayerController implements Initializable {
 
-    @FXML
-    private JFXTextField name;
-    @FXML
-    private JFXTextField video;
-    @FXML
-    private JFXTextArea description;
-    @FXML
-    private JFXTextField lastName;
-    @FXML
-    private JFXTextField age;
-    @FXML
-    private JFXTextField club;
-    @FXML
-    private ComboBox<String> nation;
-    @FXML
-    private JFXTextField height;
-    @FXML
-    private JFXTextField weight;
-    @FXML
-    private JFXComboBox<String> position;
-    @FXML
-    private JFXTextField goals;
-    @FXML
-    private JFXTextField shirtNb;
-    @FXML
-    private JFXTextField profilePhoto;
-    @FXML
-    private JFXTextField blanketPhoto;
-    @FXML
-    private JFXTextField descriptionPhoto;
-/*
+	@FXML
+	private JFXTextField name;
+	@FXML
+	private JFXTextField video;
+	@FXML
+	private JFXTextArea description;
+	@FXML
+	private JFXTextField lastName;
+	@FXML
+	private JFXTextField age;
+	@FXML
+	private JFXTextField club;
+	@FXML
+	private ComboBox<String> nation;
+	@FXML
+	private JFXTextField height;
+	@FXML
+	private JFXTextField weight;
+	@FXML
+	private JFXComboBox<String> position;
+	@FXML
+	private JFXTextField goals;
+	@FXML
+	private JFXTextField shirtNb;
+	@FXML
+	private JFXTextField profilePhoto;
+	@FXML
+	private JFXTextField blanketPhoto;
+	@FXML
+	private JFXTextField descriptionPhoto;
+	/*
     private int id ;//
     private String name ; //
     private String lastName ; //
@@ -92,143 +99,166 @@ public class AddformPlayerController implements Initializable {
     private String video ; 
     
     
-    */
-    @FXML
-    private JFXTextField fbLink;
-    @FXML
-    private JFXTextField twitterLink;
-    Cloudinary cloudinary;
-    private File image; //profilephoto
-    private File image2; //blanketphoto
-    private File image3; //Descriptionphoto
-    
-    private List<String> list ;
-    private List<String> Listposition = new ArrayList<String>();
+	 */
+	@FXML
+	private JFXTextField fbLink;
+	@FXML
+	private JFXTextField twitterLink;
+	Cloudinary cloudinary;
+	private File image; //profilephoto
+	private File image2; //blanketphoto
+	private File image3; //Descriptionphoto
+	
+	private boolean profileP = false;
+	private boolean blanketP = false;
+	private boolean DescriptionP = false;
+	
+	private List<String> list;
+	private List<String> Listposition = new ArrayList<String>();
 	@FXML
 	private StackPane PlayerSP;
-    
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
-        list = TeamCrud.GetNamelist();
-        nation.setItems(FXCollections.observableArrayList(list));
-        
-        Listposition.add("Forward") ;
-        Listposition.add("Backword") ;
-        Listposition.add("Middle");
-        position.setItems(FXCollections.observableArrayList(Listposition));
-		
-		
-        
-       // nation.setItems(FXCollections.observableArrayList(list));
-    }    
+	@FXML
+	private ImageView PlayerImageView;
 
-    @FXML
-    private void submit(MouseEvent event) throws IOException {
-		
-		if (name.getText().trim().isEmpty() ||lastName.getText().trim().isEmpty() || age.getText().trim().isEmpty() || club.getText().trim().isEmpty() || nation.getValue() == null || height.getText().trim().isEmpty() || weight.getText().trim().isEmpty() || position.getValue()== null || goals.getText().trim().isEmpty() || description.getText().trim().isEmpty() || profilePhoto.getText().trim().isEmpty() || blanketPhoto.getText().trim().isEmpty() || descriptionPhoto.getText().trim().isEmpty() || fbLink.getText().trim().isEmpty() || twitterLink.getText().trim().isEmpty() || shirtNb.getText().trim().isEmpty() || video.getText().trim().isEmpty() ) {
+	/**
+	 * Initializes the controller class.
+	 */
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		// TODO
+		cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
+		list = TeamCrud.GetNamelist();
+		nation.setItems(FXCollections.observableArrayList(list));
+
+		Listposition.add("Forward");
+		Listposition.add("Backword");
+		Listposition.add("Middle");
+		position.setItems(FXCollections.observableArrayList(Listposition));
+
+		// nation.setItems(FXCollections.observableArrayList(list));
+	}
+
+	@FXML
+	private void submit(MouseEvent event) throws IOException {
+
+		if (name.getText().trim().isEmpty() || lastName.getText().trim().isEmpty() || age.getText().trim().isEmpty() || club.getText().trim().isEmpty() || nation.getValue() == null || height.getText().trim().isEmpty() || weight.getText().trim().isEmpty() || position.getValue() == null || goals.getText().trim().isEmpty() || description.getText().trim().isEmpty() || profilePhoto.getText().trim().isEmpty() || blanketPhoto.getText().trim().isEmpty() || descriptionPhoto.getText().trim().isEmpty() || fbLink.getText().trim().isEmpty() || twitterLink.getText().trim().isEmpty() || shirtNb.getText().trim().isEmpty() || video.getText().trim().isEmpty()) {
 			JFXDialogLayout content = new JFXDialogLayout();
 			content.setHeading(new Text("Error !"));
 			content.setBody(new Text("Please fill all the fields"));
-			JFXDialog check_username = new JFXDialog(PlayerSP, content, JFXDialog.DialogTransition.CENTER);
-			check_username.show();
+			JFXDialog check_player = new JFXDialog(PlayerSP, content, JFXDialog.DialogTransition.CENTER);
+			check_player.show();
 
 		} else { //[0-9]{<range>}(\\.[0-9]*)?
-				//&& height.getText().matches("-?[0-9](?:\\.[0-9]+)?") && weight.getText().matches("-?[0-9](?:\\.[0-9]+)?")
-				if((age.getText().matches("[0-9]*") && goals.getText().matches("[0-9]*") && shirtNb.getText().matches("[0-9]*"))==false)
-				{
+			//&& height.getText().matches("-?[0-9](?:\\.[0-9]+)?") && weight.getText().matches("-?[0-9](?:\\.[0-9]+)?")
+			if ((age.getText().matches("[0-9]*") && goals.getText().matches("[0-9]*") && shirtNb.getText().matches("[0-9]*")) == false) {
+				JFXDialogLayout content = new JFXDialogLayout();
+				content.setHeading(new Text("Error !"));
+				content.setBody(new Text("Age ,goals and shirt number have to be numbers !"));
+				JFXDialog check_player = new JFXDialog(PlayerSP, content, JFXDialog.DialogTransition.CENTER);
+				check_player.show();
+			} else {//-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?
+				if ((height.getText().matches("(([1-9][0-9]*)|0)?(\\.[0-9]*)?") && weight.getText().matches("(([1-9][0-9]*)|0)?(\\.[0-9]*)?")) == false) {
 					JFXDialogLayout content = new JFXDialogLayout();
-                               content.setHeading(new Text("Error !"));
-                               content.setBody(new Text("Age ,goals and shirt number have to be numbers !"));
-                               JFXDialog check_username = new JFXDialog(PlayerSP, content, JFXDialog.DialogTransition.CENTER);
-                               check_username.show();
-				}
-				else
-				{//-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?
-					if((height.getText().matches("(([1-9][0-9]*)|0)?(\\.[0-9]*)?") && weight.getText().matches("(([1-9][0-9]*)|0)?(\\.[0-9]*)?"))==false)
+					content.setHeading(new Text("Error !"));
+					content.setBody(new Text("Height and weight have to be double !"));
+					JFXDialog check_player = new JFXDialog(PlayerSP, content, JFXDialog.DialogTransition.CENTER);
+					check_player.show();
+				} else {
+					if (profileP && blanketP && DescriptionP)
 					{
-						JFXDialogLayout content = new JFXDialogLayout();
-                               content.setHeading(new Text("Error !"));
-                               content.setBody(new Text("Height and weight have to be double !"));
-                               JFXDialog check_username = new JFXDialog(PlayerSP, content, JFXDialog.DialogTransition.CENTER);
-                               check_username.show();
-					}
-					else{
+						Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+					alert.setTitle("Add confirmation");
+					alert.setHeaderText("Are you sure about adding this player ?");
+					Optional<ButtonType> result = alert.showAndWait();
+					if(result.get() == ButtonType.OK){
 						Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap()); //profilephoto
-					    Map uploadResult1 = cloudinary.uploader().upload(image2, ObjectUtils.emptyMap()); //blanketphoto
-					    Map uploadResult2 = cloudinary.uploader().upload(image3, ObjectUtils.emptyMap());//Descriptionphoto
-						System.out.println(fbLink.getText() + "ddddd");
-					    PlayerCrud.addPlayer(new Player(name.getText(), lastName.getText(), Integer.parseInt(age.getText()), club.getText(), nation.getValue(), Double.parseDouble(height.getText()), Double.parseDouble(weight.getText()), position.getValue(), Integer.parseInt(goals.getText()), description.getText(), (String) uploadResult.get("url"), (String) uploadResult1.get("url"), (String) uploadResult2.get("url"), fbLink.getText(), twitterLink.getText(), Integer.parseInt(shirtNb.getText()), video.getText()));
+					Map uploadResult1 = cloudinary.uploader().upload(image2, ObjectUtils.emptyMap()); //blanketphoto
+					Map uploadResult2 = cloudinary.uploader().upload(image3, ObjectUtils.emptyMap());//Descriptionphoto
+					System.out.println(fbLink.getText() + "ddddd");
+					PlayerCrud.addPlayer(new Player(name.getText(), lastName.getText(), Integer.parseInt(age.getText()), club.getText(), nation.getValue(), Double.parseDouble(height.getText()), Double.parseDouble(weight.getText()), position.getValue(), Integer.parseInt(goals.getText()), description.getText(), (String) uploadResult.get("url"), (String) uploadResult1.get("url"), (String) uploadResult2.get("url"), fbLink.getText(), twitterLink.getText(), Integer.parseInt(shirtNb.getText()), video.getText()));
+					Notifications notificationBuilder
+								= Notifications.create().title("Avertissment")
+										.text("the player has been added ! ")
+										.hideAfter(Duration.seconds(3))
+										.position(Pos.TOP_RIGHT)
+										.onAction((ActionEvent event1) -> {
+											// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+											System.out.println("Clicked on notification !");
+										});
+
+						notificationBuilder.showInformation();
+					}
 					//(String name, String lastName, int age, String club, int nation, double height,                                               double weight, String position,                                             int goals, String description, String profilePhoto, String blanketPhoto, String descriptionPhoto, String fbLink, String twitterLink, int shirtNb, String video) {
 					//   TeamCrud.addTeam(new Team(name.getText(),coach.getText(),president.getText(),area.getText(),Integer.parseInt(participation.getText()),Date.valueOf(date.getValue()),wcgroupe.getText(),Integer.parseInt(fifarank.getText()),(String) uploadResult.get("url"),(String) uploadResult2.get("url"),(String) uploadResult1.get("url"),(String) uploadResult3.get("url"),description.getText(),website.getText(),video.getText()));
-   Alert alert = new Alert(Alert.AlertType.INFORMATION);
-					alert.setTitle("Information Dialog");
-					alert.setHeaderText("Congratulation");
-					alert.setContentText("successfully done !");
-					alert.showAndWait();
+
+					}
+					else
+					{
+						JFXDialogLayout content = new JFXDialogLayout();
+						content.setHeading(new Text("Error !"));
+						content.setBody(new Text("Please insert all photos properly !"));
+						JFXDialog check_player = new JFXDialog(PlayerSP, content, JFXDialog.DialogTransition.CENTER);
+						check_player.show();
 					}
 					
 				}
-		        
-		
+
+			}
+
 		}
-		
-   
-    }                                                                                                                                               //Double.parseDouble(text)
 
+	}                                                                                                                                               //Double.parseDouble(text)
 
-    
+	@FXML
+	private void profilePhoto(MouseEvent event) {
 
-    @FXML
-    private void profilePhoto(MouseEvent event) {
-             
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choisir une photo");
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
 		image = fileChooser.showOpenDialog(null);
-                
-		profilePhoto.setText(image.getPath());
-    }
 
-    @FXML
-    private void blanketPhoto(MouseEvent event) {
-        FileChooser fileChooser = new FileChooser();
+		profilePhoto.setText(image.getPath());
+		Image image = new Image(new File(profilePhoto.getText()).toURI().toString());
+		PlayerImageView.setImage(image);
+		profileP = true;
+	}
+
+	@FXML
+	private void blanketPhoto(MouseEvent event) {
+		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choisir une photo");
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
 		image2 = fileChooser.showOpenDialog(null);
-                
-		blanketPhoto.setText(image2.getPath());
-    }
 
-    @FXML
-    private void DescriptionPhoto(MouseEvent event) {
-        FileChooser fileChooser = new FileChooser();
+		blanketPhoto.setText(image2.getPath());
+		Image image = new Image(new File(blanketPhoto.getText()).toURI().toString());
+		PlayerImageView.setImage(image);
+		blanketP =true ;
+	}
+
+	@FXML
+	private void DescriptionPhoto(MouseEvent event) {
+		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choisir une photo");
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
 		image3 = fileChooser.showOpenDialog(null);
-                
+
 		descriptionPhoto.setText(image3.getPath());
-    }
+		Image image = new Image(new File(descriptionPhoto.getText()).toURI().toString());
+		PlayerImageView.setImage(image);
+		DescriptionP=true ;
+	}
 
+	@FXML
+	private void choixPosition(ActionEvent event) {
+	}
 
-    @FXML
-    private void choixPosition(ActionEvent event) {
-    }
+	@FXML
+	private void choixNation(ActionEvent event) {
+		System.out.println(nation.getValue());
+	}
 
-   
-
-
-    @FXML
-    private void choixNation(ActionEvent event) {
-        System.out.println(nation.getValue());
-    }
-
-    
 }
