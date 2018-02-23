@@ -94,6 +94,11 @@ public class AddFormTeamController implements Initializable {
 	@FXML
 	private ImageView TeamImageView;
 
+	private boolean flagP = false;
+	private boolean squadP = false;
+	private boolean logoP = false;
+	private boolean descriptionP = false;
+
 	/**
 	 * Initializes the controller class.
 	 */
@@ -126,67 +131,76 @@ public class AddFormTeamController implements Initializable {
 				JFXDialog check_team = new JFXDialog(TeamSP, content, JFXDialog.DialogTransition.CENTER);
 				check_team.show();
 			} else {
-				Boolean ok = TeamCrud.findTeamByName(name.getText());
-				if (ok) {
-					JFXDialogLayout content = new JFXDialogLayout();
-					content.setHeading(new Text("Error !"));
-					content.setBody(new Text("Sorry, this team's name already exist !"));
-					JFXDialog check_team = new JFXDialog(TeamSP, content, JFXDialog.DialogTransition.CENTER);
-					check_team.show();
-				} else {
+				if (flagP && squadP && logoP && descriptionP) {
+					Boolean ok = TeamCrud.findTeamByName(name.getText());
+					if (ok) {
+						JFXDialogLayout content = new JFXDialogLayout();
+						content.setHeading(new Text("Error !"));
+						content.setBody(new Text("Sorry, this team's name already exist !"));
+						JFXDialog check_team = new JFXDialog(TeamSP, content, JFXDialog.DialogTransition.CENTER);
+						check_team.show();
+					} else {
 
-					Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-					alert.setTitle("Add confirmation");
-					alert.setHeaderText("Are you sure about adding this team ?");
-					Optional<ButtonType> result = alert.showAndWait();
-					if (result.get() == ButtonType.OK) {
-						Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap()); //flagphoto
-						Map uploadResult1 = cloudinary.uploader().upload(image2, ObjectUtils.emptyMap()); //squadphoto
-						Map uploadResult2 = cloudinary.uploader().upload(image3, ObjectUtils.emptyMap());//logophoto
-						Map uploadResult3 = cloudinary.uploader().upload(image4, ObjectUtils.emptyMap());//descriptionphoto
-						TeamCrud.addTeam(new Team(name.getText(), coach.getText(), president.getText(), area.getText(), Integer.parseInt(participation.getText()), Date.valueOf(date.getValue()), wcgroupe.getText(), Integer.parseInt(fifarank.getText()), (String) uploadResult.get("url"), (String) uploadResult2.get("url"), (String) uploadResult1.get("url"), (String) uploadResult3.get("url"), description.getText(), website.getText(), video.getText()));
-						Properties props = new Properties();
-						props.put("mail.smtp.host", "smtp.gmail.com");
-						props.put("mail.smtp.socketFactory.port", "465");
-						props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-						props.put("mail.smtp.auth", "true");
-						props.put("mail.smtp.prot", "465");
+						Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+						alert.setTitle("Add confirmation");
+						alert.setHeaderText("Are you sure about adding this team ?");
+						Optional<ButtonType> result = alert.showAndWait();
+						if (result.get() == ButtonType.OK) {
+							Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap()); //flagphoto
+							Map uploadResult1 = cloudinary.uploader().upload(image2, ObjectUtils.emptyMap()); //squadphoto
+							Map uploadResult2 = cloudinary.uploader().upload(image3, ObjectUtils.emptyMap());//logophoto
+							Map uploadResult3 = cloudinary.uploader().upload(image4, ObjectUtils.emptyMap());//descriptionphoto
+							TeamCrud.addTeam(new Team(name.getText(), coach.getText(), president.getText(), area.getText(), Integer.parseInt(participation.getText()), Date.valueOf(date.getValue()), wcgroupe.getText(), Integer.parseInt(fifarank.getText()), (String) uploadResult.get("url"), (String) uploadResult2.get("url"), (String) uploadResult1.get("url"), (String) uploadResult3.get("url"), description.getText(), website.getText(), video.getText()));
+							Properties props = new Properties();
+							props.put("mail.smtp.host", "smtp.gmail.com");
+							props.put("mail.smtp.socketFactory.port", "465");
+							props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+							props.put("mail.smtp.auth", "true");
+							props.put("mail.smtp.prot", "465");
 
-						Session session = Session.getDefaultInstance(props,
-								new javax.mail.Authenticator() {
-							protected PasswordAuthentication getPasswordAuthentication() {
+							Session session = Session.getDefaultInstance(props,
+									new javax.mail.Authenticator() {
+								protected PasswordAuthentication getPasswordAuthentication() {
 
-								return new PasswordAuthentication("moez.haddad@esprit.tn", "moezmoezhaddad71126429118");
+									return new PasswordAuthentication("moez.haddad@esprit.tn", "moezmoezhaddad71126429118");
+								}
 							}
-						}
-						);
-						try {
-							Message message = new MimeMessage(session);
-							message.setFrom(new InternetAddress("moez.haddad@esprit.tn"));
-							message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("moezhdd@gmail.com"));
-							message.setSubject("New add !");
-							message.setText("You have added new team in your desktop application !");
-							Transport.send(message);
+							);
+							try {
+								Message message = new MimeMessage(session);
+								message.setFrom(new InternetAddress("moez.haddad@esprit.tn"));
+								message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("moezhdd@gmail.com"));
+								message.setSubject("New add !");
+								message.setText("You have added new team in your desktop application !");
+								Transport.send(message);
 
-						} catch (Exception e) {
-							JOptionPane.showMessageDialog(null, e);
-						}
+							} catch (Exception e) {
+								JOptionPane.showMessageDialog(null, e);
+							}
 
 // *TeamCrud.addTeam(new Team(name.getText(),coach.getText(),president.getText(),area.getText(),Integer.parseInt(participation.getText()),Date.valueOf(date.getValue()),wcgroupe.getText(),Integer.parseInt(fifarank.getText()),flagphoto.getText(),logophoto.getText(),squadphoto.getText(),descriptionphoto.getText(),description.getText(),website.getText(),video.getText()));
-						Notifications notificationBuilder
-								= Notifications.create().title("Avertissment")
-										.text("the team has been added ! ")
-										.hideAfter(Duration.seconds(3))
-										.position(Pos.TOP_RIGHT)
-										.onAction((ActionEvent event1) -> {
-											// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-											System.out.println("Clicked on notification !");
-										});
+							Notifications notificationBuilder
+									= Notifications.create().title("Avertissment")
+											.text("the team has been added ! ")
+											.hideAfter(Duration.seconds(3))
+											.position(Pos.TOP_RIGHT)
+											.onAction((ActionEvent event1) -> {
+												// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+												System.out.println("Clicked on notification !");
+											});
 
-						notificationBuilder.showInformation();
+							notificationBuilder.showInformation();
+						}
+
 					}
-
+				} else {
+					JFXDialogLayout content = new JFXDialogLayout();
+					content.setHeading(new Text("Error !"));
+					content.setBody(new Text("Please insert all photos properly !"));
+					JFXDialog check_team = new JFXDialog(TeamSP, content, JFXDialog.DialogTransition.CENTER);
+					check_team.show();
 				}
+
 			}
 
 		}
@@ -207,6 +221,7 @@ public class AddFormTeamController implements Initializable {
 		System.out.println(flagphoto.getText());
 		Image image = new Image(new File(flagphoto.getText()).toURI().toString());
 		TeamImageView.setImage(image);
+		flagP = true;
 
 	}
 
@@ -222,6 +237,7 @@ public class AddFormTeamController implements Initializable {
 		squadphoto.setText(image2.getPath());
 		Image image = new Image(new File(squadphoto.getText()).toURI().toString());
 		TeamImageView.setImage(image);
+		squadP = true;
 
 	}
 
@@ -238,6 +254,7 @@ public class AddFormTeamController implements Initializable {
 
 		Image image = new Image(new File(logophoto.getText()).toURI().toString());
 		TeamImageView.setImage(image);
+		logoP = true;
 
 	}
 
@@ -253,6 +270,7 @@ public class AddFormTeamController implements Initializable {
 		descriptionphoto.setText(image4.getPath());
 		Image image = new Image(new File(descriptionphoto.getText()).toURI().toString());
 		TeamImageView.setImage(image);
+		descriptionP = true;
 
 	}
 

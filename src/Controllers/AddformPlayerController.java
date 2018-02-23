@@ -108,7 +108,11 @@ public class AddformPlayerController implements Initializable {
 	private File image; //profilephoto
 	private File image2; //blanketphoto
 	private File image3; //Descriptionphoto
-
+	
+	private boolean profileP = false;
+	private boolean blanketP = false;
+	private boolean DescriptionP = false;
+	
 	private List<String> list;
 	private List<String> Listposition = new ArrayList<String>();
 	@FXML
@@ -160,7 +164,9 @@ public class AddformPlayerController implements Initializable {
 					JFXDialog check_player = new JFXDialog(PlayerSP, content, JFXDialog.DialogTransition.CENTER);
 					check_player.show();
 				} else {
-					Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+					if (profileP && blanketP && DescriptionP)
+					{
+						Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 					alert.setTitle("Add confirmation");
 					alert.setHeaderText("Are you sure about adding this player ?");
 					Optional<ButtonType> result = alert.showAndWait();
@@ -185,6 +191,16 @@ public class AddformPlayerController implements Initializable {
 					//(String name, String lastName, int age, String club, int nation, double height,                                               double weight, String position,                                             int goals, String description, String profilePhoto, String blanketPhoto, String descriptionPhoto, String fbLink, String twitterLink, int shirtNb, String video) {
 					//   TeamCrud.addTeam(new Team(name.getText(),coach.getText(),president.getText(),area.getText(),Integer.parseInt(participation.getText()),Date.valueOf(date.getValue()),wcgroupe.getText(),Integer.parseInt(fifarank.getText()),(String) uploadResult.get("url"),(String) uploadResult2.get("url"),(String) uploadResult1.get("url"),(String) uploadResult3.get("url"),description.getText(),website.getText(),video.getText()));
 
+					}
+					else
+					{
+						JFXDialogLayout content = new JFXDialogLayout();
+						content.setHeading(new Text("Error !"));
+						content.setBody(new Text("Please insert all photos properly !"));
+						JFXDialog check_player = new JFXDialog(PlayerSP, content, JFXDialog.DialogTransition.CENTER);
+						check_player.show();
+					}
+					
 				}
 
 			}
@@ -205,6 +221,7 @@ public class AddformPlayerController implements Initializable {
 		profilePhoto.setText(image.getPath());
 		Image image = new Image(new File(profilePhoto.getText()).toURI().toString());
 		PlayerImageView.setImage(image);
+		profileP = true;
 	}
 
 	@FXML
@@ -218,6 +235,7 @@ public class AddformPlayerController implements Initializable {
 		blanketPhoto.setText(image2.getPath());
 		Image image = new Image(new File(blanketPhoto.getText()).toURI().toString());
 		PlayerImageView.setImage(image);
+		blanketP =true ;
 	}
 
 	@FXML
@@ -231,6 +249,7 @@ public class AddformPlayerController implements Initializable {
 		descriptionPhoto.setText(image3.getPath());
 		Image image = new Image(new File(descriptionPhoto.getText()).toURI().toString());
 		PlayerImageView.setImage(image);
+		DescriptionP=true ;
 	}
 
 	@FXML
