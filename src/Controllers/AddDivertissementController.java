@@ -164,7 +164,6 @@ public class AddDivertissementController implements Initializable {
 	private void Enregistrement(ActionEvent event) throws SQLException {
 		
 		if ((!"".equals(city.getText())) && (!"".equals(opening.getValue())) &&(!"".equals(closing.getValue())) && (!"".equals(nom.getText()))) {
-			System.out.println(closing.getValue().toString());
 			
 			//enregistrer
 			Divertissement p = new Divertissement(0, nom.getText(), Double.parseDouble(latitude.getText()), Double.parseDouble(longtitude.getText()), Timestamp.valueOf("2016-11-16 "+opening.getValue().toString()+":10"),Timestamp.valueOf("2016-11-16 "+closing.getValue().toString()+":10"),link.getText(), image.getText(), city.getText());

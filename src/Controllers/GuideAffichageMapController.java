@@ -82,7 +82,6 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 		MapOptions mapOptions = new MapOptions();
 	
 		 LatLong x = new LatLong(50.00,50.00);
-		 System.out.println(x);
 		mapOptions.center(x)
 				.mapType(MapTypeIdEnum.ROADMAP)
 				.overviewMapControl(false)

@@ -113,7 +113,7 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 	private MarkerOptions markerOptions1;
 	private Marker joeSmithMarker;
 	private TextToSpeech tts = new TextToSpeech();
-	private float VoiceVolume ;
+	private float VoiceVolume;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -138,11 +138,9 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 			node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
 				switch (node.getId()) {
 					case "valider":
-						System.out.println("	valider cliqued");
 						break;
 					case "hotel":
 						if (x == 0) {
-							System.out.println("	Hotel");
 							try {
 								HotelCRUD C = new HotelCRUD();
 								List<Hotel> Lis = C.AfficherTousLesHotels();
@@ -157,7 +155,6 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 											.title(Lis.get(i).getNom());
 									Marker joeSmithMarker = new Marker(markerOptions1);
 									col.add(joeSmithMarker);
-									System.out.println("-yes");
 
 								}
 								map.addMarkers(col);
@@ -236,17 +233,17 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 						}
 
 						break;
-					case "Male" :
+					case "Male":
 						tts.setVoice("cmu-rms-hsmm");
-						VoiceVolume = 2 ;
-							break ;
-					case "Female" :
-					
+						VoiceVolume = 2;
+						break;
+					case "Female":
+
 						tts.setVoice("dfki-poppy-hsmm");
-						VoiceVolume = 2 ;
-						break ; 
-					case "None" : 
-						VoiceVolume = 0 ;
+						VoiceVolume = 2;
+						break;
+					case "None":
+						VoiceVolume = 0;
 						break;
 
 				}
@@ -301,10 +298,8 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 
 				map.removeMarker(joeSmithMarker);
 			}
-			
-		tts.speak(searchField.getText(), VoiceVolume, false,false);
 
-			System.out.println(searchField.getText());
+			tts.speak(searchField.getText(), VoiceVolume, false, false);
 			ListHotel = C.AfficherTousLesHotels(searchField.getText());
 			ListStade = S.AfficherTousLesStade(searchField.getText());
 			if (ListHotel.size() != 0) {
@@ -356,14 +351,11 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 					@Override
 					public void geocodedResultsReceived(com.lynden.gmapsfx.service.geocoding.GeocodingResult[] grs, GeocoderStatus gs) {
 						LatLong latLong = null;
-						System.out.println("1");
 						if (gs == GeocoderStatus.ZERO_RESULTS) {
 							Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
 							alert.show();
 							return;
 						} else if (grs.length > 1) {
-
-							System.out.println("2");
 							Alert alert = new Alert(Alert.AlertType.WARNING, "Multiple results found, showing the first one.");
 							alert.show();
 							latLong = new LatLong(grs[0].getGeometry().getLocation().getLatitude(), grs[0].getGeometry().getLocation().getLongitude());
@@ -375,8 +367,6 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 							joeSmithMarker = new Marker(markerOptions1);
 							map.addMarker(joeSmithMarker);
 						} else {
-
-							System.out.println("3");
 							latLong = new LatLong(grs[0].getGeometry().getLocation().getLatitude(), grs[0].getGeometry().getLocation().getLongitude());
 							markerOptions1 = new MarkerOptions();
 							markerOptions1.position(latLong)
@@ -412,9 +402,7 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 			C.updateTest(p);
 			try {
 				String x = toTextField.getText();
-				System.out.println(Double.parseDouble(x));
 			} catch (NumberFormatException e) {
-				System.out.println("not a number");
 			}
 
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/AddHotel.fxml"));
@@ -428,9 +416,7 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 			C.updateTest(p);
 			try {
 				String x = toTextField.getText();
-				System.out.println(Double.parseDouble(x));
 			} catch (NumberFormatException e) {
-				System.out.println("not a number");
 			}
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/AddStade.fxml"));
 			Parent root = (Parent) fxmlLoader.load();
@@ -444,9 +430,7 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 			C.updateTest(p);
 			try {
 				String x = toTextField.getText();
-				System.out.println(Double.parseDouble(x));
 			} catch (NumberFormatException e) {
-				System.out.println("not a number");
 			}
 
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/AddDivertissement.fxml"));

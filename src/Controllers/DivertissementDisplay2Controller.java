@@ -152,18 +152,6 @@ public class DivertissementDisplay2Controller implements Initializable {
 
 	@FXML
 	private void update(ActionEvent event) throws SQLException {
-
-		//System.out.println(Timestamp.valueOf("2016-11-16 "+open.getValue().toString()+":10"));
-		System.out.println(city.getText());
-		System.out.println(name.getText());
-		System.out.println(Integer.parseInt(id.getText()));
-		System.out.println(link.getText());
-		System.out.println(path.getText());
-		System.out.println(open.getValue().toString());
-		System.out.println(Timestamp.valueOf("2016-11-16 " + open.getValue().toString() + ":10"));
-		System.out.println(Timestamp.valueOf("2016-11-16 " + close.getValue().toString() + ":10"));
-		System.out.println(Double.parseDouble(latitude.getText()));
-		System.out.println(Double.parseDouble(longtitude.getText()));
 		Divertissement p = new Divertissement(Integer.parseInt(id.getText()), name.getText(), Double.parseDouble(latitude.getText()), Double.parseDouble(longtitude.getText()), Timestamp.valueOf("2016-11-16 " + open.getValue().toString() + ":10"), Timestamp.valueOf("2016-11-16 " + close.getValue().toString() + ":10"), link.getText(), path.getText(), city.getText());
 		DivertissmentCRUD x = new DivertissmentCRUD();
 		x.updateA(p);

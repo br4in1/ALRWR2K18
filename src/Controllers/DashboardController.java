@@ -200,7 +200,6 @@ public class DashboardController implements Initializable {
 							break;
 						case "divertiss":
 							tts.speak("Managing divertissments", 2.0f, false, false);
-							System.out.println("alo");
 							 {
 								try {
 									ManagingDivertissement = FXMLLoader.load(getClass().getResource("/Views/DivertissementDisplay2.fxml"));

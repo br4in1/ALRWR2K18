@@ -189,7 +189,6 @@ public class DisplayIController implements Initializable {
 		   .onAction(new EventHandler<ActionEvent>() {
 	   @Override
 	   public void handle(ActionEvent event) {
-		   System.out.println("Clickeeeed");
 	   }
    });
    notificationBuilder.showError();

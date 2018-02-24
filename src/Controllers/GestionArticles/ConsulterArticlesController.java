@@ -110,9 +110,6 @@ public class ConsulterArticlesController implements Initializable {
         titreColumn.setOnEditCommit((TableColumn.CellEditEvent<Article, String> t) -> {
             //Article a = new Article(t.getTableView().getItems().get(t.getTablePosition().getRow()));
             //a.setTitre(t.getNewValue());
-            //System.out.println(t.getTableView().getItems().get(t.getTablePosition().getRow()));
-            //System.out.println(t.getNewValue());
-            // System.out.println(a);
             if (ArticleCrud.update(t.getTableView().getItems().get(t.getTablePosition().getRow()).getId(), "titre", t.getNewValue()) != null) {
                 showDialog("Success", "L'article a ete MAJ");
             } else {
@@ -173,7 +170,6 @@ public class ConsulterArticlesController implements Initializable {
                 if (!row.isEmpty() && eventt.getButton() == MouseButton.PRIMARY
                         && eventt.getClickCount() == 1) {
                     Article clickedRow = row.getItem();
-                    System.out.println(clickedRow);
                 }
             });*/
 

@@ -125,23 +125,17 @@ public class AjouterArticleController implements Initializable {
                     }
                     break;
                 case "Joueur":
-                    System.out.println("choix Joueur");
                     break;
                 case "Equipe":
-                    System.out.println("Choix equipe");
                     break;
                 case "Evenement":
-                    System.out.println("Choix evenement");
                     break;
                 case "Stade":
-                    System.out.println("Choix stade");
                     break;
                 case "None":
-                    System.out.println("None");
                     break;
             }
         } else {
-            System.out.println("ne pas laisser vide");
         }
     }
 

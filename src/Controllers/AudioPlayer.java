@@ -206,7 +206,6 @@ public class AudioPlayer extends Thread {
 	public void setGain(float fGain) {
 		
 		// if (line != null)
-		// System.out.println(((FloatControl)
 		// line.getControl(FloatControl.Type.MASTER_GAIN)).getValue())
 		
 		// Set the value
@@ -218,7 +217,6 @@ public class AudioPlayer extends Thread {
 		// OR (Math.log(fGain == 0.0 ? 0.0000 : fGain) / Math.log(10.0))
 		
 		// if (line != null)
-		// System.out.println(((FloatControl)
 		// line.getControl(FloatControl.Type.MASTER_GAIN)).getValue())
 	}
 	

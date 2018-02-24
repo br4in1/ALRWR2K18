@@ -186,7 +186,6 @@ public class AddFormTeamController implements Initializable {
 											.position(Pos.TOP_RIGHT)
 											.onAction((ActionEvent event1) -> {
 												// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-												System.out.println("Clicked on notification !");
 											});
 
 							notificationBuilder.showInformation();
@@ -218,7 +217,6 @@ public class AddFormTeamController implements Initializable {
 		image = fileChooser.showOpenDialog(null);
 
 		flagphoto.setText(image.getPath());
-		System.out.println(flagphoto.getText());
 		Image image = new Image(new File(flagphoto.getText()).toURI().toString());
 		TeamImageView.setImage(image);
 		flagP = true;

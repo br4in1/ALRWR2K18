@@ -174,7 +174,6 @@ public class AddformPlayerController implements Initializable {
 						Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap()); //profilephoto
 					Map uploadResult1 = cloudinary.uploader().upload(image2, ObjectUtils.emptyMap()); //blanketphoto
 					Map uploadResult2 = cloudinary.uploader().upload(image3, ObjectUtils.emptyMap());//Descriptionphoto
-					System.out.println(fbLink.getText() + "ddddd");
 					PlayerCrud.addPlayer(new Player(name.getText(), lastName.getText(), Integer.parseInt(age.getText()), club.getText(), nation.getValue(), Double.parseDouble(height.getText()), Double.parseDouble(weight.getText()), position.getValue(), Integer.parseInt(goals.getText()), description.getText(), (String) uploadResult.get("url"), (String) uploadResult1.get("url"), (String) uploadResult2.get("url"), fbLink.getText(), twitterLink.getText(), Integer.parseInt(shirtNb.getText()), video.getText()));
 					Notifications notificationBuilder
 								= Notifications.create().title("Avertissment")
@@ -183,7 +182,6 @@ public class AddformPlayerController implements Initializable {
 										.position(Pos.TOP_RIGHT)
 										.onAction((ActionEvent event1) -> {
 											// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-											System.out.println("Clicked on notification !");
 										});
 
 						notificationBuilder.showInformation();
@@ -258,7 +256,6 @@ public class AddformPlayerController implements Initializable {
 
 	@FXML
 	private void choixNation(ActionEvent event) {
-		System.out.println(nation.getValue());
 	}
 
 }
