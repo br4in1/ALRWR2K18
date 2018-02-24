@@ -46,6 +46,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -99,6 +100,8 @@ public class AddImageController implements Initializable {
 	private Text inserer1;
 	@FXML
 	private Label rat;
+	@FXML
+	private FlowPane Showadd;
 
 	/**
 	 * Initializes the controller class.
