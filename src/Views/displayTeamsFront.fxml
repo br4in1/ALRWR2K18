@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEndController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DisplayTeamsFrontController">
    <bottom>
       <Pane prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -27,8 +19,24 @@
       </Pane>
    </bottom>
    <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <HBox prefHeight="700.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
    </center>
+   <left>
+      <AnchorPane fx:id="sidebar" prefHeight="700.0" prefWidth="305.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tableT" prefHeight="695.0" prefWidth="312.0">
+              <columns>
+                <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="flag" prefWidth="75.0" text="Flag" />
+                  <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
+                  <TableColumn fx:id="area" prefWidth="75.0" text="Area" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
+   </left>
+   <right>
+      <AnchorPane fx:id="mainContent" prefHeight="700.0" prefWidth="646.0" BorderPane.alignment="CENTER" />
+   </right>
    <top>
       <HBox prefHeight="80.0" prefWidth="1120.0" BorderPane.alignment="CENTER">
          <children>
@@ -41,66 +49,67 @@
                </HBox.margin>
             </ImageView>
             <HBox prefHeight="40.0" prefWidth="683.0">
-               <HBox.margin>
-                  <Insets bottom="20.0" left="70.0" right="80.0" top="20.0" />
-               </HBox.margin>
                <children>
                   <Label fx:id="homebutton" alignment="CENTER" onMouseEntered="#highlighthomebtn" onMouseExited="#unhighlighthomebtn" prefHeight="22.0" prefWidth="88.0" text="Accueil">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin>
+                  </Label>
+                  <Label fx:id="fixturesbtn" alignment="CENTER" onMouseEntered="#highlightFixturesbtn" onMouseExited="#unhighlightFixturesbtn" prefHeight="22.0" prefWidth="101.0" text="Calendrier">
                      <cursor>
                         <Cursor fx:constant="HAND" />
-                     </cursor></Label>
-                  <Label fx:id="fixturesbtn" alignment="CENTER" onMouseEntered="#highlightFixturesbtn" onMouseExited="#unhighlightFixturesbtn" prefHeight="22.0" prefWidth="101.0" text="Calendrier">
+                     </cursor>
                      <HBox.margin>
                         <Insets left="25.0" top="10.0" />
                      </HBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
                   </Label>
                   <Label fx:id="teamsbtn" alignment="CENTER" onMouseClicked="#teamsClicked" onMouseEntered="#highlightteamsbtn" onMouseExited="#unhighlightteamsbtn" prefHeight="22.0" prefWidth="88.0" text="Teams">
-                     <HBox.margin>
-                        <Insets left="20.0" top="10.0" />
-                     </HBox.margin>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <HBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </HBox.margin>
                   </Label>
                   <Label fx:id="hotelsbtn" alignment="CENTER" onMouseEntered="#highlighthotelsbtn" onMouseExited="#unhighlighthotelsbtn" prefHeight="22.0" prefWidth="83.0" text="Hôtels">
-                     <HBox.margin>
-                        <Insets left="20.0" top="10.0" />
-                     </HBox.margin>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <HBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </HBox.margin>
                   </Label>
                   <Label fx:id="stadesbtn" alignment="CENTER" onMouseEntered="#highlightstadesbtn" onMouseExited="#unhighlightstadesbtn" prefHeight="22.0" prefWidth="91.0" text="Stades">
-                     <HBox.margin>
-                        <Insets left="20.0" top="10.0" />
-                     </HBox.margin>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <HBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </HBox.margin>
                   </Label>
                   <Label fx:id="gallerybtn" alignment="CENTER" onMouseClicked="#GalerieCliked" onMouseEntered="#highlightgallerybtn" onMouseExited="#unhighlightgallerybtn" prefHeight="22.0" prefWidth="95.0" text="Galerie">
-                     <HBox.margin>
-                        <Insets left="20.0" top="10.0" />
-                     </HBox.margin>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <HBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </HBox.margin>
                   </Label>
                   <Label fx:id="contactbtn" alignment="CENTER" onMouseEntered="#highlightcontactbtn" onMouseExited="#unhighlightcontactbtn" prefHeight="22.0" prefWidth="137.0" text="Contactez-Nous">
-                     <HBox.margin>
-                        <Insets left="20.0" top="10.0" />
-                     </HBox.margin>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <HBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </HBox.margin>
                   </Label>
                </children>
+               <HBox.margin>
+                  <Insets bottom="20.0" left="70.0" right="80.0" top="20.0" />
+               </HBox.margin>
             </HBox>
             <Circle fx:id="profilepic" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE">
                <HBox.margin>
@@ -108,20 +117,14 @@
                </HBox.margin>
             </Circle>
             <Label fx:id="firstlastname" onMouseClicked="#myProfileClicked" prefHeight="17.0" prefWidth="100.0" text="Label" underline="true" wrapText="true">
-               <HBox.margin>
-                  <Insets right="10.0" top="32.0" />
-               </HBox.margin>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <HBox.margin>
+                  <Insets right="10.0" top="32.0" />
+               </HBox.margin>
             </Label>
          </children>
       </HBox>
    </top>
-   <left>
-      <AnchorPane fx:id="sidebar" prefHeight="700.0" prefWidth="284.0" BorderPane.alignment="CENTER" />
-   </left>
-   <right>
-      <AnchorPane fx:id="mainContent" prefHeight="700.0" prefWidth="1063.0" BorderPane.alignment="CENTER" />
-   </right>
 </BorderPane>

@@ -52,7 +52,7 @@ public class FrontEndController implements Initializable {
 	private Circle profilepic;
 	private String current_page;
 	VBox userBox, gallerybox;
-	Pane add, gallery, profile;
+	Pane add, gallery, profile,teams;
 	@FXML
 	private AnchorPane sidebar;
 	@FXML
@@ -253,5 +253,13 @@ public class FrontEndController implements Initializable {
 		unhighlightAll();
 		current_page = "gallery";
 		setNavNode(gallerybox);
+	}
+		@FXML
+	private void teamsClicked(MouseEvent event) throws IOException {
+		userBox.setVisible(false);
+		gallerybox.setVisible(false);
+		mainContent.getChildren().clear();
+		teams = FXMLLoader.load(getClass().getResource("/Views/teamFrontEnd.fxml"));
+		setContentNode(teams);
 	}
 }

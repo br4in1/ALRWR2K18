@@ -6,6 +6,8 @@
 package Entities;
 
 import java.sql.Date;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -297,6 +299,14 @@ public class Team {
     public void setVideo(String video) {
         this.video = video;
     }
+	
+	public ImageView getImage(){
+		ImageView img = new ImageView();
+		img.setImage(new Image(flagPhoto));
+		img.setFitHeight(50);
+		img.setFitWidth(100);
+		return img;
+	}
     
     
 }
