@@ -26,11 +26,14 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -38,8 +41,6 @@ import javafx.stage.FileChooser;
  * @author simo
  */
 public class AddFormController implements Initializable {
-
-	
 
 	@FXML
 	private DatePicker GameDate;
@@ -83,13 +84,21 @@ public class AddFormController implements Initializable {
 
 	@FXML
 	private void submit(MouseEvent event) throws IOException {
-			if (HomeTeam.getSelectionModel().getSelectedItem() == AwayTeam.getSelectionModel().getSelectedItem()) {
-				error.setText("Cannot Have a game with both teams the same");
-			} else {
-				Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap());
-				GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), String.valueOf(map1.get(HomeTeam.getSelectionModel().getSelectedItem())), String.valueOf(map1.get(AwayTeam.getSelectionModel().getSelectedItem())), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"), Highlights.getText(), Referee.getText()));
-			}
-		
+		if (HomeTeam.getSelectionModel().getSelectedItem() == AwayTeam.getSelectionModel().getSelectedItem()) {
+			error.setText("Cannot Have a game with both teams the same");
+		} else {
+			Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap());
+			GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), String.valueOf(map1.get(HomeTeam.getSelectionModel().getSelectedItem())), String.valueOf(map1.get(AwayTeam.getSelectionModel().getSelectedItem())), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"), Highlights.getText(), Referee.getText()));
+			Notifications notificationBuilder
+					= Notifications.create().title("Information")
+							.text("Your Game Has Been Succesfully Added ")
+							.hideAfter(Duration.seconds(5))
+							.position(Pos.BOTTOM_RIGHT)
+							.darkStyle();
+
+			notificationBuilder.showInformation();
+		}
+
 	}
 
 	@FXML

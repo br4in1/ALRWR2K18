@@ -6,6 +6,7 @@
 package Controllers;
 
 import Entities.Player;
+import Entities.sendSMS;
 import Services.GameCrud;
 import Services.PlayerCrud;
 import Services.TeamCrud;
@@ -60,7 +61,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 import javax.imageio.ImageIO;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -166,7 +169,7 @@ Cloudinary cloudinary;
 	@FXML
 	private void spawn(MouseEvent event) {
 		System.out.println("/assets/Players/'" + tablev.getSelectionModel().getSelectedItem().getName() + "'_'" + tablev.getSelectionModel().getSelectedItem().getLastName() + "'.png");
-		Circle circle = new Circle(20.0f, Color.RED);
+		Circle circle = new Circle(25.0f, Color.RED);
 		circle.setCursor(Cursor.HAND);
 
 		Label name = new Label(tablev.getSelectionModel().getSelectedItem().getLastName());
@@ -206,7 +209,6 @@ Cloudinary cloudinary;
 
 	@FXML
 	private void snap(MouseEvent event) throws IOException, ParseException {
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Format formatter = new SimpleDateFormat("yyyy-MM-dd");
 		List<String> choices = new ArrayList<>();
 		List<Date> dates = new ArrayList<>(GameCrud.findDatesByTeams(map.get(HomeTeam.getSelectionModel().getSelectedItem()),map.get(AwayTeam.getSelectionModel().getSelectedItem())));
@@ -231,6 +233,15 @@ Cloudinary cloudinary;
 			ImageIO.write(image, "png", file);	
 		//	Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
 			GameCrud.updateSquad("Squads",file.getAbsolutePath(), (Date) Date.valueOf(result.get()));
+			Notifications notificationBuilder
+						= Notifications.create().title("Information")
+								.text("Squad Sucessfully Added ")
+								.hideAfter(Duration.seconds(6))
+								.position(Pos.TOP_RIGHT)
+								.darkStyle();
+
+				notificationBuilder.showInformation();
+				sendSMS.sendSms();
 		} catch (IOException ex) {
 			Logger.getLogger(SquadsController.class.getName()).log(Level.SEVERE, null, ex);
 		};

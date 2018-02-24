@@ -199,6 +199,7 @@ public class GamesCrudController implements Initializable {
 		home.setOnEditCommit(new EventHandler<CellEditEvent<Game, String>>() {
 			@Override
 			public void handle(CellEditEvent<Game, String> t) {
+				
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("Confirmation Dialog");
 				alert.setContentText("Are you sure of your edition?");
