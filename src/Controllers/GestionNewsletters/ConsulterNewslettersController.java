@@ -77,6 +77,8 @@ public class ConsulterNewslettersController implements Initializable {
 
     private WebEngine webEngine;
     private Facebook facebook;
+    @FXML
+    private JFXButton btRefresh;
 
     /**
      * Initializes the controller class.
@@ -160,6 +162,9 @@ public class ConsulterNewslettersController implements Initializable {
             } else {
                 if (NewsletterCrud.remove(toVisualize.getId())) {
                     showDialog("Successs", "L'article a ete supprimer avec success");
+                    data.remove(toVisualize);
+                    newsletterList.setItems(data);
+                    newsletterList.refresh();
                 } else {
                     showDialog("Erreur !!!", "L'article n'a pas pu etre supprimer, veuillez ressayer plus tard");
                 }
@@ -188,5 +193,12 @@ public class ConsulterNewslettersController implements Initializable {
         });
         content.setActions(button);
         dialog.show();
+    }
+
+    @FXML
+    private void RefreshClicked(MouseEvent event) {
+        newsletterList.getItems().removeAll(data);
+        NewsletterCrud.findAll().forEach((e) -> data.add(e));
+        newsletterList.setItems(data);
     }
 }

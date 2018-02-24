@@ -88,6 +88,8 @@ public class ConsulterArticlesController implements Initializable {
     @FXML
     private JFXButton btShare;
     private Facebook facebook;
+    @FXML
+    private JFXButton btRefresh;
 
     /**
      * Initializes the controller class.
@@ -220,6 +222,10 @@ public class ConsulterArticlesController implements Initializable {
             } else {
                 if (ArticleCrud.remove(toVisualize.getId())) {
                     showDialog("Successs", "L'article a ete supprimer avec success");
+                    data.remove(toVisualize);
+                    webEngine.loadContent("");
+                    articlesList.setItems(data);
+                    articlesList.refresh();
                 } else {
                     showDialog("Erreur !!!", "L'article n'a pas pu etre supprimer, veuillez ressayer plus tard");
                 }
@@ -236,7 +242,7 @@ public class ConsulterArticlesController implements Initializable {
         // Get an access token from: 
         // https://developers.facebook.com/tools/explorer
         // Copy and paste it below.
-        String accessTokenString = "EAACEdEose0cBALc2dX7YmPhZCMylXh6C36SKskJtgc1g8zT1F8QROtwOE6ooJTzp3YbkTINmRcOuzxKRpTXuYHfpTragFewFhjex6N2ZBmssxqm60YnQEEdQmKJTG5paYR6kE93GVDCc0ilIdsT9GpqVMKXXRFX4Q7lgInAOhcxdwwnF8OO6pJQVUg8asEtIysuQzbTKvTbrbUzx3Y";
+        String accessTokenString = "EAACEdEose0cBAFiqKz8mHBFVb0HqGBdzx8bqXHhFiWot2Qkpe54bA9Prm6JWzOBXN32mxe442Kd6wgYefZARMPb2phpvkgJ7omWI5aw0nvMhJuRBpOnCge55bJTXsnv6PbbXhz7b21FZBBIZBmZCTJyX0DSvNtvB5Xh9HtQkF3XeoGoNpfe7O82uoSZAj5eOXa3huSAThEemnK0Tp7YxW";
         AccessToken at = new AccessToken(accessTokenString);
         // Set access token.
         facebook.setOAuthAccessToken(at);
@@ -249,12 +255,27 @@ public class ConsulterArticlesController implements Initializable {
         Account yourPageAccount = accounts.get(0);  // if index 0 is your page account.
         String pageAccessToken = yourPageAccount.getAccessToken();
 
-        PostUpdate post = new PostUpdate(new URL("http://facebook4j.org"))
+        /*PostUpdate post = new PostUpdate(new URL("http://facebook4j.org"))
                 .picture(new URL("http://facebook4j.org/images/hero.png"))
-                .name(toVisualize.getTitre()+"-Par "+toVisualize.getAuteur())
+                .name(toVisualize.getTitre() + "-Par " + toVisualize.getAuteur())
                 .caption(toVisualize.getTitre())
                 .description(toVisualize.getContenu());
-        facebook.postFeed(post);
-        
+        facebook.postFeed(post);*/
+        facebook.postStatusMessage(toVisualize.getTitre());
+
     }
+
+    @FXML
+    private void refreshClicked(MouseEvent event) {
+        articlesList.getItems().removeAll(data);
+        data.removeAll(data);
+        ArticleCrud.findAll().forEach((e) -> {
+            if (!data.contains(e)) {
+                data.add(e);
+            }
+        });
+        articlesList.setItems(data);
+        articlesList.refresh();
+    }
+
 }

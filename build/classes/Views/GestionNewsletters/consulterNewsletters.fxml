@@ -18,7 +18,7 @@
     <children>
         <BorderPane prefHeight="739.0" prefWidth="958.0">
             <top>
-                <Label contentDisplay="BOTTOM" text="Consulter Articles" textAlignment="CENTER" textFill="#a12323" BorderPane.alignment="CENTER">
+                <Label contentDisplay="BOTTOM" text="Consulter Newsletters" textAlignment="CENTER" textFill="#a12323" BorderPane.alignment="CENTER">
                     <font>
                         <Font size="25.0" />
                     </font>
@@ -57,6 +57,7 @@
                             </font>
                         </JFXCheckBox>
                         <Separator layoutX="529.0" layoutY="21.0" orientation="VERTICAL" prefHeight="63.0" prefWidth="0.0" />
+                  <JFXButton fx:id="btRefresh" buttonType="RAISED" layoutX="275.0" layoutY="8.0" onMouseClicked="#RefreshClicked" prefHeight="25.0" prefWidth="64.0" ripplerFill="#a4a4a4" style="-fx-background-color: #b12b2b #b12b2b;" text="Refresh" textFill="WHITE" />
                     </children>
                 </Pane>
             </center>

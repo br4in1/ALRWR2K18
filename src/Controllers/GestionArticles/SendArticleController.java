@@ -120,7 +120,7 @@ public class SendArticleController implements Initializable {
     @FXML
     private void sendMailClicked(MouseEvent event) {
         String USER_NAME = "raiizowqw";  // GMail user name (just the part before "@gmail.com")
-        String PASSWORD = ""; // GMail password
+        String PASSWORD = "kaisbaghloul199659"; // GMail password
         String RECIPIENT = tfRecipient.getText();
 
         String from = USER_NAME;

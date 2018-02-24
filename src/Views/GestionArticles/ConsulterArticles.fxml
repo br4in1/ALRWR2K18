@@ -76,6 +76,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <JFXButton fx:id="btRefresh" buttonType="RAISED" layoutX="279.0" layoutY="9.0" onMouseClicked="#refreshClicked" ripplerFill="#cdc7c7" style="-fx-background-color: #b12b2b;" text="Refresh" textFill="WHITE" />
                     </children>
                 </Pane>
             </center>

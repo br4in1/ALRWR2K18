@@ -160,8 +160,13 @@ public class AjouterNewsletterController implements Initializable {
             showDialog("Error", "Veuillez saisir une adresse mail valide");
             return;
         }
-        data.add(email);
-        tableEmails.setItems(data);
+        if (!data.contains(email)) {
+            data.add(email);
+            tableEmails.setItems(data);
+        } else {
+            showDialog("Error", "Veuillez ne pas ajouter la meme addresse mail");
+            return;
+        }
 
     }
 
@@ -209,7 +214,7 @@ public class AjouterNewsletterController implements Initializable {
             return;
         }
         String USER_NAME = "raiizowqw";  // GMail user name (just the part before "@gmail.com")
-        String PASSWORD = ""; // GMail password
+        String PASSWORD = "kaisbahloul199659"; // GMail password
         ArrayList<String> a = new ArrayList<>();
         a.addAll(data);
         String from = USER_NAME;
@@ -259,7 +264,6 @@ public class AjouterNewsletterController implements Initializable {
             transport.connect(host, from, pass);
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
-            showDialog("Success", "Le newsletter a ete envoyer avec success");
             return true;
         } catch (AddressException ae) {
             showDialog("Error", "Un error est subis lors de l'envoie de mail");
