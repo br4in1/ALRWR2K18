@@ -52,7 +52,7 @@ public class FrontEndController implements Initializable {
 	private Circle profilepic;
 	private String current_page;
 	VBox userBox, gallerybox;
-	Pane add, gallery, profile,teams;
+	Pane add, gallery, profile,teams,editProfile;
 	@FXML
 	private AnchorPane sidebar;
 	@FXML
@@ -71,6 +71,7 @@ public class FrontEndController implements Initializable {
 		try {
 			userBox = FXMLLoader.load(getClass().getResource("/Views/FrontUserBox.fxml"));
 			profile = FXMLLoader.load(getClass().getResource("/Views/myProfile.fxml"));
+			editProfile = FXMLLoader.load(getClass().getResource("/Views/editProfile.fxml"));
 			for (Node node : userBox.getChildren()) {
 				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
 					switch (node.getId()) {
@@ -80,7 +81,7 @@ public class FrontEndController implements Initializable {
 							setContentNode(profile);
 							break;
 						case "editData":
-							//setContentNode(teams);
+							setContentNode(editProfile);
 							break;
 						case "favoris":
 							//setContentNode(teamStatics);

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<FlowPane fx:id="nav" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="973.0" style="-fx-background-color: white; -fx-border-radius: 7; -fx-border-color: gray;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EditProfileController">
+   <padding>
+      <Insets right="20.0" />
+   </padding>
+   <children>
+      <VBox prefHeight="611.0" prefWidth="972.0">
+         <children>
+            <VBox prefHeight="349.0" prefWidth="972.0">
+               <children>
+                  <Label text="Edit My Profile">
+                     <VBox.margin>
+                        <Insets left="30.0" top="30.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Ubuntu" size="26.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="39.0" prefWidth="972.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="101.0" text="First Name">
+                           <font>
+                              <Font name="Ubuntu" size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="13.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXTextField fx:id="firstname" prefHeight="27.0" prefWidth="320.0">
+                           <HBox.margin>
+                              <Insets top="4.0" />
+                           </HBox.margin>
+                        </JFXTextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="31.0" top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="39.0" prefWidth="972.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="101.0" text="Last Name">
+                           <font>
+                              <Font name="Ubuntu" size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="13.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXTextField fx:id="lastname" prefHeight="27.0" prefWidth="320.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets left="31.0" top="1.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="39.0" prefWidth="972.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="101.0" text="Birthdate">
+                           <font>
+                              <Font name="Ubuntu" size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="13.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXTextField fx:id="birthdate" prefHeight="27.0" prefWidth="320.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets left="31.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="39.0" prefWidth="972.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="101.0" text="Email ">
+                           <font>
+                              <Font name="Ubuntu" size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="13.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXTextField fx:id="email" prefHeight="27.0" prefWidth="320.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets left="31.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="39.0" prefWidth="972.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="101.0" text="Password*">
+                           <font>
+                              <Font name="Ubuntu" size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="13.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXPasswordField fx:id="password" prefHeight="27.0" prefWidth="320.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets left="31.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <JFXButton fx:id="apply1" onAction="#editProfileAction" prefHeight="37.0" prefWidth="88.0" style="-fx-background-color: #62b518;" text="Apply" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets left="365.0" top="20.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <Separator prefHeight="3.0" prefWidth="972.0" />
+            <Label text="Change My Password">
+               <font>
+                  <Font name="Ubuntu" size="26.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="30.0" top="30.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="39.0" prefWidth="972.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="101.0" text="Old Password">
+                     <font>
+                        <Font name="Ubuntu" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="13.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXTextField fx:id="oldpassword" prefHeight="27.0" prefWidth="320.0">
+                     <HBox.margin>
+                        <Insets left="110.0" top="4.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+               <VBox.margin>
+                  <Insets left="31.0" top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="39.0" prefWidth="972.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="101.0" text="New Password">
+                     <font>
+                        <Font name="Ubuntu" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="13.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXTextField fx:id="newpassword" prefHeight="27.0" prefWidth="320.0">
+                     <HBox.margin>
+                        <Insets left="110.0" top="4.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+               <VBox.margin>
+                  <Insets left="31.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="39.0" prefWidth="972.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="170.0" text="Confirm New Password">
+                     <font>
+                        <Font name="Ubuntu" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="13.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXTextField fx:id="newpassword2" prefHeight="27.0" prefWidth="320.0">
+                     <HBox.margin>
+                        <Insets left="40.0" top="4.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+               <VBox.margin>
+                  <Insets left="31.0" />
+               </VBox.margin>
+            </HBox>
+            <JFXButton fx:id="apply2" onAction="#changePasswordAction" prefHeight="37.0" prefWidth="88.0" style="-fx-background-color: #62b518;" text="Apply" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="475.0" top="20.0" />
+               </VBox.margin>
+            </JFXButton>
+         </children>
+      </VBox>
+   </children>
+</FlowPane>

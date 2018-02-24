@@ -15,8 +15,8 @@ public class TokenGenerator {
 		SecureRandom random1 = new SecureRandom();
 		long longToken = Math.abs(random1.nextLong());
 		String random2 = Long.toString(longToken, 16);
-		String random4 = Long.toString(longToken, 16);
-		String random3 = Long.toString(longToken, 16);
+		String random4 = Long.toString(longToken, 20);
+		String random3 = Long.toString(longToken, 32);
 		return (random2+random3+random4);
 	}
 }

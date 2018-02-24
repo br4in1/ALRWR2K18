@@ -137,6 +137,8 @@ public class Login_formController implements Initializable {
 	private JFXPasswordField pass2forgot;
 	@FXML
 	private JFXButton changepassword;
+	private String changepasswordToken = "";
+	private String Mail2ChangePassword = "";
 
 	/**
 	 * Initializes the controller class.
@@ -473,22 +475,49 @@ public class Login_formController implements Initializable {
 
 	@FXML
 	private void sendCodeForgot(ActionEvent event) {
-		if(mailforgot.getText() == null || UserCrud.findUserByEmail(mailforgot.getText())){
+		if (mailforgot.getText() == null || mailforgot.getText().isEmpty() || !UserCrud.findUserByEmail(mailforgot.getText())) {
 			JFXDialogLayout content = new JFXDialogLayout();
 			content.setHeading(new Text(""));
 			content.setBody(new Text("L'adresse email est invalide."));
 			JFXDialog check_data = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
 			check_data.show();
-		}
-		else
-		{
-			String confirmationToken = TokenGenerator.generateToken2();
-			SendConfirmationToken(mailforgot.getText(), confirmationToken);
-			
+		} else {
+			changepasswordToken = TokenGenerator.generateToken2();
+			Mail2ChangePassword = mailforgot.getText();
+			SendConfirmationToken(mailforgot.getText(), changepasswordToken);
 		}
 	}
 
 	@FXML
 	private void ChangePassword(ActionEvent event) {
+		if (codeforgot.getText().isEmpty() || !codeforgot.getText().equals(changepasswordToken)) {
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("Le code est invalide."));
+			JFXDialog check_data = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
+			check_data.show();
+		} else if (pass1forgot.getText().length() < 7) {
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("Le mot de passe doit contenir 7 caractères ou plus."));
+			JFXDialog check_data = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
+			check_data.show();
+		} else if (!pass2forgot.getText().equals(pass1forgot.getText())) {
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("Les deux mot de passe doivent être exactes."));
+			JFXDialog check_data = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
+			check_data.show();
+		} else {
+			if (Mail2ChangePassword.isEmpty()) {
+				JFXDialogLayout content = new JFXDialogLayout();
+				content.setHeading(new Text(""));
+				content.setBody(new Text("Veuillez s'il vous plait saisir votre email au-dessus pour recevoir un code."));
+				JFXDialog check_data = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
+				check_data.show();
+			} else {
+				UserCrud.ChangePasswordForUser(Mail2ChangePassword,pass1forgot.getText());
+			}
+		}
 	}
 }
