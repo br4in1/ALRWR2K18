@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +23,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableColumnBuilder;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -68,12 +70,34 @@ public class TeamFrontEndController implements Initializable {
 		listDisplay();
 	//	tableT.getSelectionModel().setCellSelectionEnabled(true);
 		
+	final ObservableList<TablePosition> selectedCells = tableT.getSelectionModel().getSelectedCells();
+selectedCells.addListener(new ListChangeListener<TablePosition>() {
+    @Override
+    public void onChanged(ListChangeListener.Change change) {
+        for (TablePosition pos : selectedCells) {
+			if (tableT.getSelectionModel().getSelectedItem() != null)
+		{
+			ID=tableT.getSelectionModel().getSelectedItem().getId() ;
+			President.setText(TeamCrud.findById(ID).getPresident());
+			coach.setText(TeamCrud.findById(ID).getCoach());	
+			fifaDate.setText(TeamCrud.findById(ID).getFifaDate().toString());
+			participation.setText(Integer.toString(TeamCrud.findById(ID).getParticipations()));
+			wcGroupe.setText(TeamCrud.findById(ID).getWcGroup());
+			
+		}
+			
+        }
+    };
+});
+	
+	
 		if (tableT.getSelectionModel().getSelectedItem() != null)
 		{
 			ID=tableT.getSelectionModel().getSelectedItem().getId() ;
 			coach.setText(TeamCrud.findById(ID).getCoach());	
+			System.out.println("coach " +  coach.getText());
 		}
-		System.out.println("coach " +  coach.getText());
+		
 		System.out.println("ID "+ ID );
 	}	
 	private void listDisplay(){
