@@ -44,7 +44,6 @@ import com.jfoenix.controls.JFXComboBox;
 import java.util.List;
 import javafx.collections.FXCollections;
 
-
 /**
  * FXML Controller class
  *
@@ -66,14 +65,13 @@ public class TeamStaticsController implements Initializable {
 	private SwingNode staticSwigNode;
 	@FXML
 	private JFXComboBox<Integer> id;
-private List<Integer> list;
+	private List<Integer> list;
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
-
-
-			list = TeamCrud.GeIdlist();
-		id.setItems(FXCollections.observableArrayList(list));	
+		list = TeamCrud.GeIdlist();
+		id.setItems(FXCollections.observableArrayList(list));
 	}
 
 	@FXML
@@ -109,9 +107,7 @@ private List<Integer> list;
 	}
 
 	private static JFreeChart createChart(PieDataset dataset) {
-			
-		
-		
+
 		JFreeChart chart = ChartFactory.createPieChart(
 				"Team Statics", dataset);
 
@@ -130,17 +126,15 @@ private List<Integer> list;
 		plot.setOutlineVisible(false);
 		float[] hsb = new float[3];
 		ColorAdjust ca = new ColorAdjust();
-		
-		
-	plot.setSectionPaint("Win",Color.getHSBColor(84, 175, 83) );
-		plot.setSectionPaint("Draw",Color.getHSBColor(40, 97, 92));
+
+		plot.setSectionPaint("Win", Color.getHSBColor(84, 175, 83));
+		plot.setSectionPaint("Draw", Color.getHSBColor(40, 97, 92));
 		plot.setSectionPaint("Loose", Color.getHSBColor(120, 81, 89));
 		//plot.setSectionPaint("Loose", Color.getHSBColor(100, 100, 100));
-		
-	//	plot.setDefaultSectionOutlinePaint(Color.WHITE);
-		plot.setSectionOutlinesVisible(true);
-	//	plot.setDefaultSectionOutlineStroke(new BasicStroke(2.0f));
 
+		//	plot.setDefaultSectionOutlinePaint(Color.WHITE);
+		plot.setSectionOutlinesVisible(true);
+		//	plot.setDefaultSectionOutlineStroke(new BasicStroke(2.0f));
 
 		// add a subtitle giving the data source
 		TextTitle source = new TextTitle("",
@@ -152,23 +146,20 @@ private List<Integer> list;
 
 	}
 
-	
-
 	@FXML
 	private void ChoixChart(ActionEvent event) {
-			//createDataset();
-			
-					PieDataset dataset = createDataset(id.getValue());
+		//createDataset();
+
+		PieDataset dataset = createDataset(id.getValue());
 		JFreeChart chart = createChart(dataset);
-	
-	//	ChartViewer viewer = new ChartViewer(chart);
+
+		//	ChartViewer viewer = new ChartViewer(chart);
 		//grid.add(imageHouse, 0, 0, 1, 2);
 		staticSwigNode.setContent(
-      new ChartPanel(
-			  createChart(dataset)
-      )      
-    );
+				new ChartPanel(
+						createChart(dataset)
+				)
+		);
 	}
-
 
 }

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.embed.swing.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -22,16 +25,16 @@
             <TableColumn fx:id="area" prefWidth="75.0" text="Area" />
          </columns>
       </TableView>
-      <VBox layoutX="333.0" layoutY="43.0" prefHeight="336.0" prefWidth="335.0">
+      <VBox layoutX="335.0" layoutY="17.0" prefHeight="336.0" prefWidth="315.0">
          <children>
-            <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="712.0">
+            <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="290.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="146.0" text="President">
+                  <Label prefHeight="17.0" prefWidth="104.0" text="President">
                      <font>
                         <Font name="Ubuntu Bold Italic" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="President" prefHeight="17.0" prefWidth="176.0" text="President" />
+                  <Label fx:id="President" prefHeight="17.0" prefWidth="161.0" text="President" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -43,14 +46,14 @@
                   <Insets left="35.0" top="40.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="50.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="712.0">
+            <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="50.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="302.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="146.0" text="Coach">
+                  <Label prefHeight="17.0" prefWidth="103.0" text="Coach">
                      <font>
                         <Font name="Ubuntu Bold Italic" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="coach" prefHeight="17.0" prefWidth="315.0" text="Coach" />
+                  <Label fx:id="coach" prefHeight="17.0" prefWidth="137.0" text="Coach" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -62,14 +65,14 @@
                   <Insets left="35.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="84.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="712.0">
+            <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="84.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="263.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="146.0" text="Fifa date">
+                  <Label prefHeight="17.0" prefWidth="106.0" text="Fifa date">
                      <font>
                         <Font name="Ubuntu Bold Italic" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="fifaDate" prefHeight="17.0" prefWidth="315.0" text="FifaDate" />
+                  <Label fx:id="fifaDate" prefHeight="17.0" prefWidth="80.0" text="FifaDate" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -81,14 +84,14 @@
                   <Insets left="35.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="118.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="712.0">
+            <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="118.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="287.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="146.0" text="Participations">
+                  <Label prefHeight="17.0" prefWidth="107.0" text="Participations">
                      <font>
                         <Font name="Ubuntu Bold Italic" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="participation" prefHeight="17.0" prefWidth="315.0" text="Participations" />
+                  <Label fx:id="participation" prefHeight="17.0" prefWidth="103.0" text="Participations" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -100,14 +103,14 @@
                   <Insets left="35.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="152.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="712.0">
+            <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="152.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="295.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="146.0" text="world cup group">
+                  <Label prefHeight="17.0" prefWidth="109.0" text="world cup group">
                      <font>
                         <Font name="Ubuntu Bold Italic" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="wcGroupe" prefHeight="17.0" prefWidth="315.0" text="world cup groupe" />
+                  <Label fx:id="wcGroupe" prefHeight="17.0" prefWidth="114.0" text="world cup groupe" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -121,5 +124,8 @@
             </HBox>
          </children>
       </VBox>
+      <SwingNode fx:id="staticSwigNode" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="300.0" />
+      <JFXButton fx:id="PlayersView" layoutX="745.0" layoutY="216.0" text="View Players" />
+      <ImageView fx:id="TeamImageView" fitHeight="150.0" fitWidth="200.0" layoutX="673.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
