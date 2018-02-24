@@ -93,7 +93,7 @@ public class AddFormController implements Initializable {
 					= Notifications.create().title("Information")
 							.text("Your Game Has Been Succesfully Added ")
 							.hideAfter(Duration.seconds(5))
-							.position(Pos.BOTTOM_RIGHT)
+							.position(Pos.TOP_RIGHT)
 							.darkStyle();
 
 			notificationBuilder.showInformation();

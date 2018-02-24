@@ -55,7 +55,7 @@
                         <JFXComboBox fx:id="AwayTeam" prefHeight="40.0" prefWidth="271.0" promptText="                    Select Away Team" />
                         <ScrollPane prefHeight="595.0" prefWidth="268.0">
                            <content>
-                              <TableView fx:id="tablev2" prefHeight="593.0" prefWidth="266.0">
+                              <TableView fx:id="tablev2" onMouseClicked="#spawn2" prefHeight="593.0" prefWidth="266.0">
                                 <columns>
                                   <TableColumn fx:id="positionAway" prefWidth="120.0" text="Position" />
                                   <TableColumn fx:id="NameAway" prefWidth="147.0" text="Name" />
