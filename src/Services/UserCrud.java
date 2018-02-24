@@ -445,4 +445,17 @@ public class UserCrud {
 		}
 		return null;
 	}
+	
+	public static void ChangePasswordForUser(String email,String newpassword){
+		Connection con = DataSource.getInstance().getCon();
+		String query = "update User set password = ? where email = ?";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+			ste.setString(1, BCrypt.hashpw(newpassword, BCrypt.gensalt(12)));
+			ste.setString(2, email);
+			ste.executeUpdate();
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 }
