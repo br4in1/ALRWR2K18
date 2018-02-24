@@ -21,6 +21,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.embed.swing.SwingNode;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -38,6 +40,8 @@ public class ChartPPController implements Initializable {
 
 	@FXML
 	private SwingNode swing2;
+	@FXML
+	private Button actualiser;
 
 	/**
 	 * Initializes the controller class.
@@ -53,8 +57,6 @@ public class ChartPPController implements Initializable {
 			Logger.getLogger(ChartPPController.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		JFreeChart chart = createChart(dataset);
-		//	ChartViewer viewer = new ChartViewer(chart);
-		//grid.add(imageHouse, 0, 0, 1, 2);
 		swing2.setContent(
 				new ChartPanel(
 						createChart(dataset)
@@ -71,8 +73,8 @@ public class ChartPPController implements Initializable {
 			y = g.returnEtat1();
 		
 		DefaultPieDataset dataset = new DefaultPieDataset();
-		dataset.setValue("Etat (0)", new Double(x));
-		dataset.setValue("Etat (1) ", new Double(y));
+		dataset.setValue("Le nombre d'image non validé : "+x, new Double(x));
+		dataset.setValue("Le nombre de d'image accepté : "+y, new Double(y));
 		return dataset;
 	}
 
@@ -83,8 +85,8 @@ public class ChartPPController implements Initializable {
 				"", dataset);
 
 		// set a custom background for the chart
-		chart.setBackgroundPaint(new GradientPaint(new Point(0, 0),
-				new Color(20, 20, 20), new Point(400, 200), Color.WHITE));
+		//chart.setBackgroundPaint(new GradientPaint(new Point(0, 0),
+				//new Color(20, 20, 20), new Point(400, 200), Color.WHITE));
 
 		// customise the title position and font
 		TextTitle t = chart.getTitle();
@@ -98,8 +100,8 @@ public class ChartPPController implements Initializable {
 		plot.setOutlineVisible(false);
 
 		// use gradients and white borders for the section colours
-		plot.setSectionPaint("Others", createGradientPaint(new Color(200, 200, 255), Color.BLUE));
-		plot.setSectionPaint("Win", createGradientPaint(new Color(255, 200, 200), Color.RED));
+		plot.setSectionPaint("Validé", createGradientPaint(new Color(0, 204, 0), Color.GREEN));
+		plot.setSectionPaint("Non validé", createGradientPaint(new Color(255, 200, 200), Color.RED));
 		
 
 		//plot.setDefaultSectionOutlinePaint(Color.WHITE);
@@ -116,8 +118,8 @@ public class ChartPPController implements Initializable {
 
 		// add a subtitle giving the data source
 		TextTitle source = new TextTitle("Stat sur les états des images postés",
-				new Font("Courier New", Font.PLAIN, 12));
-		source.setPaint(Color.WHITE);
+				new Font("Arial", Font.PLAIN, 30));
+		source.setPaint(Color.BLACK);
 //        source.setPosition(RectangleEdge.BOTTOM);
 		//source.setHorizontalAlignment(HorizontalAlignment.RIGHT);
 		chart.addSubtitle(source);
@@ -131,6 +133,23 @@ public class ChartPPController implements Initializable {
 		float[] dist = {0.0f, 1.0f};
 		return new RadialGradientPaint(center, radius, dist,
 				new Color[]{c1, c2});
+	}
+
+	@FXML
+	private void actu(ActionEvent event) throws SQLException {
+		
+		PieDataset dataset = null;
+		try {
+			dataset = createDataset();
+		} catch (SQLException ex) {
+			Logger.getLogger(ChartPPController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		JFreeChart chart = createChart(dataset);
+		swing2.setContent(
+				new ChartPanel(
+						createChart(dataset)
+				)
+		);
 	}
 
 }

@@ -8,6 +8,7 @@ package Controllers;
 import Entities.Admin;
 import Entities.Gallery;
 import Entities.Opinions;
+import Entities.SimpleUser;
 import Services.GalleryCrud;
 import Services.OpinionsCrud;
 import com.cloudinary.Cloudinary;
@@ -198,15 +199,12 @@ public class AddImageController implements Initializable {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		Map uploadResult = cloudinary.uploader().upload(image1, ObjectUtils.emptyMap());
 		alert.setTitle("Confirmation d'ajout de photo");
-		alert.setHeaderText("voulez vous vraiment Ajoutercette photo?");
+		alert.setHeaderText("voulez vous vraiment Ajouter cette photo?");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
-			GalleryCrud g = new GalleryCrud();
-			OpinionsCrud o = new OpinionsCrud();
-			Gallery g1 = new Gallery(Admin.current_user.getId(), villeCombo.getValue(), Li.getText(), Dc.getText(), (String) uploadResult.get("url"), "0");
+			Gallery g1 = new Gallery(SimpleUser.current_user.getId(), villeCombo.getValue(), Li.getText(), Dc.getText(), (String) uploadResult.get("url"), "0");
 			GalleryCrud.AddImage(g1);
-			Opinions o1 = new Opinions(Admin.current_user.getId(), Av.getText(), rat.getText());
-			OpinionsCrud.AddOpinion(o1);
+			Opinions o1 = new Opinions(SimpleUser.current_user.getId(), Av.getText(), rat.getText());
 			JFXDialogLayout content = new JFXDialogLayout();
 			content.setHeading(new Text(""));
 			content.setBody(new Text("Ajout fait avec succés"));

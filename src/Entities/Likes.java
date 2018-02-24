@@ -14,18 +14,22 @@ public class Likes {
 	 private int id;
     private int idUser;
 	private int idPhoto; 
-	private int nombre ; 
 
 	
 	 public Likes() {
 	}
 	 
-	public Likes(int id, int idUser, int idPhoto, int nombre) {
+	public Likes(int id, int idUser, int idPhoto) {
 		this.id = id;
 		this.idUser = idUser;
 		this.idPhoto = idPhoto;
-		this.nombre = nombre;
 	}
+	public Likes(int idUser, int idPhoto) {
+		this.idUser = idUser;
+		this.idPhoto = idPhoto;
+	}
+	
+	
 
 	public int getId() {
 		return id;
@@ -51,14 +55,6 @@ public class Likes {
 		this.idPhoto = idPhoto;
 	}
 
-	public int getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(int nombre) {
-		this.nombre = nombre;
-	}
-	
 	
 
 	
