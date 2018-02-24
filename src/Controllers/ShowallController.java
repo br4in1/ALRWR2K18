@@ -43,6 +43,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
@@ -69,6 +70,8 @@ public class ShowallController implements Initializable {
 	private Text bienvenue;
 	@FXML
 	private AnchorPane anch;
+	@FXML
+	private FlowPane mainShowAll;
 
 	/**
 	 * Initializes the controller class.
@@ -196,6 +199,7 @@ public class ShowallController implements Initializable {
 								a1.setVisible(false);
 								btn.setVisible(false);
 								btn1.setVisible(false);
+								L.setVisible(false);
 								try {
 									LikesCrud.Unlike(idPhoto);
 								} catch (SQLException ex) {
@@ -241,8 +245,5 @@ public class ShowallController implements Initializable {
 
 	}
 
-	@FXML
-	private void monter(MouseEvent event) {
-	}
 
 }

@@ -1,30 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="300.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ShowallController">
+
+<FlowPane fx:id="mainShowAll" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="973.0" style="-fx-background-color: white; -fx-border-radius: 7; -fx-border-color: grey;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ShowallController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="570.0" layoutX="24.0" layoutY="41.0" stroke="#1d3a93" strokeType="INSIDE" strokeWidth="3.0" width="1219.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="556.0" layoutX="14.0" layoutY="31.0" onMouseClicked="#monter" stroke="#b23d3d" strokeType="INSIDE" strokeWidth="5.0" width="800.0" />
-      <Text fx:id="bienvenue" fill="#b23d3d" layoutX="427.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Binvenue dans la galerie d'images " wrappingWidth="377.13671875">
-         <font>
-           <Font name="Berlin Sans FB Demi Bold" size="22.0" />
-         </font>
-      </Text>
-      <Separator layoutX="483.0" layoutY="79.0" prefHeight="19.0" prefWidth="243.0" />
-      <AnchorPane fx:id="anch" layoutX="45.0" layoutY="122.0" prefHeight="446.0" prefWidth="1140.0" />
-      <Line endX="-10.0" layoutX="125.0" layoutY="94.0" startX="-100.0" stroke="#b23d3d" strokeWidth="5.0" />
-      <ImageView fitHeight="56.0" fitWidth="50.0" layoutX="45.0" layoutY="40.0" onMouseMoved="#Monter" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/galerie.png" />
-         </image>
-      </ImageView>
+      <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="611.0" prefWidth="973.0">
+         <children>
+            <Text fx:id="bienvenue" fill="#b23d3d" layoutX="389.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue dans la galerie d'images " wrappingWidth="415.13671875">
+               <font>
+                 <Font name="Ubuntu" size="24.0" />
+               </font>
+            </Text>
+            <Separator layoutX="467.0" layoutY="56.0" prefHeight="19.0" prefWidth="243.0" />
+            <ScrollBar orientation="VERTICAL" prefHeight="521.0" prefWidth="14.0" visible="false" />
+            <AnchorPane fx:id="anch" layoutX="32.0" layoutY="84.0" prefHeight="520.0" prefWidth="898.0" />
+            <ImageView fitHeight="56.0" fitWidth="50.0" layoutX="32.0" layoutY="16.0" onMouseMoved="#Monter" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/galerie.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+   <padding>
+      <Insets right="20.0" />
+   </padding>
+</FlowPane>

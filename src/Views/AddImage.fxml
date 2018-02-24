@@ -17,18 +17,18 @@
 
 <AnchorPane id="AnchorPane" fx:id="browse1" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="300.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddImageController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="502.0" layoutX="539.0" layoutY="41.0" stroke="#1d3a93" strokeType="INSIDE" strokeWidth="3.0" width="437.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="502.0" layoutX="539.0" layoutY="41.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" width="437.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="491.0" layoutX="525.0" layoutY="35.0" stroke="#b23d3d" strokeType="INSIDE" strokeWidth="5.0" width="427.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="502.0" layoutX="24.0" layoutY="41.0" stroke="#1d3a93" strokeType="INSIDE" strokeWidth="3.0" width="437.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="502.0" layoutX="24.0" layoutY="41.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" width="437.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="491.0" layoutX="14.0" layoutY="31.0" stroke="#b23d3d" strokeType="INSIDE" strokeWidth="5.0" width="427.0" />
-      <Text fx:id="emp" fill="#1d3a93" layoutX="36.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Lieu :  " wrappingWidth="100.083984375">
+      <Text fx:id="emp" layoutX="36.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Lieu :  " wrappingWidth="100.083984375">
          <font>
-            <Font name="Berlin Sans FB Demi Bold" size="23.0" />
+            <Font name="Ubuntu Bold Italic" size="18.0" />
          </font>
       </Text>
-      <Text fx:id="Des" fill="#b23d3d" layoutX="34.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Description : " wrappingWidth="193.00000780820847">
+      <Text fx:id="Des" layoutX="34.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Description : " wrappingWidth="193.00000780820847">
          <font>
-            <Font name="Berlin Sans FB Demi Bold" size="23.0" />
+            <Font name="Ubuntu Bold Italic" size="18.0" />
          </font>
       </Text>
       <JFXButton fx:id="SaveImage" layoutX="847.0" layoutY="462.0" onMouseClicked="#savee" prefHeight="32.0" prefWidth="91.0" ripplerFill="WHITE" style="-fx-background-color: #b23d3d;" text="Save">
@@ -45,20 +45,20 @@
             <Font size="14.0" />
          </font>
       </JFXTextArea>
-      <Text fx:id="emp0" fill="#b23d3d" layoutX="36.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Ville : " wrappingWidth="90.9999979622662">
+      <Text fx:id="emp0" layoutX="36.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Ville : " wrappingWidth="90.9999979622662">
          <font>
-            <Font name="Berlin Sans FB Demi Bold" size="23.0" />
+            <Font name="Ubuntu Bold Italic" size="18.0" />
          </font>
       </Text>
-      <Text fx:id="inserer" fill="#1d3a93" layoutX="539.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Inserer votre photo :  " wrappingWidth="304.083984375">
+      <Text fx:id="inserer" layoutX="539.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Inserer votre photo :  " wrappingWidth="304.083984375">
          <font>
-            <Font name="Berlin Sans FB Demi Bold" size="23.0" />
+            <Font name="Ubuntu Bold Italic" size="18.0" />
          </font>
       </Text>
       <Separator layoutX="481.0" layoutY="41.0" orientation="VERTICAL" prefHeight="479.0" prefWidth="24.0" />
-      <Text fx:id="avis" fill="#b23d3d" layoutX="543.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Votre avis sur cette rubrique : " wrappingWidth="357.083984375">
+      <Text fx:id="avis" layoutX="543.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Votre avis sur cette rubrique : " wrappingWidth="357.083984375">
          <font>
-            <Font name="Berlin Sans FB Demi Bold" size="23.0" />
+            <Font name="Ubuntu Bold Italic" size="18.0" />
          </font>
       </Text>
       <JFXTextArea fx:id="Av" focusColor="#b23d3d" labelFloat="true" layoutX="610.0" layoutY="240.0" prefHeight="155.0" prefWidth="257.0" promptText="Donner votre avis... :)" unFocusColor="#b23d3d">
@@ -66,9 +66,9 @@
             <Font size="14.0" />
          </font>
       </JFXTextArea>
-      <Text fx:id="inserer1" fill="#1d3a93" layoutX="543.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Noter :  " wrappingWidth="304.083984375">
+      <Text fx:id="inserer1" layoutX="543.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Noter :  " wrappingWidth="304.083984375">
          <font>
-            <Font name="Berlin Sans FB Demi Bold" size="23.0" />
+            <Font name="Ubuntu Bold Italic" size="18.0" />
          </font>
       </Text>
       <ImageView fx:id="imgvw" fitHeight="136.0" fitWidth="159.0" layoutX="788.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" />

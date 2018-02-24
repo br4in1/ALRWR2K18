@@ -25,11 +25,7 @@ public class GalleryController implements Initializable {
     @FXML
     private JFXButton mainMenu;
     @FXML
-    private JFXButton Add;
-    @FXML
     private JFXButton managegallery;
-	@FXML
-	private JFXButton Showw;
 	@FXML
 	private JFXButton Showw3;
 	@FXML

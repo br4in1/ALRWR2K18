@@ -43,9 +43,7 @@ public class DashboardController implements Initializable {
 	private Pane main;
 	AnchorPane games, teams, teamStatics, players, users, userStatistics, squads, moderators;
 	VBox tournementBox, teamBox, UsersBox;
-	AnchorPane add;
 	AnchorPane manageGallery;
-	AnchorPane show1;
 	AnchorPane show2;
 	AnchorPane show3;
 	VBox GalleryBox;
@@ -113,9 +111,7 @@ public class DashboardController implements Initializable {
 			squads = FXMLLoader.load(getClass().getResource("/Views/squads.fxml"));
 			userStatistics = FXMLLoader.load(getClass().getResource("/Views/UsersStatistics.fxml"));
 			moderators = FXMLLoader.load(getClass().getResource("/Views/ModeratorsCrud.fxml"));
-			add = FXMLLoader.load(getClass().getResource("/Views/AddImage.fxml"));
 			manageGallery = FXMLLoader.load(getClass().getResource("/Views/DisplayI.fxml"));
-			show1 = FXMLLoader.load(getClass().getResource("/Views/Showall.fxml"));
 			show2 = FXMLLoader.load(getClass().getResource("/Views/DisplayO.fxml"));
 			//		show3 = FXMLLoader.load(getClass().getResource("/Views/chartP.fxml"));
 			GalleryBox = FXMLLoader.load(getClass().getResource("/Views/GalleryBox.fxml"));
@@ -251,15 +247,8 @@ public class DashboardController implements Initializable {
 						case "mainMenu":
 							setNavNode(nav);
 							break;
-						case "Add":
-							setContentNode(add);
-							break;
 						case "managegallery":
 							setContentNode(manageGallery);
-							break;
-
-						case "Showw":
-							setContentNode(show1);
 							break;
 						case "Showw3":
 							setContentNode(show2);
