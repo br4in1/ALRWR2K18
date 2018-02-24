@@ -69,8 +69,6 @@ public class ShowallController implements Initializable {
 	private Text bienvenue;
 	@FXML
 	private AnchorPane anch;
-	private int idPhoto ;
-	private Likes like;	
 
 	/**
 	 * Initializes the controller class.
@@ -86,16 +84,15 @@ public class ShowallController implements Initializable {
 	private void Monter(MouseEvent event) throws SQLException, MalformedURLException {
 		Gallery ga = new Gallery();
 		GalleryCrud g = new GalleryCrud();
-
 		int y = 1;
 		List<Gallery> Liste = g.DisplayAll();
 		anch.getChildren().clear();
 		for (int i = 0; i < Liste.size(); i++) {
-
 			if ("1".equals(Liste.get(i).getEtat())) {
+
 				Image im = new Image(Liste.get(i).getImage());
-				
 				ImageView img2 = new ImageView(im);
+
 				img2.setLayoutX(50.0 + y);
 				img2.setLayoutY(41.0);
 				img2.setFitHeight(170);
@@ -127,6 +124,7 @@ public class ShowallController implements Initializable {
 				a3.setLayoutX(50.0 + y);
 				a3.setLayoutY(270);
 
+				
 				Label a4 = new Label();
 				a4.setLayoutX(50.0 + y);
 				a4.setLayoutY(300);
@@ -135,19 +133,20 @@ public class ShowallController implements Initializable {
 				L1.setLayoutX(50 + y);
 				L1.setLayoutY(0);
 				img2.setAccessibleHelp(Liste.get(i).getImage());
+				img2.setId("" + Liste.get(i).getId());
 				
-				//img2.setId("" + Liste.get(i).getId() + "" + Liste.get(i).getVille());
-				img2.setId(""+Liste.get(i).getId());
-				
+
 				img2.setOnMouseClicked(new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent event2) {
+
 						System.out.println(img2.getId());
 						if (event2.getClickCount() == 1) {
 							a.setText("Cette photo est prise à : " + img2.getId());
 						}
+
 						if (event2.getClickCount() == 2) {
-							
+
 							img2.setFitWidth(145 * 1.5);
 							img2.setFitHeight(145 * 1.5);
 							img2.setStyle("-fx-border-color: BLACK");
@@ -160,7 +159,7 @@ public class ShowallController implements Initializable {
 							L.setStyle("-fx-color: red");
 							L1.setVisible(false);
 							anch.getChildren().add(L);
-							
+
 							Image im2 = new Image("/Views/save.png");
 							ImageView btn = new ImageView(im2);
 							btn.setLayoutX(180.0 + y);
@@ -174,10 +173,12 @@ public class ShowallController implements Initializable {
 							btn1.setLayoutY(265);
 							btn1.setFitHeight(30);
 							btn1.setFitWidth(30);
-                           
-							idPhoto = Integer.parseInt(img2.getId());					
-							System.out.println(SimpleUser.current_user.getId()+"aaaa"+idPhoto);
-							//like = new Likes(SimpleUser.current_user.getId(),idPhoto);
+
+							int idPhoto = Integer.parseInt(img2.getId());
+							
+							System.out.println(SimpleUser.current_user.getId() + "aaaa" + idPhoto);
+							Likes Liked = new Likes(SimpleUser.current_user.getId(), idPhoto);
+                            LikesCrud.Like(Liked);
 							
 							btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 								@Override
@@ -195,12 +196,18 @@ public class ShowallController implements Initializable {
 								a1.setVisible(false);
 								btn.setVisible(false);
 								btn1.setVisible(false);
+								try {
+									LikesCrud.Unlike(idPhoto);
+								} catch (SQLException ex) {
+									Logger.getLogger(ShowallController.class.getName()).log(Level.SEVERE, null, ex);
+								}
 								
+
 							});
 
 							anch.getChildren().add(btn);
 							anch.getChildren().add(btn1);
-							
+
 						} else {
 							img2.setFitHeight(170);
 							img2.setFitWidth(170);

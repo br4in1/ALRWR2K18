@@ -23,11 +23,11 @@ public class FrontGalleryBoxController implements Initializable {
 	@FXML
 	private VBox nav;
 	@FXML
-	private Label AddPhoto;
+	private Label AddImage;
 	@FXML
-	private Label ShowImage;
+	private Label ShowGallery;
 	@FXML
-	private Label myPhotos;
+	private Label ShowMyGallery;
 
 	/**
 	 * Initializes the controller class.
@@ -35,30 +35,43 @@ public class FrontGalleryBoxController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
-	}	
+	}
 
 	@FXML
 	private void unhighlightAdd(MouseEvent event) {
+		AddImage.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+
 	}
 
 	@FXML
 	private void highlightAdd(MouseEvent event) {
+
+		AddImage.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
+
 	}
 
 	@FXML
 	private void unhighlighConsulter(MouseEvent event) {
+
+		ShowGallery.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+
 	}
 
 	@FXML
 	private void highlightConsulter(MouseEvent event) {
+		ShowGallery.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
+
 	}
 
 	@FXML
 	private void unhighlightConsulter2(MouseEvent event) {
+		ShowMyGallery.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+
 	}
 
 	@FXML
 	private void highlightConsulter2(MouseEvent event) {
+		ShowMyGallery.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
 	}
-	
+
 }

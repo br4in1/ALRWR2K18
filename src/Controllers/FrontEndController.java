@@ -52,7 +52,7 @@ public class FrontEndController implements Initializable {
 	private Circle profilepic;
 	private String current_page;
 	VBox userBox, gallerybox;
-	Pane add, profile;
+	Pane add, gallery, profile;
 	@FXML
 	private AnchorPane sidebar;
 	@FXML
@@ -93,22 +93,21 @@ public class FrontEndController implements Initializable {
 				});
 			}
 			add = FXMLLoader.load(getClass().getResource("/Views/AddImage.fxml"));
+			gallery = FXMLLoader.load(getClass().getResource("/Views/Showall.fxml"));
+			//mygallery = FXMLLoader.load(getClass().getResource("/Views/DisplayI.fxml"));
 			gallerybox = FXMLLoader.load(getClass().getResource("/Views/FrontGalleryBox.fxml"));
 			for (Node node : gallerybox.getChildren()) {
 				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
 					switch (node.getId()) {
-						case "AddPhoto":
+						case "AddImage":
 							setContentNode(add);
 							break;
-						case "editData":
-							//setContentNode(teams);
+						case "ShowGallery":
+							setContentNode(gallery);
 							break;
-						case "favoris":
-							//setContentNode(teamStatics);
-							break;
-						case "myPhotos":
+					//	case "ShowMyGallery":
 							//setContentNode(players);
-							break;
+						//	break;
 
 					}
 				});
@@ -253,7 +252,6 @@ public class FrontEndController implements Initializable {
 	private void GalerieCliked(MouseEvent event) throws IOException {
 		unhighlightAll();
 		current_page = "gallery";
-		gallerybox = FXMLLoader.load(getClass().getResource("/Views/FrontGalleryBox.fxml"));
 		setNavNode(gallerybox);
 	}
 }

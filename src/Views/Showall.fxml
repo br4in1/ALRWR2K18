@@ -9,10 +9,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ShowallController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="300.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ShowallController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="570.0" layoutX="24.0" layoutY="41.0" stroke="#1d3a93" strokeType="INSIDE" strokeWidth="3.0" width="1219.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="556.0" layoutX="14.0" layoutY="31.0" onMouseClicked="#monter" stroke="#b23d3d" strokeType="INSIDE" strokeWidth="5.0" width="1203.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="556.0" layoutX="14.0" layoutY="31.0" onMouseClicked="#monter" stroke="#b23d3d" strokeType="INSIDE" strokeWidth="5.0" width="800.0" />
       <Text fx:id="bienvenue" fill="#b23d3d" layoutX="427.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Binvenue dans la galerie d'images " wrappingWidth="377.13671875">
          <font>
            <Font name="Berlin Sans FB Demi Bold" size="22.0" />
