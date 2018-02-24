@@ -22,6 +22,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -453,6 +454,38 @@ public class UserCrud {
 			PreparedStatement ste = con.prepareStatement(query);
 			ste.setString(1, BCrypt.hashpw(newpassword, BCrypt.gensalt(12)));
 			ste.setString(2, email);
+			ste.executeUpdate();
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+	
+	public static Boolean CheckUserPassword(String username,String password){
+		Connection con = DataSource.getInstance().getCon();
+		String query = "select password from User where username = '"+username+"'";
+		try {
+			Statement ste = con.createStatement();
+			ResultSet set = ste.executeQuery(query);
+			if (set.next()) {
+				return BCrypt.checkpw(password, set.getString("password"));
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return false;
+	}
+	
+	public static void editProfile(String username,String firstname,String lastname,LocalDate birthdate,String email){
+		Connection con = DataSource.getInstance().getCon();
+		String query = "update User set firstname = ?,lastname=?,birth_date=?,email=?,email_canonical=? where username = ?";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+			ste.setString(1, firstname);
+			ste.setString(2, lastname);
+			ste.setDate(3, java.sql.Date.valueOf(birthdate));
+			ste.setString(4, email);
+			ste.setString(5, email);
+			ste.setString(6, username);
 			ste.executeUpdate();
 		} catch (SQLException ex) {
 			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);

@@ -32,6 +32,7 @@ import javafx.scene.shape.Circle;
  */
 public class FrontEndController implements Initializable {
 
+	public static FrontEndController thisController;
 	@FXML
 	private Label homebutton;
 	@FXML
@@ -63,6 +64,7 @@ public class FrontEndController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		thisController = this;
 		current_page = "home";
 		homebutton.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
 		firstlastname.setText(SimpleUser.current_user.getUsername());
@@ -231,6 +233,15 @@ public class FrontEndController implements Initializable {
 
 	@FXML
 	private void myProfileClicked(MouseEvent event) throws IOException {
+		unhighlightAll();
+		current_page = "profile";
+		setNavNode(userBox);
+		MyProfileController.current_username = SimpleUser.current_user.getUsername();
+		MyProfileController.thisController.show();
+		setContentNode(profile);
+	}
+	
+	public void myProfileClicked() throws IOException {
 		unhighlightAll();
 		current_page = "profile";
 		setNavNode(userBox);
