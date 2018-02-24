@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
@@ -47,7 +48,21 @@ public class DashboardController implements Initializable {
 	AnchorPane show1;
 	AnchorPane show2;
 	AnchorPane show3;
-	VBox GalleryBox; 
+	VBox GalleryBox;
+	AnchorPane hotels;
+	VBox guideBox;
+	AnchorPane Managing;
+	AnchorPane StaduimManage;
+	AnchorPane ManagingDivertissement;
+	VBox articlesBox;
+    VBox newslettersBox;
+    AnchorPane ajouterArticle;
+    AnchorPane consulterArticles;
+    
+    AnchorPane ajouterNewsletter;
+    AnchorPane consulterNewsletter;
+    @FXML
+    private JFXButton Articles;
 
 	/**
 	 * Initializes the controller class.
@@ -82,6 +97,8 @@ public class DashboardController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		TextToSpeech tts = new TextToSpeech();
+		tts.setVoice("dfki-poppy-hsmm");
 		try {
 			//Load all fxmls in a cache
 
@@ -100,8 +117,49 @@ public class DashboardController implements Initializable {
 			manageGallery = FXMLLoader.load(getClass().getResource("/Views/DisplayI.fxml"));
 			show1 = FXMLLoader.load(getClass().getResource("/Views/Showall.fxml"));
 			show2 = FXMLLoader.load(getClass().getResource("/Views/DisplayO.fxml"));
-	//		show3 = FXMLLoader.load(getClass().getResource("/Views/chartP.fxml"));
+			//		show3 = FXMLLoader.load(getClass().getResource("/Views/chartP.fxml"));
 			GalleryBox = FXMLLoader.load(getClass().getResource("/Views/GalleryBox.fxml"));
+			guideBox = FXMLLoader.load(getClass().getResource("/Views/GuidBox.fxml"));
+			hotels = FXMLLoader.load(getClass().getResource("/Views/GuideHotelCrud.fxml"));
+			Managing = FXMLLoader.load(getClass().getResource("/Views/HotelDisplay.fxml"));
+			articlesBox = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/articleBox.fxml"));
+            newslettersBox = FXMLLoader.load(getClass().getResource("/Views/GestionNewsletters/newslettersBox.fxml"));
+            ajouterArticle = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/AjouterArticle.fxml"));
+            consulterArticles = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/ConsulterArticles.fxml"));
+            ajouterNewsletter = FXMLLoader.load(getClass().getResource("/Views/GestionNewsletters/ajouterNewsletter.fxml"));
+            consulterNewsletter = FXMLLoader.load(getClass().getResource("/Views/GestionNewsletters/consulterNewsletters.fxml"));
+			
+			for (Node node : articlesBox.getChildren()) {
+                node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
+                    switch (node.getId()) {
+                        case "mainMenu":
+                            setNavNode(nav);
+                            break;
+                        case "addArticle":
+                            setContentNode(ajouterArticle);
+                            break;
+                        case "showArticles":
+                            setContentNode(consulterArticles);
+                            break;
+                    }
+                });
+            }
+
+            for (Node node : newslettersBox.getChildren()) {
+                node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
+                    switch (node.getId()) {
+                        case "mainMenu":
+                            setNavNode(nav);
+                            break;
+                        case "addNewsLetter":
+                            setContentNode(ajouterNewsletter);
+                            break;
+                        case "showNewsLetters":
+                            setContentNode(consulterNewsletter);
+                            break;
+                    }
+                });
+            }
 
 			for (Node node : teamBox.getChildren()) {
 				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
@@ -118,6 +176,51 @@ public class DashboardController implements Initializable {
 							break;
 						case "Players":
 							setContentNode(players);
+							break;
+
+					}
+				});
+			}
+
+			for (Node node : guideBox.getChildren()) {
+				node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
+					switch (node.getId()) {
+						case "mainMenu":
+
+							tts.speak("main Menu", 2.0f, false, false);
+							setNavNode(nav);
+							break;
+						case "hotel":
+							tts.speak("adding with Map", 2.0f, false, false);
+							setContentNode(hotels);
+							break;
+						case "manage":
+							tts.speak("Managing hotels", 2.0f, false, false);
+							setContentNode(Managing);
+							break;
+						case "divertiss":
+							tts.speak("Managing divertissments", 2.0f, false, false);
+							System.out.println("alo");
+							 {
+								try {
+									ManagingDivertissement = FXMLLoader.load(getClass().getResource("/Views/DivertissementDisplay2.fxml"));
+								} catch (IOException ex) {
+									Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+								}
+								setContentNode(ManagingDivertissement);
+							}
+							break;
+						case "DisplayStade":
+							tts.speak("Managing Staduims", 2.0f, false, false);
+							 {
+								try {
+									StaduimManage = FXMLLoader.load(getClass().getResource("/Views/StadeDisplay.fxml"));
+								} catch (IOException ex) {
+									Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+								}
+
+								setContentNode(StaduimManage);
+							}
 							break;
 
 					}
@@ -202,11 +305,8 @@ public class DashboardController implements Initializable {
 	}
 
 	@FXML
-	private void newsNavbar(MouseEvent event) {
-	}
-
-	@FXML
 	private void guideNavbar(MouseEvent event) {
+		setNavNode(guideBox);
 	}
 
 	@FXML
@@ -223,4 +323,14 @@ public class DashboardController implements Initializable {
 	private void tournementNavbar(MouseEvent event) {
 		setNavNode(tournementBox);
 	}
+	
+	@FXML
+    private void NewsLettersNavbar(MouseEvent event) {
+        setNavNode(newslettersBox);
+    }
+	
+	@FXML
+    private void newsNavbar(MouseEvent event) {
+        setNavNode(articlesBox);
+    }
 }

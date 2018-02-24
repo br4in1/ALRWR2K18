@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.HTMLEditor?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="469.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GestionArticles.ModifierContenuController">
+   <children>
+      <HTMLEditor fx:id="contenu" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="73.0" layoutY="74.0" onKeyPressed="#contenuTyped" prefHeight="341.0" prefWidth="537.0" />
+      <Label layoutX="256.0" layoutY="21.0" text="Modifier Contenu " textFill="#ae2424">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Separator layoutX="241.0" layoutY="51.0" prefWidth="200.0" />
+      <JFXButton fx:id="btModifier" buttonType="RAISED" disable="true" layoutX="512.0" layoutY="424.0" onMouseClicked="#modiferClicked" prefHeight="31.0" prefWidth="98.0" style="-fx-background-color: #931d1d;" text="Modifier" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btClear" buttonType="RAISED" layoutX="392.0" layoutY="424.0" onMouseClicked="#ClearClicked" prefHeight="31.0" prefWidth="98.0" style="-fx-background-color: #931d1d;" text="Clear" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

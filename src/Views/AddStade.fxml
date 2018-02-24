@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="475.0" prefWidth="407.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddStadeController">
+   <children>
+      <AnchorPane layoutY="7.0" prefHeight="475.0" prefWidth="407.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
+         <children>
+            <Label layoutX="41.0" layoutY="34.0" prefHeight="17.0" prefWidth="54.0" text="Nom       :" />
+            <Label layoutX="41.0" layoutY="92.0" />
+            <Label layoutX="41.0" layoutY="75.0" prefHeight="17.0" prefWidth="109.0" text="Capacite" />
+            <Label layoutX="41.0" layoutY="119.0" prefHeight="17.0" prefWidth="66.0" text="City            :" />
+            <Label layoutX="41.0" layoutY="157.0" prefHeight="17.0" prefWidth="66.0" text="Latitude :" />
+            <Label layoutX="41.0" layoutY="206.0" prefHeight="17.0" prefWidth="82.0" text="Longtitude :" />
+            <Label layoutX="41.0" layoutY="258.0" prefHeight="17.0" prefWidth="66.0" text="Image :" />
+            <Button fx:id="enregistrer" layoutX="107.0" layoutY="419.0" mnemonicParsing="false" onAction="#Enregistrement" text="Enregistrer" />
+            <Button fx:id="anuler" layoutX="235.0" layoutY="419.0" mnemonicParsing="false" onAction="#RetourALAMap" prefHeight="25.0" prefWidth="66.0" text="Anuler" />
+            <JFXTextField fx:id="nom" alignment="CENTER" layoutX="167.0" layoutY="30.0" unFocusColor="RED" />
+            <JFXTextField fx:id="capacite" alignment="CENTER" layoutX="167.0" layoutY="71.0" unFocusColor="RED" />
+            <JFXTextField fx:id="city" alignment="CENTER" layoutX="167.0" layoutY="115.0" unFocusColor="RED" />
+            <JFXTextField fx:id="latitude" alignment="CENTER" editable="false" layoutX="167.0" layoutY="153.0" unFocusColor="#00b100" />
+            <JFXTextField fx:id="longtitude" alignment="CENTER" editable="false" layoutX="167.0" layoutY="202.0" unFocusColor="#00b100" />
+            <JFXTextField fx:id="image" alignment="CENTER" layoutX="167.0" layoutY="254.0" onMouseClicked="#browse" unFocusColor="RED" />
+            <StackPane fx:id="confirmation" layoutX="72.0" layoutY="362.0" prefHeight="49.0" prefWidth="264.0" />
+            <Label layoutX="109.0" layoutY="6.0" text="Label" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

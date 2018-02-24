@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="314.0" styleClass="Filtrer" stylesheets="@Filtrer.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.MapFilerController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="61.0" prefWidth="176.0" text="Search filter" textFill="WHITE" />
+      <JFXCheckBox fx:id="hotel" alignment="CENTER" checkedColor="#581abb" contentDisplay="RIGHT" prefHeight="56.0" prefWidth="160.0" text="               Hotels" textFill="WHITE" unCheckedColor="WHITE" underline="true" />
+      <JFXCheckBox fx:id="stades" alignment="CENTER" checkedColor="#581abb" contentDisplay="RIGHT" prefHeight="50.0" prefWidth="166.0" text="                Stadiums" textFill="WHITE" unCheckedColor="WHITE" underline="true" />
+      <JFXCheckBox fx:id="divertissement" alignment="CENTER" checkedColor="#581abb" contentDisplay="RIGHT" layoutX="10.0" layoutY="118.0" prefHeight="50.0" prefWidth="169.0" text=" Divertissements" textFill="WHITE" unCheckedColor="WHITE" underline="true" />
+      <JFXCheckBox fx:id="event" alignment="CENTER" checkedColor="#581abb" contentDisplay="RIGHT" layoutX="10.0" layoutY="168.0" prefHeight="50.0" prefWidth="164.0" text="     Evennement" textFill="WHITE" unCheckedColor="WHITE" underline="true" />
+      <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="57.0" prefWidth="165.0" text="Voice Type : " textFill="WHITE" />
+      <JFXRadioButton fx:id="Male" contentDisplay="RIGHT" prefHeight="37.0" prefWidth="105.0" text="Male" textFill="WHITE">
+         <toggleGroup>
+            <ToggleGroup fx:id="typeMap" />
+         </toggleGroup>
+      </JFXRadioButton>
+      <JFXRadioButton fx:id="Female" contentDisplay="RIGHT" prefHeight="37.0" prefWidth="105.0" text="Female" textFill="WHITE" toggleGroup="$typeMap" />
+      <JFXRadioButton fx:id="None" contentDisplay="RIGHT" layoutX="10.0" layoutY="455.0" prefHeight="37.0" prefWidth="105.0" text="None" textFill="WHITE" toggleGroup="$typeMap" />
+   </children>
+</VBox>
