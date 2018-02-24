@@ -144,7 +144,13 @@ public class AjouterArticleController implements Initializable {
         if (idEntite.getValue() == null || contenu.getHtmlText() == null || contenu.getHtmlText().equals("") || tfTitre.getText().equals("") || tfTitre.getText() == null || !checkPublier.isSelected()) {
             showDialog("Error", "Veuillez verifier que vous avez remplis tous les champs");
         } else {
-            Article a = new Article(1, tfTitre.getText(), contenu.getHtmlText(), idEntite.getValue().getId(), typeEntite.getValue(), new Date(Calendar.getInstance().getTime().getTime()), null, 7);
+            Article a = new Article(1, tfTitre.getText(), contenu.getHtmlText(), idEntite.getValue().getId(), typeEntite.getValue(), new Date(Calendar.getInstance().getTime().getTime()), null, 0);
+			if(Admin.current_user != null){
+				a.setAuteur(Admin.current_user.getId());
+			}
+			else{
+				a.setAuteur(Moderator.current_user.getId());
+			}
             if (ArticleCrud.getRepository().add(a)) {
                 showDialog("Success", "Votre articles a ete ajouter avec success");
 

@@ -13,6 +13,7 @@ import com.cloudinary.*;
 import Entities.User;
 import Services.Browser;
 import Services.UserCrud;
+import Utils.TokenGenerator;
 import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -120,6 +121,22 @@ public class Login_formController implements Initializable {
 	private JFXButton loginbtn;
 	@FXML
 	private JFXButton backbtn;
+	@FXML
+	private JFXButton forgotpassword;
+	@FXML
+	private Pane forgotform;
+	@FXML
+	private JFXButton sendcodeforgot;
+	@FXML
+	private JFXPasswordField pass1forgot;
+	@FXML
+	private JFXTextField mailforgot;
+	@FXML
+	private JFXTextField codeforgot;
+	@FXML
+	private JFXPasswordField pass2forgot;
+	@FXML
+	private JFXButton changepassword;
 
 	/**
 	 * Initializes the controller class.
@@ -352,24 +369,23 @@ public class Login_formController implements Initializable {
 	}
 
 	public static void SendConfirmationToken(String dest, String confirmationToken) {
-		String host = "smtp.mail.yahoo.com";
-		final String user = "pidevrussiealpha@yahoo.com";
-		final String password = "projetpi2018";
 		Properties props = new Properties();
-		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.socketFactory.port", "465");
+		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.prot", "465");
 		Session session = Session.getDefaultInstance(props,
 				new javax.mail.Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(user, password);
+				return new PasswordAuthentication("moez.haddad@esprit.tn", "moezmoezhaddad71126429118");
 			}
 		});
 
 		try {
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(user));
+			message.setFrom(new InternetAddress("moez.haddad@esprit.tn"));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(dest));
 			message.setSubject("Account Activation");
 			message.setText("Thank you for signing up on our platform. Please use this code to enable your account. " + confirmationToken);
@@ -444,6 +460,35 @@ public class Login_formController implements Initializable {
 
 	@FXML
 	private void loginUserByKeyboard(KeyEvent event) throws IOException {
-		if(event.getCode() == KeyCode.ENTER) loginUser();
+		if (event.getCode() == KeyCode.ENTER) {
+			loginUser();
+		}
+	}
+
+	@FXML
+	private void showForgotForm(ActionEvent event) {
+		loginform.setVisible(false);
+		forgotform.setVisible(true);
+	}
+
+	@FXML
+	private void sendCodeForgot(ActionEvent event) {
+		if(mailforgot.getText() == null || UserCrud.findUserByEmail(mailforgot.getText())){
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("L'adresse email est invalide."));
+			JFXDialog check_data = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
+			check_data.show();
+		}
+		else
+		{
+			String confirmationToken = TokenGenerator.generateToken2();
+			SendConfirmationToken(mailforgot.getText(), confirmationToken);
+			
+		}
+	}
+
+	@FXML
+	private void ChangePassword(ActionEvent event) {
 	}
 }
