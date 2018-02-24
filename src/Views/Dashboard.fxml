@@ -45,10 +45,11 @@
                   <JFXButton onMouseClicked="#usersNavbar" prefHeight="50.0" prefWidth="254.0" text="Users" textFill="WHITE" />
                   <JFXButton onMouseClicked="#tournementNavbar" prefHeight="50.0" prefWidth="254.0" text="Tournement" textFill="WHITE" />
                   <JFXButton onMouseClicked="#teamsNavbar" prefHeight="50.0" prefWidth="254.0" text="Teams" textFill="WHITE" />
-                  <JFXButton onMouseClicked="#newsNavbar" prefHeight="50.0" prefWidth="254.0" text="News" textFill="WHITE" />
+                  <JFXButton onMouseClicked="#newsNavbar" prefHeight="50.0" prefWidth="254.0" text="Articles" textFill="WHITE" />
                   <JFXButton onMouseClicked="#guideNavbar" prefHeight="50.0" prefWidth="254.0" text="Guide" textFill="WHITE" />
                   <JFXButton onMouseClicked="#GalleryNavbar" prefHeight="50.0" prefWidth="254.0" text="Gallery" textFill="WHITE" />
-               </children>
+				  <JFXButton layoutX="10.0" layoutY="521.0" onMouseClicked="#NewsLettersNavbar" prefHeight="50.0" prefWidth="254.0" text="NewsLetters" textFill="WHITE" />
+			   </children>
             </VBox>
          </children>
       </Pane>
