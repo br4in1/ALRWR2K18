@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.embed.swing.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
@@ -12,29 +12,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="582.0" prefWidth="877.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TeamFrontEndController">
-	<stylesheets>
-		<URL value="@teamfrontend.css" />
-	</stylesheets>
+<AnchorPane id="AnchorPane" prefHeight="582.0" prefWidth="877.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PlayerFrontEndController">
    <children>
       <TableView fx:id="tableT" layoutX="15.0" layoutY="14.0" prefHeight="568.0" prefWidth="301.0">
          <columns>
             <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
-            <TableColumn fx:id="flag" prefWidth="75.0000991821289" text="Flag" />
-            <TableColumn fx:id="name" prefWidth="74.99996948242188" text="Name" />
-            <TableColumn fx:id="area" prefWidth="75.0" text="Area" />
+            <TableColumn fx:id="Name" prefWidth="75.0000991821289" text="Name" />
+            <TableColumn fx:id="lastName" prefWidth="74.99996948242188" text="Lastname" />
+            <TableColumn fx:id="profilePhoto" prefWidth="75.0" text="Photo" />
          </columns>
       </TableView>
       <VBox layoutX="335.0" layoutY="17.0" prefHeight="336.0" prefWidth="315.0">
          <children>
             <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="290.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="104.0" text="President">
+                  <Label prefHeight="17.0" prefWidth="104.0" text="Age">
                      <font>
                         <Font name="Ubuntu Bold Italic" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="President" prefHeight="17.0" prefWidth="161.0" text="President" />
+                  <Label fx:id="Age" prefHeight="17.0" prefWidth="161.0" text="Age" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -48,12 +45,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="50.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="302.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="103.0" text="Coach">
+                  <Label prefHeight="17.0" prefWidth="103.0" text="Position">
                      <font>
                         <Font name="Ubuntu Bold Italic" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="coach" prefHeight="17.0" prefWidth="137.0" text="Coach" />
+                  <Label fx:id="Position" prefHeight="17.0" prefWidth="137.0" text="Position" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -67,12 +64,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="84.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="263.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="106.0" text="Fifa date">
+                  <Label prefHeight="17.0" prefWidth="106.0" text="Height">
                      <font>
                         <Font name="Ubuntu Bold Italic" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="fifaDate" prefHeight="17.0" prefWidth="80.0" text="FifaDate" />
+                  <Label fx:id="Height" prefHeight="17.0" prefWidth="80.0" text="Height" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -86,12 +83,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="118.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="287.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="107.0" text="Participations">
+                  <Label prefHeight="17.0" prefWidth="107.0" text="Weight">
                      <font>
                         <Font name="Ubuntu Bold Italic" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="participation" prefHeight="17.0" prefWidth="103.0" text="Participations" />
+                  <Label fx:id="Weight" prefHeight="17.0" prefWidth="103.0" text="Weight" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -105,12 +102,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="152.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="295.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="109.0" text="world cup group">
+                  <Label prefHeight="17.0" prefWidth="109.0" text="Shirt Number">
                      <font>
                         <Font name="Ubuntu Bold Italic" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="wcGroupe" prefHeight="17.0" prefWidth="114.0" text="world cup groupe" />
+                  <Label fx:id="shirtNumber" prefHeight="17.0" prefWidth="114.0" text="Shirt Number" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -124,8 +121,10 @@
             </HBox>
          </children>
       </VBox>
-      <SwingNode fx:id="staticSwigNode" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="300.0" />
-      <JFXButton fx:id="PlayersView" layoutX="717.0" layoutY="221.0" onMouseClicked="#viewPlayers" text="View Players" />
-      <ImageView fx:id="TeamImageView" fitHeight="150.0" fitWidth="200.0" layoutX="673.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="PlayerImageView" fitHeight="150.0" fitWidth="200.0" layoutX="673.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="PlayerImageView2" fitHeight="222.0" fitWidth="400.0" layoutX="403.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true" />
    </children>
+   <stylesheets>
+      <URL value="@teamfrontend.css" />
+   </stylesheets>
 </AnchorPane>

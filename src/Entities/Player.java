@@ -5,6 +5,8 @@
  */
 package Entities;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 
 /**
@@ -233,7 +235,13 @@ public class Player {
 	public String toString() {
 		return "Player{" + "id=" + id + ", name=" + name + ", lastName=" + lastName + ", age=" + age + ", club=" + club + ", nation=" + nation + ", height=" + height + ", weight=" + weight + ", position=" + position + ", goals=" + goals + ", description=" + description + ", profilePhoto=" + profilePhoto + ", blanketPhoto=" + blanketPhoto + ", descriptionPhoto=" + descriptionPhoto + ", fbLink=" + fbLink + ", twitterLink=" + twitterLink + ", shirtNb=" + shirtNb + ", video=" + video + '}';
 	}
-	
+	public ImageView getImage(){
+		ImageView img = new ImageView();
+		img.setImage(new Image(profilePhoto));
+		img.setFitHeight(50);
+		img.setFitWidth(100);
+		return img;
+	}
     
 }
     

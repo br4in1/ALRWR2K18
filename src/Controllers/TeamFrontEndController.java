@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import static Controllers.TeamsCrudController.x;
 import Entities.Team;
 import Services.PlayerCrud;
 import Services.TeamCrud;
@@ -20,8 +21,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingNode;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -33,8 +39,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -79,6 +89,8 @@ public class TeamFrontEndController implements Initializable {
 	private ImageView TeamImageView;
 	@FXML
 	private JFXButton PlayersView;
+	
+	static String selecteNation="" ;
 
 	/**
 	 * Initializes the controller class.
@@ -102,25 +114,24 @@ public class TeamFrontEndController implements Initializable {
 						fifaDate.setText(TeamCrud.findById(ID).getFifaDate().toString());
 						participation.setText(Integer.toString(TeamCrud.findById(ID).getParticipations()));
 						wcGroupe.setText(TeamCrud.findById(ID).getWcGroup());
-						
+
 						//image view
-					//	Image image = new Image(new File(TeamCrud.findById(ID).getSquadPhoto()).toString());
+						//	Image image = new Image(new File(TeamCrud.findById(ID).getSquadPhoto()).toString());
 						TeamImageView.setImage(new Image(TeamCrud.findById(ID).getSquadPhoto()));
-					//	System.out.println("flag url " + image);
-						
+						//	System.out.println("flag url " + image);
+
 						// statics 
 						PieDataset dataset = createDataset(ID);
-		JFreeChart chart = createChart(dataset);
+						JFreeChart chart = createChart(dataset);
 
-		//	ChartViewer viewer = new ChartViewer(chart);
-		//grid.add(imageHouse, 0, 0, 1, 2);
-		staticSwigNode.setContent(
-				new ChartPanel(
-						createChart(dataset)
-				)
-		);
-						
-						
+						//	ChartViewer viewer = new ChartViewer(chart);
+						//grid.add(imageHouse, 0, 0, 1, 2);
+						staticSwigNode.setContent(
+								new ChartPanel(
+										createChart(dataset)
+								)
+						);
+
 					}
 
 				}
@@ -154,7 +165,7 @@ public class TeamFrontEndController implements Initializable {
 		ObservableList<Team> OL = FXCollections.observableList(TeamCrud.findAllTeam());
 		tableT.setItems(OL);
 	}
-	
+
 	private static PieDataset createDataset(int x) {
 		Team team = TeamCrud.findById(x);
 		DefaultPieDataset dataset = new DefaultPieDataset();
@@ -164,12 +175,9 @@ public class TeamFrontEndController implements Initializable {
 		dataset.setValue("Draw", team.getDraw());
 		return dataset;
 	}
-	
-	
+
 	private static JFreeChart createChart(PieDataset dataset) {
-			
-		
-		
+
 		JFreeChart chart = ChartFactory.createPieChart(
 				"Team Statics", dataset);
 
@@ -188,17 +196,15 @@ public class TeamFrontEndController implements Initializable {
 		plot.setOutlineVisible(false);
 		float[] hsb = new float[3];
 		ColorAdjust ca = new ColorAdjust();
-		
-		
-	plot.setSectionPaint("Win",Color.getHSBColor(84, 175, 83) );
-		plot.setSectionPaint("Draw",Color.getHSBColor(40, 97, 92));
+
+		plot.setSectionPaint("Win", Color.getHSBColor(84, 175, 83));
+		plot.setSectionPaint("Draw", Color.getHSBColor(40, 97, 92));
 		plot.setSectionPaint("Loose", Color.getHSBColor(120, 81, 89));
 		//plot.setSectionPaint("Loose", Color.getHSBColor(100, 100, 100));
-		
-	//	plot.setDefaultSectionOutlinePaint(Color.WHITE);
-		plot.setSectionOutlinesVisible(true);
-	//	plot.setDefaultSectionOutlineStroke(new BasicStroke(2.0f));
 
+		//	plot.setDefaultSectionOutlinePaint(Color.WHITE);
+		plot.setSectionOutlinesVisible(true);
+		//	plot.setDefaultSectionOutlineStroke(new BasicStroke(2.0f));
 
 		// add a subtitle giving the data source
 		TextTitle source = new TextTitle("",
@@ -208,6 +214,36 @@ public class TeamFrontEndController implements Initializable {
 		chart.addSubtitle(source);
 		return chart;
 
+	}
+
+	@FXML
+	private void viewPlayers(MouseEvent event) {
+		if (tableT.getSelectionModel().getSelectedItem() == null) {
+			Notifications notificationBuilder
+					= Notifications.create().title("Avertissment")
+							.text("Please select a team")
+							.hideAfter(Duration.seconds(3))
+							.position(Pos.TOP_RIGHT)
+							.onAction((ActionEvent event1) -> {
+								// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+								System.out.println("Clicked on notification !");
+							});
+
+			notificationBuilder.showInformation();
+		} else {
+			try {
+				selecteNation = tableT.getSelectionModel().getSelectedItem().getName();
+
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/PlayerFrontEnd.fxml"));
+				Parent root = (Parent) fxmlLoader.load();
+				Stage stage = new Stage();
+				stage.setScene(new Scene(root));
+				stage.show();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
