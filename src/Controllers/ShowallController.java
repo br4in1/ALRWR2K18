@@ -10,6 +10,7 @@ import Entities.Likes;
 import Entities.SimpleUser;
 import Services.GalleryCrud;
 import Services.LikesCrud;
+import static com.google.maps.PlacesApi.photo;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -42,6 +43,7 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import static javafx.scene.input.KeyCode.L;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
@@ -81,6 +83,9 @@ public class ShowallController implements Initializable {
 	@FXML
 	private StackPane mainStack;
 
+	private TextToSpeech tts = new TextToSpeech();
+	private float VoiceVolume;
+
 	/**
 	 * Initializes the controller class.
 	 */
@@ -89,6 +94,7 @@ public class ShowallController implements Initializable {
 		type = new ArrayList<>();
 		type.add("*.png");
 		type.add("*.jpg");
+
 	}
 
 	@FXML
@@ -132,72 +138,83 @@ public class ShowallController implements Initializable {
 								ImageView img22 = new ImageView(img2.getImage());
 								img22.setFitHeight(400);
 								img22.setFitWidth(500);
-
 								Image im33 = new Image("/Views/like.png");
 								ImageView btn = new ImageView(im33);
 								btn.setFitHeight(30);
 								btn.setFitWidth(30);
-
 								Image im44 = new Image("/Views/Dislike.png");
 								ImageView btn2 = new ImageView(im44);
 								btn2.setFitHeight(30);
 								btn2.setFitWidth(30);
 								btn2.setVisible(false);
-
 								btn.setOnMouseClicked((event) -> {
-
-									btn.setVisible(false);
-									btn2.setVisible(true);
-
-									int photo = Integer.parseInt(img2.getId());
-									Likes Liked = new Likes(SimpleUser.current_user.getId(), photo);
-									LikesCrud.Like(Liked);
-
+									
+									 
+										tts.setVoice("dfki-poppy-hsmm");
+										VoiceVolume = 2;
+										tts.speak("You have liked this photo ", VoiceVolume, false, false);
+										
+										btn.setVisible(false);
+										btn2.setVisible(true);
+										int photo = Integer.parseInt(img2.getId());
+										Likes Liked = new Likes(SimpleUser.current_user.getId(), photo);
+										LikesCrud.Like(Liked);
+										
+										
+								
 								});
 								btn2.setOnMouseClicked(new EventHandler<MouseEvent>() {
 									@Override
 									public void handle(MouseEvent event) {
 										try {
+											tts.setVoice("dfki-poppy-hsmm");
+											VoiceVolume = 2;
+											tts.speak("You have disliked this photo ", VoiceVolume, false, false);
+											
 											btn2.setVisible(false);
 											btn.setVisible(true);
 											LikesCrud L = new LikesCrud();
 											int photo = Integer.parseInt(img2.getId());
-										//	int x = L.PhotoLiked(photo);
-											LikesCrud.Unlike(photo);
-
+											LikesCrud.Unlike(SimpleUser.current_user.getId());
 										} catch (SQLException ex) {
 											Logger.getLogger(ShowallController.class.getName()).log(Level.SEVERE, null, ex);
 										}
 									}
 								});
-
 								Label Ville = new Label();
 								Ville.setText("Ville : ");
-								Ville.setFont(Font.font("Ubuntu", FontWeight.BOLD, 18));
-
+								Ville.setFont(Font.font("Ubuntu", 19));
+								
 								Label Lieu = new Label();
 								Lieu.setText("Lieu : ");
-								Lieu.setFont(Font.font("Ubuntu", FontWeight.BOLD, 18));
-
+								Lieu.setFont(Font.font("Ubuntu", 19));
+								
 								Label Description = new Label();
 								Description.setText("Description : ");
-								Description.setFont(Font.font("Ubuntu", FontWeight.BOLD, 18));
-
+								Description.setFont(Font.font("Ubuntu", 19));
+								
 								Label Mention = new Label();
 								Mention.setText("      Mention de j'aime");
 								Mention.setFont(Font.font("Ubuntu", FontWeight.BOLD, 20));
-
+								Mention.setTextFill(Color.web("#b23d3d"));
+								
 								LikesCrud L = new LikesCrud();
 								int photo = Integer.parseInt(img2.getId());
-								int nbre = L.PhotoLiked(photo);
-								Label Total = new Label();
+								int  nbre = L.PhotoLiked(photo);
+								System.out.println(nbre);
 								
-								Total.setText("     " + nbre);
-								Total.setFont(Font.font("Ubuntu", FontWeight.BOLD, 20));
-
+								
+								
+								
+								
+								
+								
+								Label Total = new Label();
+								Total.setText("            " + nbre);
+								Total.setTextFill(Color.web("#b23d3d"));
+								Total.setFont(Font.font("Ubuntu", 40));
 								Label espace = new Label(" ");
 								Separator Sep = new Separator();
-
 								Hb.getChildren().add((img22));
 								Hb.setMaxSize(40, 40);
 								VBox Vb = new VBox();
@@ -211,12 +228,10 @@ public class ShowallController implements Initializable {
 										Total,
 										btn2
 								);
-
 								Vb.setMinWidth(300);
 								Vb.setSpacing(30);
 								Vb.setPadding(new Insets(30));
 								Hb.getChildren().add(Vb);
-
 								JFXDialogLayout Dialog = new JFXDialogLayout();
 								Dialog.setBody(Hb);
 								JFXDialog Dialog1;

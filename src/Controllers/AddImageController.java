@@ -174,8 +174,33 @@ public class AddImageController implements Initializable {
 				}
 			}
 		});
+		Av.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (!newValue) {
+
+					if (!"".equals(Av.getText())) {
+						Dc.setUnFocusColor(Color.rgb(0, 0, 255, 1));
+						try {
+							Integer.parseInt(Dc.getText());
+							Av.setUnFocusColor(Color.rgb(255, 0, 0, 1));
+							Alert alert = new Alert(Alert.AlertType.WARNING, "Erreur de saisie :Impossible d'enter des chiffres ");
+							alert.show();
+							Av.setText("");
+						} catch (NumberFormatException e) {
+
+							Av.setUnFocusColor(Color.rgb(0, 0, 255, 1));
+
+						}
+
+					} else {
+						Av.setUnFocusColor(Color.rgb(255, 0, 0, 1));
+					}
+				}
+			}
+		});
 
 	}
+	
 
 	@FXML
 	private void InsertImagee(MouseEvent event) throws MalformedURLException {

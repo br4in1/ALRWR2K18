@@ -41,7 +41,7 @@ public class LikesCrud {
 	{
 		Scanner sc = new Scanner(System.in);
 		Connection con = DataSource.getInstance().getCon();
-		String req = "DELETE from  likes  WHERE idPhoto =?";
+		String req = "DELETE from  likes  WHERE idUser =?";
 		PreparedStatement pre = con.prepareStatement(req);
 		pre.setInt(1, id);
 		pre.executeUpdate();
