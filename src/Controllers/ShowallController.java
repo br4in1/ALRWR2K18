@@ -11,6 +11,7 @@ import Entities.SimpleUser;
 import Services.GalleryCrud;
 import Services.LikesCrud;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import static java.awt.Color.red;
 import java.awt.image.BufferedImage;
@@ -31,6 +32,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.chart.BubbleChart;
 import javafx.scene.control.Alert;
@@ -45,9 +47,13 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -72,6 +78,8 @@ public class ShowallController implements Initializable {
 	private AnchorPane anch;
 	@FXML
 	private FlowPane mainShowAll;
+	@FXML
+	private StackPane mainStack;
 
 	/**
 	 * Initializes the controller class.
@@ -111,129 +119,121 @@ public class ShowallController implements Initializable {
 				line.setStroke(Color.rgb(178, 61, 61));
 				line.setStyle("-fx-stroke-width:" + 3);
 
-				Label a = new Label();
-				a.setLayoutX(50.0 + y);
-				a.setLayoutY(240);
-
-				Label a1 = new Label();
-				a1.setLayoutX(50.0 + y);
-				a1.setLayoutY(270);
-
-				Label a2 = new Label();
-				a2.setLayoutX(50.0 + y);
-				a2.setLayoutY(300);
-
-				Label a3 = new Label();
-				a3.setLayoutX(50.0 + y);
-				a3.setLayoutY(270);
-
-				
-				Label a4 = new Label();
-				a4.setLayoutX(50.0 + y);
-				a4.setLayoutY(300);
-
-				Label L1 = new Label();
-				L1.setLayoutX(50 + y);
-				L1.setLayoutY(0);
 				img2.setAccessibleHelp(Liste.get(i).getImage());
 				img2.setId("" + Liste.get(i).getId());
-				
 
 				img2.setOnMouseClicked(new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent event2) {
-
-						System.out.println(img2.getId());
 						if (event2.getClickCount() == 1) {
-							a.setText("Cette photo est prise à : " + img2.getId());
-						}
 
-						if (event2.getClickCount() == 2) {
+							try {
+								HBox Hb = new HBox();
+								ImageView img22 = new ImageView(img2.getImage());
+								img22.setFitHeight(400);
+								img22.setFitWidth(500);
 
-							img2.setFitWidth(145 * 1.5);
-							img2.setFitHeight(145 * 1.5);
-							img2.setStyle("-fx-border-color: BLACK");
-							double y = img2.getLayoutX() - 50;
+								Image im33 = new Image("/Views/like.png");
+								ImageView btn = new ImageView(im33);
+								btn.setFitHeight(30);
+								btn.setFitWidth(30);
 
-							Label L = new Label();
-							L.setLayoutX(50 + y);
-							L.setLayoutY(0);
-							L.setText("vous avez likez cette photo ! :) ");
-							L.setStyle("-fx-color: red");
-							L1.setVisible(false);
-							anch.getChildren().add(L);
+								Image im44 = new Image("/Views/Dislike.png");
+								ImageView btn2 = new ImageView(im44);
+								btn2.setFitHeight(30);
+								btn2.setFitWidth(30);
+								btn2.setVisible(false);
 
-							Image im2 = new Image("/Views/save.png");
-							ImageView btn = new ImageView(im2);
-							btn.setLayoutX(180.0 + y);
-							btn.setLayoutY(265);
-							btn.setFitHeight(30);
-							btn.setFitWidth(30);
+								btn.setOnMouseClicked((event) -> {
 
-							Image im3 = new Image("/Views/dislike.png");
-							ImageView btn1 = new ImageView(im3);
-							btn1.setLayoutX(110.0 + y);
-							btn1.setLayoutY(265);
-							btn1.setFitHeight(30);
-							btn1.setFitWidth(30);
+									btn.setVisible(false);
+									btn2.setVisible(true);
 
-							int idPhoto = Integer.parseInt(img2.getId());
-							
-							System.out.println(SimpleUser.current_user.getId() + "aaaa" + idPhoto);
-							Likes Liked = new Likes(SimpleUser.current_user.getId(), idPhoto);
-                            LikesCrud.Like(Liked);
-							
-							btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-								@Override
-								public void handle(MouseEvent event) {
-									Stage fileChooserStage = new Stage();
-									FileChooser fileChooser = new FileChooser();
-									fileChooser.setTitle("Select an Image");
-									fileChooser.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-									File file = fileChooser.showSaveDialog(fileChooserStage);
+									int photo = Integer.parseInt(img2.getId());
+									Likes Liked = new Likes(SimpleUser.current_user.getId(), photo);
+									LikesCrud.Like(Liked);
 
-								}
-							});
+								});
+								btn2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+									@Override
+									public void handle(MouseEvent event) {
+										try {
+											btn2.setVisible(false);
+											btn.setVisible(true);
+											LikesCrud L = new LikesCrud();
+											int photo = Integer.parseInt(img2.getId());
+										//	int x = L.PhotoLiked(photo);
+											LikesCrud.Unlike(photo);
 
-							btn1.setOnMouseClicked((event) -> {
-								a1.setVisible(false);
-								btn.setVisible(false);
-								btn1.setVisible(false);
-								L.setVisible(false);
-								try {
-									LikesCrud.Unlike(idPhoto);
-								} catch (SQLException ex) {
-									Logger.getLogger(ShowallController.class.getName()).log(Level.SEVERE, null, ex);
-								}
+										} catch (SQLException ex) {
+											Logger.getLogger(ShowallController.class.getName()).log(Level.SEVERE, null, ex);
+										}
+									}
+								});
+
+								Label Ville = new Label();
+								Ville.setText("Ville : ");
+								Ville.setFont(Font.font("Ubuntu", FontWeight.BOLD, 18));
+
+								Label Lieu = new Label();
+								Lieu.setText("Lieu : ");
+								Lieu.setFont(Font.font("Ubuntu", FontWeight.BOLD, 18));
+
+								Label Description = new Label();
+								Description.setText("Description : ");
+								Description.setFont(Font.font("Ubuntu", FontWeight.BOLD, 18));
+
+								Label Mention = new Label();
+								Mention.setText("      Mention de j'aime");
+								Mention.setFont(Font.font("Ubuntu", FontWeight.BOLD, 20));
+
+								LikesCrud L = new LikesCrud();
+								int photo = Integer.parseInt(img2.getId());
+								int nbre = L.PhotoLiked(photo);
+								Label Total = new Label();
 								
+								Total.setText("     " + nbre);
+								Total.setFont(Font.font("Ubuntu", FontWeight.BOLD, 20));
 
-							});
+								Label espace = new Label(" ");
+								Separator Sep = new Separator();
 
-							anch.getChildren().add(btn);
-							anch.getChildren().add(btn1);
+								Hb.getChildren().add((img22));
+								Hb.setMaxSize(40, 40);
+								VBox Vb = new VBox();
+								Vb.getChildren().addAll(
+										Ville,
+										Lieu,
+										Description,
+										btn,
+										Sep,
+										Mention,
+										Total,
+										btn2
+								);
 
-						} else {
-							img2.setFitHeight(170);
-							img2.setFitWidth(170);
+								Vb.setMinWidth(300);
+								Vb.setSpacing(30);
+								Vb.setPadding(new Insets(30));
+								Hb.getChildren().add(Vb);
+
+								JFXDialogLayout Dialog = new JFXDialogLayout();
+								Dialog.setBody(Hb);
+								JFXDialog Dialog1;
+								Dialog1 = new JFXDialog(mainStack, Dialog, JFXDialog.DialogTransition.TOP);
+								Dialog1.show();
+							} catch (SQLException ex) {
+								Logger.getLogger(ShowallController.class.getName()).log(Level.SEVERE, null, ex);
+							}
 
 						}
+
 					}
 
 				}
 				);
 
 				y = 230 * (i + 1);
-
-				anch.getChildren()
-						.add(a);
-				anch.getChildren()
-						.add(a1);
-				anch.getChildren()
-						.add(a2);
-				anch.getChildren()
-						.add(a3);
-				anch.getChildren()
-						.add(a4);
 				anch.getChildren()
 						.add(line);
 				anch.getChildren()
@@ -244,6 +244,5 @@ public class ShowallController implements Initializable {
 		}
 
 	}
-
 
 }

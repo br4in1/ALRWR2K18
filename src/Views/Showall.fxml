@@ -7,29 +7,33 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <FlowPane fx:id="mainShowAll" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="973.0" style="-fx-background-color: white; -fx-border-radius: 7; -fx-border-color: grey;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ShowallController">
    <children>
-      <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="611.0" prefWidth="973.0">
+      <StackPane fx:id="mainStack">
          <children>
-            <Text fx:id="bienvenue" fill="#b23d3d" layoutX="389.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue dans la galerie d'images " wrappingWidth="415.13671875">
-               <font>
-                 <Font name="Ubuntu" size="24.0" />
-               </font>
-            </Text>
-            <Separator layoutX="467.0" layoutY="56.0" prefHeight="19.0" prefWidth="243.0" />
-            <ScrollBar orientation="VERTICAL" prefHeight="521.0" prefWidth="14.0" visible="false" />
-            <AnchorPane fx:id="anch" layoutX="32.0" layoutY="84.0" prefHeight="520.0" prefWidth="898.0" />
-            <ImageView fitHeight="56.0" fitWidth="50.0" layoutX="32.0" layoutY="16.0" onMouseMoved="#Monter" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/galerie.png" />
-               </image>
-            </ImageView>
+            <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="611.0" prefWidth="973.0">
+               <children>
+                  <Text fx:id="bienvenue" fill="#b23d3d" layoutX="365.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue dans la galerie d'images " wrappingWidth="415.13671875">
+                     <font>
+                       <Font name="Ubuntu" size="24.0" />
+                     </font>
+                  </Text>
+                  <Separator layoutX="451.0" layoutY="47.0" prefHeight="19.0" prefWidth="243.0" />
+                  <ScrollBar orientation="VERTICAL" prefHeight="521.0" prefWidth="14.0" visible="false" />
+                  <AnchorPane fx:id="anch" layoutX="32.0" layoutY="84.0" prefHeight="520.0" prefWidth="898.0" />
+                  <ImageView fitHeight="56.0" fitWidth="50.0" layoutX="32.0" layoutY="16.0" onMouseMoved="#Monter" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/galerie.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
          </children>
-      </AnchorPane>
+      </StackPane>
    </children>
    <padding>
       <Insets right="20.0" />
