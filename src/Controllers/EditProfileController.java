@@ -44,10 +44,9 @@ public class EditProfileController implements Initializable {
 	@FXML
 	private JFXButton apply1;
 	@FXML
-	private JFXTextField oldpassword;
+	private JFXPasswordField oldpassword;
 	@FXML
-	private JFXTextField newpassword;
-	@FXML
+	private JFXPasswordField newpassword;
 	private JFXTextField newpassword2;
 	@FXML
 	private JFXButton apply2;
@@ -55,6 +54,8 @@ public class EditProfileController implements Initializable {
 	private FlowPane nav;
 	@FXML
 	private StackPane stack;
+	@FXML
+	private JFXPasswordField newpassword1;
 
 	/**
 	 * Initializes the controller class.
@@ -82,15 +83,49 @@ public class EditProfileController implements Initializable {
 			content.setBody(new Text("The password you provided is wrong."));
 			JFXDialog check_data = new JFXDialog(stack, content, JFXDialog.DialogTransition.CENTER);
 			check_data.show();
+		}
+		else if(UserCrud.findUserByEmail(email.getText()) && !email.getText().equals(SimpleUser.current_user.getEmail())){
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("This mail address already exists."));
+			JFXDialog check_data = new JFXDialog(stack, content, JFXDialog.DialogTransition.CENTER);
+			check_data.show();
 		} else {
 			UserCrud.editProfile(SimpleUser.current_user.getUsername(),(firstname.getText().length() != 0) ? firstname.getText() : SimpleUser.current_user.getFirstname(),(lastname.getText().length()!= 0) ? lastname.getText() : SimpleUser.current_user.getLastname(),birthdate.getValue(),(email.getText().length()!=0) ? email.getText() : SimpleUser.current_user.getEmail());
+			password.setText("");
+			oldpassword.setText("");
 			FrontEndController.thisController.myProfileClicked();
 		}
 	}
 
 	@FXML
-	private void changePasswordAction(ActionEvent event) {
-
+	private void changePasswordAction(ActionEvent event) throws IOException {
+		if (!UserCrud.CheckUserPassword(SimpleUser.current_user.getUsername(), oldpassword.getText())) {
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("The old password you provided is wrong."));
+			JFXDialog check_data = new JFXDialog(stack, content, JFXDialog.DialogTransition.CENTER);
+			check_data.show();
+		} else if(newpassword.getText() == null || newpassword.getText().length() < 7) {
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("The new password should contains at least 7 characters."));
+			JFXDialog check_data = new JFXDialog(stack, content, JFXDialog.DialogTransition.CENTER);
+			check_data.show();
+		}
+		else if(!newpassword1.getText().equals(newpassword.getText())){
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(""));
+			content.setBody(new Text("The two passwords must be the same."));
+			JFXDialog check_data = new JFXDialog(stack, content, JFXDialog.DialogTransition.CENTER);
+			check_data.show();
+		}
+		else{
+			UserCrud.ChangePasswordForUser(SimpleUser.current_user.getEmail(), newpassword.getText());
+			password.setText("");
+			oldpassword.setText("");
+			FrontEndController.thisController.myProfileClicked();
+		}
 	}
 
 }

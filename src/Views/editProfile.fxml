@@ -142,11 +142,11 @@
                               <Insets top="13.0" />
                            </HBox.margin>
                         </Label>
-                        <JFXTextField fx:id="oldpassword" prefHeight="27.0" prefWidth="320.0">
+                        <JFXPasswordField fx:id="oldpassword" prefHeight="27.0" prefWidth="320.0">
                            <HBox.margin>
-                              <Insets left="110.0" top="4.0" />
+                              <Insets left="110.0" />
                            </HBox.margin>
-                        </JFXTextField>
+                        </JFXPasswordField>
                      </children>
                      <VBox.margin>
                         <Insets left="31.0" top="15.0" />
@@ -162,11 +162,11 @@
                               <Insets top="13.0" />
                            </HBox.margin>
                         </Label>
-                        <JFXTextField fx:id="newpassword" prefHeight="27.0" prefWidth="320.0">
+                        <JFXPasswordField fx:id="newpassword" prefHeight="27.0" prefWidth="320.0">
                            <HBox.margin>
                               <Insets left="110.0" top="4.0" />
                            </HBox.margin>
-                        </JFXTextField>
+                        </JFXPasswordField>
                      </children>
                      <VBox.margin>
                         <Insets left="31.0" />
@@ -182,11 +182,11 @@
                               <Insets top="13.0" />
                            </HBox.margin>
                         </Label>
-                        <JFXTextField fx:id="newpassword2" prefHeight="27.0" prefWidth="320.0">
+                        <JFXPasswordField fx:id="newpassword1" prefHeight="27.0" prefWidth="320.0">
                            <HBox.margin>
                               <Insets left="40.0" top="4.0" />
                            </HBox.margin>
-                        </JFXTextField>
+                        </JFXPasswordField>
                      </children>
                      <VBox.margin>
                         <Insets left="31.0" />
