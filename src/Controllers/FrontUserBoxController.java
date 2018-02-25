@@ -32,7 +32,7 @@ public class FrontUserBoxController implements Initializable {
 	private Label favoris;
 	@FXML
 	private Label myPhotos;
-	private String selected;
+	public static String selected;
 	public static FrontUserBoxController thisController;
 	/**
 	 * Initializes the controller class.
@@ -42,7 +42,14 @@ public class FrontUserBoxController implements Initializable {
 		thisController = this;
 		selected = "myprofile";
 		myProfile.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
-	}	
+	}
+
+	public void unhighlightAll(){
+		myProfile.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		editData.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		favoris.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		myPhotos.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+	}
 
 	@FXML
 	private void unhighlightMyProfile(MouseEvent event) {
@@ -51,7 +58,7 @@ public class FrontUserBoxController implements Initializable {
 	}
 
 	@FXML
-	private void highlightMyProfile(MouseEvent event) {
+	public void highlightMyProfile(MouseEvent event) {
 		if(!selected.equals("myprofile"))
 			myProfile.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
 	}
@@ -63,7 +70,7 @@ public class FrontUserBoxController implements Initializable {
 	}
 
 	@FXML
-	private void highlightEdit(MouseEvent event) {
+	public void highlightEdit(MouseEvent event) {
 		if(!selected.equals("edit"))
 			editData.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
 	}

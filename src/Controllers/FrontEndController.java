@@ -80,9 +80,15 @@ public class FrontEndController implements Initializable {
 						case "myProfile":
 							MyProfileController.current_username = SimpleUser.current_user.getUsername();
 							MyProfileController.thisController.show();
+							FrontUserBoxController.thisController.unhighlightAll();
+							FrontUserBoxController.thisController.highlightMyProfile(k);
+							FrontUserBoxController.selected = "myprofile";
 							setContentNode(profile);
 							break;
 						case "editData":
+							FrontUserBoxController.thisController.unhighlightAll();
+							FrontUserBoxController.thisController.highlightEdit(k);
+							FrontUserBoxController.selected = "edit";
 							setContentNode(editProfile);
 							break;
 						case "favoris":
