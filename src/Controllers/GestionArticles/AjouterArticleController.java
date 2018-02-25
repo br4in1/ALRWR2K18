@@ -23,6 +23,7 @@ import com.sun.javafx.webkit.Accessor;
 import com.sun.webkit.WebPage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.Calendar;
@@ -40,6 +41,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -59,7 +63,7 @@ public class AjouterArticleController implements Initializable {
 
     @FXML
     private AnchorPane ajouterArticlePane;
-    @FXML
+
     private HTMLEditor contenu;
     @FXML
     private JFXButton btAjouter;
@@ -78,12 +82,26 @@ public class AjouterArticleController implements Initializable {
 
     Cloudinary cloudinary;
     private File image;
+    @FXML
+    private JFXTextField tfImageArticle;
+    @FXML
+    private AnchorPane contenuPane;
+    @FXML
+    private ImageView ivImageArticle;
+    @FXML
+    private StackPane IvStackPane;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        contenu = new HTMLEditor();
+        contenu.setId("contenu");
+        contenuPane.getChildren().add(contenu);
+        contenu.prefWidthProperty().bind(contenuPane.widthProperty());
+        contenu.prefHeightProperty().bind(contenuPane.heightProperty());
+
         cloudinary = new Cloudinary("cloudinary://187685892358282:rL27N346tuXqVQyA5sR1oDLFJag@pidev");
         ObservableList<String> entitesList = FXCollections.observableArrayList("Match", "Joueur", "Equipe", "Evenement", "Stade", "None");
         typeEntite.setItems(entitesList);
@@ -140,17 +158,19 @@ public class AjouterArticleController implements Initializable {
     }
 
     @FXML
-    private void ajouterArticle(MouseEvent event) {
-        if (idEntite.getValue() == null || contenu.getHtmlText() == null || contenu.getHtmlText().equals("") || tfTitre.getText().equals("") || tfTitre.getText() == null || !checkPublier.isSelected()) {
+    private void ajouterArticle(MouseEvent event) throws IOException {
+        if (idEntite.getValue() == null || contenu.getHtmlText() == null || contenu.getHtmlText().equals("") || tfTitre.getText().equals("") || tfTitre.getText() == null || !checkPublier.isSelected() || tfImageArticle.getText() == null || tfImageArticle.getText().equals("") || ivImageArticle.getImage() == null) {
             showDialog("Error", "Veuillez verifier que vous avez remplis tous les champs");
         } else {
-            Article a = new Article(1, tfTitre.getText(), contenu.getHtmlText(), idEntite.getValue().getId(), typeEntite.getValue(), new Date(Calendar.getInstance().getTime().getTime()), null, 0);
-			if(Admin.current_user != null){
-				a.setAuteur(Admin.current_user.getId());
-			}
-			else{
-				a.setAuteur(Moderator.current_user.getId());
-			}
+            image = new File(tfImageArticle.getText());
+            Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap());
+
+            Article a = new Article(1, tfTitre.getText(), contenu.getHtmlText(), idEntite.getValue().getId(), typeEntite.getValue(), new Date(Calendar.getInstance().getTime().getTime()), null, 0, (String) uploadResult.get("url"));
+            if (Admin.current_user != null) {
+                a.setAuteur(Admin.current_user.getId());
+            } else {
+                a.setAuteur(Moderator.current_user.getId());
+            }
             if (ArticleCrud.getRepository().add(a)) {
                 showDialog("Success", "Votre articles a ete ajouter avec success");
 
@@ -210,6 +230,18 @@ public class AjouterArticleController implements Initializable {
             WebView webView = (WebView) contenu.lookup(".web-view");
             WebPage webPage = Accessor.getPageFor(webView.getEngine());
             webPage.executeCommand("insertHTML", "<img src=" + uploadResult.get("url") + " width=200 height=200 />");
+        }
+    }
+
+    @FXML
+    private void addImageArticle(MouseEvent event) throws MalformedURLException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisir une photo");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+        image = fileChooser.showOpenDialog(null);
+        if (image != null) {
+            tfImageArticle.setText(image.getPath());
+            ivImageArticle.setImage(new Image(image.toURI().toURL().toExternalForm()));
         }
     }
 

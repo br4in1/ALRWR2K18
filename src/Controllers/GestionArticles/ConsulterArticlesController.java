@@ -7,25 +7,21 @@ package Controllers.GestionArticles;
 
 import Entities.Article;
 import Services.ArticleCrud;
-import Services.UserCrud;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXScrollPane;
-import com.jfoenix.controls.JFXTreeView;
 import facebook4j.Account;
 import facebook4j.Facebook;
 import facebook4j.FacebookException;
 import facebook4j.FacebookFactory;
-import facebook4j.PostUpdate;
 import facebook4j.ResponseList;
 import facebook4j.auth.AccessToken;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -33,27 +29,25 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -90,6 +84,8 @@ public class ConsulterArticlesController implements Initializable {
     private Facebook facebook;
     @FXML
     private JFXButton btRefresh;
+    @FXML
+    private ImageView ivArticleImage;
 
     /**
      * Initializes the controller class.
@@ -138,6 +134,7 @@ public class ConsulterArticlesController implements Initializable {
                         && event.getClickCount() == 1) {
                     Article clickedRow = row.getItem();
                     toVisualize = row.getItem();
+                    ivArticleImage.setImage(new Image(toVisualize.getArticleImage()));
                 }
             });
             return row;
@@ -222,6 +219,7 @@ public class ConsulterArticlesController implements Initializable {
                     webEngine.loadContent("");
                     articlesList.setItems(data);
                     articlesList.refresh();
+                    
                 } else {
                     showDialog("Erreur !!!", "L'article n'a pas pu etre supprimer, veuillez ressayer plus tard");
                 }
@@ -233,7 +231,7 @@ public class ConsulterArticlesController implements Initializable {
     private void shareClicked(MouseEvent event) throws FacebookException, MalformedURLException {
         facebook = new FacebookFactory().getInstance();
         facebook.setOAuthAppId("", "");
-		// TODO : Change Token
+        // TODO : Change Token
         String accessTokenString = "EAACEdEose0cBAFiqKz8mHBFVb0HqGBdzx8bqXHhFiWot2Qkpe54bA9Prm6JWzOBXN32mxe442Kd6wgYefZARMPb2phpvkgJ7omWI5aw0nvMhJuRBpOnCge55bJTXsnv6PbbXhz7b21FZBBIZBmZCTJyX0DSvNtvB5Xh9HtQkF3XeoGoNpfe7O82uoSZAj5eOXa3huSAThEemnK0Tp7YxW";
         AccessToken at = new AccessToken(accessTokenString);
         // Set access token.

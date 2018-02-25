@@ -12,6 +12,7 @@ import java.sql.Date;
  * @author raiiz
  */
 public class Article {
+
     private int id;
     private String titre;
     private String contenu;
@@ -20,8 +21,9 @@ public class Article {
     private Date datePublication;
     private Date derniereModification;
     private int auteur;
-    
-    public Article(int id, String titre, String contenu, int idEntity, String typeEntity, Date datePublication, Date derniereModification, int auteur) {
+    private String articleImage;
+
+    public Article(int id, String titre, String contenu, int idEntity, String typeEntity, Date datePublication, Date derniereModification, int auteur,String articleImage) {
         this.id = id;
         this.titre = titre;
         this.contenu = contenu;
@@ -30,11 +32,13 @@ public class Article {
         this.datePublication = datePublication;
         this.derniereModification = derniereModification;
         this.auteur = auteur;
+        this.articleImage = articleImage;
     }
 
     public Article() {
     }
-    public Article(Article a){
+
+    public Article(Article a) {
         this.id = a.getId();
         this.titre = a.getTitre();
         this.contenu = a.getContenu();
@@ -43,7 +47,9 @@ public class Article {
         this.datePublication = a.getDatePublication();
         this.derniereModification = a.getDerniereModification();
         this.auteur = a.getAuteur();
+        this.articleImage = a.getArticleImage();
     }
+
     public int getId() {
         return id;
     }
@@ -108,8 +114,18 @@ public class Article {
         this.auteur = auteur;
     }
 
+    public String getArticleImage() {
+        return articleImage;
+    }
+
+    public void setArticleImage(String articleImage) {
+        this.articleImage = articleImage;
+    }
+
     @Override
     public String toString() {
-        return "Article{" + "id=" + id + ", titre=" + titre + ", contenu=" + contenu + ", idEntity=" + idEntity + ", typeEntity=" + typeEntity + ", datePublication=" + datePublication + ", derniereModification=" + derniereModification + ", auteur=" + auteur + '}';
+        return "Article{" + "id=" + id + ", titre=" + titre + ", contenu=" + contenu + ", idEntity=" + idEntity + ", typeEntity=" + typeEntity + ", datePublication=" + datePublication + ", derniereModification=" + derniereModification + ", auteur=" + auteur + ", articleImage=" + articleImage + '}';
     }
+
+ 
 }

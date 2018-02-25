@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -38,36 +39,36 @@
                         <Insets left="10.0" right="10.0" top="35.0" />
                     </BorderPane.margin>
                     <children>
-                        <JFXButton fx:id="btVisualiser" buttonType="RAISED" disable="true" layoutX="398.0" layoutY="37.0" onMouseClicked="#clickVisualiser" prefHeight="25.0" prefWidth="109.0" ripplerFill="#a49191" style="-fx-background-color: #b12b2b;" text="Visualiser" textFill="WHITE">
+                        <JFXButton fx:id="btVisualiser" buttonType="RAISED" disable="true" layoutX="398.0" layoutY="23.0" onMouseClicked="#clickVisualiser" prefHeight="25.0" prefWidth="109.0" ripplerFill="#a49191" style="-fx-background-color: #b12b2b;" text="Visualiser" textFill="WHITE">
                             <font>
                                 <Font size="15.0" />
                             </font>
                         </JFXButton>
-                        <TableView fx:id="articlesList" layoutX="28.0" layoutY="37.0" onMouseClicked="#clickTable" prefHeight="487.0" prefWidth="320.0" tableMenuButtonVisible="true">
+                        <TableView fx:id="articlesList" layoutX="24.0" layoutY="21.0" onMouseClicked="#clickTable" prefHeight="464.0" prefWidth="320.0" tableMenuButtonVisible="true">
                         </TableView>
-                  <JFXScrollPane fx:id="scrollPaneWeb" layoutX="398.0" layoutY="89.0" prefHeight="384.0" prefWidth="474.0">
+                  <JFXScrollPane fx:id="scrollPaneWeb" layoutX="398.0" layoutY="63.0" prefHeight="384.0" prefWidth="337.0">
                      <children>
                         <WebView fx:id="webView" disable="true" prefHeight="428.0" prefWidth="474.0" />
                      </children>
                   </JFXScrollPane>
-                  <JFXButton fx:id="btModifier" buttonType="RAISED" disable="true" layoutX="763.0" layoutY="491.0" onMouseClicked="#clickModifier" prefHeight="25.0" prefWidth="109.0" ripplerFill="#a49191" style="-fx-background-color: #b12b2b;" text="Modifier" textFill="WHITE">
+                  <JFXButton fx:id="btModifier" buttonType="RAISED" disable="true" layoutX="763.0" layoutY="460.0" onMouseClicked="#clickModifier" prefHeight="25.0" prefWidth="109.0" ripplerFill="#a49191" style="-fx-background-color: #b12b2b;" text="Modifier" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </JFXButton>
-                  <Separator layoutX="368.0" layoutY="23.0" orientation="VERTICAL" prefHeight="499.0" prefWidth="1.0" />
-                  <JFXButton fx:id="btSupprimer" buttonType="RAISED" disable="true" layoutX="763.0" layoutY="38.0" onMouseClicked="#clickSupprimer" prefHeight="25.0" prefWidth="109.0" ripplerFill="#a49191" style="-fx-background-color: #b12b2b;" text="Supprimer" textFill="WHITE">
+                  <Separator layoutX="361.0" layoutY="23.0" orientation="VERTICAL" prefHeight="461.0" prefWidth="13.0" />
+                  <JFXButton fx:id="btSupprimer" buttonType="RAISED" disable="true" layoutX="763.0" layoutY="23.0" onMouseClicked="#clickSupprimer" prefHeight="25.0" prefWidth="109.0" ripplerFill="#a49191" style="-fx-background-color: #b12b2b;" text="Supprimer" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXCheckBox fx:id="checkSupprimer" checkedColor="#b12b2b" layoutX="552.0" layoutY="44.0" text="Etes-vous sur de supprimer ?">
+                  <JFXCheckBox fx:id="checkSupprimer" checkedColor="#b12b2b" layoutX="547.0" layoutY="28.0" text="Etes-vous sur de supprimer ?">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </JFXCheckBox>
-                  <Separator layoutX="529.0" layoutY="21.0" orientation="VERTICAL" prefHeight="63.0" prefWidth="0.0" />
-                  <JFXButton fx:id="btShare" buttonType="RAISED" layoutX="660.0" layoutY="488.0" onMouseClicked="#shareClicked" prefHeight="31.0" prefWidth="92.0" ripplerFill="#e8e8e8" style="-fx-background-color: #335fd0;" text="     Share " textFill="WHITE">
+                  <Separator layoutX="530.0" layoutY="7.0" orientation="VERTICAL" prefHeight="47.0" prefWidth="7.0" />
+                  <JFXButton fx:id="btShare" buttonType="RAISED" layoutX="659.0" layoutY="460.0" onMouseClicked="#shareClicked" prefHeight="31.0" prefWidth="92.0" ripplerFill="#e8e8e8" style="-fx-background-color: #335fd0;" text="     Share " textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -76,7 +77,17 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="btRefresh" buttonType="RAISED" layoutX="279.0" layoutY="9.0" onMouseClicked="#refreshClicked" ripplerFill="#cdc7c7" style="-fx-background-color: #b12b2b;" text="Refresh" textFill="WHITE" />
+                  <JFXButton fx:id="btRefresh" buttonType="RAISED" layoutX="279.0" layoutY="-7.0" onMouseClicked="#refreshClicked" ripplerFill="#cdc7c7" style="-fx-background-color: #b12b2b;" text="Refresh" textFill="WHITE" />
+                  <ImageView fx:id="ivArticleImage" fitHeight="158.0" fitWidth="217.0" layoutX="751.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
+                     <effect>
+                        <DropShadow color="#1e1d1d" />
+                     </effect>
+                  </ImageView>
+                  <Label layoutX="761.0" layoutY="70.0" text="Image de l'article">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
                     </children>
                 </Pane>
             </center>

@@ -47,7 +47,7 @@ public class ArticleCrud {
             conn = DataSource.getInstance().getCon();
         }
         try {
-            String sql = "INSERT INTO articles (titre, contenu, idEntity, typeEntity, datePublication, derniereModification, Auteur) VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO articles (titre, contenu, idEntity, typeEntity, datePublication, derniereModification, Auteur, articleImage) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement ste = conn.prepareStatement(sql);
             ste.setString(1, n.getTitre());
             ste.setString(2, n.getContenu());
@@ -56,6 +56,7 @@ public class ArticleCrud {
             ste.setDate(5, n.getDatePublication());
             ste.setDate(6, n.getDerniereModification());
             ste.setInt(7, n.getAuteur());
+            ste.setString(8, n.getArticleImage());
             ste.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -77,7 +78,7 @@ public class ArticleCrud {
             while (result.next()) {
                 list.add(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
                         result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
-                        result.getDate("derniereModification"), result.getInt("auteur")));
+                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage")));
             }
             return list;
         } catch (SQLException e) {
@@ -99,7 +100,7 @@ public class ArticleCrud {
             while (result.next()) {
                 list.add(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
                         result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
-                        result.getDate("derniereModification"), result.getInt("auteur")));
+                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage")));
             }
             return list;
         } catch (SQLException e) {
@@ -117,7 +118,7 @@ public class ArticleCrud {
             if (result.next()) {
                 return new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
                         result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
-                        result.getDate("derniereModification"), result.getInt("auteur"));
+                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage"));
             } else {
                 return null;
             }
@@ -192,5 +193,18 @@ public class ArticleCrud {
             return false;
         }
     }
-    
+
+    public static boolean remove(Article a) {
+        String sql = "DELETE from articles where id  = ?";
+        try {
+            PreparedStatement ste = conn.prepareStatement(sql);
+            ste.setInt(1, a.getId());
+            ste.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+
 }
