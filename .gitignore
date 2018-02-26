@@ -88,3 +88,4 @@ nbproject/private/private.xml
 !/src/Libraries/junit-4.11_1.jar
 !/src/Libraries/httpmime-4.0_1.jar
 !/src/Libraries/facebook4j-core-2.4.10.jar
+!/src/Libraries/jsoup-1.11.2.jar

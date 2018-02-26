@@ -31,14 +31,14 @@
                   <Font size="21.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="tfSearch" prefHeight="25.0" prefWidth="183.0" promptText="keywords....." style="-fx-background-color: #b1b0b0;" unFocusColor="#6b6868" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <JFXTextField fx:id="tfSearch" prefHeight="25.0" prefWidth="183.0" promptText="keywords....." style="-fx-background-color: #eaeaea;" unFocusColor="#66ae2e" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="20.0" right="20.0" />
                </GridPane.margin>
                <font>
                   <Font size="18.0" />
                </font></JFXTextField>
-            <JFXButton fx:id="btGoSearch" buttonType="RAISED" prefHeight="40.0" prefWidth="53.0" ripplerFill="#808080" style="-fx-background-color: #66ae2e;" text="Go" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <JFXButton fx:id="btGoSearch" buttonType="RAISED" prefHeight="40.0" prefWidth="53.0" ripplerFill="#eaeaea" style="-fx-background-color: #66ae2e;" text="Go" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font>
@@ -79,22 +79,22 @@
         </rowConstraints>
          <children>
             <Separator prefWidth="200.0" />
-            <Label fx:id="allLabel" onMouseEntered="#allHighlight" onMouseExited="#allUnhighlight" prefHeight="34.0" prefWidth="247.0" text="All" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="allLabel" onMouseEntered="#allHighlight" onMouseExited="#allUnhighlight" prefHeight="34.0" prefWidth="247.0" text="  All" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="gamesLabel" onMouseEntered="#gamesHighlight" onMouseExited="#gamesUnhighlight" prefHeight="33.0" prefWidth="250.0" text="Games" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="gamesLabel" onMouseEntered="#gamesHighlight" onMouseExited="#gamesUnhighlight" prefHeight="33.0" prefWidth="250.0" text="  Games" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="teamsLabel" onMouseEntered="#teamsHighlight" onMouseExited="#teamsUnhightlight" prefHeight="34.0" prefWidth="248.0" text="Teams" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label fx:id="teamsLabel" onMouseEntered="#teamsHighlight" onMouseExited="#teamsUnhightlight" prefHeight="34.0" prefWidth="248.0" text="  Teams" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="stadiumLabel" onMouseEntered="#stadiumsHighlight" onMouseExited="#stadiumsUnhighlight" prefHeight="33.0" prefWidth="248.0" text="Stadiums" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Label fx:id="stadiumLabel" onMouseEntered="#stadiumsHighlight" onMouseExited="#stadiumsUnhighlight" prefHeight="33.0" prefWidth="248.0" text="  Stadiums" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font size="15.0" />
                </font>

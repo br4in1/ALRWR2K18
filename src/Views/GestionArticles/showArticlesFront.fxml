@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <FlowPane fx:id="homeContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="973.0" style="-fx-border-color: gray; -fx-border-radius: 7; -fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GestionArticles.ShowArticlesFrontController">
    <padding>
       <Insets right="20.0" />
    </padding>
    <children>
-      <ScrollPane fx:id="contentPane" prefHeight="609.0" prefWidth="971.0" />
+      <HBox fx:id="topBar" prefHeight="22.0" prefWidth="953.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#66ae2e" height="45.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="11.0" />
+            <Label fx:id="lbRecentNews" prefHeight="50.0" prefWidth="206.0" text="    Recent News">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <ScrollPane fx:id="contentPane" prefHeight="609.0" prefWidth="971.0">
+         <content>
+            <VBox fx:id="vBig" prefHeight="606.0" prefWidth="953.0" />
+         </content></ScrollPane>
    </children>
 </FlowPane>
