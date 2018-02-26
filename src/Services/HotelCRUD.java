@@ -48,8 +48,22 @@ public class HotelCRUD {
        {
 		    Connection con = Utils.DataSource.getInstance().getCon();
 		   List<Hotel> list = new ArrayList<>();
-            String req = "select * from hotel" ;
+            String req = "select * from hotel where nom not like ('test')" ;
             PreparedStatement ste = con.prepareStatement(req);
+            ResultSet result = ste.executeQuery();//select 
+            while(result.next())
+            {      
+            list.add(new Hotel(result.getInt("id"), result.getString("nom"), result.getDouble("geolat") , result.getDouble("geolong"), result.getInt("nbEtoiles"), result.getString("tripAdvisorLink"), result.getString("image") , result.getString("city")));
+            }
+        return list ;
+       }
+		     public List<Hotel> AfficherTousLesHotels(int i) throws SQLException
+       {
+		    Connection con = Utils.DataSource.getInstance().getCon();
+		   List<Hotel> list = new ArrayList<>();
+            String req = "select * from hotel where id=(?) " ;
+            PreparedStatement ste = con.prepareStatement(req);
+			ste.setInt(1,i); 
             ResultSet result = ste.executeQuery();//select 
             while(result.next())
             {      

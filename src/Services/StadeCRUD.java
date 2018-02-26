@@ -38,7 +38,7 @@ public class StadeCRUD {
        {
 		    Connection con = Utils.DataSource.getInstance().getCon();
 		   List<Stade> list = new ArrayList<>();
-            String req = "select * from stadium" ;
+            String req = "select * from stadium where name not like ('test')" ;
             PreparedStatement ste = con.prepareStatement(req);
             ResultSet result = ste.executeQuery();//select 
             while(result.next())

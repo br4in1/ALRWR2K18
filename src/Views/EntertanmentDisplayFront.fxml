@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import com.lynden.gmapsfx.*?>
+
+<FlowPane fx:id="mainMap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="973.0" style="-fx-border-color: gray; -fx-border-radius: 7; -fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EntertanmentDisplayFrontController">
+ 
+<AnchorPane id="AnchorPane" fx:id="back" prefHeight="611.0" prefWidth="973.0" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <ImageView fitHeight="729.0" fitWidth="980.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/restaurant.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="anchor2" layoutX="126.0" layoutY="93.0" prefHeight="446.0" prefWidth="346.0" style="-fx-background-color: white;">
+         <children>
+            <ImageView fx:id="image" fitHeight="144.0" fitWidth="273.0" layoutX="36.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true" />
+            <JFXTextField fx:id="name" editable="false" layoutX="123.0" layoutY="30.0" />
+            <JFXTextField fx:id="city" editable="false" layoutX="122.0" layoutY="67.0" />
+            <JFXTextField fx:id="link" editable="false" layoutX="123.0" layoutY="113.0" />
+            <JFXTimePicker fx:id="open" layoutX="88.0" layoutY="201.0" prefHeight="25.0" prefWidth="94.0" />
+            <JFXTimePicker fx:id="close" layoutX="244.0" layoutY="202.0" prefHeight="25.0" prefWidth="88.0" />
+            <Label layoutX="23.0" layoutY="42.0" prefHeight="17.0" prefWidth="68.0" text="Name" textFill="#b52525">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="23.0" layoutY="77.0" prefHeight="17.0" prefWidth="68.0" text="City" textFill="#b52525">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="25.0" layoutY="122.0" prefHeight="17.0" prefWidth="68.0" text="Link" textFill="#b52525">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="24.0" layoutY="209.0" prefHeight="17.0" prefWidth="56.0" text="Opening" textFill="#b52525">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="192.0" layoutY="210.0" prefHeight="17.0" prefWidth="47.0" text="Closing" textFill="#b52525">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="12.0" />
+               </font>
+            </Label>
+            <Separator layoutX="17.0" layoutY="57.0" orientation="VERTICAL" prefHeight="200.0" />
+            <Label layoutX="26.0" layoutY="173.0" prefHeight="13.0" prefWidth="106.0" text="Show Location : " textFill="#b52525">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="12.0" />
+               </font>
+            </Label>
+               <JFXButton fx:id="buttonshow" layoutX="164.0" layoutY="165.0" onAction="#showLocation" text="Show" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor1" layoutX="490.0" layoutY="91.0" prefHeight="448.0" prefWidth="344.0" style="-fx-background-color: white;" />
+         <Pane fx:id="mapPlace" layoutX="65.0" layoutY="35.0" prefHeight="562.0" prefWidth="864.0">
+            <children>
+				  <GoogleMapView fx:id="mapView" prefHeight="562.0" prefWidth="864.0" /> 
+ 	  
+               <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="795.0" layoutY="29.0" onMouseClicked="#Close" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../assets/croix.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </Pane>
+   </children>
+</AnchorPane>
+
+</FlowPane>

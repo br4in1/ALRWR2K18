@@ -3,20 +3,31 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="973.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GuideAffichageMapController">
+<?import com.lynden.gmapsfx.*?>
+<FlowPane fx:id="mainMap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="973.0" style="-fx-border-color: gray; -fx-border-radius: 7; -fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GuideAffichageMapController">
    <children>
-      <Pane prefHeight="616.0" prefWidth="976.0">
+      <AnchorPane id="AnchorPane" prefHeight="616.0" prefWidth="976.0">
          <children>
-            <JFXTextField fx:id="searchfield" layoutX="29.0" layoutY="15.0" text="Search :" />
-            <JFXTextField fx:id="tofield" layoutX="27.0" layoutY="51.0" onAction="#toTextFieldAction" text="Destination" />
-            <JFXCheckBox layoutX="757.0" layoutY="15.0" text="Hotels" />
-            <JFXCheckBox layoutX="672.0" layoutY="15.0" text="Stadiums" />
-            <JFXCheckBox layoutX="563.0" layoutY="13.0" text="Divertissments" />
-            <JFXComboBox layoutX="858.0" layoutY="7.0" prefHeight="25.0" prefWidth="67.0" />
-         </children>
-      </Pane>
+            <JFXTextField fx:id="searchfield" layoutX="29.0" layoutY="15.0" onKeyPressed="#Search" promptText="Search :" />
+            <JFXTextField fx:id="tofield" layoutX="217.0" layoutY="15.0" onAction="#toTextFieldAction" promptText="Destination :" />
+            <JFXCheckBox fx:id="hotel" layoutX="757.0" layoutY="15.0" onAction="#cocherhotel" text="Hotels" />
+            <JFXCheckBox fx:id="staduims" layoutX="672.0" layoutY="15.0" onAction="#CocherStade" text="Stadiums" />
+            <JFXCheckBox fx:id="divertissments" layoutX="563.0" layoutY="13.0" onAction="#CocherDivertissments" text="Divertissments" />
+            <JFXComboBox fx:id="choiceCombo" layoutX="822.0" layoutY="7.0" onAction="#VoiceChanged" prefHeight="25.0" prefWidth="116.0" />
+            <Pane fx:id="panMap" layoutX="5.0" layoutY="53.0" prefHeight="544.0" prefWidth="960.0" style="-fx-border-color: black;">
+	   <GoogleMapView fx:id="mapView" prefHeight="544.0" prefWidth="960.0" /> 
+ 	  
+	  </Pane>
+  
+		 </children>
+      </AnchorPane>
    </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
 </FlowPane>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+
+<FlowPane fx:id="mainMa" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="973.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TranslationDisplayController">
+   <children>
+      <AnchorPane prefHeight="611.0" prefWidth="976.0" style="-fx-background-color: white;">
+         <children>
+            <ImageView fitHeight="646.0" fitWidth="976.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/fondrussia1.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="rusia1" fitHeight="116.0" fitWidth="138.0" layoutX="91.0" layoutY="64.0" onMouseClicked="#rusia1selected" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.5;">
+               <image>
+                  <Image url="@../assets/flags/russian_federation.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="france1" fitHeight="116.0" fitWidth="138.0" layoutX="91.0" layoutY="218.0" onMouseClicked="#france1selected" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.5;">
+               <image>
+                  <Image url="@../assets/flags/france.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="eng1" fitHeight="116.0" fitWidth="138.0" layoutX="89.0" layoutY="372.0" onMouseClicked="#eng1selected" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.5;">
+               <image>
+                  <Image url="@../assets/flags/britain.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="rusia2" fitHeight="116.0" fitWidth="138.0" layoutX="761.0" layoutY="68.0" onMouseClicked="#russia2selected" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.5;">
+               <image>
+                  <Image url="@../assets/flags/russian_federation.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="france2" fitHeight="116.0" fitWidth="138.0" layoutX="762.0" layoutY="222.0" onMouseClicked="#france2selected" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.5;">
+               <image>
+                  <Image url="@../assets/flags/france.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="eng2" fitHeight="116.0" fitWidth="138.0" layoutX="762.0" layoutY="372.0" onMouseClicked="#eng2selected" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.5;">
+               <image>
+                  <Image url="@../assets/flags/britain.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="from" layoutX="357.0" layoutY="99.0" prefHeight="51.0" prefWidth="249.0" promptText="Enter text" />
+            <TextField fx:id="to" layoutX="357.0" layoutY="314.0" prefHeight="51.0" prefWidth="249.0" />
+            <JFXButton buttonType="RAISED" layoutX="354.0" layoutY="230.0" onMouseClicked="#translate" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #b11818;" text="Translate" textFill="WHITE" />
+            <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="620.0" layoutY="107.0" onMouseClicked="#sound1" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/soundOn.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="619.0" layoutY="321.0" onMouseClicked="#sound2" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/soundOn.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="279.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/translation.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</FlowPane>

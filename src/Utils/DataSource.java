@@ -20,7 +20,7 @@ public class DataSource {
     private static DataSource data;
     final String url = "jdbc:mysql://localhost:3306/WorldCup";
     final String user = "root";
-    final String pwd = "root";
+    final String pwd = "";
     private DataSource() {
         try {
             con = DriverManager.getConnection(url,user,pwd);   
