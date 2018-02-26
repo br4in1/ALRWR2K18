@@ -60,7 +60,7 @@ public class TeamFrontController implements Initializable {
 	@FXML
 	private SwingNode staticSwigNode;
 
-	public static Integer current_team_id;
+	public static Integer current_team_id = 1;
 	@FXML
 	private ImageView TeamImageView;
 	public static List<Player> listPlayers;
@@ -78,6 +78,7 @@ public class TeamFrontController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		thisController = this;
 		hboxNav.setStyle("-fx-padding-left: 30px;");
+		refreshData();
 	}
 
 	public void refreshData() {
@@ -120,7 +121,6 @@ public class TeamFrontController implements Initializable {
 			vboxNav1.getChildren().add(plNameLabel);
 			hboxNav.getChildren().add(vboxNav1);
 			hboxNav.setSpacing(30);
-			
 			//pl.setId(String.valueOf(listPlayers.get(i).getName()));
 			//nav.getChildren().add(plPhotoLabel);
 			
