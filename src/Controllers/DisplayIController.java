@@ -152,9 +152,7 @@ public class DisplayIController implements Initializable {
 		Id.setText(id);
 		String id1 = Integer.toString(g.getId());
 		iD.setText(id1);
-		
-		// File file = new File(g.getImage());
-		Image im = new Image(g.getImage());
+				Image im = new Image(g.getImage());
 		img_view.setImage(im);
         
 

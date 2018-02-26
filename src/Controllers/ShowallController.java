@@ -49,6 +49,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -87,7 +88,7 @@ public class ShowallController implements Initializable {
 
 	private TextToSpeech tts = new TextToSpeech();
 	private float VoiceVolume;
-	int nbre;
+	int nbre, aze = 0, ligne = 0;
 
 	/**
 	 * Initializes the controller class.
@@ -99,23 +100,30 @@ public class ShowallController implements Initializable {
 		type.add("*.png");
 		type.add("*.jpg");
 
-	}
-
-	@FXML
-	private void Monter(MouseEvent event) throws SQLException, MalformedURLException {
 		Gallery ga = new Gallery();
 		GalleryCrud g = new GalleryCrud();
 		int y = 1;
 		List<Gallery> Liste = g.DisplayAll();
 		anch.getChildren().clear();
-		for (int i = 0; i < Liste.size(); i++) {
-			if ("1".equals(Liste.get(i).getEtat())) {
 
+		for (int i = 0; i < Liste.size(); i++) {
+
+			if ("1".equals(Liste.get(i).getEtat())) {
+				y = 230 * (aze);
+				if (aze == 3) {
+					aze = 0;
+					ligne = ligne + 200;
+					y = 1;
+				} else {
+					aze++;
+				}
+
+				
 				Image im = new Image(Liste.get(i).getImage());
 				ImageView img2 = new ImageView(im);
 
 				img2.setLayoutX(50.0 + y);
-				img2.setLayoutY(41.0);
+				img2.setLayoutY(ligne);
 				img2.setFitHeight(170);
 				img2.setFitWidth(170);
 
@@ -125,7 +133,7 @@ public class ShowallController implements Initializable {
 				line.setEndX(0);
 				line.setEndY(0);
 				line.setLayoutX(45.0 + y);
-				line.setLayoutY(220);
+				line.setLayoutY(ligne + 178);
 				line.setStroke(Color.rgb(178, 61, 61));
 				line.setStyle("-fx-stroke-width:" + 3);
 
@@ -147,18 +155,17 @@ public class ShowallController implements Initializable {
 								Image im44 = new Image("/Views/Dislike.png");
 								int photo = Integer.parseInt(img2.getId());
 								ImageView btn;
-								if(LikesCrud.AlreadyLiked(SimpleUser.current_user.getId(),photo)){
+								if (LikesCrud.AlreadyLiked(SimpleUser.current_user.getId(), photo)) {
 									btn = new ImageView(im44);
-								}
-								else{
+								} else {
 									btn = new ImageView(im33);
 								}
-								
+
 								btn.setFitHeight(30);
 								btn.setFitWidth(30);
 								Label Total = new Label();
 								LikesCrud L = new LikesCrud();
-								
+
 								nbre = L.PhotoLiked(photo);
 								Total.setText("            " + nbre);
 								btn.setOnMouseClicked((event) -> {
@@ -169,45 +176,49 @@ public class ShowallController implements Initializable {
 										tts.speak("You have liked this photo ", VoiceVolume, false, false);
 										Likes Liked = new Likes(SimpleUser.current_user.getId(), photo);
 										LikesCrud.Like(Liked);
-										Total.setText("            " +(nbre+1));
+										Total.setText("            " + (nbre + 1));
 										thisController.nbre++;
 										btn.setImage(im44);
-										
+
 									} else {
 										try {
 											tts.setVoice("dfki-poppy-hsmm");
 											VoiceVolume = 2;
 											tts.speak("You have disliked this photo ", VoiceVolume, false, false);
-											LikesCrud.Unlike(SimpleUser.current_user.getId(),photo);
-											Total.setText("            " + (nbre-1));
+											LikesCrud.Unlike(SimpleUser.current_user.getId(), photo);
+											Total.setText("            " + (nbre - 1));
 											thisController.nbre--;
 											btn.setImage(im33);
 										} catch (SQLException ex) {
 											Logger.getLogger(ShowallController.class.getName()).log(Level.SEVERE, null, ex);
 										}
-											
+
 									}
 
 								});
+
 								Label Ville = new Label();
-								Ville.setText("Ville : "+thisController.current_shown_Gallery.getVille());
+								Ville.setText("Ville : " + thisController.current_shown_Gallery.getVille());
 								Ville.setFont(Font.font("Ubuntu", 19));
+								Ville.setTextFill(Color.web("#b23d3d"));
 
 								Label Lieu = new Label();
-								Lieu.setText("Lieu : "+thisController.current_shown_Gallery.getLieu());
+								Lieu.setText("Lieu : " + thisController.current_shown_Gallery.getLieu());
 								Lieu.setFont(Font.font("Ubuntu", 19));
+								Lieu.setTextFill(Color.web("#b23d3d"));
 
 								Label Description = new Label();
-								
-								
-								Description.setText("Description : "+thisController.current_shown_Gallery.getDescription());
+								Description.setText("Description : " + thisController.current_shown_Gallery.getDescription());
 								Description.setFont(Font.font("Ubuntu", 19));
+								Description.setTextFill(Color.web("#b23d3d"));
+								Description.setMaxWidth(250);
+								Description.setMinHeight(Region.USE_PREF_SIZE);
+
 								Label Mention = new Label();
 								Mention.setText("      Mention de j'aime");
 								Mention.setFont(Font.font("Ubuntu", FontWeight.BOLD, 20));
 								Mention.setTextFill(Color.web("#b23d3d"));
 
-								
 								Total.setTextFill(Color.web("#b23d3d"));
 								Total.setFont(Font.font("Ubuntu", 40));
 								Label espace = new Label(" ");
@@ -223,7 +234,6 @@ public class ShowallController implements Initializable {
 										Sep,
 										Mention,
 										Total
-									
 								);
 								Vb.setMinWidth(300);
 								Vb.setSpacing(30);
@@ -245,7 +255,6 @@ public class ShowallController implements Initializable {
 				}
 				);
 
-				y = 230 * (i + 1);
 				anch.getChildren()
 						.add(line);
 				anch.getChildren()

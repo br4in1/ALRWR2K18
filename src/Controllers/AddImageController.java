@@ -61,7 +61,18 @@ import org.controlsfx.control.Rating;
  */
 public class AddImageController implements Initializable {
 
-	ObservableList<String> TypeDate = FXCollections.observableArrayList("Saint-Pétersbourg", "Novossibirsk", "Kazan", "Tcheliabins", "Omsk", "Oufa");
+	ObservableList<String> TypeDate = FXCollections.observableArrayList("Moscow",	
+	"SaintPetersbourg", "Novosibirsk",	
+	"Nischni", "Nowgorod","Iekaterinbourg","Samara","Russie Omsk"	
+	,"Kasan"," Ufa","Tscheljabinsk", "RostowPerm","Volgogra",	
+	"Woronesh"," Krasnojarsk",	
+	"Saratow"," Togliatti",	
+	"Uljanowsk", "Ishewsk",	"Russie Krasnodar","Jaroslavl Chabarowsk",	
+	"Vladivostok", "Irkoutsk","Nowokusnezk","Pensa",
+	"Rjasan", "Lipezk",	
+	"Orenburg", "Nabereshnyje"," Tschelny Russie","Tjumen","Tula"," Kemerowo",	
+	"Astrachan", "Tomsk"	,"Wjatka" ,"Tscheboksary"
+	);
 
 	List<String> type;
 	private StackPane Validation;
@@ -131,7 +142,7 @@ public class AddImageController implements Initializable {
 		Li.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if (!newValue) {
-                      
+
 					if (!"".equals(Li.getText())) {
 						Li.setUnFocusColor(Color.rgb(0, 0, 255, 1));
 						try {
@@ -152,30 +163,29 @@ public class AddImageController implements Initializable {
 				}
 			}
 		});
-			Dc.focusedProperty().addListener(new ChangeListener<Boolean>() {
+		Dc.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if (!newValue) {
-					if (Dc.getText().length() <10 ) {
+					if (Dc.getText().length() < 10) {
 						JFXDialogLayout content = new JFXDialogLayout();
 						content.setHeading(new Text(""));
 						content.setBody(new Text("La description doit contenir au moins 10 caractères"));
 						JFXDialog description = new JFXDialog(StackAdd, content, JFXDialog.DialogTransition.CENTER);
 						description.show();
-						if (!"".equals(Dc.getText()))
-					{
-						JFXDialogLayout content1 = new JFXDialogLayout();
-						content1.setHeading(new Text(""));
-						content1.setBody(new Text("La description ne peut pas contenir seulement que des chifrres"));
-						JFXDialog description1 = new JFXDialog(StackAdd, content1, JFXDialog.DialogTransition.CENTER);
-						description1.show();
+						if (!"".equals(Dc.getText())) {
+							JFXDialogLayout content1 = new JFXDialogLayout();
+							content1.setHeading(new Text(""));
+							content1.setBody(new Text("La description ne peut pas contenir seulement que des chifrres"));
+							JFXDialog description1 = new JFXDialog(StackAdd, content1, JFXDialog.DialogTransition.CENTER);
+							description1.show();
+						}
 					}
 				}
-			}
-				
+
 			}
 		});
-			Av.focusedProperty().addListener(new ChangeListener<Boolean>() {
+		Av.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if (!newValue) {
@@ -189,8 +199,7 @@ public class AddImageController implements Initializable {
 				}
 			}
 		});
-		
-		
+
 		Av.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if (!newValue) {
@@ -217,7 +226,6 @@ public class AddImageController implements Initializable {
 		});
 
 	}
-	
 
 	@FXML
 	private void InsertImagee(MouseEvent event) throws MalformedURLException {
