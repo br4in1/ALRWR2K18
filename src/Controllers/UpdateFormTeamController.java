@@ -29,6 +29,7 @@ import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
@@ -215,6 +216,8 @@ public class UpdateFormTeamController implements Initializable {
 											});
 
 							notificationBuilder.showInformation();
+						((Node)(event.getSource())).getScene().getWindow().hide();  
+
 						}
 
 					} else {

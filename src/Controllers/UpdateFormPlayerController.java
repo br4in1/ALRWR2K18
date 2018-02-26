@@ -23,11 +23,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
@@ -191,6 +193,8 @@ public class UpdateFormPlayerController implements Initializable {
 											});
 
 							notificationBuilder.showInformation();
+							((Node)(event.getSource())).getScene().getWindow().hide();  
+
 						}
 
 					} else {
