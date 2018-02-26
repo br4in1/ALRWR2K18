@@ -7,13 +7,20 @@ package Controllers.GestionArticles;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -86,7 +93,27 @@ public class ArticleBoxFrontController implements Initializable {
     @FXML
     private void stadiumsHighlight(MouseEvent event) {
         stadiumLabel.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
+    }
 
+    @FXML
+    private void AllClicked(MouseEvent event) throws IOException {
+        ShowArticlesFrontController.content2Display = 1;
+    }
+
+    @FXML
+    private void GamesClicked(MouseEvent event) throws IOException {
+        ShowArticlesFrontController.content2Display = 2;
+    }
+
+    @FXML
+    private void TeamsClicked(MouseEvent event) throws IOException {
+        ShowArticlesFrontController.content2Display = 3;
+
+    }
+
+    @FXML
+    private void StadiumsClicked(MouseEvent event) {
+        ShowArticlesFrontController.content2Display = 4;
     }
 
 }

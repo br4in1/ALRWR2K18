@@ -207,4 +207,26 @@ public class ArticleCrud {
         }
     }
 
+    public static List<Article> findAllByCategory(String cat) {
+        if (article == null) {
+            conn = DataSource.getInstance().getCon();
+        }
+        List<Article> list = new ArrayList<>();
+
+        String req = "select * from articles where typeEntity = ?";
+        try {
+            PreparedStatement ste = conn.prepareStatement(req);
+            ste.setString(1, cat);
+            ResultSet result = ste.executeQuery();// select
+            while (result.next()) {
+                list.add(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+                        result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
+                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage")));
+            }
+            return list;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        }
+    }
 }
