@@ -7,12 +7,15 @@ package Services;
 
 import Entities.Gallery;
 import Entities.Likes;
+import Entities.SimpleUser;
 import Utils.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -37,16 +40,31 @@ public class LikesCrud {
 			Logger.getLogger(LikesCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-	public static void Unlike(int id) throws SQLException
+	public static void Unlike(int id , int idPhoto) throws SQLException
 	{
 		Scanner sc = new Scanner(System.in);
 		Connection con = DataSource.getInstance().getCon();
-		String req = "DELETE from  likes  WHERE idUser =?";
+		String req = ("DELETE from  likes  WHERE idUser =? and idPhoto="+idPhoto);
 		PreparedStatement pre = con.prepareStatement(req);
 		pre.setInt(1, id);
 		pre.executeUpdate();
 	}
 	
+	public static Boolean AlreadyLiked(int user,int photo){
+		Connection con = DataSource.getInstance().getCon();
+		String query = "select * from Likes where idUser = '" + user + "' and idPhoto = "+photo;
+		try {
+			Statement ste = con.createStatement();
+			ResultSet set = ste.executeQuery(query);
+			if (set.next()) {
+				return true;
+			}
+			return false;
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return false;
+	}
 	
 	public int PhotoLiked(int id ) throws SQLException {
          int nbre=0;
