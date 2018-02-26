@@ -40,6 +40,7 @@ import com.lynden.gmapsfx.service.geocoding.GeocoderStatus;
 import com.lynden.gmapsfx.service.geocoding.GeocodingResult;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 import com.lynden.gmapsfx.service.geocoding.GeocodingServiceCallback;
+import com.lynden.gmapsfx.util.MarkerImageFactory;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -138,9 +139,11 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 			node.addEventHandler(MouseEvent.MOUSE_PRESSED, (k) -> {
 				switch (node.getId()) {
 					case "valider":
+						System.out.println("	valider cliqued");
 						break;
 					case "hotel":
 						if (x == 0) {
+							System.out.println("	Hotel");
 							try {
 								HotelCRUD C = new HotelCRUD();
 								List<Hotel> Lis = C.AfficherTousLesHotels();
@@ -152,9 +155,11 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 											//.icon(new File("/assets/hotel.png").toURI().toURL().toExternalForm())
 
 											.visible(true)
+											.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/hotel.png", "png"))
 											.title(Lis.get(i).getNom());
 									Marker joeSmithMarker = new Marker(markerOptions1);
 									col.add(joeSmithMarker);
+									System.out.println("-yes");
 
 								}
 								map.addMarkers(col);
@@ -183,6 +188,7 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 									MarkerOptions markerOptions1 = new MarkerOptions();
 									markerOptions1.position(Location)
 											.visible(true)
+											.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/stade.png", "png"))
 											.title(LisStade.get(i).getNom());
 
 									Marker joeSmithMarker = new Marker(markerOptions1);
@@ -214,6 +220,7 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 									MarkerOptions markerOptions1 = new MarkerOptions();
 									markerOptions1.position(Location)
 											.visible(true)
+											.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/resto.png", "png"))
 											.title(LisStade.get(i).getNom());
 
 									Marker joeSmithMarker = new Marker(markerOptions1);
@@ -300,6 +307,8 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 			}
 
 			tts.speak(searchField.getText(), VoiceVolume, false, false);
+
+			System.out.println(searchField.getText());
 			ListHotel = C.AfficherTousLesHotels(searchField.getText());
 			ListStade = S.AfficherTousLesStade(searchField.getText());
 			if (ListHotel.size() != 0) {
@@ -351,11 +360,14 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 					@Override
 					public void geocodedResultsReceived(com.lynden.gmapsfx.service.geocoding.GeocodingResult[] grs, GeocoderStatus gs) {
 						LatLong latLong = null;
+						System.out.println("1");
 						if (gs == GeocoderStatus.ZERO_RESULTS) {
 							Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
 							alert.show();
 							return;
 						} else if (grs.length > 1) {
+
+							System.out.println("2");
 							Alert alert = new Alert(Alert.AlertType.WARNING, "Multiple results found, showing the first one.");
 							alert.show();
 							latLong = new LatLong(grs[0].getGeometry().getLocation().getLatitude(), grs[0].getGeometry().getLocation().getLongitude());
@@ -367,6 +379,8 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 							joeSmithMarker = new Marker(markerOptions1);
 							map.addMarker(joeSmithMarker);
 						} else {
+
+							System.out.println("3");
 							latLong = new LatLong(grs[0].getGeometry().getLocation().getLatitude(), grs[0].getGeometry().getLocation().getLongitude());
 							markerOptions1 = new MarkerOptions();
 							markerOptions1.position(latLong)
@@ -402,7 +416,9 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 			C.updateTest(p);
 			try {
 				String x = toTextField.getText();
+				System.out.println(Double.parseDouble(x));
 			} catch (NumberFormatException e) {
+				System.out.println("not a number");
 			}
 
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/AddHotel.fxml"));
@@ -416,7 +432,9 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 			C.updateTest(p);
 			try {
 				String x = toTextField.getText();
+				System.out.println(Double.parseDouble(x));
 			} catch (NumberFormatException e) {
+				System.out.println("not a number");
 			}
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/AddStade.fxml"));
 			Parent root = (Parent) fxmlLoader.load();
@@ -430,7 +448,9 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 			C.updateTest(p);
 			try {
 				String x = toTextField.getText();
+				System.out.println(Double.parseDouble(x));
 			} catch (NumberFormatException e) {
+				System.out.println("not a number");
 			}
 
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/AddDivertissement.fxml"));
@@ -439,7 +459,5 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 			stage.setScene(new Scene(root));
 			stage.show();
 		}
-
 	}
-
 }

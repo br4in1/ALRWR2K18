@@ -76,7 +76,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
-                  <Label fx:id="stadesbtn" alignment="CENTER" onMouseEntered="#highlightstadesbtn" onMouseExited="#unhighlightstadesbtn" prefHeight="22.0" prefWidth="91.0" text="Stades">
+                  <Label fx:id="stadesbtn" alignment="CENTER" onMouseClicked="#GuideClicked" onMouseEntered="#highlightstadesbtn" onMouseExited="#unhighlightstadesbtn" prefHeight="22.0" prefWidth="91.0" text="Guide">
                      <HBox.margin>
                         <Insets left="20.0" top="10.0" />
                      </HBox.margin>

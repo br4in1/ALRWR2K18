@@ -53,8 +53,8 @@ public class FrontEndController implements Initializable {
 	@FXML
 	private Circle profilepic;
 	private String current_page;
-	VBox userBox, gallerybox, articlesBox, teamBox;
-	Pane add, gallery, profile, teams, editProfile, showArticles;
+	VBox userBox, gallerybox, articlesBox, teamBox,MapBox;
+	Pane add, gallery, profile, teams, editProfile, showArticles,interfaceMap,interfaceHotel,interfaceStade,interfaceResto,translate;
 	@FXML
 	private AnchorPane sidebar;
 	@FXML
@@ -120,6 +120,63 @@ public class FrontEndController implements Initializable {
 						//	case "ShowMyGallery":
 						//setContentNode(players);
 						//	break;
+
+					}
+				});
+			}
+			
+			MapBox = FXMLLoader.load(getClass().getResource("/Views/MapBox.fxml"));
+			
+			interfaceMap = FXMLLoader.load(getClass().getResource("/Views/GuideAffichageMap.fxml"));
+			for (Node node : MapBox.getChildren()) {
+				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
+					switch (node.getId()) {
+						case "VisualizeMap":
+							setContentNode(interfaceMap);
+							break;
+						case "Hotels":
+					{
+						try {
+							interfaceHotel = FXMLLoader.load(getClass().getResource("/Views/ReceptionFront.fxml"));
+						} catch (IOException ex) {
+							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+						}
+					}
+			
+							setContentNode(interfaceHotel);
+							break;
+							
+						case "Stadiums":
+								{
+						try {
+							interfaceStade = FXMLLoader.load(getClass().getResource("/Views/StadeFrontDisplay.fxml"));
+						} catch (IOException ex) {
+							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+						}
+					}
+							setContentNode(interfaceStade);
+							break;
+							//Translate
+						case "Entertanment":
+										{
+						try {
+							interfaceResto = FXMLLoader.load(getClass().getResource("/Views/EntertanmentDisplayFront.fxml"));
+						} catch (IOException ex) {
+							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+						}
+					}
+							setContentNode(interfaceResto);
+							break;
+							case "Translate":
+										{
+						try {
+							translate = FXMLLoader.load(getClass().getResource("/Views/TranslationDisplay.fxml"));
+						} catch (IOException ex) {
+							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+						}
+					}
+							setContentNode(translate);
+							break;
 
 					}
 				});
@@ -301,5 +358,13 @@ public class FrontEndController implements Initializable {
 		articlesBox = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/articleBoxFront.fxml"));
 		setContentNode(showArticles);
 		setNavNode(articlesBox);
+	}
+
+	@FXML
+	private void GuideClicked(MouseEvent event) {
+		unhighlightAll();
+		current_page = "Guide";
+		setNavNode(MapBox);
+		setContentNode(interfaceMap);
 	}
 }
