@@ -15,6 +15,7 @@ package Views;
 import Entities.SimpleUser;
 import org.jfree.chart.plot.PiePlot;
 import Services.UserCrud;
+import Utils.RunnableDemo;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -61,6 +62,7 @@ public class main extends Application {
 	@Override
 	public void stop(){
 		if(SimpleUser.current_user != null){
+			RunnableDemo.indicator = 0;
 			UserCrud.LogOutUser(SimpleUser.current_user.getUsername());
 		}
 	}

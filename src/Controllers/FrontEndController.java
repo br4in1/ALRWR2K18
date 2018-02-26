@@ -25,6 +25,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import Controllers.TeamFrontController;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -373,5 +377,18 @@ public class FrontEndController implements Initializable {
 		current_page = "Guide";
 		setNavNode(MapBox);
 		setContentNode(interfaceMap);
+	}
+
+	public static void ShowNotification(String text) {
+		Notifications notificationBuilder
+				= Notifications.create().title("New Like !")
+						.text(text)
+						.hideAfter(Duration.seconds(3))
+						.position(Pos.TOP_RIGHT)
+						.onAction((ActionEvent event1) -> {
+							// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+						});
+
+		notificationBuilder.showInformation();
 	}
 }

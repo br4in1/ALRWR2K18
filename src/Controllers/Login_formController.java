@@ -13,6 +13,7 @@ import com.cloudinary.*;
 import Entities.User;
 import Services.Browser;
 import Services.UserCrud;
+import Utils.RunnableDemo;
 import Utils.TokenGenerator;
 import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXButton;
@@ -321,6 +322,8 @@ public class Login_formController implements Initializable {
 					SimpleUser.current_user = (SimpleUser) (u);
 					SimpleUser.current_user = UserCrud.GetMyData_SimpleUser(SimpleUser.current_user);
 					ShowFrontEnd();
+					RunnableDemo runnableDemo = new RunnableDemo();
+					runnableDemo.start();
 				} else {
 					JFXDialogLayout content = new JFXDialogLayout();
 					content.setHeading(new Text("Veuillez saisir le code que vous avez reçu sur votre boite."));
