@@ -114,7 +114,7 @@ public class AddImageController implements Initializable {
 		type.add("*.png");
 		type.add("*.jpg");
 		villeCombo.setItems(TypeDate);
-		villeCombo.setValue("Moscou");
+		villeCombo.setValue("Moscow");
 		cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
 		final Rating rating = new Rating();
 		rating.setOrientation(Orientation.HORIZONTAL);

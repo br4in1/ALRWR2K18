@@ -180,7 +180,6 @@ public class ShowallController implements Initializable {
 											tts.speak("You have disliked this photo ", VoiceVolume, false, false);
 											LikesCrud.Unlike(SimpleUser.current_user.getId(),photo);
 											Total.setText("            " + (nbre-1));
-											System.out.println(nbre);
 											thisController.nbre--;
 											btn.setImage(im33);
 										} catch (SQLException ex) {
@@ -195,11 +194,13 @@ public class ShowallController implements Initializable {
 								Ville.setFont(Font.font("Ubuntu", 19));
 
 								Label Lieu = new Label();
-								Lieu.setText("Lieu : ");
+								Lieu.setText("Lieu : "+thisController.current_shown_Gallery.getLieu());
 								Lieu.setFont(Font.font("Ubuntu", 19));
 
 								Label Description = new Label();
-								Description.setText("Description : ");
+								
+								
+								Description.setText("Description : "+thisController.current_shown_Gallery.getDescription());
 								Description.setFont(Font.font("Ubuntu", 19));
 								Label Mention = new Label();
 								Mention.setText("      Mention de j'aime");
