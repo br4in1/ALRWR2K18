@@ -53,8 +53,8 @@ public class FrontEndController implements Initializable {
 	@FXML
 	private Circle profilepic;
 	private String current_page;
-	VBox userBox, gallerybox, articlesBox, teamBox,MapBox;
-	Pane add, gallery, profile, teams, editProfile, showArticles,interfaceMap,interfaceHotel,interfaceStade,interfaceResto,translate;
+	VBox userBox, gallerybox, articlesBox, teamBox, MapBox;
+	Pane add, gallery, profile, teams, editProfile, showArticles, interfaceMap, interfaceHotel, interfaceStade, interfaceResto, translate;
 	@FXML
 	private AnchorPane sidebar;
 	@FXML
@@ -190,7 +190,7 @@ public class FrontEndController implements Initializable {
 
 	@FXML
 	private void myProfileClicked(MouseEvent event) throws IOException {
-		if(users_loaded == 0){
+		if (users_loaded == 0) {
 			userBox = FXMLLoader.load(getClass().getResource("/Views/FrontUserBox.fxml"));
 			profile = FXMLLoader.load(getClass().getResource("/Views/myProfile.fxml"));
 			editProfile = FXMLLoader.load(getClass().getResource("/Views/editProfile.fxml"));
@@ -252,7 +252,7 @@ public class FrontEndController implements Initializable {
 
 	@FXML
 	private void GalerieCliked(MouseEvent event) throws IOException {
-		if(gallery_loaded == 0){
+		if (gallery_loaded == 0) {
 			add = FXMLLoader.load(getClass().getResource("/Views/AddImage.fxml"));
 			gallery = FXMLLoader.load(getClass().getResource("/Views/Showall.fxml"));
 			//mygallery = FXMLLoader.load(getClass().getResource("/Views/DisplayI.fxml"));
@@ -282,7 +282,7 @@ public class FrontEndController implements Initializable {
 
 	@FXML
 	private void teamsClicked(MouseEvent event) throws IOException {
-		if(teams_loaded == 0){
+		if (teams_loaded == 0) {
 			teams = FXMLLoader.load(getClass().getResource("/Views/TeamFront.fxml"));
 			teamBox = FXMLLoader.load(getClass().getResource("/Views/FrontTeamBox.fxml"));
 			for (Node node : teamBox.getChildren()) {
@@ -314,9 +314,9 @@ public class FrontEndController implements Initializable {
 
 	@FXML
 	private void GuideClicked(MouseEvent event) throws IOException {
-		if(guide_loaded == 0){
+		if (guide_loaded == 0) {
 			MapBox = FXMLLoader.load(getClass().getResource("/Views/MapBox.fxml"));
-			
+
 			interfaceMap = FXMLLoader.load(getClass().getResource("/Views/GuideAffichageMap.fxml"));
 			for (Node node : MapBox.getChildren()) {
 				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
@@ -324,49 +324,45 @@ public class FrontEndController implements Initializable {
 						case "VisualizeMap":
 							setContentNode(interfaceMap);
 							break;
-						case "Hotels":
-					{
-						try {
-							interfaceHotel = FXMLLoader.load(getClass().getResource("/Views/ReceptionFront.fxml"));
-						} catch (IOException ex) {
-							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+						case "Hotels": {
+							try {
+								interfaceHotel = FXMLLoader.load(getClass().getResource("/Views/ReceptionFront.fxml"));
+							} catch (IOException ex) {
+								Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+							}
 						}
-					}
-			
-							setContentNode(interfaceHotel);
-							break;
-							
-						case "Stadiums":
-								{
-						try {
-							interfaceStade = FXMLLoader.load(getClass().getResource("/Views/StadeFrontDisplay.fxml"));
-						} catch (IOException ex) {
-							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+
+						setContentNode(interfaceHotel);
+						break;
+
+						case "Stadiums": {
+							try {
+								interfaceStade = FXMLLoader.load(getClass().getResource("/Views/StadeFrontDisplay.fxml"));
+							} catch (IOException ex) {
+								Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+							}
 						}
-					}
-							setContentNode(interfaceStade);
-							break;
-							//Translate
-						case "Entertanment":
-										{
-						try {
-							interfaceResto = FXMLLoader.load(getClass().getResource("/Views/EntertanmentDisplayFront.fxml"));
-						} catch (IOException ex) {
-							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+						setContentNode(interfaceStade);
+						break;
+						//Translate
+						case "Entertanment": {
+							try {
+								interfaceResto = FXMLLoader.load(getClass().getResource("/Views/EntertanmentDisplayFront.fxml"));
+							} catch (IOException ex) {
+								Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+							}
 						}
-					}
-							setContentNode(interfaceResto);
-							break;
-							case "Translate":
-										{
-						try {
-							translate = FXMLLoader.load(getClass().getResource("/Views/TranslationDisplay.fxml"));
-						} catch (IOException ex) {
-							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+						setContentNode(interfaceResto);
+						break;
+						case "Translate": {
+							try {
+								translate = FXMLLoader.load(getClass().getResource("/Views/TranslationDisplay.fxml"));
+							} catch (IOException ex) {
+								Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+							}
 						}
-					}
-							setContentNode(translate);
-							break;
+						setContentNode(translate);
+						break;
 
 					}
 				});
