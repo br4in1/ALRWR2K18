@@ -24,6 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import Controllers.TeamFrontController;
 
 /**
  * FXML Controller class
@@ -52,7 +53,7 @@ public class FrontEndController implements Initializable {
     @FXML
     private Circle profilepic;
     private String current_page;
-    VBox userBox, gallerybox, articlesBox;
+    VBox userBox, gallerybox, articlesBox,teamBox;
     Pane add, gallery, profile, teams, editProfile, showArticles;
     @FXML
     private AnchorPane sidebar;
@@ -72,6 +73,7 @@ public class FrontEndController implements Initializable {
 
         try {
             userBox = FXMLLoader.load(getClass().getResource("/Views/FrontUserBox.fxml"));
+			teamBox = FXMLLoader.load(getClass().getResource("/Views/FrontTeamBox.fxml"));
             profile = FXMLLoader.load(getClass().getResource("/Views/myProfile.fxml"));
             editProfile = FXMLLoader.load(getClass().getResource("/Views/editProfile.fxml"));
             for (Node node : userBox.getChildren()) {
@@ -119,6 +121,14 @@ public class FrontEndController implements Initializable {
                         //	break;
 
                     }
+                });
+            }
+			for (Node node : teamBox.getChildren()) {
+                node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
+					
+					TeamFrontController.current_team_id = Integer.parseInt(node.getId());
+					TeamFrontController.thisController.refreshData();
+					
                 });
             }
         } catch (IOException ex) {
@@ -278,7 +288,8 @@ public class FrontEndController implements Initializable {
         userBox.setVisible(false);
         gallerybox.setVisible(false);
         mainContent.getChildren().clear();
-        teams = FXMLLoader.load(getClass().getResource("/Views/teamFrontEnd.fxml"));
+        teams = FXMLLoader.load(getClass().getResource("/Views/TeamFront.fxml"));
+		setNavNode(teamBox);
         setContentNode(teams);
     }
 

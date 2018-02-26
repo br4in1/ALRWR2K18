@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<FlowPane fx:id="profileContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="973.0" style="-fx-border-color: gray; -fx-border-radius: 7; -fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TeamFrontController">
+   <children>
+      <VBox prefHeight="234.0" prefWidth="1035.0">
+         <children>
+            <HBox prefHeight="260.0" prefWidth="1035.0">
+               <children>
+                  <ImageView fx:id="TeamImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets left="20.0" top="30.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <VBox prefHeight="171.0" prefWidth="431.0">
+                     <children>
+                        <Label fx:id="lastname" contentDisplay="CENTER" maxWidth="-Infinity" prefHeight="65.0" prefWidth="293.0" text="team name" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="Ubuntu" size="47.0" />
+                           </font>
+                        </Label>
+                        <Separator orientation="VERTICAL" prefHeight="170.0" prefWidth="0.0" />
+                        <VBox prefHeight="96.0" prefWidth="431.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="290.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="104.0" text="President">
+                                       <font>
+                                          <Font name="Ubuntu Bold Italic" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="President" prefHeight="17.0" prefWidth="161.0" text="President" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="50.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="302.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="103.0" text="Coach">
+                                       <font>
+                                          <Font name="Ubuntu Bold Italic" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="coach" prefHeight="17.0" prefWidth="137.0" text="Coach" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="84.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="263.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="106.0" text="Fifa date">
+                                       <font>
+                                          <Font name="Ubuntu Bold Italic" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="fifaDate" prefHeight="17.0" prefWidth="80.0" text="FifaDate" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="118.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="287.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="107.0" text="Participations">
+                                       <font>
+                                          <Font name="Ubuntu Bold Italic" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="participation" prefHeight="17.0" prefWidth="103.0" text="Participations" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="152.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="295.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="109.0" text="world cup group">
+                                       <font>
+                                          <Font name="Ubuntu Bold Italic" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="wcGroupe" prefHeight="17.0" prefWidth="114.0" text="world cup groupe" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="40.0" top="20.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <StackPane fx:id="staticSwigNode" prefHeight="220.0" prefWidth="286.0">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin></StackPane>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
+            <Separator prefHeight="0.0" prefWidth="797.0">
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </Separator>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets right="20.0" />
+   </padding>
+</FlowPane>
