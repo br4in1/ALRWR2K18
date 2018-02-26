@@ -7,6 +7,8 @@ package Controllers;
 
 import Entities.Hotel;
 import Services.HotelCRUD;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
@@ -16,6 +18,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,6 +49,7 @@ import javafx.stage.Stage;
  */
 public class HotelDisplayController implements Initializable {
 
+	Cloudinary cloudinary;
 	@FXML
 	private TableColumn<?, ?> id;
 	@FXML
@@ -86,6 +90,8 @@ public class HotelDisplayController implements Initializable {
 	private JFXButton delete;
 	@FXML
 	private ImageView photo;
+	@FXML
+	private ImageView testimage;
 
 	/**
 	 * Initializes the controller class.
@@ -140,20 +146,19 @@ public class HotelDisplayController implements Initializable {
 		longtitudeT.setText(""+g.getGeolong());
 		nb_etoilesT.setText(""+g.getNbEtoiles());
 		cityT.setText(g.getCity());
-		File file = new File(imageT.getText());
-
-			try {
-				Image im = new Image(file.toURI().toURL().toExternalForm());
-				photo.setImage(im);
-				photo.setVisible(true);
-			} catch (MalformedURLException ex) {
-			}
+		System.out.println(g.getImage());
+		
+		testimage.setImage(new Image(imageT.getText()));
+		testimage.setVisible(true);
 	}
 
 
 	@FXML
-	private void Updateing(MouseEvent event) throws SQLException {
-		Hotel p = new Hotel(Integer.parseInt(idT.getText()), nomT.getText(), Double.parseDouble(latitudeT.getText()), Double.parseDouble(longtitudeT.getText()),Integer.parseInt( nb_etoilesT.getText()), linkT.getText(), imageT.getText(), cityT.getText());
+	private void Updateing(MouseEvent event) throws SQLException, IOException {
+		Cloudinary cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
+		File toUpload = new File(imageT.getText());
+			Map uploadResult = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
+		Hotel p = new Hotel(Integer.parseInt(idT.getText()), nomT.getText(), Double.parseDouble(latitudeT.getText()), Double.parseDouble(longtitudeT.getText()),Integer.parseInt( nb_etoilesT.getText()), linkT.getText(), (String) uploadResult.get("url"), cityT.getText());
 		HotelCRUD c = new HotelCRUD();
 		c.update(p);
 		System.out.println("bon");

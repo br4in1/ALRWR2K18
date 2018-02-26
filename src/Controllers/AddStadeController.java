@@ -9,14 +9,18 @@ import Entities.Hotel;
 import Entities.Stade;
 import Services.HotelCRUD;
 import Services.StadeCRUD;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +44,7 @@ import javafx.stage.Stage;
  * @author Sof
  */
 public class AddStadeController implements Initializable {
-	
+	Cloudinary cloudinary;
 	@FXML
 	private Button enregistrer;
 	@FXML
@@ -66,6 +70,7 @@ public class AddStadeController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
+		cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
 		type=new ArrayList<>();
 		type.add("*.png");
 		type.add("*.jpg");
@@ -169,11 +174,13 @@ public class AddStadeController implements Initializable {
 	}
 
 	@FXML
-	private void Enregistrement(ActionEvent event)throws SQLException {
+	private void Enregistrement(ActionEvent event)throws SQLException, IOException {
 		if ((!"".equals(city.getText())) && (!"".equals(capacite.getText())) && (!"".equals(nom.getText()))) {
-
+			File toUpload = new File(image.getText());
+			Map uploadResult = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
+		
 			//enregistrer
-			Stade p = new Stade(0, nom.getText(), Double.parseDouble(latitude.getText()), Double.parseDouble(longtitude.getText()), Integer.parseInt(capacite.getText()), image.getText(), city.getText());
+			Stade p = new Stade(0, nom.getText(), Double.parseDouble(latitude.getText()), Double.parseDouble(longtitude.getText()), Integer.parseInt(capacite.getText()), (String) uploadResult.get("url"), city.getText());
 			StadeCRUD C = new StadeCRUD();
 			C.ajouterStade(p);
 			nom.setText("");

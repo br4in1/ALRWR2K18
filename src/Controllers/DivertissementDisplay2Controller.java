@@ -7,12 +7,15 @@ package Controllers;
 
 import Entities.Divertissement;
 import Services.DivertissmentCRUD;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 import com.lynden.gmapsfx.javascript.event.GMapMouseEvent;
 import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -21,6 +24,7 @@ import java.time.LocalTime;
 import static java.time.temporal.ChronoField.MINUTE_OF_DAY;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +44,7 @@ import javafx.scene.layout.AnchorPane;
  * @author Sof
  */
 public class DivertissementDisplay2Controller implements Initializable {
-
+	Cloudinary cloudinary;
 	@FXML
 	private AnchorPane back;
 	@FXML
@@ -78,6 +82,7 @@ public class DivertissementDisplay2Controller implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
+		cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
 		init();
 	}
 
@@ -151,8 +156,11 @@ public class DivertissementDisplay2Controller implements Initializable {
 	}
 
 	@FXML
-	private void update(ActionEvent event) throws SQLException {
-		Divertissement p = new Divertissement(Integer.parseInt(id.getText()), name.getText(), Double.parseDouble(latitude.getText()), Double.parseDouble(longtitude.getText()), Timestamp.valueOf("2016-11-16 " + open.getValue().toString() + ":10"), Timestamp.valueOf("2016-11-16 " + close.getValue().toString() + ":10"), link.getText(), path.getText(), city.getText());
+	private void update(ActionEvent event) throws SQLException, IOException {
+		File toUpload = new File(path.getText());
+		Map uploadResult = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
+		
+		Divertissement p = new Divertissement(Integer.parseInt(id.getText()), name.getText(), Double.parseDouble(latitude.getText()), Double.parseDouble(longtitude.getText()), Timestamp.valueOf("2016-11-16 " + open.getValue().toString() + ":10"), Timestamp.valueOf("2016-11-16 " + close.getValue().toString() + ":10"), link.getText(), (String) uploadResult.get("url"), city.getText());
 		DivertissmentCRUD x = new DivertissmentCRUD();
 		x.updateA(p);
 		init();
