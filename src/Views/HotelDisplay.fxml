@@ -92,5 +92,6 @@
          </graphic></JFXButton>
       <JFXTextField fx:id="idT" layoutX="127.0" layoutY="487.0" visible="false" />
       <ImageView fx:id="photo" fitHeight="214.0" fitWidth="239.0" layoutX="706.0" layoutY="423.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="testimage" fitHeight="146.0" fitWidth="146.0" layoutX="60.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

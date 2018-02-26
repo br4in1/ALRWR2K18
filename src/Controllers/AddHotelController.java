@@ -8,16 +8,19 @@ package Controllers;
 import Entities.Hotel;
 import Services.HotelCRUD;
 import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,6 +46,7 @@ import javafx.stage.Stage;
  */
 public class AddHotelController implements Initializable {
 
+	Cloudinary cloudinary;
 	@FXML
 	private Button enregistrer;
 	@FXML
@@ -63,8 +67,8 @@ public class AddHotelController implements Initializable {
 	private JFXTextField link;
 	@FXML
 	private StackPane confirmation;
-	Cloudinary cloudinary;
-	 private File image1;
+	private File image1;
+
 	/**
 	 * Initializes the controller class.
 	 */
@@ -72,8 +76,7 @@ public class AddHotelController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
 		cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
-		
-		
+
 		List<Hotel> p2 = null;
 		HotelCRUD C = new HotelCRUD();
 
@@ -199,11 +202,13 @@ public class AddHotelController implements Initializable {
 	}
 
 	@FXML
-	private void Enregistrement(ActionEvent event) throws SQLException {
+	private void Enregistrement(ActionEvent event) throws SQLException, IOException {
 		if ((!"".equals(city.getText())) && (!"".equals(nb_etoiles.getText())) && (!"".equals(nom.getText()))) {
 
 			//enregistrer
-			Hotel p = new Hotel(0, nom.getText(), Double.parseDouble(latitude.getText()), Double.parseDouble(longtitude.getText()), Integer.parseInt(nb_etoiles.getText()), link.getText(), image.getText(), city.getText());
+			File toUpload = new File(image.getText());
+			Map uploadResult = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
+			Hotel p = new Hotel(0, nom.getText(), Double.parseDouble(latitude.getText()), Double.parseDouble(longtitude.getText()), Integer.parseInt(nb_etoiles.getText()), link.getText(),(String) uploadResult.get("url"), city.getText());
 			HotelCRUD C = new HotelCRUD();
 			C.ajouterHotel(p);
 			nom.setText("");
@@ -226,19 +231,18 @@ public class AddHotelController implements Initializable {
 
 	@FXML
 	private void RetourALAMap(ActionEvent event) {
-        Stage stage = (Stage) anuler.getScene().getWindow();
-    // do what you have to do
-    stage.close();
+		Stage stage = (Stage) anuler.getScene().getWindow();
+		// do what you have to do
+		stage.close();
 	}
+
 	@FXML
 	private void browse(MouseEvent event) throws MalformedURLException {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choisir une photo");
 		fileChooser.getExtensionFilters().addAll(
-		new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+				new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
 		image1 = fileChooser.showOpenDialog(null);
-        image.setText(image1.getPath());
+		image.setText(image1.getPath());
 	}
-	}
-
-
+}
