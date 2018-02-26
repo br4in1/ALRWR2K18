@@ -5,11 +5,15 @@
  */
 package Controllers;
 
+import static Controllers.FrontTeamBoxController.list;
+import Entities.Player;
 import Entities.Team;
+import Services.PlayerCrud;
 import Services.TeamCrud;
 import java.awt.Color;
 import java.awt.Font;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
@@ -20,7 +24,9 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -53,10 +59,17 @@ public class TeamFrontController implements Initializable {
 	private Label wcGroupe;
 	@FXML
 	private SwingNode staticSwigNode;
-	
+
 	public static Integer current_team_id;
 	@FXML
 	private ImageView TeamImageView;
+	public static List<Player> listPlayers;
+	
+	@FXML
+	private Label players;
+	
+	@FXML
+	private HBox hboxNav;
 
 	/**
 	 * Initializes the controller class.
@@ -64,35 +77,58 @@ public class TeamFrontController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		thisController = this;
-	
-	}	
-	
-	public void refreshData(){
+		hboxNav.setStyle("-fx-padding-left: 30px;");
+	}
+
+	public void refreshData() {
+		hboxNav.getChildren().clear();
 		Team t = TeamCrud.findById(current_team_id);
 		lastname.setText(t.getName());
-						President.setText(t.getPresident());
-						coach.setText(t.getCoach());
-						fifaDate.setText(t.toString());
-						participation.setText(Integer.toString(t.getParticipations()));
-						wcGroupe.setText(t.getWcGroup());
+		President.setText(t.getPresident());
+		coach.setText(t.getCoach());
+		fifaDate.setText(t.getFifaDate().toString());
+		participation.setText(Integer.toString(t.getParticipations()));
+		wcGroupe.setText(t.getWcGroup());
 
-						//image view
-						TeamImageView.setImage(new Image(t.getDescriptionPhoto()));
-						
-						// statics 
-						PieDataset dataset = createDataset(current_team_id);
-						JFreeChart chart = createChart(dataset);
+		//image view
+		TeamImageView.setImage(new Image(t.getDescriptionPhoto()));
 
-						//	ChartViewer viewer = new ChartViewer(chart);
-						//grid.add(imageHouse, 0, 0, 1, 2);
-						//staticSwigNode.setScene(new Scene(pane, 250, 150));
-						staticSwigNode.setContent(
-								new ChartPanel(
-										createChart(dataset)
-								)
-						);
+		// statics 
+		PieDataset dataset = createDataset(current_team_id);
+		JFreeChart chart = createChart(dataset);
+
+		staticSwigNode.setContent(
+				new ChartPanel(
+						createChart(dataset)
+				)
+		);
+
+		listPlayers = PlayerCrud.findPlayersByNationFront(t.getName());
+		for (int i = 0; i < listPlayers.size(); i++) {
+			Label plPhotoLabel = new Label();
+			Label plNameLabel = new Label() ;
+			plNameLabel.setText(listPlayers.get(i).getName()+" " + listPlayers.get(i).getLastName());
+			
+			ImageView im = new ImageView(listPlayers.get(i).getProfilePhoto());
+			im.setFitHeight(140);
+			im.setFitWidth(120);
+			plPhotoLabel.setGraphic(im);
+			
+			VBox vboxNav1 = new VBox();
+			vboxNav1.setSpacing(25);
+			vboxNav1.getChildren().add(plPhotoLabel);
+			vboxNav1.getChildren().add(plNameLabel);
+			hboxNav.getChildren().add(vboxNav1);
+			hboxNav.setSpacing(30);
+			
+			//pl.setId(String.valueOf(listPlayers.get(i).getName()));
+			//nav.getChildren().add(plPhotoLabel);
+			
+			//hnav.getChildren().add(pl);
+		}
 	}
-		private static PieDataset createDataset(int x) {
+
+	private static PieDataset createDataset(int x) {
 		Team team = TeamCrud.findById(x);
 		DefaultPieDataset dataset = new DefaultPieDataset();
 		dataset.setValue("Win", team.getWin());
@@ -109,7 +145,7 @@ public class TeamFrontController implements Initializable {
 
 		// set a custom background for the chart
 		chart.setBorderVisible(false);
-		
+
 		chart.setBackgroundPaint(Color.WHITE);
 		// customise the title position and font
 		TextTitle t = chart.getTitle();
