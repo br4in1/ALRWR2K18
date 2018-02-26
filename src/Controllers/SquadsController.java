@@ -121,8 +121,27 @@ public class SquadsController implements Initializable {
 
 			((VBox) (t.getSource())).setTranslateX(newTranslateX);
 			((VBox) (t.getSource())).setTranslateY(newTranslateY);
+			
 		}
 	};
+	@FXML
+	private Label D1;
+	@FXML
+	private Label M1;
+	@FXML
+	private Label A1;
+	@FXML
+	private Label D2;
+	@FXML
+	private Label M2;
+	@FXML
+	private Label D11;
+	@FXML
+	private Label M11;
+	@FXML
+	private Label D111;
+	@FXML
+	private Label A2;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -145,6 +164,8 @@ public class SquadsController implements Initializable {
 		HomeTeam.setOnAction((event) -> {
 			ObservableList<Player> OL = FXCollections.observableList(PlayerCrud.findPlayersByNation((String) HomeTeam.getSelectionModel().getSelectedItem()));
 			tablev.setItems(OL);
+			AwayTeam.setItems(FXCollections.observableArrayList(map.keySet()));
+			AwayTeam.getItems().remove(HomeTeam.getSelectionModel().getSelectedItem());
 			for (int i = 0; i < OL.size(); i++) {
 				exist.put(OL.get(i).getLastName(), new AbstractMap.SimpleEntry<Integer, Integer>(0, 0));
 
@@ -153,13 +174,21 @@ public class SquadsController implements Initializable {
 		AwayTeam.setOnAction((event) -> {
 			ObservableList<Player> OL2 = FXCollections.observableList(PlayerCrud.findPlayersByNation((String) AwayTeam.getSelectionModel().getSelectedItem()));
 			tablev2.setItems(OL2);
+			HomeTeam.setItems(FXCollections.observableArrayList(map.keySet()));
+			HomeTeam.getItems().remove(AwayTeam.getSelectionModel().getSelectedItem());
 			for (int i = 0; i < OL2.size(); i++) {
 				exist.put(OL2.get(i).getLastName(), new AbstractMap.SimpleEntry<Integer, Integer>(0, 0));
 
 			}
 		});
 	}
-
+	int d0 = 0;
+	int m0 = 0;
+	int a0 = 0;
+	int d = 0;
+	int m = 0;
+	int a = 0;
+    int counter=0;
 	@FXML
 	private void spawn(MouseEvent event) {
 
@@ -181,6 +210,22 @@ public class SquadsController implements Initializable {
 			playerbox.setOnMousePressed(circleOnMousePressedEventHandler);
 			playerbox.setOnMouseDragged(circleOnMouseDraggedEventHandler);
 			middle.getChildren().add(playerbox);
+
+			if (tablev.getSelectionModel().getSelectedItem().getPosition().equals("DEF"))
+			{
+				d0++;
+				D1.setText(String.valueOf(d0));
+			}
+			else if (tablev.getSelectionModel().getSelectedItem().getPosition().equals("MDF")) 
+				{
+				m0++;
+				M1.setText(String.valueOf(m0));
+			}
+		    else if (tablev.getSelectionModel().getSelectedItem().getPosition().equals("STR"))
+				{
+				a0++;
+				A1.setText(String.valueOf(a0));
+			}
 			exist.put(name.getText(), new AbstractMap.SimpleEntry<Integer, Integer>(1, tablev.getSelectionModel().getSelectedIndex()));
 		}
 
@@ -189,9 +234,8 @@ public class SquadsController implements Initializable {
 				for (Node node : middle.getChildren()) {
 					if (node.getId().equals(playerbox.getId())) {
 						for (Entry<String, Entry<Integer, Integer>> a : exist.entrySet()) {
-							if (a.getValue().getValue().equals(Integer.parseInt(node.getId()))) {
+							if (a.getValue().getValue().equals(Integer.parseInt(node.getId())))
 								exist.put(a.getKey(), new AbstractMap.SimpleEntry<Integer, Integer>(0, 0));
-							}
 						}
 						middle.getChildren().remove(node);
 					}
@@ -257,13 +301,28 @@ public class SquadsController implements Initializable {
 		// ********** PLAYER VBOX PARAMS ********** \\
 
 		exist.get(name.getText()).setValue(tablev2.getSelectionModel().getSelectedIndex());
-		if (exist.get(name.getText()).getKey() == 0) {
+		if (exist.get(name.getText()).getKey() == 0) {		
 			Image im;
 			im = new Image(String.format("/assets/Players/%s_%s.png", tablev2.getSelectionModel().getSelectedItem().getName(), tablev2.getSelectionModel().getSelectedItem().getLastName()));
 			circle.setFill(new ImagePattern(im));
 			playerbox.setOnMousePressed(circleOnMousePressedEventHandler);
 			playerbox.setOnMouseDragged(circleOnMouseDraggedEventHandler);
 			middle.getChildren().add(playerbox);
+			if (tablev.getSelectionModel().getSelectedItem().getPosition().equals("DEF"))
+			{
+				d++;
+				D2.setText(String.valueOf(d));
+			}
+			else if (tablev.getSelectionModel().getSelectedItem().getPosition().equals("MDF")) 
+				{
+				m++;
+				M2.setText(String.valueOf(m));
+			}
+		    else if (tablev.getSelectionModel().getSelectedItem().getPosition().equals("STR"))
+				{
+				a++;
+				A2.setText(String.valueOf(a));
+			}
 			exist.put(name.getText(), new AbstractMap.SimpleEntry<Integer, Integer>(1, tablev2.getSelectionModel().getSelectedIndex()));
 		}
 

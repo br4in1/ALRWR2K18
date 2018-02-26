@@ -20,7 +20,33 @@
          <top>
             <Pane fx:id="pane" prefHeight="68.0" prefWidth="958.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton layoutX="111.0" layoutY="21.0" onMouseClicked="#snap" text="Save" />
+                  <HBox layoutX="43.0" layoutY="16.0">
+                     <children>
+                        <HBox layoutX="68.0" layoutY="30.0" prefHeight="31.0" prefWidth="112.0">
+                           <children>
+                              <Label fx:id="D1" prefHeight="31.0" prefWidth="39.0" text="D" />
+                              <Label fx:id="M1" prefHeight="31.0" prefWidth="39.0" text="-" />
+                              <Label fx:id="M1" prefHeight="31.0" prefWidth="39.0" text="M" />
+                              <Label fx:id="D11" contentDisplay="CENTER" prefHeight="31.0" prefWidth="39.0" text="-" />
+                              <Label fx:id="A1" prefHeight="31.0" prefWidth="39.0" text="S" />
+                           </children>
+                        </HBox>
+                        <JFXButton layoutX="447.0" layoutY="16.0" onMouseClicked="#snap" prefHeight="37.0" prefWidth="66.0" text="Save">
+                           <HBox.margin>
+                              <Insets left="300.0" right="300.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <HBox layoutX="773.0" layoutY="10.0" prefHeight="31.0" prefWidth="112.0">
+                           <children>
+                              <Label fx:id="D2" prefHeight="31.0" prefWidth="39.0" text="D" />
+                              <Label fx:id="M11" prefHeight="31.0" prefWidth="39.0" text="-" />
+                              <Label fx:id="M2" prefHeight="31.0" prefWidth="39.0" text="M" />
+                              <Label fx:id="D111" contentDisplay="CENTER" prefHeight="31.0" prefWidth="39.0" text="-" />
+                              <Label fx:id="A2" prefHeight="31.0" prefWidth="39.0" text="S" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
                </children></Pane>
          </top>
          <center>

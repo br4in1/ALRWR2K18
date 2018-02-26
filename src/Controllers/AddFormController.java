@@ -27,11 +27,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
@@ -86,9 +88,17 @@ public class AddFormController implements Initializable {
 	private void submit(MouseEvent event) throws IOException {
 		if (HomeTeam.getSelectionModel().getSelectedItem() == AwayTeam.getSelectionModel().getSelectedItem()) {
 			error.setText("Cannot Have a game with both teams the same");
+		} else if (!Result.getText().matches("\\d+[-]\\d+")) {
+			error.setText("Result format not valid");
 		} else {
+
 			Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap());
 			GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), String.valueOf(map1.get(HomeTeam.getSelectionModel().getSelectedItem())), String.valueOf(map1.get(AwayTeam.getSelectionModel().getSelectedItem())), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"), Highlights.getText(), Referee.getText()));
+
+			Node source = (Node) event.getSource();
+			Stage stage = (Stage) source.getScene().getWindow();
+			stage.close();
+
 			Notifications notificationBuilder
 					= Notifications.create().title("Information")
 							.text("Your Game Has Been Succesfully Added ")

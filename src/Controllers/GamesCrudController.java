@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package Controllers;
-
-
 import Entities.Game;
 import java.util.Date;
 import javafx.scene.layout.VBox;
@@ -13,7 +11,6 @@ import Services.GameCrud;
 import Services.StadiumCrud;
 import Services.TeamCrud;
 import com.jfoenix.controls.JFXButton;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -43,11 +40,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import jxl.Workbook;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -138,9 +130,18 @@ public class GamesCrudController implements Initializable {
 
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == ButtonType.OK) {
-					((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setResult(t.getNewValue());
-					GameCrud.update("Result", t.getNewValue(), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+					if (!t.getNewValue().matches("\\d+[-]\\d+"))
+				{
+						alert("Result format not valid");
+					refresh();
+				}
+					else 
+					{
+						((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setResult(t.getNewValue());
+					GameCrud.update("result", t.getNewValue(), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+					}
 				} else {
+					refresh();
 					alert.close();
 				}
 
@@ -158,6 +159,7 @@ public class GamesCrudController implements Initializable {
 					((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setSummary(t.getNewValue());
 					GameCrud.update("Summary", t.getNewValue(), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
 				} else {
+					refresh();
 					alert.close();
 				}
 			}
@@ -175,6 +177,7 @@ public class GamesCrudController implements Initializable {
 					((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setSummaryPhoto(t.getNewValue());
 					GameCrud.update("summaryPhoto", t.getNewValue(), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
 				} else {
+					refresh();
 					alert.close();
 				}
 			}
@@ -189,9 +192,18 @@ public class GamesCrudController implements Initializable {
 
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == ButtonType.OK) {
-					((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setAwayTeam(t.getNewValue());
-					GameCrud.update("AwayTeam", map1.get(t.getNewValue()), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+					if (t.getNewValue().equals(t.getRowValue().getHomeTeam()))
+				{
+						alert("Home and Away teams cannot be the same");
+					refresh();
+				}
+					else 
+					{
+						((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setAwayTeam(t.getNewValue());
+						GameCrud.update("AwayTeam", map1.get(t.getNewValue()), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+					}
 				} else {
+					refresh();
 					alert.close();
 				}
 			}
@@ -199,7 +211,7 @@ public class GamesCrudController implements Initializable {
 		home.setOnEditCommit(new EventHandler<CellEditEvent<Game, String>>() {
 			@Override
 			public void handle(CellEditEvent<Game, String> t) {
-				
+
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("Confirmation Dialog");
 				alert.setContentText("Are you sure of your edition?");
@@ -207,9 +219,18 @@ public class GamesCrudController implements Initializable {
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == ButtonType.OK) {
 
-					((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setHomeTeam(t.getNewValue());
-					GameCrud.update("HomeTeam", map1.get(t.getNewValue()), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+										if (t.getNewValue().equals(t.getRowValue().getAwayTeam()))
+				{
+						alert("Home and Away teams cannot be the same");
+					refresh();
+				}
+					else 
+					{
+						((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setAwayTeam(t.getNewValue());
+						GameCrud.update("HomeTeam", map1.get(t.getNewValue()), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+					}
 				} else {
+					refresh();
 					alert.close();
 				}
 			}
@@ -228,6 +249,7 @@ public class GamesCrudController implements Initializable {
 					((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setStadium(t.getNewValue());
 					GameCrud.update("Stadium", map2.get(t.getNewValue()), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
 				} else {
+					refresh();
 					alert.close();
 				}
 			}
@@ -241,11 +263,11 @@ public class GamesCrudController implements Initializable {
 
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == ButtonType.OK) {
-
-					((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setReferee(t.getNewValue());
-					GameCrud.update("referee", map2.get(t.getNewValue()), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+					((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setSummary(t.getNewValue());
+					GameCrud.update("referee", t.getNewValue(), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
 				} else {
 					alert.close();
+					refresh();
 				}
 			}
 		});
@@ -258,11 +280,11 @@ public class GamesCrudController implements Initializable {
 
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == ButtonType.OK) {
-
-					((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setStadium(t.getNewValue());
-					GameCrud.update("Highlights", map2.get(t.getNewValue()), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+					((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setSummary(t.getNewValue());
+					GameCrud.update("highlights", t.getNewValue(), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
 				} else {
 					alert.close();
+					refresh();
 				}
 			}
 		});
@@ -281,6 +303,7 @@ public class GamesCrudController implements Initializable {
 						GameCrud.update("date", java.sql.Date.valueOf(bis.getValue()), tablev.getSelectionModel().getSelectedItem().getId());
 
 						dialog.close();
+						refresh();
 					});
 					dialogVbox.getChildren().add(bis);
 					dialogVbox.getChildren().add(button);
@@ -321,6 +344,11 @@ public class GamesCrudController implements Initializable {
 		display();
 	}
 
+	private void refresh() {
+		OL = FXCollections.observableList(GameCrud.findAllGames());
+		display();
+	}
+
 	@FXML
 	private void delete(MouseEvent event) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -339,30 +367,36 @@ public class GamesCrudController implements Initializable {
 	@FXML
 	private void export(MouseEvent event) throws FileNotFoundException, IOException {
 
-   
-        HSSFWorkbook workbook = new HSSFWorkbook(); 
-			HSSFSheet spreadsheet = workbook.createSheet("sample");
-				HSSFRow row = spreadsheet.createRow(0);
-				
-				for (int j = 0; j < tablev.getColumns().size(); j++) {
-            row.createCell(j).setCellValue(tablev.getColumns().get(j).getText());
-        }
-				for (int i = 0; i < tablev.getItems().size(); i++) {
-            row = spreadsheet.createRow(i + 1);
-            for (int j = 0; j < tablev.getColumns().size(); j++) {
-                if(tablev.getColumns().get(j).getCellData(i) != null) { 
-                    row.createCell(j).setCellValue(tablev.getColumns().get(j).getCellData(i).toString()); 
-                }
-                else {
-                    row.createCell(j).setCellValue("");
-                }   
-            }
-        }
-				
-				FileOutputStream fileOut = new FileOutputStream("/Users/simo/Desktop/MyBackup.xls");
-			 workbook.write(fileOut);
-			 fileOut.close();
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		HSSFSheet spreadsheet = workbook.createSheet("sample");
+		HSSFRow row = spreadsheet.createRow(0);
 
+		for (int j = 0; j < tablev.getColumns().size(); j++) {
+			row.createCell(j).setCellValue(tablev.getColumns().get(j).getText());
+		}
+		for (int i = 0; i < tablev.getItems().size(); i++) {
+			row = spreadsheet.createRow(i + 1);
+			for (int j = 0; j < tablev.getColumns().size(); j++) {
+				if (tablev.getColumns().get(j).getCellData(i) != null) {
+					row.createCell(j).setCellValue(tablev.getColumns().get(j).getCellData(i).toString());
+				} else {
+					row.createCell(j).setCellValue("");
+				}
+			}
+		}
+
+		FileOutputStream fileOut = new FileOutputStream("/Users/simo/Desktop/MyBackup.xls");
+		workbook.write(fileOut);
+		fileOut.close();
+
+	}
+
+	void alert(String text) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Error");
+		alert.setContentText(text);
+
+		alert.showAndWait();
 	}
 
 }

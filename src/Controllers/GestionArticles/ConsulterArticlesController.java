@@ -95,7 +95,7 @@ public class ConsulterArticlesController implements Initializable {
         webEngine = webView.getEngine();
 
         data = FXCollections.observableArrayList();
-        ArticleCrud.findAll().forEach((e) -> data.add(e));
+//        ArticleCrud.findAll().forEach((e) -> data.add(e));
         TableColumn dateColumn = new TableColumn("Date de publication");
         dateColumn.setCellValueFactory(new PropertyValueFactory<Article, Date>("datePublication"));
 
