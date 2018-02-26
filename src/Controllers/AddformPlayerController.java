@@ -130,9 +130,10 @@ public class AddformPlayerController implements Initializable {
 		list = TeamCrud.GetNamelist();
 		nation.setItems(FXCollections.observableArrayList(list));
 
-		Listposition.add("Forward");
-		Listposition.add("Backword");
-		Listposition.add("Middle");
+		Listposition.add("STR");
+		Listposition.add("DEF");
+		Listposition.add("MDF");
+		Listposition.add("GK");
 		position.setItems(FXCollections.observableArrayList(Listposition));
 
 		// nation.setItems(FXCollections.observableArrayList(list));
