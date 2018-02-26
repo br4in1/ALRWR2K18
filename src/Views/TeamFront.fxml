@@ -152,6 +152,28 @@
             </Separator>
          </children>
       </VBox>
+      <StackPane prefHeight="351.0" prefWidth="971.0">
+         <children>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="338.0" prefWidth="974.0">
+                     <children>
+                        <HBox fx:id="nav" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="players" contentDisplay="CENTER" maxWidth="-Infinity" prefHeight="65.0" prefWidth="293.0" text="Players " textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font name="Ubuntu" size="47.0" />
+                                 </font>
+                              </Label>
+                              <VBox fx:id="hnav" prefHeight="200.0" prefWidth="100.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </StackPane>
    </children>
    <padding>
       <Insets right="20.0" />
