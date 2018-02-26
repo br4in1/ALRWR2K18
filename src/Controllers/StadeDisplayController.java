@@ -7,6 +7,8 @@ package Controllers;
 
 import Entities.Stade;
 import Services.StadeCRUD;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.lynden.gmapsfx.GoogleMapView;
@@ -23,11 +25,13 @@ import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,7 +77,7 @@ public class StadeDisplayController implements Initializable, MapComponentInitia
 	private StadeCRUD C = new StadeCRUD();
 	private Stade S;
 	private List<Stade> ListStade = new ArrayList<>();
-
+	Cloudinary cloudinary;
 	private GoogleMap map;
 	@FXML
 	private GoogleMapView mapView;
@@ -88,18 +92,20 @@ public class StadeDisplayController implements Initializable, MapComponentInitia
 	private JFXTextField i;
 	@FXML
 	private JFXTextField path;
-	List<String>type ;
+	List<String> type;
+
 	/**
 	 * Initializes the controller class.
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
 		mapView.addMapInializedListener(this);
 	}
 
 	@Override
 	public void mapInitialized() {
-		type=new ArrayList<>();
+		type = new ArrayList<>();
 		type.add("*.png");
 		type.add("*.jpg");
 		geocodingService = new GeocodingService();
@@ -250,21 +256,23 @@ public class StadeDisplayController implements Initializable, MapComponentInitia
 	}
 
 	@FXML
-	private void saveupdate(ActionEvent event) throws SQLException {
-		if((name.getText() != "")&&(fromTextField.getText()!="")&&(toTextField.getText() != "")&&(capcity.getText()!="")&&(city.getText() != "")&&(path.getText()!=""))
-		{Stade s = new Stade(Integer.parseInt(id.getText()), name.getText(), Double.parseDouble(fromTextField.getText()), Double.parseDouble(toTextField.getText()), Integer.parseInt(capcity.getText()), path.getText(), city.getText());
-		C.update(s);
-		TextToSpeech tts = new TextToSpeech();
-		tts.setVoice("dfki-poppy-hsmm");
-		tts.speak("staduim updated with success", 2.0f, false,false);
-	
-	}
-		else
-		{
+	private void saveupdate(ActionEvent event) throws SQLException, IOException {
+		if ((name.getText() != "") && (fromTextField.getText() != "") && (toTextField.getText() != "") && (capcity.getText() != "") && (city.getText() != "") && (path.getText() != "")) {
+			System.out.println(path.getText());
+			File toUpload = new File(path.getText());
+			Map uploadResult = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
+
+			Stade s = new Stade(Integer.parseInt(id.getText()), name.getText(), Double.parseDouble(fromTextField.getText()), Double.parseDouble(toTextField.getText()), Integer.parseInt(capcity.getText()), (String) uploadResult.get("url"), city.getText());
+			C.update(s);
 			TextToSpeech tts = new TextToSpeech();
-		tts.setVoice("dfki-poppy-hsmm");
-		tts.speak("Error while updating, reset your data", 2.0f, false,false);
-		
+			tts.setVoice("dfki-poppy-hsmm");
+			tts.speak("staduim updated with success", 2.0f, false, false);
+
+		} else {
+			TextToSpeech tts = new TextToSpeech();
+			tts.setVoice("dfki-poppy-hsmm");
+			tts.speak("Error while updating, reset your data", 2.0f, false, false);
+
 		}
 	}
 
@@ -274,27 +282,26 @@ public class StadeDisplayController implements Initializable, MapComponentInitia
 
 	@FXML
 	private void resetlocation(ActionEvent event) {
-		
+
 		init();
 	}
 
 	@FXML
-	private void Browse(MouseEvent event){
+	private void Browse(MouseEvent event) {
 		FileChooser F = new FileChooser();
 		F.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", type));
 		File Fc = F.showOpenDialog(null);
-		if(Fc != null)
-		{
-		path.setText(Fc.getAbsolutePath());
+		if (Fc != null) {
+			path.setText(Fc.getAbsolutePath());
 		}
 		File file = new File(path.getText());
 
-			try {
-				Image im = new Image(file.toURI().toURL().toExternalForm());
-				image.setImage(im);
-				image.setVisible(true);
-			} catch (MalformedURLException ex) {
-			}
+		try {
+			Image im = new Image(file.toURI().toURL().toExternalForm());
+			image.setImage(im);
+			image.setVisible(true);
+		} catch (MalformedURLException ex) {
+		}
 	}
 
 }

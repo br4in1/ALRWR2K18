@@ -9,16 +9,20 @@ import Entities.Divertissement;
 import Entities.Stade;
 import Services.DivertissmentCRUD;
 import Services.StadeCRUD;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,6 +67,7 @@ public class AddDivertissementController implements Initializable {
 	private StackPane confirmation;
 	@FXML
 	private JFXTimePicker opening;
+	Cloudinary cloudinary;
 	@FXML
 	private JFXTimePicker closing;
 		List<String>type ;
@@ -161,12 +166,13 @@ public class AddDivertissementController implements Initializable {
 	}	
 
 	@FXML
-	private void Enregistrement(ActionEvent event) throws SQLException {
+	private void Enregistrement(ActionEvent event) throws SQLException, IOException {
 		
 		if ((!"".equals(city.getText())) && (!"".equals(opening.getValue())) &&(!"".equals(closing.getValue())) && (!"".equals(nom.getText()))) {
-			
+			File toUpload = new File(image.getText());
+			Map uploadResult = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
 			//enregistrer
-			Divertissement p = new Divertissement(0, nom.getText(), Double.parseDouble(latitude.getText()), Double.parseDouble(longtitude.getText()), Timestamp.valueOf("2016-11-16 "+opening.getValue().toString()+":10"),Timestamp.valueOf("2016-11-16 "+closing.getValue().toString()+":10"),link.getText(), image.getText(), city.getText());
+			Divertissement p = new Divertissement(0, nom.getText(), Double.parseDouble(latitude.getText()), Double.parseDouble(longtitude.getText()), Timestamp.valueOf("2016-11-16 "+opening.getValue().toString()+":10"),Timestamp.valueOf("2016-11-16 "+closing.getValue().toString()+":10"),link.getText(), (String) uploadResult.get("url"), city.getText());
 			DivertissmentCRUD C = new DivertissmentCRUD();
 			C.ajouterdivertissement(p);
 			nom.setText("");

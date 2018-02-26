@@ -33,6 +33,7 @@ import javafx.util.Duration;
 import javax.naming.NamingException;
 import org.controlsfx.control.Notifications;
 import java.util.Properties;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
@@ -189,6 +190,8 @@ public class AddFormTeamController implements Initializable {
 											});
 
 							notificationBuilder.showInformation();
+							((Node)(event.getSource())).getScene().getWindow().hide();  
+
 						}
 
 					}

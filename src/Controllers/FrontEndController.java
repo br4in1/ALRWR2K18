@@ -59,6 +59,10 @@ public class FrontEndController implements Initializable {
 	private AnchorPane sidebar;
 	@FXML
 	private AnchorPane mainContent;
+	private int users_loaded = 0;
+	private int teams_loaded = 0;
+	private int gallery_loaded = 0;
+	private int guide_loaded = 0;
 
 	/**
 	 * Initializes the controller class.
@@ -71,127 +75,6 @@ public class FrontEndController implements Initializable {
 		firstlastname.setText(SimpleUser.current_user.getUsername());
 		profilepic.setFill(new ImagePattern(new Image(SimpleUser.current_user.getProfilepicture())));
 
-		try {
-			teams = FXMLLoader.load(getClass().getResource("/Views/TeamFront.fxml"));
-			userBox = FXMLLoader.load(getClass().getResource("/Views/FrontUserBox.fxml"));
-			teamBox = FXMLLoader.load(getClass().getResource("/Views/FrontTeamBox.fxml"));
-			profile = FXMLLoader.load(getClass().getResource("/Views/myProfile.fxml"));
-			editProfile = FXMLLoader.load(getClass().getResource("/Views/editProfile.fxml"));
-			for (Node node : userBox.getChildren()) {
-				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
-					switch (node.getId()) {
-						case "myProfile":
-							MyProfileController.current_username = SimpleUser.current_user.getUsername();
-							MyProfileController.thisController.show();
-							FrontUserBoxController.thisController.unhighlightAll();
-							FrontUserBoxController.thisController.highlightMyProfile(k);
-							FrontUserBoxController.selected = "myprofile";
-							setContentNode(profile);
-							break;
-						case "editData":
-							FrontUserBoxController.thisController.unhighlightAll();
-							FrontUserBoxController.thisController.highlightEdit(k);
-							FrontUserBoxController.selected = "edit";
-							setContentNode(editProfile);
-							break;
-						case "favoris":
-							//setContentNode(teamStatics);
-							break;
-						case "myPhotos":
-							//setContentNode(players);
-							break;
-
-					}
-				});
-			}
-			add = FXMLLoader.load(getClass().getResource("/Views/AddImage.fxml"));
-			gallery = FXMLLoader.load(getClass().getResource("/Views/Showall.fxml"));
-			//mygallery = FXMLLoader.load(getClass().getResource("/Views/DisplayI.fxml"));
-			gallerybox = FXMLLoader.load(getClass().getResource("/Views/FrontGalleryBox.fxml"));
-			for (Node node : gallerybox.getChildren()) {
-				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
-					switch (node.getId()) {
-						case "AddImage":
-							setContentNode(add);
-							break;
-						case "ShowGallery":
-							setContentNode(gallery);
-							break;
-						//	case "ShowMyGallery":
-						//setContentNode(players);
-						//	break;
-
-					}
-				});
-			}
-			
-			MapBox = FXMLLoader.load(getClass().getResource("/Views/MapBox.fxml"));
-			
-			interfaceMap = FXMLLoader.load(getClass().getResource("/Views/GuideAffichageMap.fxml"));
-			for (Node node : MapBox.getChildren()) {
-				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
-					switch (node.getId()) {
-						case "VisualizeMap":
-							setContentNode(interfaceMap);
-							break;
-						case "Hotels":
-					{
-						try {
-							interfaceHotel = FXMLLoader.load(getClass().getResource("/Views/ReceptionFront.fxml"));
-						} catch (IOException ex) {
-							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
-						}
-					}
-			
-							setContentNode(interfaceHotel);
-							break;
-							
-						case "Stadiums":
-								{
-						try {
-							interfaceStade = FXMLLoader.load(getClass().getResource("/Views/StadeFrontDisplay.fxml"));
-						} catch (IOException ex) {
-							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
-						}
-					}
-							setContentNode(interfaceStade);
-							break;
-							//Translate
-						case "Entertanment":
-										{
-						try {
-							interfaceResto = FXMLLoader.load(getClass().getResource("/Views/EntertanmentDisplayFront.fxml"));
-						} catch (IOException ex) {
-							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
-						}
-					}
-							setContentNode(interfaceResto);
-							break;
-							case "Translate":
-										{
-						try {
-							translate = FXMLLoader.load(getClass().getResource("/Views/TranslationDisplay.fxml"));
-						} catch (IOException ex) {
-							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
-						}
-					}
-							setContentNode(translate);
-							break;
-
-					}
-				});
-			}
-			for (Node node : teamBox.getChildren()) {
-				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
-					if (TeamFrontController.current_team_id != Integer.parseInt(node.getId())) {
-						TeamFrontController.current_team_id = Integer.parseInt(node.getId());
-						TeamFrontController.thisController.refreshData();
-					}
-				});
-			}
-		} catch (IOException ex) {
-			Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
-		}
 	}
 
 	@FXML
@@ -307,6 +190,39 @@ public class FrontEndController implements Initializable {
 
 	@FXML
 	private void myProfileClicked(MouseEvent event) throws IOException {
+		if(users_loaded == 0){
+			userBox = FXMLLoader.load(getClass().getResource("/Views/FrontUserBox.fxml"));
+			profile = FXMLLoader.load(getClass().getResource("/Views/myProfile.fxml"));
+			editProfile = FXMLLoader.load(getClass().getResource("/Views/editProfile.fxml"));
+			for (Node node : userBox.getChildren()) {
+				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
+					switch (node.getId()) {
+						case "myProfile":
+							MyProfileController.current_username = SimpleUser.current_user.getUsername();
+							MyProfileController.thisController.show();
+							FrontUserBoxController.thisController.unhighlightAll();
+							FrontUserBoxController.thisController.highlightMyProfile(k);
+							FrontUserBoxController.selected = "myprofile";
+							setContentNode(profile);
+							break;
+						case "editData":
+							FrontUserBoxController.thisController.unhighlightAll();
+							FrontUserBoxController.thisController.highlightEdit(k);
+							FrontUserBoxController.selected = "edit";
+							setContentNode(editProfile);
+							break;
+						case "favoris":
+							//setContentNode(teamStatics);
+							break;
+						case "myPhotos":
+							//setContentNode(players);
+							break;
+
+					}
+				});
+			}
+			users_loaded = 1;
+		}
 		unhighlightAll();
 		current_page = "profile";
 		setNavNode(userBox);
@@ -336,6 +252,29 @@ public class FrontEndController implements Initializable {
 
 	@FXML
 	private void GalerieCliked(MouseEvent event) throws IOException {
+		if(gallery_loaded == 0){
+			add = FXMLLoader.load(getClass().getResource("/Views/AddImage.fxml"));
+			gallery = FXMLLoader.load(getClass().getResource("/Views/Showall.fxml"));
+			//mygallery = FXMLLoader.load(getClass().getResource("/Views/DisplayI.fxml"));
+			gallerybox = FXMLLoader.load(getClass().getResource("/Views/FrontGalleryBox.fxml"));
+			for (Node node : gallerybox.getChildren()) {
+				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
+					switch (node.getId()) {
+						case "AddImage":
+							setContentNode(add);
+							break;
+						case "ShowGallery":
+							setContentNode(gallery);
+							break;
+						//	case "ShowMyGallery":
+						//setContentNode(players);
+						//	break;
+
+					}
+				});
+			}
+			gallery_loaded = 1;
+		}
 		unhighlightAll();
 		current_page = "gallery";
 		setNavNode(gallerybox);
@@ -343,6 +282,19 @@ public class FrontEndController implements Initializable {
 
 	@FXML
 	private void teamsClicked(MouseEvent event) throws IOException {
+		if(teams_loaded == 0){
+			teams = FXMLLoader.load(getClass().getResource("/Views/TeamFront.fxml"));
+			teamBox = FXMLLoader.load(getClass().getResource("/Views/FrontTeamBox.fxml"));
+			for (Node node : teamBox.getChildren()) {
+				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
+					if (TeamFrontController.current_team_id != Integer.parseInt(node.getId())) {
+						TeamFrontController.current_team_id = Integer.parseInt(node.getId());
+						TeamFrontController.thisController.refreshData();
+					}
+				});
+			}
+			teams_loaded = 1;
+		}
 		unhighlightAll();
 		current_page = "teams";
 		setNavNode(teamBox);
@@ -361,7 +313,66 @@ public class FrontEndController implements Initializable {
 	}
 
 	@FXML
-	private void GuideClicked(MouseEvent event) {
+	private void GuideClicked(MouseEvent event) throws IOException {
+		if(guide_loaded == 0){
+			MapBox = FXMLLoader.load(getClass().getResource("/Views/MapBox.fxml"));
+			
+			interfaceMap = FXMLLoader.load(getClass().getResource("/Views/GuideAffichageMap.fxml"));
+			for (Node node : MapBox.getChildren()) {
+				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
+					switch (node.getId()) {
+						case "VisualizeMap":
+							setContentNode(interfaceMap);
+							break;
+						case "Hotels":
+					{
+						try {
+							interfaceHotel = FXMLLoader.load(getClass().getResource("/Views/ReceptionFront.fxml"));
+						} catch (IOException ex) {
+							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+						}
+					}
+			
+							setContentNode(interfaceHotel);
+							break;
+							
+						case "Stadiums":
+								{
+						try {
+							interfaceStade = FXMLLoader.load(getClass().getResource("/Views/StadeFrontDisplay.fxml"));
+						} catch (IOException ex) {
+							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+						}
+					}
+							setContentNode(interfaceStade);
+							break;
+							//Translate
+						case "Entertanment":
+										{
+						try {
+							interfaceResto = FXMLLoader.load(getClass().getResource("/Views/EntertanmentDisplayFront.fxml"));
+						} catch (IOException ex) {
+							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+						}
+					}
+							setContentNode(interfaceResto);
+							break;
+							case "Translate":
+										{
+						try {
+							translate = FXMLLoader.load(getClass().getResource("/Views/TranslationDisplay.fxml"));
+						} catch (IOException ex) {
+							Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+						}
+					}
+							setContentNode(translate);
+							break;
+
+					}
+				});
+			}
+			guide_loaded = 1;
+		}
 		unhighlightAll();
 		current_page = "Guide";
 		setNavNode(MapBox);

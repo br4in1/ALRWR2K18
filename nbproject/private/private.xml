@@ -3,13 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/SquadsController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/TeamFrontEndController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Entities/Player.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Entities/Team.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/PlayerFrontEndController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/TeamStaticsController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Services/PlayerCrud.java</file>
+            <file>file:/C:/Users/G50-70%20I7/Documents/GitHub/ALRWR2K18/src/Controllers/HotelDisplayController.java</file>
+            <file>file:/C:/Users/G50-70%20I7/Documents/GitHub/ALRWR2K18/src/Controllers/StadeFrontDisplayController.java</file>
+            <file>file:/C:/Users/G50-70%20I7/Documents/GitHub/ALRWR2K18/src/Views/FrontEnd.fxml</file>
+            <file>file:/C:/Users/G50-70%20I7/Documents/GitHub/ALRWR2K18/src/Controllers/FrontEndController.java</file>
+            <file>file:/C:/Users/G50-70%20I7/Documents/GitHub/ALRWR2K18/src/Controllers/GuideHotelCrudController.java</file>
+            <file>file:/C:/Users/G50-70%20I7/Documents/GitHub/ALRWR2K18/src/Controllers/StadeDisplayController.java</file>
+            <file>file:/C:/Users/G50-70%20I7/Documents/GitHub/ALRWR2K18/src/Controllers/Login_formController.java</file>
+            <file>file:/C:/Users/G50-70%20I7/Documents/GitHub/ALRWR2K18/src/Controllers/DivertissementDisplay2Controller.java</file>
+            <file>file:/C:/Users/G50-70%20I7/Documents/GitHub/ALRWR2K18/src/Controllers/AddHotelController.java</file>
+            <file>file:/C:/Users/G50-70%20I7/Documents/GitHub/ALRWR2K18/src/Controllers/AddStadeController.java</file>
         </group>
     </open-files>
 </project-private>
