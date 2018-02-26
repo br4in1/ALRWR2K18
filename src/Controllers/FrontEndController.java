@@ -72,6 +72,7 @@ public class FrontEndController implements Initializable {
         profilepic.setFill(new ImagePattern(new Image(SimpleUser.current_user.getProfilepicture())));
 
         try {
+			teams = FXMLLoader.load(getClass().getResource("/Views/TeamFront.fxml"));
             userBox = FXMLLoader.load(getClass().getResource("/Views/FrontUserBox.fxml"));
 			teamBox = FXMLLoader.load(getClass().getResource("/Views/FrontTeamBox.fxml"));
             profile = FXMLLoader.load(getClass().getResource("/Views/myProfile.fxml"));
@@ -285,10 +286,8 @@ public class FrontEndController implements Initializable {
 
     @FXML
     private void teamsClicked(MouseEvent event) throws IOException {
-        userBox.setVisible(false);
-        gallerybox.setVisible(false);
-        mainContent.getChildren().clear();
-        teams = FXMLLoader.load(getClass().getResource("/Views/TeamFront.fxml"));
+		unhighlightAll();
+		current_page = "teams";
 		setNavNode(teamBox);
         setContentNode(teams);
     }
