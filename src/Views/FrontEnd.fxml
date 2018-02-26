@@ -45,7 +45,7 @@
                   <Insets bottom="20.0" left="70.0" right="80.0" top="20.0" />
                </HBox.margin>
                <children>
-                  <Label fx:id="homebutton" alignment="CENTER" onMouseEntered="#highlighthomebtn" onMouseExited="#unhighlighthomebtn" prefHeight="22.0" prefWidth="88.0" text="Accueil">
+                  <Label fx:id="homebutton" alignment="CENTER" onMouseClicked="#homeClicked" onMouseEntered="#highlighthomebtn" onMouseExited="#unhighlighthomebtn" prefHeight="22.0" prefWidth="88.0" text="Accueil">
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin>
