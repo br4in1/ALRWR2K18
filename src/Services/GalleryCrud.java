@@ -156,5 +156,25 @@ public class GalleryCrud {
 		};
 		return count;
 	}
+	
+	public static Gallery findGalleryById(int id){
+		Connection con = DataSource.getInstance().getCon();
+		List<Gallery> list = new ArrayList<>();
+		try {
+
+			String req = "SELECT * FROM `gallery` where id = "+id;
+			PreparedStatement ste = con.prepareStatement(req);
+			ResultSet result = ste.executeQuery();
+			if (result.next()) {
+				Gallery g = new Gallery(result.getInt("idUser"), result.getString("ville"), result.getString("lieu"), result.getString("description"), result.getString("image"), result.getString("etat"));
+				g.setId(result.getInt("id"));
+				return g;
+			}
+			return null;
+		} catch (SQLException ex) {
+			Logger.getLogger(GalleryCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
 
 }

@@ -73,6 +73,7 @@ import org.jfree.ui.L1R1ButtonPanel;
  */
 public class ShowallController implements Initializable {
 
+	public static ShowallController thisController;
 	List<String> type;
 	@FXML
 	private Text bienvenue;
@@ -82,15 +83,18 @@ public class ShowallController implements Initializable {
 	private FlowPane mainShowAll;
 	@FXML
 	private StackPane mainStack;
+	public Gallery current_shown_Gallery;
 
 	private TextToSpeech tts = new TextToSpeech();
 	private float VoiceVolume;
+	int nbre;
 
 	/**
 	 * Initializes the controller class.
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		thisController = this;
 		type = new ArrayList<>();
 		type.add("*.png");
 		type.add("*.jpg");
@@ -126,11 +130,12 @@ public class ShowallController implements Initializable {
 				line.setStyle("-fx-stroke-width:" + 3);
 
 				img2.setAccessibleHelp(Liste.get(i).getImage());
-				img2.setId("" + Liste.get(i).getId());
+				img2.setId(String.valueOf(Liste.get(i).getId()));
 
 				img2.setOnMouseClicked(new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent event2) {
+						thisController.current_shown_Gallery = GalleryCrud.findGalleryById(Integer.parseInt(img2.getId()));
 						if (event2.getClickCount() == 1) {
 
 							try {
@@ -139,78 +144,69 @@ public class ShowallController implements Initializable {
 								img22.setFitHeight(400);
 								img22.setFitWidth(500);
 								Image im33 = new Image("/Views/like.png");
-								ImageView btn = new ImageView(im33);
+								Image im44 = new Image("/Views/Dislike.png");
+								int photo = Integer.parseInt(img2.getId());
+								ImageView btn;
+								if(LikesCrud.AlreadyLiked(SimpleUser.current_user.getId(),photo)){
+									btn = new ImageView(im44);
+								}
+								else{
+									btn = new ImageView(im33);
+								}
+								
 								btn.setFitHeight(30);
 								btn.setFitWidth(30);
-								Image im44 = new Image("/Views/Dislike.png");
-								ImageView btn2 = new ImageView(im44);
-								btn2.setFitHeight(30);
-								btn2.setFitWidth(30);
-								btn2.setVisible(false);
+								Label Total = new Label();
+								LikesCrud L = new LikesCrud();
+								
+								nbre = L.PhotoLiked(photo);
+								Total.setText("            " + nbre);
 								btn.setOnMouseClicked((event) -> {
-									
-									 
+
+									if (btn.getImage() == im33) {
 										tts.setVoice("dfki-poppy-hsmm");
 										VoiceVolume = 2;
 										tts.speak("You have liked this photo ", VoiceVolume, false, false);
-										
-										btn.setVisible(false);
-										btn2.setVisible(true);
-										int photo = Integer.parseInt(img2.getId());
 										Likes Liked = new Likes(SimpleUser.current_user.getId(), photo);
 										LikesCrud.Like(Liked);
+										Total.setText("            " +(nbre+1));
+										thisController.nbre++;
+										btn.setImage(im44);
 										
-										
-								
-								});
-								btn2.setOnMouseClicked(new EventHandler<MouseEvent>() {
-									@Override
-									public void handle(MouseEvent event) {
+									} else {
 										try {
 											tts.setVoice("dfki-poppy-hsmm");
 											VoiceVolume = 2;
 											tts.speak("You have disliked this photo ", VoiceVolume, false, false);
-											
-											btn2.setVisible(false);
-											btn.setVisible(true);
-											LikesCrud L = new LikesCrud();
-											int photo = Integer.parseInt(img2.getId());
-											LikesCrud.Unlike(SimpleUser.current_user.getId());
+											LikesCrud.Unlike(SimpleUser.current_user.getId(),photo);
+											Total.setText("            " + (nbre-1));
+											System.out.println(nbre);
+											thisController.nbre--;
+											btn.setImage(im33);
 										} catch (SQLException ex) {
 											Logger.getLogger(ShowallController.class.getName()).log(Level.SEVERE, null, ex);
 										}
+											
 									}
+
 								});
 								Label Ville = new Label();
-								Ville.setText("Ville : ");
+								Ville.setText("Ville : "+thisController.current_shown_Gallery.getVille());
 								Ville.setFont(Font.font("Ubuntu", 19));
-								
+
 								Label Lieu = new Label();
 								Lieu.setText("Lieu : ");
 								Lieu.setFont(Font.font("Ubuntu", 19));
-								
+
 								Label Description = new Label();
 								Description.setText("Description : ");
 								Description.setFont(Font.font("Ubuntu", 19));
-								
 								Label Mention = new Label();
 								Mention.setText("      Mention de j'aime");
 								Mention.setFont(Font.font("Ubuntu", FontWeight.BOLD, 20));
 								Mention.setTextFill(Color.web("#b23d3d"));
+
 								
-								LikesCrud L = new LikesCrud();
-								int photo = Integer.parseInt(img2.getId());
-								int  nbre = L.PhotoLiked(photo);
-								System.out.println(nbre);
-								
-								
-								
-								
-								
-								
-								
-								Label Total = new Label();
-								Total.setText("            " + nbre);
 								Total.setTextFill(Color.web("#b23d3d"));
 								Total.setFont(Font.font("Ubuntu", 40));
 								Label espace = new Label(" ");
@@ -225,8 +221,8 @@ public class ShowallController implements Initializable {
 										btn,
 										Sep,
 										Mention,
-										Total,
-										btn2
+										Total
+									
 								);
 								Vb.setMinWidth(300);
 								Vb.setSpacing(30);

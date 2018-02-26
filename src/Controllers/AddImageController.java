@@ -102,6 +102,8 @@ public class AddImageController implements Initializable {
 	private Label rat;
 	@FXML
 	private FlowPane Showadd;
+	@FXML
+	private StackPane StackAdd;
 
 	/**
 	 * Initializes the controller class.
@@ -129,7 +131,7 @@ public class AddImageController implements Initializable {
 		Li.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if (!newValue) {
-
+                      
 					if (!"".equals(Li.getText())) {
 						Li.setUnFocusColor(Color.rgb(0, 0, 255, 1));
 						try {
@@ -150,30 +152,45 @@ public class AddImageController implements Initializable {
 				}
 			}
 		});
-		Dc.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			Dc.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if (!newValue) {
-
-					if (!"".equals(Dc.getText())) {
-						Dc.setUnFocusColor(Color.rgb(0, 0, 255, 1));
-						try {
-							Integer.parseInt(Dc.getText());
-							Dc.setUnFocusColor(Color.rgb(255, 0, 0, 1));
-							Alert alert = new Alert(Alert.AlertType.WARNING, "Erreur de saisie :Impossible d'enter des chiffres ");
-							alert.show();
-							Dc.setText("");
-						} catch (NumberFormatException e) {
-
-							Dc.setUnFocusColor(Color.rgb(0, 0, 255, 1));
-
-						}
-
-					} else {
-						Dc.setUnFocusColor(Color.rgb(255, 0, 0, 1));
+					if (Dc.getText().length() <10 ) {
+						JFXDialogLayout content = new JFXDialogLayout();
+						content.setHeading(new Text(""));
+						content.setBody(new Text("La description doit contenir au moins 10 caractères"));
+						JFXDialog description = new JFXDialog(StackAdd, content, JFXDialog.DialogTransition.CENTER);
+						description.show();
+						if (!"".equals(Dc.getText()))
+					{
+						JFXDialogLayout content1 = new JFXDialogLayout();
+						content1.setHeading(new Text(""));
+						content1.setBody(new Text("La description ne peut pas contenir seulement que des chifrres"));
+						JFXDialog description1 = new JFXDialog(StackAdd, content1, JFXDialog.DialogTransition.CENTER);
+						description1.show();
+					}
+				}
+			}
+				
+			}
+		});
+			Av.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (!newValue) {
+					if (Av.getText().length() < 7) {
+						JFXDialogLayout content = new JFXDialogLayout();
+						content.setHeading(new Text(""));
+						content.setBody(new Text("L'avis doit contenir au moins 20 caractères"));
+						JFXDialog description = new JFXDialog(StackAdd, content, JFXDialog.DialogTransition.CENTER);
+						description.show();
 					}
 				}
 			}
 		});
+		
+		
 		Av.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if (!newValue) {
