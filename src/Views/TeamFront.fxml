@@ -156,22 +156,27 @@
          <children>
             <ScrollPane prefHeight="200.0" prefWidth="200.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="338.0" prefWidth="974.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="338.0" prefWidth="2331.0">
                      <children>
-                        <HBox fx:id="nav" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label fx:id="players" contentDisplay="CENTER" maxWidth="-Infinity" prefHeight="65.0" prefWidth="293.0" text="Players " textAlignment="CENTER" wrapText="true">
-                                 <font>
-                                    <Font name="Ubuntu" size="47.0" />
-                                 </font>
-                              </Label>
-                              <VBox fx:id="hnav" prefHeight="200.0" prefWidth="100.0" />
-                           </children>
-                        </HBox>
+                        <HBox fx:id="hboxNav" prefHeight="183.0" prefWidth="954.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding></HBox>
                      </children>
                   </AnchorPane>
               </content>
+               <StackPane.margin>
+                  <Insets top="60.0" />
+               </StackPane.margin>
             </ScrollPane>
+            <Label fx:id="players" contentDisplay="CENTER" maxWidth="-Infinity" prefHeight="39.0" prefWidth="176.0" text="Players " textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Ubuntu" size="32.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets left="-730.0" top="-300.0" />
+               </StackPane.margin>
+            </Label>
          </children>
       </StackPane>
    </children>

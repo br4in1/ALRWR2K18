@@ -64,13 +64,12 @@ public class TeamFrontController implements Initializable {
 	@FXML
 	private ImageView TeamImageView;
 	public static List<Player> listPlayers;
-	private HBox hbox;
+	
 	@FXML
 	private Label players;
+	
 	@FXML
-	private HBox nav;
-	@FXML
-	private VBox hnav;
+	private HBox hboxNav;
 
 	/**
 	 * Initializes the controller class.
@@ -78,10 +77,11 @@ public class TeamFrontController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		thisController = this;
-
+		hboxNav.setStyle("-fx-padding-left: 30px;");
 	}
 
 	public void refreshData() {
+		hboxNav.getChildren().clear();
 		Team t = TeamCrud.findById(current_team_id);
 		lastname.setText(t.getName());
 		President.setText(t.getPresident());
@@ -97,9 +97,6 @@ public class TeamFrontController implements Initializable {
 		PieDataset dataset = createDataset(current_team_id);
 		JFreeChart chart = createChart(dataset);
 
-		//	ChartViewer viewer = new ChartViewer(chart);
-		//grid.add(imageHouse, 0, 0, 1, 2);
-		//staticSwigNode.setScene(new Scene(pane, 250, 150));
 		staticSwigNode.setContent(
 				new ChartPanel(
 						createChart(dataset)
@@ -109,14 +106,24 @@ public class TeamFrontController implements Initializable {
 		listPlayers = PlayerCrud.findPlayersByNationFront(t.getName());
 		for (int i = 0; i < listPlayers.size(); i++) {
 			Label plPhotoLabel = new Label();
-			//label pl
-			//pl.setText(listPlayers.get(i).getName());
+			Label plNameLabel = new Label() ;
+			plNameLabel.setText(listPlayers.get(i).getName()+" " + listPlayers.get(i).getLastName());
+			
 			ImageView im = new ImageView(listPlayers.get(i).getProfilePhoto());
-			im.setFitHeight(50);
-			im.setFitWidth(70);
+			im.setFitHeight(140);
+			im.setFitWidth(120);
 			plPhotoLabel.setGraphic(im);
+			
+			VBox vboxNav1 = new VBox();
+			vboxNav1.setSpacing(25);
+			vboxNav1.getChildren().add(plPhotoLabel);
+			vboxNav1.getChildren().add(plNameLabel);
+			hboxNav.getChildren().add(vboxNav1);
+			hboxNav.setSpacing(30);
+			
 			//pl.setId(String.valueOf(listPlayers.get(i).getName()));
-		//	nav.getChildren().add(pl);
+			//nav.getChildren().add(plPhotoLabel);
+			
 			//hnav.getChildren().add(pl);
 		}
 	}
