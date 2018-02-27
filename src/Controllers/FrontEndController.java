@@ -59,7 +59,7 @@ public class FrontEndController implements Initializable {
 	private Circle profilepic;
 	private String current_page;
 	VBox userBox, gallerybox, articlesBox, teamBox, MapBox, gamesBox;
-	Pane games, add, gallery, profile, teams, editProfile, showArticles, interfaceMap, interfaceHotel, interfaceStade, interfaceResto, translate,livescore;
+	Pane games, add, gallery, profile, teams, editProfile, showArticles, interfaceMap, interfaceHotel, interfaceStade, interfaceResto, translate, livescore;
 	@FXML
 	private AnchorPane sidebar;
 	@FXML
@@ -69,6 +69,7 @@ public class FrontEndController implements Initializable {
 	private int gallery_loaded = 0;
 	private int guide_loaded = 0;
 	private int tournement_loaded = 0;
+	private int articles_loaded = 0;
 
 	/**
 	 * Initializes the controller class.
@@ -80,7 +81,11 @@ public class FrontEndController implements Initializable {
 		homebutton.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
 		firstlastname.setText(SimpleUser.current_user.getUsername());
 		profilepic.setFill(new ImagePattern(new Image(SimpleUser.current_user.getProfilepicture())));
-
+		try {
+			homeClicked(null);
+		} catch (IOException ex) {
+			Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 
 	@FXML
@@ -324,44 +329,47 @@ public class FrontEndController implements Initializable {
 		unhighlightAll();
 		homebutton.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
 		current_page = "home";
-		showArticles = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/showArticlesFront.fxml"));
-		articlesBox = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/articleBoxFront.fxml"));
-		for (Node node : articlesBox.getChildren()) {
-			node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
-				switch (node.getId()) {
-					case "allLabel":
-						if (ShowArticlesFrontController.content2Display != 1) {
-							ShowArticlesFrontController.content2Display = 1;
-							ShowArticlesFrontController.thisController.setContent();
-						}
-						break;
-					case "gamesLabel":
-						if (ShowArticlesFrontController.content2Display != 2) {
-							ShowArticlesFrontController.content2Display = 2;
-							ShowArticlesFrontController.thisController.setContent();
-						}
-						break;
-					case "teamsLabel":
-						if (ShowArticlesFrontController.content2Display != 3) {
-							ShowArticlesFrontController.content2Display = 3;
-							ShowArticlesFrontController.thisController.setContent();
-						}
-						break;
-					case "stadiumLabel":
-						if (ShowArticlesFrontController.content2Display != 4) {
-							ShowArticlesFrontController.content2Display = 4;
-							ShowArticlesFrontController.thisController.setContent();
-						}
-						break;
-					default:
-						break;
-				}
-				/* if (TeamFrontController.current_team_id != Integer.parseInt(node.getId())) {
+		if (articles_loaded == 0) {
+			showArticles = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/showArticlesFront.fxml"));
+			articlesBox = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/articleBoxFront.fxml"));
+			for (Node node : articlesBox.getChildren()) {
+				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
+					switch (node.getId()) {
+						case "allLabel":
+							if (ShowArticlesFrontController.content2Display != 1) {
+								ShowArticlesFrontController.content2Display = 1;
+								ShowArticlesFrontController.thisController.setContent();
+							}
+							break;
+						case "gamesLabel":
+							if (ShowArticlesFrontController.content2Display != 2) {
+								ShowArticlesFrontController.content2Display = 2;
+								ShowArticlesFrontController.thisController.setContent();
+							}
+							break;
+						case "teamsLabel":
+							if (ShowArticlesFrontController.content2Display != 3) {
+								ShowArticlesFrontController.content2Display = 3;
+								ShowArticlesFrontController.thisController.setContent();
+							}
+							break;
+						case "stadiumLabel":
+							if (ShowArticlesFrontController.content2Display != 4) {
+								ShowArticlesFrontController.content2Display = 4;
+								ShowArticlesFrontController.thisController.setContent();
+							}
+							break;
+						default:
+							break;
+					}
+					/* if (TeamFrontController.current_team_id != Integer.parseInt(node.getId())) {
                         TeamFrontController.current_team_id = Integer.parseInt(node.getId());
                         TeamFrontController.thisController.refreshData();
                     }*/
-			});
+				});
 
+			}
+			articles_loaded = 1;
 		}
 
 		setContentNode(showArticles);

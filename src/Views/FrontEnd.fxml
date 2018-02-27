@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEndController">
    <bottom>
@@ -44,7 +45,10 @@
                      </HBox.margin>
                      <cursor>
                         <Cursor fx:constant="HAND" />
-                     </cursor></Label>
+                     </cursor>
+                     <font>
+                        <Font name="Dusha V5 Regular" size="16.0" />
+                     </font></Label>
                   <Label fx:id="tournementbtn" alignment="CENTER" onMouseClicked="#tournementClicked" onMouseEntered="#highlightTournementbtn" onMouseExited="#unhighlightTournementbtn" prefHeight="22.0" prefWidth="101.0" text="Tournement">
                      <HBox.margin>
                         <Insets left="25.0" top="10.0" />
@@ -52,6 +56,9 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Dusha V5 Regular" size="16.0" />
+                     </font>
                   </Label>
                   <Label fx:id="teamsbtn" alignment="CENTER" onMouseClicked="#teamsClicked" onMouseEntered="#highlightteamsbtn" onMouseExited="#unhighlightteamsbtn" prefHeight="22.0" prefWidth="88.0" text="Teams">
                      <HBox.margin>
@@ -60,6 +67,9 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Dusha V5 Regular" size="16.0" />
+                     </font>
                   </Label>
                   <Label fx:id="hotelsbtn" alignment="CENTER" onMouseEntered="#highlighthotelsbtn" onMouseExited="#unhighlighthotelsbtn" prefHeight="22.0" prefWidth="83.0" text="Hotels">
                      <HBox.margin>
@@ -68,6 +78,9 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Dusha V5 Regular" size="16.0" />
+                     </font>
                   </Label>
                   <Label fx:id="stadesbtn" alignment="CENTER" onMouseClicked="#GuideClicked" onMouseEntered="#highlightstadesbtn" onMouseExited="#unhighlightstadesbtn" prefHeight="22.0" prefWidth="91.0" text="Guide">
                      <HBox.margin>
@@ -76,6 +89,9 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+					 <font>
+                        <Font name="Dusha V5 Regular" size="16.0" />
+                     </font>
                   </Label>
                   <Label fx:id="gallerybtn" alignment="CENTER" onMouseClicked="#GalerieCliked" onMouseEntered="#highlightgallerybtn" onMouseExited="#unhighlightgallerybtn" prefHeight="22.0" prefWidth="95.0" text="Gallery">
                      <HBox.margin>
@@ -84,14 +100,20 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+					 <font>
+                        <Font name="Dusha V5 Regular" size="16.0" />
+                     </font>
                   </Label>
-                  <Label fx:id="contactbtn" alignment="CENTER" onMouseEntered="#highlightcontactbtn" onMouseExited="#unhighlightcontactbtn" prefHeight="22.0" prefWidth="137.0" text="Contact us">
+                  <Label fx:id="contactbtn" alignment="CENTER" onMouseEntered="#highlightcontactbtn" onMouseExited="#unhighlightcontactbtn" prefHeight="22.0" prefWidth="107.0" text="Contact us">
                      <HBox.margin>
                         <Insets left="20.0" right="10.0" top="10.0" />
                      </HBox.margin>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+					 <font>
+                        <Font name="Dusha V5 Regular" size="16.0" />
+                     </font>
                   </Label>
                </children>
             </HBox>
