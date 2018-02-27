@@ -61,17 +61,17 @@ import org.controlsfx.control.Rating;
  */
 public class AddImageController implements Initializable {
 
-	ObservableList<String> TypeDate = FXCollections.observableArrayList("Moscow",	
-	"SaintPetersbourg", "Novosibirsk",	
-	"Nischni", "Nowgorod","Iekaterinbourg","Samara","Russie Omsk"	
-	,"Kasan"," Ufa","Tscheljabinsk", "RostowPerm","Volgogra",	
-	"Woronesh"," Krasnojarsk",	
-	"Saratow"," Togliatti",	
-	"Uljanowsk", "Ishewsk",	"Russie Krasnodar","Jaroslavl Chabarowsk",	
-	"Vladivostok", "Irkoutsk","Nowokusnezk","Pensa",
-	"Rjasan", "Lipezk",	
-	"Orenburg", "Nabereshnyje"," Tschelny Russie","Tjumen","Tula"," Kemerowo",	
-	"Astrachan", "Tomsk"	,"Wjatka" ,"Tscheboksary"
+	ObservableList<String> TypeDate = FXCollections.observableArrayList("Moscow",
+			"SaintPetersbourg", "Novosibirsk",
+			"Nischni", "Nowgorod", "Iekaterinbourg", "Samara", "Russie Omsk",
+			"Kasan", " Ufa", "Tscheljabinsk", "RostowPerm", "Volgogra",
+			"Woronesh", " Krasnojarsk",
+			"Saratow", " Togliatti",
+			"Uljanowsk", "Ishewsk", "Russie Krasnodar", "Jaroslavl Chabarowsk",
+			"Vladivostok", "Irkoutsk", "Nowokusnezk", "Pensa",
+			"Rjasan", "Lipezk",
+			"Orenburg", "Nabereshnyje", " Tschelny Russie", "Tjumen", "Tula", " Kemerowo",
+			"Astrachan", "Tomsk", "Wjatka", "Tscheboksary"
 	);
 
 	List<String> type;
@@ -140,6 +140,7 @@ public class AddImageController implements Initializable {
 		browse1.getChildren().add(rating);
 
 		Li.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if (!newValue) {
 
@@ -148,7 +149,7 @@ public class AddImageController implements Initializable {
 						try {
 							Integer.parseInt(Li.getText());
 							Li.setUnFocusColor(Color.rgb(255, 0, 0, 1));
-							Alert alert = new Alert(Alert.AlertType.WARNING, "Erreur de saisie :Impossible d'enter des chiffres ");
+							Alert alert = new Alert(Alert.AlertType.WARNING, "Vous devez saisir des lettres pas seulement que des entiers.");
 							alert.show();
 							Li.setText("");
 						} catch (NumberFormatException e) {
@@ -163,53 +164,69 @@ public class AddImageController implements Initializable {
 				}
 			}
 		});
+		Li.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (!newValue) {
+
+					if ("".equals(Li.getText())) {
+						Li.setUnFocusColor(Color.rgb(0, 0, 255, 1));
+						try {
+							Integer.parseInt(Li.getText());
+							Li.setUnFocusColor(Color.rgb(255, 0, 0, 1));
+							Alert alert = new Alert(Alert.AlertType.WARNING, "Vous devez saisir un lieu .");
+							alert.show();
+							Li.setText("");
+						} catch (NumberFormatException e) {
+
+							Li.setUnFocusColor(Color.rgb(0, 0, 255, 1));
+
+						}
+
+					} else {
+						Li.setUnFocusColor(Color.rgb(255, 0, 0, 1));
+					}
+				}
+			}
+		});
+
 		Dc.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if (!newValue) {
-					if (Dc.getText().length() < 10) {
-						JFXDialogLayout content = new JFXDialogLayout();
-						content.setHeading(new Text(""));
-						content.setBody(new Text("La description doit contenir au moins 10 caractères"));
-						JFXDialog description = new JFXDialog(StackAdd, content, JFXDialog.DialogTransition.CENTER);
-						description.show();
-						if (!"".equals(Dc.getText())) {
-							JFXDialogLayout content1 = new JFXDialogLayout();
-							content1.setHeading(new Text(""));
-							content1.setBody(new Text("La description ne peut pas contenir seulement que des chifrres"));
-							JFXDialog description1 = new JFXDialog(StackAdd, content1, JFXDialog.DialogTransition.CENTER);
-							description1.show();
+
+					if ("".equals(Dc.getText())) {
+						Dc.setUnFocusColor(Color.rgb(0, 0, 255, 1));
+						try {
+							Integer.parseInt(Dc.getText());
+							Dc.setUnFocusColor(Color.rgb(255, 0, 0, 1));
+							Alert alert = new Alert(Alert.AlertType.WARNING, "Vous devez saisir une description.");
+							alert.show();
+							Dc.setText("");
+						} catch (NumberFormatException e) {
+
+							Dc.setUnFocusColor(Color.rgb(0, 0, 255, 1));
+
 						}
+
+					} else {
+						Dc.setUnFocusColor(Color.rgb(255, 0, 0, 1));
 					}
 				}
-
 			}
 		});
+
 		Av.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if (!newValue) {
-					if (Av.getText().length() < 7) {
-						JFXDialogLayout content = new JFXDialogLayout();
-						content.setHeading(new Text(""));
-						content.setBody(new Text("L'avis doit contenir au moins 20 caractères"));
-						JFXDialog description = new JFXDialog(StackAdd, content, JFXDialog.DialogTransition.CENTER);
-						description.show();
-					}
-				}
-			}
-		});
 
-		Av.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if (!newValue) {
-
-					if (!"".equals(Av.getText())) {
-						Dc.setUnFocusColor(Color.rgb(0, 0, 255, 1));
+					if ("".equals(Av.getText())) {
+						Av.setUnFocusColor(Color.rgb(0, 0, 255, 1));
 						try {
-							Integer.parseInt(Dc.getText());
+							Integer.parseInt(Av.getText());
 							Av.setUnFocusColor(Color.rgb(255, 0, 0, 1));
-							Alert alert = new Alert(Alert.AlertType.WARNING, "Erreur de saisie :Impossible d'enter des chiffres ");
+							Alert alert = new Alert(Alert.AlertType.WARNING, "Vous devez saisir une description.");
 							alert.show();
 							Av.setText("");
 						} catch (NumberFormatException e) {
@@ -249,26 +266,34 @@ public class AddImageController implements Initializable {
 
 	@FXML
 	private void savee(MouseEvent event) throws IOException {
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		Map uploadResult = cloudinary.uploader().upload(image1, ObjectUtils.emptyMap());
-		alert.setTitle("Confirmation d'ajout de photo");
-		alert.setHeaderText("voulez vous vraiment Ajouter cette photo?");
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK) {
-			Gallery g1 = new Gallery(SimpleUser.current_user.getId(), villeCombo.getValue(), Li.getText(), Dc.getText(), (String) uploadResult.get("url"), "0");
-			GalleryCrud.AddImage(g1);
-			Opinions o1 = new Opinions(SimpleUser.current_user.getId(), Av.getText(), rat.getText());
-			JFXDialogLayout content = new JFXDialogLayout();
-			content.setHeading(new Text(""));
-			content.setBody(new Text("Ajout fait avec succés"));
-			JFXDialog check_username = new JFXDialog(Validation, content, JFXDialog.DialogTransition.CENTER);
-			check_username.show();
+		if ((!"".equals(Av.getText())) && (!"".equals(Dc.getText())) && (!"".equals(Li.getText())) && (!"".equals(insertionIm.getText()))) {
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			Map uploadResult = cloudinary.uploader().upload(image1, ObjectUtils.emptyMap());
+			alert.setTitle("Confirmation d'ajout de photo");
+			alert.setHeaderText("voulez vous vraiment Ajouter cette photo?");
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK) {
+				Gallery g1 = new Gallery(SimpleUser.current_user.getId(), villeCombo.getValue(), Li.getText(), Dc.getText(), (String) uploadResult.get("url"), "0");
+				GalleryCrud.AddImage(g1);
+				Opinions o1 = new Opinions(SimpleUser.current_user.getId(), Av.getText(), rat.getText());
+				JFXDialogLayout content = new JFXDialogLayout();
+				content.setHeading(new Text(""));
+				content.setBody(new Text("Ajout fait avec succés"));
+				JFXDialog check_username = new JFXDialog(Validation, content, JFXDialog.DialogTransition.CENTER);
+				check_username.show();
+			}
+			villeCombo.setValue(null);
+			Li.setText("");
+			Dc.setText("");
+			insertionIm.setText("");
+			imgvw.setVisible(false);
+			Av.setText("");
+
+		} else {
+			Alert alert1 = new Alert(Alert.AlertType.WARNING, "Veuillez remplir tous les champs.");
+			alert1.show();
+
 		}
-		villeCombo.setValue(null);
-		Li.setText("");
-		Dc.setText("");
-		insertionIm.setText("");
-		imgvw.setVisible(false);
 
 	}
 

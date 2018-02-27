@@ -200,17 +200,14 @@ public class ShowallController implements Initializable {
 								Label Ville = new Label();
 								Ville.setText("Ville : " + thisController.current_shown_Gallery.getVille());
 								Ville.setFont(Font.font("Ubuntu", 19));
-								Ville.setTextFill(Color.web("#b23d3d"));
 
 								Label Lieu = new Label();
 								Lieu.setText("Lieu : " + thisController.current_shown_Gallery.getLieu());
 								Lieu.setFont(Font.font("Ubuntu", 19));
-								Lieu.setTextFill(Color.web("#b23d3d"));
 
 								Label Description = new Label();
 								Description.setText("Description : " + thisController.current_shown_Gallery.getDescription());
 								Description.setFont(Font.font("Ubuntu", 19));
-								Description.setTextFill(Color.web("#b23d3d"));
 								Description.setMaxWidth(250);
 								Description.setMinHeight(Region.USE_PREF_SIZE);
 
