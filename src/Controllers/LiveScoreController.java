@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.web.WebView;
 
 /**
@@ -20,13 +21,14 @@ public class LiveScoreController implements Initializable {
 
 	@FXML
 	private WebView wv;
+	@FXML
+	private FlowPane nav;
 
 	/**
 	 * Initializes the controller class.
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		wv.getEngine().loadContent("", "text/html");
-	}	
-	
+		wv.getEngine().load("http://alrwr-2k18.eb2a.com/");
+	}
 }

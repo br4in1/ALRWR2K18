@@ -104,6 +104,7 @@ public class Browser extends Region {
 							} else {
 								SimpleUser U = new SimpleUser(Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), (u.getLocation()!= null && u.getLocation().getName() != null) ? u.getLocation().getName() : "", true, 0, u.getPicture().getUrl(), u.getEmail(), u.getEmail(), false, "", u.getEmail() + u.getId(), Timestamp.valueOf(LocalDateTime.now()), "ROLE_USER", u.getLastName(), u.getFirstName());
 								UserCrud.AddUserToDataBaseStepOne(U);
+								UserCrud.UpdateUserPhoto(u.getPicture().getUrl(), u.getEmail());
 								SimpleUser.current_user = U;
 							}
 							try {
