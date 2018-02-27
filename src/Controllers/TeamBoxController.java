@@ -29,8 +29,6 @@ public class TeamBoxController implements Initializable {
     @FXML
     private JFXButton TeamStatics;
     @FXML
-    private JFXButton Teams1;
-    @FXML
     private JFXButton Players;
 
     /**

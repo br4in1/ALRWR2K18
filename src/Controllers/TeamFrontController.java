@@ -10,6 +10,8 @@ import Entities.Player;
 import Entities.Team;
 import Services.PlayerCrud;
 import Services.TeamCrud;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.net.URL;
@@ -18,15 +20,18 @@ import java.util.ResourceBundle;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -61,6 +66,7 @@ public class TeamFrontController implements Initializable {
 	private SwingNode staticSwigNode;
 
 	public static Integer current_team_id = 1;
+	public Integer current_player_id=1 ;
 	@FXML
 	private ImageView TeamImageView;
 	public static List<Player> listPlayers;
@@ -70,6 +76,8 @@ public class TeamFrontController implements Initializable {
 	
 	@FXML
 	private HBox hboxNav;
+	@FXML
+	private JFXDialog TeamSP;
 
 	/**
 	 * Initializes the controller class.
@@ -114,17 +122,50 @@ public class TeamFrontController implements Initializable {
 			im.setFitHeight(140);
 			im.setFitWidth(120);
 			plPhotoLabel.setGraphic(im);
+			plPhotoLabel.setId(String.valueOf(listPlayers.get(i).getId()));
+			
 			
 			VBox vboxNav1 = new VBox();
 			vboxNav1.setSpacing(25);
 			vboxNav1.getChildren().add(plPhotoLabel);
 			vboxNav1.getChildren().add(plNameLabel);
+		
+			
+			
 			hboxNav.getChildren().add(vboxNav1);
 			hboxNav.setSpacing(30);
 			//pl.setId(String.valueOf(listPlayers.get(i).getName()));
 			//nav.getChildren().add(plPhotoLabel);
-			
 			//hnav.getChildren().add(pl);
+		}
+		/*
+		JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text("Error !"));
+			content.setBody(new Text("Please fill all the fields !"));
+			JFXDialog check_team = new JFXDialog(TeamSP, content, JFXDialog.DialogTransition.CENTER);
+			check_team.show();
+		*/
+		if(listPlayers.size()!=0)
+		{
+			System.out.println("llllllll");
+			//for(int i=0; i<listPlayers.size();i++)
+			//{
+			
+				
+				for (Node node : hboxNav.getChildren()) {
+				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
+					
+					System.out.println("mmmm " + hboxNav.getId() );
+					
+		//		JFXDialogLayout content = new JFXDialogLayout();
+		//		content.setHeading(new Text("please !"));
+		//		content.setBody(new Text("afficih !"));
+		//		JFXDialog check_team = new JFXDialog(TeamSP, content, JFXDialog.DialogTransition.CENTER);
+		//		check_team.show();
+					
+				});
+			}
+			//}
 		}
 	}
 

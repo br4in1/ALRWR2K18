@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.embed.swing.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
@@ -158,6 +159,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="338.0" prefWidth="2331.0">
                      <children>
+                        <JFXDialog fx:id="TeamSP" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="1500.0" AnchorPane.topAnchor="10.0" />
                         <HBox fx:id="hboxNav" prefHeight="183.0" prefWidth="954.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
                            <padding>
                               <Insets left="30.0" />
