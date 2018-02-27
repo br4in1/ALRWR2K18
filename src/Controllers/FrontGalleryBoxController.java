@@ -28,50 +28,64 @@ public class FrontGalleryBoxController implements Initializable {
 	private Label ShowGallery;
 	@FXML
 	private Label ShowMyGallery;
-
+	public static String selected;
+	public static FrontGalleryBoxController thisController;
 	/**
 	 * Initializes the controller class.
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		// TODO
+		thisController = this;
+		selected = "addimage";
+		AddImage.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
 	}
 
 	@FXML
 	private void unhighlightAdd(MouseEvent event) {
-		AddImage.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
-
+		if(!selected.equals("addimage")){
+			AddImage.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		}
 	}
 
 	@FXML
-	private void highlightAdd(MouseEvent event) {
-
-		AddImage.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
-
+	public void highlightAdd(MouseEvent event) {
+		if(!selected.equals("addimage")){
+			AddImage.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
+		}
 	}
 
 	@FXML
 	private void unhighlighConsulter(MouseEvent event) {
-
-		ShowGallery.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
-
+		if(!selected.equals("consulter")){
+			ShowGallery.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		}
 	}
 
 	@FXML
-	private void highlightConsulter(MouseEvent event) {
-		ShowGallery.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
-
+	public void highlightConsulter(MouseEvent event) {
+		if(!selected.equals("consulter")){
+			ShowGallery.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
+		}
 	}
 
 	@FXML
 	private void unhighlightConsulter2(MouseEvent event) {
-		ShowMyGallery.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
-
+		if(!selected.equals("consulter2")){
+			ShowMyGallery.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		}
 	}
 
 	@FXML
-	private void highlightConsulter2(MouseEvent event) {
-		ShowMyGallery.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
+	public void highlightConsulter2(MouseEvent event) {
+		if(!selected.equals("consulter2")){
+			ShowMyGallery.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
+		}
+	}
+	
+	public void unhighlightAll(){
+		ShowGallery.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		ShowMyGallery.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		AddImage.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
 	}
 
 }

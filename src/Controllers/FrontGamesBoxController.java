@@ -33,7 +33,7 @@ public class FrontGamesBoxController implements Initializable {
 	private Label groups;
 	
 	public static String selected;
-	public static FrontUserBoxController thisController;
+	public static FrontGamesBoxController thisController;
 
 	public void unhighlightAll() {
 		games.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
@@ -47,7 +47,9 @@ public class FrontGamesBoxController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		// TODO
+		thisController = this;
+		selected = "games";
+		games.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
 	}
 
 	@FXML
@@ -58,8 +60,8 @@ public class FrontGamesBoxController implements Initializable {
 	}
 
 	@FXML
-	private void highlightLiveScores(MouseEvent event) {
-		if (!selected.equals("LiveScore")) {
+	public void highlightLiveScores(MouseEvent event) {
+		if (!selected.equals("liveScore")) {
 			liveScore.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
 		}
 	}
@@ -72,7 +74,7 @@ public class FrontGamesBoxController implements Initializable {
 	}
 
 	@FXML
-	private void highlightPrediction(MouseEvent event) {
+	public void highlightPrediction(MouseEvent event) {
 		if (!selected.equals("prediction")) {
 			prediction.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
 		}
@@ -86,7 +88,7 @@ public class FrontGamesBoxController implements Initializable {
 	}
 
 	@FXML
-	private void highlightGames(MouseEvent event) {
+	public void highlightGames(MouseEvent event) {
 		if (!selected.equals("games")) {
 			games.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
 		}
@@ -100,7 +102,7 @@ public class FrontGamesBoxController implements Initializable {
 	}
 
 	@FXML
-	private void highlightGroups(MouseEvent event) {
+	public void highlightGroups(MouseEvent event) {
 		if (!selected.equals("groups")) {
 			groups.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
 		}
