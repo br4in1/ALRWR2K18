@@ -6,13 +6,17 @@
 package Controllers.GestionArticles;
 
 import Entities.Article;
+import Entities.User;
 import Services.ArticleCrud;
+import Services.UserCrud;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import java.io.IOException;
 import java.net.URL;
+import java.util.AbstractMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +32,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -36,6 +41,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import org.jsoup.Jsoup;
 
@@ -51,7 +58,8 @@ public class ShowArticlesFrontController implements Initializable {
     @FXML
     private ScrollPane contentPane;
     private AnchorPane showOneArticlePane;
-    public static int content2Display = 1;    /* 1-all , 2-Match, 3-Equipe, 4-Stade*/
+    public static int content2Display = 1;
+    /* 1-all , 2-Match, 3-Equipe, 4-Stade*/
     public static ShowArticlesFrontController thisController;
 
     /**
@@ -67,6 +75,18 @@ public class ShowArticlesFrontController implements Initializable {
     @FXML
     private Label lbRecentNews;
     public String category;
+    @FXML
+    private StackPane contentStackPane;
+    @FXML
+    private Label lbArticleTitle;
+    @FXML
+    private ImageView imageViewArticle;
+    @FXML
+    private Label lbDateArticle;
+    @FXML
+    private Label lbArticleAuteur;
+    @FXML
+    private WebView wvArticleContenu;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -78,49 +98,30 @@ public class ShowArticlesFrontController implements Initializable {
                 + "-fx-border-insets: 5;"
                 + "-fx-border-radius: 5;"
                 + "-fx-border-color: #66ae2e;");
+        contentPane.setMaxHeight(530);
+
         setContent();
         for (Node n : vBig.getChildren()) {
             n.setOnMouseClicked((e)
                     -> {
-                try {
-                    showOneArticlePane = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/ArticleShowPopUpFront.fxml"));
-                    //clearContent();
-                } catch (IOException ex) {
-                    Logger.getLogger(ShowArticlesFrontController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                AbstractMap.SimpleEntry<Article, User> m = ArticleCrud.getRepository().findArticleUserById((int) n.getUserData());
+                System.out.println(m);
+                lbArticleAuteur.setText("Par: " + m.getValue().getLastname() + " " + m.getValue().getFirstname());
+                lbArticleTitle.setText(" "+m.getKey().getTitre());
+                lbDateArticle.setText("Article Crée le: " + m.getKey().getDatePublication().toString());
+                WebEngine we = wvArticleContenu.getEngine();
+                we.loadContent(m.getKey().getContenu());
+                imageViewArticle.setImage(new Image(m.getKey().getArticleImage()));
+               
 
-                System.out.println(n.getUserData());
             });
         }
         vBig.setCursor(Cursor.HAND);
-        
+
     }
 
     public void clearContent() {
         vBig.getChildren().clear();
-    }
-
-    private void showDialog(String titre, String contenu) {
-        Stage stage = (Stage) homeContent.getScene().getWindow();
-        JFXDialogLayout content = new JFXDialogLayout();
-        content.setHeading(new Text(titre));
-        content.setBody(new Text(contenu));
-        StackPane stackpane = new StackPane();
-        JFXDialog dialog = new JFXDialog(stackpane, content, JFXDialog.DialogTransition.CENTER);
-        JFXButton button = new JFXButton("Close");
-        button.setButtonType(JFXButton.ButtonType.RAISED);
-
-        Scene scene = new Scene(stackpane, 300, 250);
-        homeContent.getChildren().add(stackpane);
-
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                dialog.close();
-            }
-        });
-        content.setActions(button);
-        dialog.show();
     }
 
     public void setContent() {
@@ -128,12 +129,11 @@ public class ShowArticlesFrontController implements Initializable {
         List<Article> a = null;
         if (content2Display == 1) {
             a = ArticleCrud.getRepository().findAllOrderDate();
-        } else if (content2Display == 2){
+        } else if (content2Display == 2) {
             a = ArticleCrud.getRepository().findAllByCategory("Match");
-        }else if (content2Display == 3){
+        } else if (content2Display == 3) {
             a = ArticleCrud.getRepository().findAllByCategory("Equipe");
-        }
-        else if (content2Display == 4){
+        } else if (content2Display == 4) {
             a = ArticleCrud.getRepository().findAllByCategory("Stade");
         }
         if (a.isEmpty()) {
@@ -158,8 +158,6 @@ public class ShowArticlesFrontController implements Initializable {
             iv.setFitHeight(200);
             StackPane sp = new StackPane(iv);
             sp.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 7, 0, 0, 0);"
-                    /*+ "-fx-padding: 2;"
-                    + "-fx-background-color: #66ae2e;"*/
                     + "-fx-background-radius: 5;");
 
             hb.getChildren().add(sp);
@@ -176,4 +174,36 @@ public class ShowArticlesFrontController implements Initializable {
             vBig.getChildren().add(hb);
         }
     }
+
+   /* private void showDialog(String titre, String contenu) {
+        ScrollPane sp = new ScrollPane();
+        sp.setMaxWidth(400);
+        sp.setMaxHeight(650);
+        WebView wv = new WebView();
+        wv.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 7, 0, 0, 0);"
+                + "-fx-background-radius: 5;");
+        wv.setDisable(true);
+        wv.setCursor(Cursor.TEXT);
+        sp.setContent(wv);
+        WebEngine we = wv.getEngine();
+        we.loadContent(contenu);
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setHeading(new Text(titre));
+        content.setBody(wv);
+        content.setMaxHeight(350);
+        content.setMaxWidth(500);
+        StackPane stackpane = new StackPane();
+        JFXDialog dialog = new JFXDialog(stackpane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button = new JFXButton("Close");
+        button.setButtonType(JFXButton.ButtonType.RAISED);
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        content.setActions(button);
+        dialog.show(contentStackPane);
+
+    }*/
 }
