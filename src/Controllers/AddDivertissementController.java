@@ -77,7 +77,8 @@ public class AddDivertissementController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
-		
+		cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
+
 		type=new ArrayList<>();
 		type.add("*.png");
 		type.add("*.jpg");

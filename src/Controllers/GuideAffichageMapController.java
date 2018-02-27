@@ -14,6 +14,7 @@ import Services.StadeCRUD;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
@@ -37,6 +38,7 @@ import com.lynden.gmapsfx.service.geocoding.GeocoderStatus;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 import com.lynden.gmapsfx.service.geocoding.GeocodingServiceCallback;
 import com.lynden.gmapsfx.util.MarkerImageFactory;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -54,6 +56,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
@@ -91,13 +94,22 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 	List<Marker> stad = new ArrayList<>();
 	List<Marker> diver = new ArrayList<>();
 	ObservableList<String> TypeVo = FXCollections.observableArrayList("Male", "Female", "None");
+	ObservableList<String>LesStade = FXCollections.observableArrayList("None");
 	private TextToSpeech tts = new TextToSpeech();
 	private float VoiceVolume;
 	@FXML
 	private JFXComboBox<String> choiceCombo;
 	private MarkerOptions markerOptions1;
 	private Marker joeSmithMarker;
-
+	@FXML
+	private Pane panFiltre;
+	@FXML
+	private JFXComboBox<String> combobocStades;
+	@FXML
+	private JFXSlider slider;
+	@FXML
+	private JFXTextField kilometre;
+	private LatLong latLongStadePrincipale;
 	/**
 	 * Initializes the controller class.
 	 */
@@ -123,12 +135,28 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
+		StadeCRUD C = new StadeCRUD();
+			List<Stade> LisStade = new ArrayList<>();
+		try {
+			LisStade = C.AfficherTousLesStades();
+		} catch (SQLException ex) {
+			Logger.getLogger(GuideAffichageMapController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+			for (int i = 0; i < LisStade.size(); i++) {
+				LesStade.add(LisStade.get(i).getNom());
+			}
+		combobocStades.setItems(LesStade);
+		combobocStades.setValue("None");
 		choiceCombo.setValue("None");
 		choiceCombo.setItems(TypeVo);
 		mapView.addMapInializedListener(this);
 		to.bindBidirectional(tofield.textProperty());
 		from.bindBidirectional(searchfield.textProperty());
-
+		panFiltre.setVisible(false);
+		slider.setValue(0);
+		kilometre.setText(0+"");
+		
 	}
 
 	@Override
@@ -163,8 +191,12 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 			List<Divertissement> LisStade = C.AfficherTousdivertissement();
 
 			for (int i = 0; i < LisStade.size(); i++) {
-
-				LatLong Location = new LatLong(LisStade.get(i).getGeolat(), LisStade.get(i).getGeolong());
+				System.out.println("slide"+slider.getValue());
+				if(slider.getValue()!=0)
+				{	double x = distance(latLongStadePrincipale.getLatitude(), latLongStadePrincipale.getLongitude(), LisStade.get(i).getGeolat(), LisStade.get(i).getGeolong(), 'K');
+				if(slider.getValue()>x)
+				{	System.out.println(x);
+					LatLong Location = new LatLong(LisStade.get(i).getGeolat(), LisStade.get(i).getGeolong());
 				MarkerOptions markerOptions1 = new MarkerOptions();
 				markerOptions1.position(Location)
 						.visible(true)
@@ -173,11 +205,25 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 
 				Marker joeSmithMarker = new Marker(markerOptions1);
 				diver.add(joeSmithMarker);
+				}
+			}
+				else
+				{
+					LatLong Location = new LatLong(LisStade.get(i).getGeolat(), LisStade.get(i).getGeolong());
+				MarkerOptions markerOptions1 = new MarkerOptions();
+				markerOptions1.position(Location)
+						.visible(true)
+						.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/resto.png", "png"))
+						.title(LisStade.get(i).getNom());
 
+				Marker joeSmithMarker = new Marker(markerOptions1);
+				diver.add(joeSmithMarker);
+				}
 			}
 			map.addMarkers(diver);
 		} else {
 			map.removeMarkers(diver);
+			diver.clear();
 		}
 	}
 
@@ -186,8 +232,12 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 		if (staduims.isSelected()) {
 			StadeCRUD C = new StadeCRUD();
 			List<Stade> LisStade = C.AfficherTousLesStades();
-
+			
 			for (int i = 0; i < LisStade.size(); i++) {
+				if(slider.getValue()!=0){
+				double x = distance(latLongStadePrincipale.getLatitude(), latLongStadePrincipale.getLongitude(), LisStade.get(i).getGeolat(), LisStade.get(i).getGeolong(), 'K');
+				if(slider.getValue()>x)
+				{
 				LatLong Location = new LatLong(LisStade.get(i).getGeolat(), LisStade.get(i).getGeolong());
 				MarkerOptions markerOptions1 = new MarkerOptions();
 				markerOptions1.position(Location)
@@ -198,9 +248,24 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 				Marker joeSmithMarker = new Marker(markerOptions1);
 				stad.add(joeSmithMarker);
 			}
+				
+			}
+				else {
+				LatLong Location = new LatLong(LisStade.get(i).getGeolat(), LisStade.get(i).getGeolong());
+				MarkerOptions markerOptions1 = new MarkerOptions();
+				markerOptions1.position(Location)
+						.visible(true)
+						.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/stade.png", "png"))
+						.title(LisStade.get(i).getNom());
+
+				Marker joeSmithMarker = new Marker(markerOptions1);
+				stad.add(joeSmithMarker);
+				}
+			}
 			map.addMarkers(stad);
 		} else {
 			map.removeMarkers(stad);
+			stad.clear();
 		}
 	}
 
@@ -211,6 +276,25 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 			List<Hotel> Lis = C.AfficherTousLesHotels();
 
 			for (int i = 0; i < Lis.size(); i++) {
+				if(slider.getValue()!=0){
+				double x = distance(latLongStadePrincipale.getLatitude(), latLongStadePrincipale.getLongitude(), Lis.get(i).getGeolat(), Lis.get(i).getGeolong(), 'K');
+				if(slider.getValue()>x)
+				{
+				LatLong Location = new LatLong(Lis.get(i).getGeolat(), Lis.get(i).getGeolong());
+				MarkerOptions markerOptions1 = new MarkerOptions();
+				markerOptions1.position(Location)
+						//.icon(new File("/assets/hotel.png").toURI().toURL().toExternalForm())
+
+						.visible(true)
+						.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/hotel.png", "png"))
+						.title(Lis.get(i).getNom()+"distance :"+x);
+				Marker joeSmithMarker = new Marker(markerOptions1);
+				col.add(joeSmithMarker);
+				System.out.println("-yes");
+
+			}
+			}
+				else {
 				LatLong Location = new LatLong(Lis.get(i).getGeolat(), Lis.get(i).getGeolong());
 				MarkerOptions markerOptions1 = new MarkerOptions();
 				markerOptions1.position(Location)
@@ -222,11 +306,13 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 				Marker joeSmithMarker = new Marker(markerOptions1);
 				col.add(joeSmithMarker);
 				System.out.println("-yes");
-
+				}
+			
 			}
 			map.addMarkers(col);
 		} else {
 			map.removeMarkers(col);
+			col.clear();
 		}
 	}
 
@@ -297,5 +383,76 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 
 		}
 
+	}
+	   private double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
+      double theta = lon1 - lon2;
+      double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+      dist = Math.acos(dist);
+      dist = rad2deg(dist);
+      dist = dist * 60 * 1.1515;
+      if (unit == 'K') {
+        dist = dist * 1.609344;
+      } else if (unit == 'N') {
+        dist = dist * 0.8684;
+        }
+      return (dist);
+    }
+
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    /*::  This function converts decimal degrees to radians             :*/
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    private double deg2rad(double deg) {
+      return (deg * Math.PI / 180.0);
+    }
+
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    /*::  This function converts radians to decimal degrees             :*/
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    private double rad2deg(double rad) {
+      return (rad * 180.0 / Math.PI);
+    }
+
+	@FXML
+	private void localiserStade(ActionEvent event) {
+		if (!"None".equals(combobocStades.getValue()))
+		{if (joeSmithMarker != null) {
+
+				map.removeMarker(joeSmithMarker);
+			}
+			StadeCRUD C = new StadeCRUD();
+			List<Stade> LisStade = new ArrayList<>();
+		try {
+			LisStade = C.AfficherTousLesStade(combobocStades.getValue());
+		} catch (SQLException ex) {
+			Logger.getLogger(GuideAffichageMapController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		 latLongStadePrincipale = new LatLong(LisStade.get(0).getGeolat(),LisStade.get(0).getGeolong());
+						markerOptions1 = new MarkerOptions();
+						markerOptions1.position(latLongStadePrincipale)
+								.visible(true)
+								.title("Stade Name :" + LisStade.get(0).getNom());
+
+						joeSmithMarker = new Marker(markerOptions1);
+						map.addMarker(joeSmithMarker);
+						
+					map.setCenter(latLongStadePrincipale);
+	}
+		else {slider.setValue(0);
+		 latLongStadePrincipale = new LatLong(0,0);
+		
+		}
+		
+	}
+
+	@FXML
+	private void kilometrageChanged(MouseEvent event) {
+		kilometre.setText(slider.getValue()+"");
+	}
+
+	@FXML
+	private void afficherFiltre(MouseEvent event) {
+		if(panFiltre.isVisible())
+			panFiltre.setVisible(false);
+		else panFiltre.setVisible(true);
 	}
 }

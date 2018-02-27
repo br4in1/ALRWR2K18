@@ -53,7 +53,7 @@ public class GameCrud {
 	public static List<Game> findAllGames() {
 		Connection con = DataSource.getInstance().getCon();
 		List result = new ArrayList<Game>();
-		String query = "select g.*,t1.name 'nomaway',t2.name 'nomhome',s.name 'nomstade' from Game g join Team t1 on t1.id = g.HomeTeam join Team t2 on t2.id = g.AwayTeam join Stadium s on s.id = g.Stadium";
+		String query = "select g.*,t1.name 'nomaway',t2.name 'nomhome',s.name 'nomstade' from Game g join Team t1 on t1.id = g.HomeTeam join Team t2 on t2.id = g.AwayTeam join Stadium s on s.id = g.Stadium ORDER BY Date ";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);

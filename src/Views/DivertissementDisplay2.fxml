@@ -23,7 +23,7 @@
             <JFXTextField fx:id="name" layoutX="123.0" layoutY="30.0" />
             <JFXTextField fx:id="city" layoutX="122.0" layoutY="67.0" />
             <JFXTextField fx:id="link" layoutX="123.0" layoutY="113.0" />
-            <JFXTextField fx:id="path" layoutX="124.0" layoutY="158.0" prefHeight="25.0" prefWidth="135.0" />
+            <JFXTextField fx:id="path" layoutX="124.0" layoutY="158.0" onAction="#browse" prefHeight="25.0" prefWidth="135.0" />
             <JFXTimePicker fx:id="open" layoutX="88.0" layoutY="235.0" prefHeight="25.0" prefWidth="94.0" />
             <JFXTimePicker fx:id="close" layoutX="244.0" layoutY="236.0" prefHeight="25.0" prefWidth="88.0" />
             <JFXTextField fx:id="id" editable="false" layoutX="201.0" layoutY="2.0" prefHeight="25.0" prefWidth="38.0" />
@@ -47,7 +47,7 @@
                   <Font name="Berlin Sans FB Demi Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="26.0" layoutY="168.0" prefHeight="17.0" prefWidth="68.0" text="Path" textFill="#b52525">
+            <Label layoutX="26.0" layoutY="168.0" onMouseClicked="#browse2" prefHeight="17.0" prefWidth="68.0" text="Path" textFill="#b52525">
                <font>
                   <Font name="Berlin Sans FB Demi Bold" size="12.0" />
                </font>

@@ -452,6 +452,8 @@ public class Login_formController implements Initializable {
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
 		stage.show();
+		RunnableDemo runnableDemo = new RunnableDemo();
+		runnableDemo.start();
 	}
 
 	public void ShowDashboard() throws IOException {
@@ -519,7 +521,7 @@ public class Login_formController implements Initializable {
 				JFXDialog check_data = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
 				check_data.show();
 			} else {
-				UserCrud.ChangePasswordForUser(Mail2ChangePassword,pass1forgot.getText());
+				UserCrud.ChangePasswordForUser(Mail2ChangePassword, pass1forgot.getText());
 			}
 		}
 	}

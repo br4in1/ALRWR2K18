@@ -332,5 +332,24 @@ public class TeamCrud {
 		}
 		return null;
 	}
+		 public static Team findByName(String name) {
+		Connection con = DataSource.getInstance().getCon();
+		List<Team> list = new ArrayList<>() ;
+		String query = "SELECT * from `Team` where name = ? ";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+                        ste.setString(1, name);
+			ResultSet result = ste.executeQuery();
+			while (result.next()) {
+				//return new Team(result.getString("name"), result.getString("coach"), result.getString("president"), result.getString("area"), result.getInt("gamesPlayed"), result.getInt("goalScored"), result.getInt("goalAgainst"), result.getInt("participations"), result.getDate("fifaDate"), result.getString("wcGroup"), result.getInt("win"), result.getInt("loose"), result.getInt("draw"), result.getInt("points"), result.getInt("fifaRank"), result.getString("flagPhoto"), result.getString("logoPhoto"), result.getString("squadPhoto"), result.getString("descriptionPhoto"), result.getString("description"), result.getString("website"), result.getString("video"));
+			Team t = new  Team(result.getString("name"), result.getString("coach"), result.getString("president"), result.getString("area"), result.getInt("gamesPlayed"), result.getInt("goalScored"), result.getInt("goalAgainst"), result.getInt("participations"), result.getDate("fifaDate"), result.getString("wcGroup"), result.getInt("win"), result.getInt("loose"), result.getInt("draw"), result.getInt("points"), result.getInt("fifaRank"), result.getString("flagPhoto"), result.getString("logoPhoto"), result.getString("squadPhoto"), result.getString("descriptionPhoto"), result.getString("description"), result.getString("website"), result.getString("video"));       
+			
+					return t;
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null ;
+	}
 
 }
