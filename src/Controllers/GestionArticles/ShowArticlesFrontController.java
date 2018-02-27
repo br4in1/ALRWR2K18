@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controllers.GestionArticles;
 
 import Entities.Article;
@@ -59,22 +54,14 @@ public class ShowArticlesFrontController implements Initializable {
     private ScrollPane contentPane;
     private AnchorPane showOneArticlePane;
     public static int content2Display = 1;
-    /* 1-all , 2-Match, 3-Equipe, 4-Stade*/
+    /* 1-all , 2-Match, 3-Equipe, 4-Stade, 5-search*/
     public static ShowArticlesFrontController thisController;
-
-    /**
-     * Initializes the controller class.
-     */
-    public static String html2text(String html) {
-        return Jsoup.parse(html).text();
-    }
     @FXML
     private VBox vBig;
     @FXML
     private HBox topBar;
     @FXML
     private Label lbRecentNews;
-    public String category;
     @FXML
     private StackPane contentStackPane;
     @FXML
@@ -87,11 +74,14 @@ public class ShowArticlesFrontController implements Initializable {
     private Label lbArticleAuteur;
     @FXML
     private WebView wvArticleContenu;
+    public static String keyword = null;
 
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         thisController = this;
-        category = "all";
         topBar.setStyle("-fx-padding: 10;"
                 + "-fx-border-style: solid inside;"
                 + "-fx-border-width: 2;"
@@ -99,23 +89,9 @@ public class ShowArticlesFrontController implements Initializable {
                 + "-fx-border-radius: 5;"
                 + "-fx-border-color: #66ae2e;");
         contentPane.setMaxHeight(530);
-		
-        setContent();
-        for (Node n : vBig.getChildren()) {
-            n.setOnMouseClicked((e)
-                    -> {
-                AbstractMap.SimpleEntry<Article, User> m = ArticleCrud.getRepository().findArticleUserById((int) n.getUserData());
-                System.out.println(m);
-                lbArticleAuteur.setText("By: " + m.getValue().getLastname() + " " + m.getValue().getFirstname());
-                lbArticleTitle.setText(" "+m.getKey().getTitre());
-                lbDateArticle.setText("Written : " + m.getKey().getDatePublication().toString());
-                WebEngine we = wvArticleContenu.getEngine();
-                we.loadContent(m.getKey().getContenu());
-                imageViewArticle.setImage(new Image(m.getKey().getArticleImage()));
-               
 
-            });
-        }
+        setContent();
+
         vBig.setCursor(Cursor.HAND);
 
     }
@@ -135,6 +111,8 @@ public class ShowArticlesFrontController implements Initializable {
             a = ArticleCrud.getRepository().findAllByCategory("Equipe");
         } else if (content2Display == 4) {
             a = ArticleCrud.getRepository().findAllByCategory("Stade");
+        } else if (content2Display == 5) {
+            a = ArticleCrud.getRepository().findAllByKeyword(keyword);
         }
         if (a.isEmpty()) {
             Label l = new Label("No News Yet");
@@ -172,38 +150,30 @@ public class ShowArticlesFrontController implements Initializable {
             vb.getChildren().add(contenu);
             hb.getChildren().add(vb);
             vBig.getChildren().add(hb);
+            for (Node n : vBig.getChildren()) {
+                n.setOnMouseClicked((e)
+                        -> {
+                    AbstractMap.SimpleEntry<Article, User> m = ArticleCrud.getRepository().findArticleUserById((int) n.getUserData());
+                    lbArticleAuteur.setText("Par: " + m.getValue().getLastname() + " " + m.getValue().getFirstname());
+                    lbArticleTitle.setText(" " + m.getKey().getTitre());
+                    lbDateArticle.setText("Article Crée le: " + m.getKey().getDatePublication().toString());
+                    WebEngine we = wvArticleContenu.getEngine();
+                    we.loadContent(m.getKey().getContenu());
+                    imageViewArticle.setImage(new Image(m.getKey().getArticleImage()));
+                });
+            }
         }
     }
 
-   /* private void showDialog(String titre, String contenu) {
-        ScrollPane sp = new ScrollPane();
-        sp.setMaxWidth(400);
-        sp.setMaxHeight(650);
-        WebView wv = new WebView();
-        wv.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 7, 0, 0, 0);"
-                + "-fx-background-radius: 5;");
-        wv.setDisable(true);
-        wv.setCursor(Cursor.TEXT);
-        sp.setContent(wv);
-        WebEngine we = wv.getEngine();
-        we.loadContent(contenu);
+    public static String html2text(String html) {
+        return Jsoup.parse(html).text();
+    }
+
+    public void showDialog(String titre, String contenu) {
         JFXDialogLayout content = new JFXDialogLayout();
         content.setHeading(new Text(titre));
-        content.setBody(wv);
-        content.setMaxHeight(350);
-        content.setMaxWidth(500);
-        StackPane stackpane = new StackPane();
-        JFXDialog dialog = new JFXDialog(stackpane, content, JFXDialog.DialogTransition.CENTER);
-        JFXButton button = new JFXButton("Close");
-        button.setButtonType(JFXButton.ButtonType.RAISED);
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                dialog.close();
-            }
-        });
-        content.setActions(button);
-        dialog.show(contentStackPane);
-
-    }*/
+        content.setBody(new Text(contenu));
+        JFXDialog dialog = new JFXDialog(contentStackPane, content, JFXDialog.DialogTransition.CENTER);
+        dialog.show();
+    }
 }
