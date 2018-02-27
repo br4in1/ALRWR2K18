@@ -49,20 +49,7 @@ public class GalleryCrud {
 		}
 	}
 
-	public static List<String> DisplayImageFromDB() throws SQLException {
-		Connection con = DataSource.getInstance().getCon();
-		List<String> list = new ArrayList<>();
 
-		String req = "select image from gallery";
-		PreparedStatement ste = con.prepareStatement(req);
-		ResultSet result = ste.executeQuery();//select 
-		while (result.next()) {
-			list.add(result.getString(1));
-		}
-
-		return list;
-
-	}
 
 	public static List<Gallery> DisplayAll() {
 		Connection con = DataSource.getInstance().getCon();
@@ -87,29 +74,7 @@ public class GalleryCrud {
 
 	}
 
-	public static List<Gallery> DisplayVille(int id) {
-		Connection con = DataSource.getInstance().getCon();
-		List<Gallery> list = new ArrayList<>();
-		try {
-
-			String req = "SELECT ville FROM `gallery` where id=(?)";
-			PreparedStatement ste = con.prepareStatement(req);
-			ste.setInt(1, id);
-			ResultSet result = ste.executeQuery();
-
-			while (result.next()) {
-				Gallery g = new Gallery(result.getString("ville"));
-
-				list.add(g);
-
-			}
-
-		} catch (SQLException ex) {
-			Logger.getLogger(GalleryCrud.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		return list;
-
-	}
+	
 
 	public void DeleteImage(int id) throws SQLException {
 		Scanner sc = new Scanner(System.in);
@@ -170,7 +135,6 @@ public class GalleryCrud {
 				g.setId(result.getInt("id"));
 				return g;
 			}
-			return null;
 		} catch (SQLException ex) {
 			Logger.getLogger(GalleryCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}
