@@ -148,15 +148,11 @@ public void initialize(URL url, ResourceBundle rb) {
 
 			Marker joeSmithMarker = new Marker(markerOptions1);
 			map.addMarker(joeSmithMarker);
-						File file = new File(ListD.get(0).getImage());
-
-						try {
-							Image im = new Image(file.toURI().toURL().toExternalForm());
+						
+							Image im = new Image(ListD.get(0).getImage());
 							image.setImage(im);
 							image.setVisible(true);
-						} catch (MalformedURLException ex) {
-							
-						}
+				
 						open.setValue(LocalTime.parse(ListD.get(0).getHeureOuverture().getHours() + ":" + ListD.get(0).getHeureOuverture().getMinutes() + ""));
 						close.setValue(LocalTime.parse(ListD.get(0).getHeureFermeture().getHours() + ":" + ListD.get(0).getHeureFermeture().getMinutes() + ""));
 					} catch (SQLException ex) {

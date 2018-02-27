@@ -126,15 +126,10 @@ public class DivertissementDisplay2Controller implements Initializable {
 						latitude.setText(ListD.get(0).getGeolat() + "");
 						longtitude.setText(ListD.get(0).getGeolong() + "");
 
-						File file = new File(path.getText());
-
-						try {
-							Image im = new Image(file.toURI().toURL().toExternalForm());
+							Image im = new Image(path.getText());
 							image.setImage(im);
 							image.setVisible(true);
-						} catch (MalformedURLException ex) {
-							
-						}
+					
 						open.setValue(LocalTime.parse(ListD.get(0).getHeureOuverture().getHours() + ":" + ListD.get(0).getHeureOuverture().getMinutes() + ""));
 						close.setValue(LocalTime.parse(ListD.get(0).getHeureFermeture().getHours() + ":" + ListD.get(0).getHeureFermeture().getMinutes() + ""));
 					} catch (SQLException ex) {

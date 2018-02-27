@@ -155,7 +155,7 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 											//.icon(new File("/assets/hotel.png").toURI().toURL().toExternalForm())
 
 											.visible(true)
-											.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/hotel.png", "png"))
+						.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/hotel.png", "png"))
 											.title(Lis.get(i).getNom());
 									Marker joeSmithMarker = new Marker(markerOptions1);
 									col.add(joeSmithMarker);
@@ -188,7 +188,7 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 									MarkerOptions markerOptions1 = new MarkerOptions();
 									markerOptions1.position(Location)
 											.visible(true)
-											.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/stade.png", "png"))
+						.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/stade.png", "png"))
 											.title(LisStade.get(i).getNom());
 
 									Marker joeSmithMarker = new Marker(markerOptions1);
@@ -220,7 +220,7 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 									MarkerOptions markerOptions1 = new MarkerOptions();
 									markerOptions1.position(Location)
 											.visible(true)
-											.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/resto.png", "png"))
+						.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/resto.png", "png"))
 											.title(LisStade.get(i).getNom());
 
 									Marker joeSmithMarker = new Marker(markerOptions1);

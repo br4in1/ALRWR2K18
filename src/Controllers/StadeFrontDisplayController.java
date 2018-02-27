@@ -120,14 +120,10 @@ public class StadeFrontDisplayController implements Initializable, MapComponentI
 			name.setText(ListStade.get(x).getNom());
 			city.setText(ListStade.get(x).getCity());
 
-			File file = new File(ListStade.get(x).getImage());
-
-			try {
-				Image im = new Image(file.toURI().toURL().toExternalForm());
+				Image im = new Image(ListStade.get(x).getImage());
 				image.setImage(im);
 				image.setVisible(true);
-			} catch (MalformedURLException ex) {
-			}
+			
 			MapOptions mapOptions = new MapOptions();
 			mapOptions.center(new LatLong(ListStade.get(x).getGeolat(), ListStade.get(x).getGeolong()))
 					.mapType(MapTypeIdEnum.SATELLITE)

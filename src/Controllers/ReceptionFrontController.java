@@ -135,13 +135,11 @@ public class ReceptionFrontController implements Initializable, MapComponentInit
 
 			Marker joeSmithMarker = new Marker(markerOptions1);
 			map.addMarker(joeSmithMarker);
-						try {
-							Image im = new Image(file.toURI().toURL().toExternalForm());
+					
+							Image im = new Image(ListD.get(0).getImage());
 							minihotel.setImage(im);
 							minihotel.setVisible(true);
-						} catch (MalformedURLException ex) {
-							
-						}
+					
 							} catch (SQLException ex) {
 						Logger.getLogger(DivertissementDisplay2Controller.class.getName()).log(Level.SEVERE, null, ex);
 					}
