@@ -37,6 +37,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -45,6 +46,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class DivertissementDisplay2Controller implements Initializable {
 	Cloudinary cloudinary;
+	List<String>type ;
 	@FXML
 	private AnchorPane back;
 	@FXML
@@ -84,6 +86,10 @@ public class DivertissementDisplay2Controller implements Initializable {
 		// TODO
 		cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
 		init();
+		
+		type=new ArrayList<>();
+		type.add("*.png");
+		type.add("*.jpg");
 	}
 
 	public void init() {
@@ -163,6 +169,42 @@ public class DivertissementDisplay2Controller implements Initializable {
 
 	@FXML
 	private void location(ActionEvent event) {
+	}
+
+	@FXML
+	private void browse(ActionEvent event) {
+	FileChooser F = new FileChooser();
+		F.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", type));
+		File Fc = F.showOpenDialog(null);
+		if (Fc != null) {
+			path.setText(Fc.getAbsolutePath());
+		}
+		File file = new File(path.getText());
+
+		try {
+			Image im = new Image(file.toURI().toURL().toExternalForm());
+			image.setImage(im);
+			image.setVisible(true);
+		} catch (MalformedURLException ex) {
+		}
+	}
+
+	@FXML
+	private void browse2(MouseEvent event) {
+		FileChooser F = new FileChooser();
+		F.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", type));
+		File Fc = F.showOpenDialog(null);
+		if (Fc != null) {
+			path.setText(Fc.getAbsolutePath());
+		}
+		File file = new File(path.getText());
+
+		try {
+			Image im = new Image(file.toURI().toURL().toExternalForm());
+			image.setImage(im);
+			image.setVisible(true);
+		} catch (MalformedURLException ex) {
+		}
 	}
 
 }
