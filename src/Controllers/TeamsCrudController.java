@@ -118,8 +118,8 @@ public class TeamsCrudController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
 		listDisplay();
-		list = TeamCrud.GetNamelist();
-		findName.setItems(FXCollections.observableArrayList(list));
+		list = TeamCrud.GetNamelist();// prepare the elements 
+		findName.setItems(FXCollections.observableArrayList(list));// put the elements in combox
 
 	}
 
@@ -139,7 +139,7 @@ public class TeamsCrudController implements Initializable {
 
 	@FXML
 	private void deleteTeam(MouseEvent event) {
-		if (tableT.getSelectionModel().getSelectedItem() == null) {
+		if (tableT.getSelectionModel().getSelectedItem() == null) { 
 			Notifications notificationBuilder
 					= Notifications.create().title("Avertissment")
 							.text("Please select a team")
@@ -157,8 +157,8 @@ public class TeamsCrudController implements Initializable {
 			alert.setHeaderText("Are you sure about deleting this team ?");
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK) {
-				TeamCrud.RemoveTeam(tableT.getSelectionModel().getSelectedItem().getId());
-				tableT.getItems().removeAll(tableT.getSelectionModel().getSelectedItem());
+				TeamCrud.RemoveTeam(tableT.getSelectionModel().getSelectedItem().getId());// delete from database
+				tableT.getItems().removeAll(tableT.getSelectionModel().getSelectedItem());// delete from table
 				Notifications notificationBuilder
 						= Notifications.create().title("Avertissment")
 								.text("the team has been deleted ! ")
@@ -211,7 +211,7 @@ public class TeamsCrudController implements Initializable {
 	private void listDisplay() {
 
 		id.setCellValueFactory(
-				new PropertyValueFactory<>("id"));
+				new PropertyValueFactory<>("id"));// expects correctlly named property getters
 		name.setCellValueFactory(
 				new PropertyValueFactory<>("name"));
 		coach.setCellValueFactory(

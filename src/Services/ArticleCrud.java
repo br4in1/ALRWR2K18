@@ -6,15 +6,19 @@
 package Services;
 
 import Entities.Article;
+import Entities.User;
 import Utils.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collection;
 import static java.util.Collections.list;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -110,6 +114,9 @@ public class ArticleCrud {
     }
 
     public static Article findById(int id) {
+        if (article == null) {
+            conn = DataSource.getInstance().getCon();
+        }
         String sql = "SELECT * from articles where id = ?";
         try {
             PreparedStatement ste = conn.prepareStatement(sql);
@@ -129,6 +136,9 @@ public class ArticleCrud {
     }
 
     public static Article updateInts(int id, String column, int value) {
+        if (article == null) {
+            conn = DataSource.getInstance().getCon();
+        }
         String sql = null;
         if (column.equals("idEntity")) {
             sql = "Update articles set idEntity= ?  where id  = ?";
@@ -151,6 +161,9 @@ public class ArticleCrud {
     }
 
     public static Article update(int id, String column, String value) {
+        if (article == null) {
+            conn = DataSource.getInstance().getCon();
+        }
         String sql = null;
         if (column.equals("titre")) {
             sql = "Update articles set titre = ?  where id  = ?";
@@ -182,6 +195,9 @@ public class ArticleCrud {
     }
 
     public static boolean remove(int id) {
+        if (article == null) {
+            conn = DataSource.getInstance().getCon();
+        }
         String sql = "DELETE from articles where id  = ?";
         try {
             PreparedStatement ste = conn.prepareStatement(sql);
@@ -195,6 +211,9 @@ public class ArticleCrud {
     }
 
     public static boolean remove(Article a) {
+        if (article == null) {
+            conn = DataSource.getInstance().getCon();
+        }
         String sql = "DELETE from articles where id  = ?";
         try {
             PreparedStatement ste = conn.prepareStatement(sql);
@@ -217,6 +236,54 @@ public class ArticleCrud {
         try {
             PreparedStatement ste = conn.prepareStatement(req);
             ste.setString(1, cat);
+            ResultSet result = ste.executeQuery();// select
+            while (result.next()) {
+                list.add(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+                        result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
+                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage")));
+            }
+            return list;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public static AbstractMap.SimpleEntry<Article, User> findArticleUserById(int id) {
+        if (article == null) {
+            conn = DataSource.getInstance().getCon();
+        }
+        String req = "select u.id 'userId', u.firstname 'userFirstname', u.lastname 'userLastname', a.id, a.titre, a.contenu, a.idEntity, a.typeEntity, a.datePublication, a.derniereModification, a.auteur, a.articleImage from User u INNER JOIN Articles a on u.id = a.auteur where a.id = ?";
+        try {
+            PreparedStatement ste = conn.prepareStatement(req);
+            ste.setInt(1, id);
+            ResultSet result = ste.executeQuery();
+            if (result.next()) {
+               return new AbstractMap.SimpleEntry<Article, User>(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+                        result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
+                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage")), new User(null, null,null, null,null,null,null,result.getString("userFirstname"), result.getString("userLastname")));
+            }
+            else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+    public static List<Article> findAllByKeyword(String keyword) {
+        if (article == null) {
+            conn = DataSource.getInstance().getCon();
+        }
+        List<Article> list = new ArrayList<>();
+
+        String req = "select * from articles where titre like ? or contenu like ?";
+        try {
+            PreparedStatement ste = conn.prepareStatement(req);
+            ste.setString(1, "%" + keyword +"%");
+            ste.setString(2,"%" + keyword +"%");
+
             ResultSet result = ste.executeQuery();// select
             while (result.next()) {
                 list.add(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),

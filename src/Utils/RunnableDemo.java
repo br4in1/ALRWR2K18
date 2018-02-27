@@ -35,7 +35,6 @@ public class RunnableDemo implements Runnable {
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						System.out.println("Thread running ...");
 						List<Notification> NewNotifications = NotificationsCrud.GetMyNewNotifications(SimpleUser.current_user.getUsername());
 						for (int i = 0; i < NewNotifications.size(); i++) {
 							FrontEndController.ShowNotification(NewNotifications.get(i).getText());
@@ -43,7 +42,7 @@ public class RunnableDemo implements Runnable {
 						}
 					}
 				});
-				Thread.sleep(10000);
+				Thread.sleep(3000);
 			}
 		} catch (InterruptedException e) {
 			//System.out.println("Thread " + threadName + " interrupted.");

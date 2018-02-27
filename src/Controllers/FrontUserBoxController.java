@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Entities.SimpleUser;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;

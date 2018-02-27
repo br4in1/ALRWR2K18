@@ -28,6 +28,8 @@ import javafx.scene.shape.Circle;
 import Controllers.TeamFrontController;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
@@ -42,7 +44,7 @@ public class FrontEndController implements Initializable {
     @FXML
     private Label homebutton;
     @FXML
-    private Label fixturesbtn;
+    private Label tournementbtn;
     @FXML
     private Label teamsbtn;
     @FXML
@@ -58,8 +60,8 @@ public class FrontEndController implements Initializable {
     @FXML
     private Circle profilepic;
     private String current_page;
-    VBox userBox, gallerybox, articlesBox, teamBox, MapBox;
-    Pane add, gallery, profile, teams, editProfile, showArticles, interfaceMap, interfaceHotel, interfaceStade, interfaceResto, translate;
+    VBox userBox, gallerybox, articlesBox, teamBox, MapBox, gamesBox;
+    Pane games, add, gallery, profile, teams, editProfile, showArticles, interfaceMap, interfaceHotel, interfaceStade, interfaceResto, translate, livescore;
     @FXML
     private AnchorPane sidebar;
     @FXML
@@ -68,6 +70,8 @@ public class FrontEndController implements Initializable {
     private int teams_loaded = 0;
     private int gallery_loaded = 0;
     private int guide_loaded = 0;
+    private int tournement_loaded = 0;
+    private int articles_loaded = 0;
 
     /**
      * Initializes the controller class.
@@ -79,20 +83,10 @@ public class FrontEndController implements Initializable {
         homebutton.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
         firstlastname.setText(SimpleUser.current_user.getUsername());
         profilepic.setFill(new ImagePattern(new Image(SimpleUser.current_user.getProfilepicture())));
-
-    }
-
-    @FXML
-    private void highlightFixturesbtn(MouseEvent event) {
-        if (!current_page.equals("fixtures")) {
-            fixturesbtn.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
-        }
-    }
-
-    @FXML
-    private void unhighlightFixturesbtn(MouseEvent event) {
-        if (!current_page.equals("fixtures")) {
-            fixturesbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+        try {
+            homeClicked(null);
+        } catch (IOException ex) {
+            Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -112,6 +106,20 @@ public class FrontEndController implements Initializable {
     }
 
     @FXML
+    private void unhighlightTournementbtn(MouseEvent event) {
+        if (!current_page.equals("games")) {
+            tournementbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+        }
+    }
+
+    @FXML
+    private void highlightTournementbtn(MouseEvent event) {
+        if (!current_page.equals("games")) {
+            tournementbtn.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
+        }
+    }
+
+    @FXML
     private void unhighlightteamsbtn(MouseEvent event) {
         if (!current_page.equals("teams")) {
             teamsbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
@@ -127,28 +135,28 @@ public class FrontEndController implements Initializable {
 
     @FXML
     private void unhighlighthotelsbtn(MouseEvent event) {
-        if (!current_page.equals("hotels")) {
+        if (!current_page.equals("Guide")) {
             hotelsbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
         }
     }
 
     @FXML
     private void highlighthotelsbtn(MouseEvent event) {
-        if (!current_page.equals("hotels")) {
+        if (!current_page.equals("Guide")) {
             hotelsbtn.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
         }
     }
 
     @FXML
     private void unhighlightstadesbtn(MouseEvent event) {
-        if (!current_page.equals("stades")) {
+        if (!current_page.equals("Guide")) {
             stadesbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
         }
     }
 
     @FXML
     private void highlightstadesbtn(MouseEvent event) {
-        if (!current_page.equals("stades")) {
+        if (!current_page.equals("Guide")) {
             stadesbtn.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
         }
     }
@@ -252,11 +260,12 @@ public class FrontEndController implements Initializable {
         hotelsbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
         teamsbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
         homebutton.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
-        fixturesbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+        tournementbtn.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
     }
 
     @FXML
     private void GalerieCliked(MouseEvent event) throws IOException {
+        gallerybtn.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
         if (gallery_loaded == 0) {
             add = FXMLLoader.load(getClass().getResource("/Views/AddImage.fxml"));
             gallery = FXMLLoader.load(getClass().getResource("/Views/Showall.fxml"));
@@ -266,12 +275,21 @@ public class FrontEndController implements Initializable {
                 node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
                     switch (node.getId()) {
                         case "AddImage":
+                            FrontGalleryBoxController.thisController.unhighlightAll();
+                            FrontGalleryBoxController.thisController.highlightAdd(k);
+                            FrontGalleryBoxController.selected = "addimage";
                             setContentNode(add);
                             break;
                         case "ShowGallery":
+                            FrontGalleryBoxController.thisController.unhighlightAll();
+                            FrontGalleryBoxController.thisController.highlightConsulter(k);
+                            FrontGalleryBoxController.selected = "consulter";
                             setContentNode(gallery);
                             break;
                         //	case "ShowMyGallery":
+                        //	FrontGalleryBoxController.thisController.unhighlightAll();
+                        //	FrontGalleryBoxController.thisController.highlightConsulter2(k);
+                        //	FrontGalleryBoxController.selected = "consulter2";
                         //setContentNode(players);
                         //	break;
 
@@ -283,10 +301,12 @@ public class FrontEndController implements Initializable {
         unhighlightAll();
         current_page = "gallery";
         setNavNode(gallerybox);
+        setContentNode(add);
     }
 
     @FXML
     private void teamsClicked(MouseEvent event) throws IOException {
+        teamsbtn.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
         if (teams_loaded == 0) {
             teams = FXMLLoader.load(getClass().getResource("/Views/TeamFront.fxml"));
             teamBox = FXMLLoader.load(getClass().getResource("/Views/FrontTeamBox.fxml"));
@@ -311,72 +331,71 @@ public class FrontEndController implements Initializable {
         unhighlightAll();
         homebutton.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
         current_page = "home";
-        showArticles = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/showArticlesFront.fxml"));
-        articlesBox = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/articleBoxFront.fxml"));
-        for (Node node : articlesBox.getChildren()) {
-            node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
-                switch (node.getId()) {
-                    case "allLabel":
-                        if (ShowArticlesFrontController.content2Display != 1) {
-                            ShowArticlesFrontController.content2Display = 1;
-                            ShowArticlesFrontController.thisController.setContent();
-                        }
-                        break;
-                    case "gamesLabel":
-                        if (ShowArticlesFrontController.content2Display != 2) {
-                            ShowArticlesFrontController.content2Display = 2;
-                            ShowArticlesFrontController.thisController.setContent();
-                        }
-                        break;
-                    case "teamsLabel":
-                        if (ShowArticlesFrontController.content2Display != 3) {
-                            ShowArticlesFrontController.content2Display = 3;
-                            ShowArticlesFrontController.thisController.setContent();
-                        }
-                        break;
-                    case "stadiumLabel":
-                        if (ShowArticlesFrontController.content2Display != 4) {
-                            ShowArticlesFrontController.content2Display = 4;
-                            ShowArticlesFrontController.thisController.setContent();
-                        }
-                        break;
-                    default:
-                        break;
-                }
-                /* if (TeamFrontController.current_team_id != Integer.parseInt(node.getId())) {
-                        TeamFrontController.current_team_id = Integer.parseInt(node.getId());
-                        TeamFrontController.thisController.refreshData();
-                    }*/
-            });
+        if (articles_loaded == 0) {
+            showArticles = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/showArticlesFront.fxml"));
+            articlesBox = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/articleBoxFront.fxml"));
+            for (Node node : articlesBox.getChildren()) {
+                node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
+                    switch (node.getId()) {
+                        case "allLabel":
+                            if (ShowArticlesFrontController.content2Display != 1) {
+                                ShowArticlesFrontController.content2Display = 1;
+                                ShowArticlesFrontController.thisController.setContent();
+                            }
+                            break;
+                        case "gamesLabel":
+                            if (ShowArticlesFrontController.content2Display != 2) {
+                                ShowArticlesFrontController.content2Display = 2;
+                                ShowArticlesFrontController.thisController.setContent();
+                            }
+                            break;
+                        case "teamsLabel":
+                            if (ShowArticlesFrontController.content2Display != 3) {
+                                ShowArticlesFrontController.content2Display = 3;
+                                ShowArticlesFrontController.thisController.setContent();
+                            }
+                            break;
+                        case "stadiumLabel":
+                            if (ShowArticlesFrontController.content2Display != 4) {
+                                ShowArticlesFrontController.content2Display = 4;
+                                ShowArticlesFrontController.thisController.setContent();
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                });
 
+                HBox h = (HBox) articlesBox.getChildren().get(1);
+                for (Node n : h.getChildren()) {
+                    n.addEventHandler(MouseEvent.MOUSE_CLICKED, (z) -> {
+                        switch (n.getId()) {
+                            case "btSearch":
+                                TextField tf = (TextField) h.getChildren().get(0);
+                                if (tf.getText().equals("") || tf.getText() == null) {
+                                    ShowArticlesFrontController.thisController.showDialog("Error", "Le champ search ne doit pas etre vide");
+                                } else {
+                                    ShowArticlesFrontController.content2Display = 5;
+                                    ShowArticlesFrontController.keyword = tf.getText();
+                                    ShowArticlesFrontController.thisController.setContent();
+                                }
+                                break;
+                        }
+                    });
+
+                }
+
+            }
+            articles_loaded = 1;
         }
 
         setContentNode(showArticles);
         setNavNode(articlesBox);
-        /*for (Node node : articlesBox.getChildren()) {
-            switch (node.getId()) {
-                case "categoryGrid":
-                    GridPane gp = (GridPane) node;
-                    gp.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
-                        for (Node n : gp.getChildren()) {
-                            switch (n.getId()) {
-                                case "allLabel":
-                                    System.out.println("all labem");
-                                    break;
-                            }
-                        };
-                    });
-                    break;
-
-                default:
-                    break;
-            }
-
-        };*/
     }
 
     @FXML
     private void GuideClicked(MouseEvent event) throws IOException {
+        stadesbtn.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
         if (guide_loaded == 0) {
             MapBox = FXMLLoader.load(getClass().getResource("/Views/MapBox.fxml"));
 
@@ -440,7 +459,7 @@ public class FrontEndController implements Initializable {
 
     public static void ShowNotification(String text) {
         Notifications notificationBuilder
-                = Notifications.create().title("New Like !")
+                = Notifications.create().title("New Notification !")
                         .text(text)
                         .hideAfter(Duration.seconds(3))
                         .position(Pos.TOP_RIGHT)
@@ -449,5 +468,51 @@ public class FrontEndController implements Initializable {
                         });
 
         notificationBuilder.showInformation();
+    }
+
+    @FXML
+    private void tournementClicked(MouseEvent event) throws IOException {
+        tournementbtn.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
+        if (tournement_loaded == 0) {
+            gamesBox = FXMLLoader.load(getClass().getResource("/Views/FrontGamesBox.fxml"));
+            games = FXMLLoader.load(getClass().getResource("/Views/Games.fxml"));
+            livescore = FXMLLoader.load(getClass().getResource("/Views/LiveScore.fxml"));
+
+            for (Node node : gamesBox.getChildren()) {
+                node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
+                    switch (node.getId()) {
+                        case "games":
+                            FrontGamesBoxController.thisController.unhighlightAll();
+                            FrontGamesBoxController.thisController.highlightGames(k);
+                            FrontGamesBoxController.selected = "games";
+                            setContentNode(games);
+                            break;
+                        case "liveScore":
+                            FrontGamesBoxController.thisController.unhighlightAll();
+                            FrontGamesBoxController.thisController.highlightLiveScores(k);
+                            FrontGamesBoxController.selected = "liveScore";
+                            setContentNode(livescore);
+                            break;
+                        case "prediction":
+                            FrontGamesBoxController.thisController.unhighlightAll();
+                            FrontGamesBoxController.thisController.highlightPrediction(k);
+                            FrontGamesBoxController.selected = "prediction";
+                            setContentNode(games);
+                            break;
+                        case "groups":
+                            FrontGamesBoxController.thisController.unhighlightAll();
+                            FrontGamesBoxController.thisController.highlightGroups(k);
+                            FrontGamesBoxController.selected = "groups";
+                            setContentNode(games);
+                            break;
+                    }
+                });
+            }
+            tournement_loaded = 1;
+        }
+        unhighlightAll();
+        current_page = "games";
+        setNavNode(gamesBox);
+        setContentNode(games);
     }
 }

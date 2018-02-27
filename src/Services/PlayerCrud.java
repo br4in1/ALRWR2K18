@@ -164,7 +164,6 @@ public class PlayerCrud {
 			return result;
 
 		} catch (SQLException ex) {
-			System.out.println(result);
 			Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return null;
@@ -184,13 +183,11 @@ public class PlayerCrud {
 				
 				Player p = new Player(set.getString("name"), set.getString("lastName"), set.getInt("age"), set.getString("club"), set.getString("nation"), set.getDouble("height"), set.getDouble("weight"), set.getString("position"), set.getInt("goals"), set.getString("description"), set.getString("profilePhoto"), set.getString("blanketPhoto"), set.getString("descriptionPhoto"), set.getString("fbLink"), set.getString("twitterLink"), set.getInt("shirtNb"), set.getString("video"));
 				p.setId(set.getInt("id"));
-				System.out.println("p.id = " + p.getId());
 				result.add(p);
 			}
 			return result;
 
 		} catch (SQLException ex) {
-			System.out.println(result);
 			Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return null;

@@ -138,35 +138,7 @@ public class TeamFrontController implements Initializable {
 			//nav.getChildren().add(plPhotoLabel);
 			//hnav.getChildren().add(pl);
 		}
-		/*
-		JFXDialogLayout content = new JFXDialogLayout();
-			content.setHeading(new Text("Error !"));
-			content.setBody(new Text("Please fill all the fields !"));
-			JFXDialog check_team = new JFXDialog(TeamSP, content, JFXDialog.DialogTransition.CENTER);
-			check_team.show();
-		*/
-		if(listPlayers.size()!=0)
-		{
-			System.out.println("llllllll");
-			//for(int i=0; i<listPlayers.size();i++)
-			//{
-			
-				
-				for (Node node : hboxNav.getChildren()) {
-				node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
-					
-					System.out.println("mmmm " + hboxNav.getId() );
-					
-		//		JFXDialogLayout content = new JFXDialogLayout();
-		//		content.setHeading(new Text("please !"));
-		//		content.setBody(new Text("afficih !"));
-		//		JFXDialog check_team = new JFXDialog(TeamSP, content, JFXDialog.DialogTransition.CENTER);
-		//		check_team.show();
-					
-				});
-			}
-			//}
-		}
+		
 	}
 
 	private static PieDataset createDataset(int x) {

@@ -3,30 +3,88 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
 
-<FlowPane fx:id="homeContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="973.0" style="-fx-border-color: gray; -fx-border-radius: 7; -fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GestionArticles.ShowArticlesFrontController">
-   <padding>
-      <Insets right="20.0" />
-   </padding>
+
+<StackPane fx:id="contentStackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GestionArticles.ShowArticlesFrontController">
    <children>
-      <HBox fx:id="topBar" prefHeight="22.0" prefWidth="953.0">
+      <FlowPane fx:id="homeContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="973.0" style="-fx-border-color: gray; -fx-border-radius: 7; -fx-background-color: white;">
+         <padding>
+            <Insets right="20.0" />
+         </padding>
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#66ae2e" height="45.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="11.0" />
-            <Label fx:id="lbRecentNews" prefHeight="50.0" prefWidth="206.0" text="    Recent News">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Label>
+            <HBox fx:id="topBar" prefHeight="45.0" prefWidth="946.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#66ae2e" height="45.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="11.0" />
+                  <Label fx:id="lbRecentNews" prefHeight="45.0" prefWidth="935.0" text="    Recent News">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <ScrollPane fx:id="contentPane" prefHeight="459.0" prefWidth="475.0" style="-fx-border-radius: 5;">
+               <content>
+                  <VBox fx:id="vBig" prefHeight="539.0" prefWidth="470.0" />
+               </content>
+            </ScrollPane>
+            <Separator orientation="VERTICAL" prefHeight="529.0" prefWidth="18.0" />
+            <VBox prefHeight="524.0" prefWidth="456.0" style="-fx-border-insets: 5; -fx-border-radius: 5; -fx-border-color: #66ae2e; -fx-border-style: solid inside;">
+               <children>
+                  <HBox prefHeight="57.0" prefWidth="443.0" style="-fx-padding: 10; -fx-border-style: solid inside; -fx-border-width: 2; -fx-border-insets: 5; -fx-border-radius: 5; -fx-border-color: #66ae2e;">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#66ae2e" height="45.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="11.0" />
+                        <Label fx:id="lbArticleTitle" prefHeight="48.0" prefWidth="392.0" text="   Title">
+                           <font>
+                              <Font name="Times New Roman" size="29.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <FlowPane prefHeight="445.0" prefWidth="435.0">
+                     <children>
+                        <StackPane prefHeight="133.0" prefWidth="188.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 7, 0, 0, 0); -fx-background-radius: 5;">
+                           <children>
+                              <ImageView fx:id="imageViewArticle" fitHeight="200.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                           <FlowPane.margin>
+                              <Insets left="7.0" />
+                           </FlowPane.margin>
+                        </StackPane>
+                        <VBox prefHeight="200.0" prefWidth="222.0">
+                           <children>
+                              <Label fx:id="lbDateArticle" alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="223.0" text="Article Crée le ">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbArticleAuteur" alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="215.0" text="dsqsdq" textAlignment="RIGHT">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <WebView fx:id="wvArticleContenu" prefHeight="254.0" prefWidth="438.0" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </FlowPane>
+               </children>
+            </VBox>
          </children>
-      </HBox>
-      <ScrollPane fx:id="contentPane" prefHeight="609.0" prefWidth="971.0">
-         <content>
-            <VBox fx:id="vBig" prefHeight="606.0" prefWidth="953.0" />
-         </content></ScrollPane>
+      </FlowPane>
    </children>
-</FlowPane>
+</StackPane>

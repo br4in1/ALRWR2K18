@@ -1,18 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controllers.GestionArticles;
 
 import Entities.Article;
+import Entities.User;
 import Services.ArticleCrud;
+import Services.UserCrud;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import java.io.IOException;
 import java.net.URL;
+import java.util.AbstractMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +27,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -36,6 +36,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import org.jsoup.Jsoup;
 
@@ -51,76 +53,51 @@ public class ShowArticlesFrontController implements Initializable {
     @FXML
     private ScrollPane contentPane;
     private AnchorPane showOneArticlePane;
-    public static int content2Display = 1;    /* 1-all , 2-Match, 3-Equipe, 4-Stade*/
+    public static int content2Display = 1;
+    /* 1-all , 2-Match, 3-Equipe, 4-Stade, 5-search*/
     public static ShowArticlesFrontController thisController;
-
-    /**
-     * Initializes the controller class.
-     */
-    public static String html2text(String html) {
-        return Jsoup.parse(html).text();
-    }
     @FXML
     private VBox vBig;
     @FXML
     private HBox topBar;
     @FXML
     private Label lbRecentNews;
-    public String category;
+    @FXML
+    private StackPane contentStackPane;
+    @FXML
+    private Label lbArticleTitle;
+    @FXML
+    private ImageView imageViewArticle;
+    @FXML
+    private Label lbDateArticle;
+    @FXML
+    private Label lbArticleAuteur;
+    @FXML
+    private WebView wvArticleContenu;
+    public static String keyword = null;
 
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         thisController = this;
-        category = "all";
         topBar.setStyle("-fx-padding: 10;"
                 + "-fx-border-style: solid inside;"
                 + "-fx-border-width: 2;"
                 + "-fx-border-insets: 5;"
                 + "-fx-border-radius: 5;"
                 + "-fx-border-color: #66ae2e;");
-        setContent();
-        for (Node n : vBig.getChildren()) {
-            n.setOnMouseClicked((e)
-                    -> {
-                try {
-                    showOneArticlePane = FXMLLoader.load(getClass().getResource("/Views/GestionArticles/ArticleShowPopUpFront.fxml"));
-                    //clearContent();
-                } catch (IOException ex) {
-                    Logger.getLogger(ShowArticlesFrontController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        contentPane.setMaxHeight(530);
 
-                System.out.println(n.getUserData());
-            });
-        }
+        setContent();
+
         vBig.setCursor(Cursor.HAND);
-        
+
     }
 
     public void clearContent() {
         vBig.getChildren().clear();
-    }
-
-    private void showDialog(String titre, String contenu) {
-        Stage stage = (Stage) homeContent.getScene().getWindow();
-        JFXDialogLayout content = new JFXDialogLayout();
-        content.setHeading(new Text(titre));
-        content.setBody(new Text(contenu));
-        StackPane stackpane = new StackPane();
-        JFXDialog dialog = new JFXDialog(stackpane, content, JFXDialog.DialogTransition.CENTER);
-        JFXButton button = new JFXButton("Close");
-        button.setButtonType(JFXButton.ButtonType.RAISED);
-
-        Scene scene = new Scene(stackpane, 300, 250);
-        homeContent.getChildren().add(stackpane);
-
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                dialog.close();
-            }
-        });
-        content.setActions(button);
-        dialog.show();
     }
 
     public void setContent() {
@@ -128,13 +105,14 @@ public class ShowArticlesFrontController implements Initializable {
         List<Article> a = null;
         if (content2Display == 1) {
             a = ArticleCrud.getRepository().findAllOrderDate();
-        } else if (content2Display == 2){
+        } else if (content2Display == 2) {
             a = ArticleCrud.getRepository().findAllByCategory("Match");
-        }else if (content2Display == 3){
+        } else if (content2Display == 3) {
             a = ArticleCrud.getRepository().findAllByCategory("Equipe");
-        }
-        else if (content2Display == 4){
+        } else if (content2Display == 4) {
             a = ArticleCrud.getRepository().findAllByCategory("Stade");
+        } else if (content2Display == 5) {
+            a = ArticleCrud.getRepository().findAllByKeyword(keyword);
         }
         if (a.isEmpty()) {
             Label l = new Label("No News Yet");
@@ -158,8 +136,6 @@ public class ShowArticlesFrontController implements Initializable {
             iv.setFitHeight(200);
             StackPane sp = new StackPane(iv);
             sp.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 7, 0, 0, 0);"
-                    /*+ "-fx-padding: 2;"
-                    + "-fx-background-color: #66ae2e;"*/
                     + "-fx-background-radius: 5;");
 
             hb.getChildren().add(sp);
@@ -174,6 +150,30 @@ public class ShowArticlesFrontController implements Initializable {
             vb.getChildren().add(contenu);
             hb.getChildren().add(vb);
             vBig.getChildren().add(hb);
+            for (Node n : vBig.getChildren()) {
+                n.setOnMouseClicked((e)
+                        -> {
+                    AbstractMap.SimpleEntry<Article, User> m = ArticleCrud.getRepository().findArticleUserById((int) n.getUserData());
+                    lbArticleAuteur.setText("Par: " + m.getValue().getLastname() + " " + m.getValue().getFirstname());
+                    lbArticleTitle.setText(" " + m.getKey().getTitre());
+                    lbDateArticle.setText("Article Crée le: " + m.getKey().getDatePublication().toString());
+                    WebEngine we = wvArticleContenu.getEngine();
+                    we.loadContent(m.getKey().getContenu());
+                    imageViewArticle.setImage(new Image(m.getKey().getArticleImage()));
+                });
+            }
         }
+    }
+
+    public static String html2text(String html) {
+        return Jsoup.parse(html).text();
+    }
+
+    public void showDialog(String titre, String contenu) {
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setHeading(new Text(titre));
+        content.setBody(new Text(contenu));
+        JFXDialog dialog = new JFXDialog(contentStackPane, content, JFXDialog.DialogTransition.CENTER);
+        dialog.show();
     }
 }

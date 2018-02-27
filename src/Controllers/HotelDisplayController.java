@@ -99,7 +99,10 @@ public class HotelDisplayController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
+		Cloudinary cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
+		
 		afficher();
+		
 	}	
 	public  void actualiserChart() throws SQLException {
 	
@@ -155,9 +158,8 @@ public class HotelDisplayController implements Initializable {
 
 	@FXML
 	private void Updateing(MouseEvent event) throws SQLException, IOException {
-		Cloudinary cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
 		File toUpload = new File(imageT.getText());
-			Map uploadResult = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
+		Map uploadResult = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
 		Hotel p = new Hotel(Integer.parseInt(idT.getText()), nomT.getText(), Double.parseDouble(latitudeT.getText()), Double.parseDouble(longtitudeT.getText()),Integer.parseInt( nb_etoilesT.getText()), linkT.getText(), (String) uploadResult.get("url"), cityT.getText());
 		HotelCRUD c = new HotelCRUD();
 		c.update(p);
@@ -204,7 +206,12 @@ public class HotelDisplayController implements Initializable {
 	}
 
 	@FXML
-	private void deleteHotel(KeyEvent event) {
+	private void deleteHotel(KeyEvent event) throws SQLException {
+			System.out.println("alo1");
+		HotelCRUD c = new HotelCRUD();
+		c.supprimerHotel(Integer.parseInt(idT.getText()));
+		System.out.println("alo2");
+		afficher();
 	}
 
 

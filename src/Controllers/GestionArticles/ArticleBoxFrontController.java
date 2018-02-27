@@ -11,16 +11,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -32,10 +27,6 @@ public class ArticleBoxFrontController implements Initializable {
     @FXML
     private VBox nav;
     @FXML
-    private JFXTextField tfSearch;
-    @FXML
-    private JFXButton btGoSearch;
-    @FXML
     private Label allLabel;
     @FXML
     private Label gamesLabel;
@@ -43,6 +34,12 @@ public class ArticleBoxFrontController implements Initializable {
     private Label teamsLabel;
     @FXML
     private Label stadiumLabel;
+    @FXML
+    private JFXTextField tfSearchWords;
+    @FXML
+    private JFXButton btSearch;
+    @FXML
+    private HBox searchBox;
 
     /**
      * Initializes the controller class.
@@ -115,5 +112,6 @@ public class ArticleBoxFrontController implements Initializable {
     private void StadiumsClicked(MouseEvent event) {
         ShowArticlesFrontController.content2Display = 4;
     }
+
 
 }
