@@ -422,7 +422,7 @@ public class UserCrud {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
 			while (set.next()) {
-				SimpleUser u = new SimpleUser(set.getDate("birth_date"), set.getDate("registration_date"), set.getString("nationality"), true, set.getInt("fidelity_points"), set.getString("profile_picture"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
+				SimpleUser u = new SimpleUser(set.getDate("birth_date"), set.getDate("registration_date"), set.getString("nationality"), set.getBoolean("loggedin"), set.getInt("fidelity_points"), set.getString("profile_picture"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
 				users.add(u);
 			}
 			return users;
