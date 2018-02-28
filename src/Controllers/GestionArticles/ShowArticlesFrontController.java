@@ -138,9 +138,9 @@ public class ShowArticlesFrontController implements Initializable {
                 n.setOnMouseClicked((e)
                         -> {
                     AbstractMap.SimpleEntry<Article, User> m = ArticleCrud.getRepository().findArticleUserById((int) n.getUserData());
-                    lbArticleAuteur.setText("Par: " + m.getValue().getLastname() + " " + m.getValue().getFirstname());
+                    lbArticleAuteur.setText("By: " + m.getValue().getLastname() + " " + m.getValue().getFirstname());
                     lbArticleTitle.setText(" " + m.getKey().getTitre());
-                    lbDateArticle.setText("Article Crée le: " + m.getKey().getDatePublication().toString());
+                    lbDateArticle.setText("Written: " + m.getKey().getDatePublication().toString());
                     WebEngine we = wvArticleContenu.getEngine();
                     we.loadContent(m.getKey().getContenu());
                     imageViewArticle.setImage(new Image(m.getKey().getArticleImage()));
