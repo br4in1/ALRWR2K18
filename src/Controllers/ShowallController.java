@@ -171,15 +171,14 @@ public class ShowallController implements Initializable {
 										Likes Liked = new Likes(SimpleUser.current_user.getId(), photo);
 										LikesCrud.Like(Liked);
 										NotificationsCrud.AddNotification(SimpleUser.current_user.getUsername() + " liked one of your photos !", GalleryCrud.GetOwnerId(photo));
-										Total.setText("            " + (nbre + 1));
-										thisController.nbre++;
+										Total.setText("            " + (++thisController.nbre));
 										btn.setImage(im44);
 
 									} else {
 										try {
 											LikesCrud.Unlike(SimpleUser.current_user.getId(), photo);
-											Total.setText("            " + (nbre - 1));
-											thisController.nbre--;
+											Total.setText("            " + (--thisController.nbre));
+											
 											btn.setImage(im33);
 										} catch (SQLException ex) {
 											Logger.getLogger(ShowallController.class.getName()).log(Level.SEVERE, null, ex);
