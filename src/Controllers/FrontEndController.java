@@ -413,7 +413,9 @@ public class FrontEndController implements Initializable {
                                 Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
-
+						MapBoxController.thisController.unhighlightAll();
+						MapBoxController.selected = "hotels";
+						MapBoxController.thisController.highlightEdit(k);
                         setContentNode(interfaceHotel);
                         break;
 
@@ -424,6 +426,9 @@ public class FrontEndController implements Initializable {
                                 Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
+						MapBoxController.thisController.unhighlightAll();
+						MapBoxController.selected = "stadiums";
+						MapBoxController.thisController.highlightFavoris(k);
                         setContentNode(interfaceStade);
                         break;
                         //Translate
@@ -434,6 +439,9 @@ public class FrontEndController implements Initializable {
                                 Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
+						MapBoxController.thisController.unhighlightAll();
+						MapBoxController.selected = "entertainement";
+						MapBoxController.thisController.highlightPhotos(k);
                         setContentNode(interfaceResto);
                         break;
                         case "Translate": {
@@ -443,6 +451,9 @@ public class FrontEndController implements Initializable {
                                 Logger.getLogger(FrontEndController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
+						MapBoxController.thisController.unhighlightAll();
+						MapBoxController.selected = "translate";
+						MapBoxController.thisController.highlightTranslate(k);
                         setContentNode(translate);
                         break;
 

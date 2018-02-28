@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import static Controllers.FrontUserBoxController.selected;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -32,49 +33,100 @@ public class MapBoxController implements Initializable {
 	private Label Entertanment;
 	@FXML
 	private Label Translate;
+	public static String selected;
+	public static MapBoxController thisController;
 
 	/**
 	 * Initializes the controller class.
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		// TODO
+		selected = "visualize";
+		VisualizeMap.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
+		thisController = this;
 	}	
 
 	@FXML
-	private void unhighlightMyProfile(MouseEvent event) {
+	public void unhighlightMyProfile(MouseEvent event) {
+		if(!selected.equals("visualize")){
+			VisualizeMap.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		}
 	}
 
 	@FXML
-	private void highlightMyProfile(MouseEvent event) {
+	public void highlightMyProfile(MouseEvent event) {
+		if(!selected.equals("visualize")){
+			VisualizeMap.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
+		}
 	}
 
 	@FXML
-	private void unhighlightEdit(MouseEvent event) {
+	public void unhighlightEdit(MouseEvent event) {
+		if(!selected.equals("hotels")){
+			Hotels.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		}
 	}
 
 	@FXML
-	private void highlightEdit(MouseEvent event) {
+	public void highlightEdit(MouseEvent event) {
+		if(!selected.equals("hotels")){
+			Hotels.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
+		}
 	}
 
 	@FXML
-	private void getContent(MouseEvent event) {
+	public void getContent(MouseEvent event) {
+		
 	}
 
 	@FXML
-	private void unhighlightFavoris(MouseEvent event) {
+	public void unhighlightFavoris(MouseEvent event) {
+		if(!selected.equals("stadiums")){
+			Stadiums.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		}
 	}
 
 	@FXML
-	private void highlightFavoris(MouseEvent event) {
+	public void highlightFavoris(MouseEvent event) {
+		if(!selected.equals("stadiums")){
+			Stadiums.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
+		}
 	}
 
 	@FXML
-	private void unhighlightPhotos(MouseEvent event) {
+	public void unhighlightPhotos(MouseEvent event) {
+		if(!selected.equals("entertainement")){
+			Entertanment.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		}
 	}
 
 	@FXML
-	private void highlightPhotos(MouseEvent event) {
+	public void highlightPhotos(MouseEvent event) {
+		if(!selected.equals("entertainement")){
+			Entertanment.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
+		}
+	}
+
+	@FXML
+	private void unhighlightTranslate(MouseEvent event) {
+		if(!selected.equals("translate")){
+			Translate.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		}
+	}
+
+	@FXML
+	public void highlightTranslate(MouseEvent event) {
+		if(!selected.equals("translate")){
+			Translate.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
+		}
+	}
+	
+	public void unhighlightAll(){
+		Translate.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		VisualizeMap.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		Hotels.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		Stadiums.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		Entertanment.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
 	}
 	
 }
