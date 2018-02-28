@@ -69,6 +69,25 @@ public class GameCrud {
 		}
 		return null;
 	}
+	public static List<Game> searchGames(String like) {
+		Connection con = DataSource.getInstance().getCon();
+		List result = new ArrayList<Game>();
+		String query = "select g.*,t1.name 'nomaway',t2.name 'nomhome',s.name 'nomstade' from Game g join Team t1 on t1.id = g.HomeTeam join Team t2 on t2.id = g.AwayTeam join Stadium s on s.id = g.Stadium where (t1.name like '%"+like+"%' or t2.name like '%"+like+"%') ORDER BY Date ";
+		try {
+			Statement ste = con.createStatement();
+			ResultSet set = ste.executeQuery(query);
+			while (set.next()) {
+				Game g = new Game(set.getDate("Date"), set.getString("nomhome"), set.getString("nomaway"), set.getString("Result"), set.getString("nomstade"), set.getString("Summary"), set.getString("SummaryPhoto"), set.getString("Highlights"), set.getString("Referee"));
+
+				g.setId(set.getInt("id"));
+				result.add(g);
+			}
+			return result;
+		} catch (SQLException ex) {
+			Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
 
 	public static List<Date> findDatesByTeams(int team1, int team2) {
 		Connection con = DataSource.getInstance().getCon();

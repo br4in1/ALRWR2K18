@@ -11,6 +11,7 @@ import Services.GameCrud;
 import Services.StadiumCrud;
 import Services.TeamCrud;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,6 +37,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -78,6 +80,8 @@ public class GamesCrudController implements Initializable {
 	private HashMap<String, Integer> map1;
 	private HashMap<String, Integer> map2;
 	ObservableList<Game> OL = FXCollections.observableList(GameCrud.findAllGames());
+	@FXML
+	private JFXTextField searchfield;
 
 	/**
 	 * Initializes the controller class.
@@ -397,6 +401,34 @@ public class GamesCrudController implements Initializable {
 		alert.setContentText(text);
 
 		alert.showAndWait();
+	}
+
+	@FXML
+	private void search(KeyEvent event) {
+		tablev.getItems().clear();
+		id.setCellValueFactory(
+				new PropertyValueFactory<>("id"));
+		date.setCellValueFactory(
+				new PropertyValueFactory<>("date"));
+		home.setCellValueFactory(
+				new PropertyValueFactory<>("HomeTeam"));
+		away.setCellValueFactory(
+				new PropertyValueFactory<>("AwayTeam"));
+		result.setCellValueFactory(
+				new PropertyValueFactory<>("result"));
+		stadium.setCellValueFactory(
+				new PropertyValueFactory<>("stadium"));
+		summary.setCellValueFactory(
+				new PropertyValueFactory<>("summary"));
+		summaryPhoto.setCellValueFactory(
+				new PropertyValueFactory<>("summaryPhoto"));
+		highlights.setCellValueFactory(
+				new PropertyValueFactory<>("highlights"));
+		referee.setCellValueFactory(
+				new PropertyValueFactory<>("referee"));
+		ObservableList<Game> OBL = FXCollections.observableList(GameCrud.searchGames(searchfield.getText()));
+		tablev.setItems(OBL);
+		
 	}
 
 }
