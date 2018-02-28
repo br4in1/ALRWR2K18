@@ -26,20 +26,20 @@ public class FrontGamesBoxController implements Initializable {
 	@FXML
 	private Label liveScore;
 	@FXML
-	private Label prediction;
-	@FXML
 	private Label games;
 	@FXML
 	private Label groups;
 	
 	public static String selected;
 	public static FrontGamesBoxController thisController;
+	@FXML
+	private Label streaming;
 
 	public void unhighlightAll() {
 		games.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
 		groups.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
 		liveScore.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
-		prediction.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		streaming.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
 	}
 
 	/**
@@ -63,20 +63,6 @@ public class FrontGamesBoxController implements Initializable {
 	public void highlightLiveScores(MouseEvent event) {
 		if (!selected.equals("liveScore")) {
 			liveScore.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
-		}
-	}
-
-	@FXML
-	private void unhighlightPrediction(MouseEvent event) {
-		if (!selected.equals("prediction")) {
-			prediction.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
-		}
-	}
-
-	@FXML
-	public void highlightPrediction(MouseEvent event) {
-		if (!selected.equals("prediction")) {
-			prediction.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
 		}
 	}
 
@@ -105,6 +91,20 @@ public class FrontGamesBoxController implements Initializable {
 	public void highlightGroups(MouseEvent event) {
 		if (!selected.equals("groups")) {
 			groups.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
+		}
+	}
+
+	@FXML
+	public void unhighlightStreaming(MouseEvent event) {
+			if (!selected.equals("streaming")) {
+			streaming.setStyle("-fx-background-color: none; -fx-background-radius : none; -fx-text-fill: #000;");
+		}
+	}
+
+	@FXML
+	public void highlightStreaming(MouseEvent event) {
+		if (!selected.equals("streaming")) {
+			streaming.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
 		}
 	}
 

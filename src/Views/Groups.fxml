@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<FlowPane fx:id="profileContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="973.0" style="-fx-border-color: gray; -fx-border-radius: 7; -fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GroupsController">
+   <padding>
+      <Insets right="20.0" />
+   </padding>
+   <children>
+      <VBox prefHeight="608.0" prefWidth="972.0">
+         <children>
+            <HBox fx:id="line1" prefHeight="310.0" prefWidth="972.0">
+               <children>
+                  <VBox fx:id="A" prefHeight="304.0" prefWidth="228.0">
+                     <children>
+                        <Label contentDisplay="CENTER" prefHeight="79.0" prefWidth="228.0" styleClass="navbar" stylesheets="@tournementbox.css" text="         Group A" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="26.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox fx:id="B" prefHeight="304.0" prefWidth="228.0">
+                     <children>
+                        <Label contentDisplay="CENTER" prefHeight="79.0" prefWidth="228.0" styleClass="navbar" stylesheets="@tournementbox.css" text="         Group B" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="26.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox fx:id="C" prefHeight="304.0" prefWidth="228.0">
+                     <children>
+                        <Label contentDisplay="CENTER" prefHeight="79.0" prefWidth="228.0" styleClass="navbar" stylesheets="@tournementbox.css" text="         Group C" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="26.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox fx:id="D" prefHeight="304.0" prefWidth="228.0">
+                     <children>
+                        <Label contentDisplay="CENTER" prefHeight="79.0" prefWidth="228.0" styleClass="navbar" stylesheets="@tournementbox.css" text="         Group D" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="26.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox fx:id="line2" prefHeight="310.0" prefWidth="972.0">
+               <children>
+                  <VBox fx:id="E" prefHeight="304.0" prefWidth="228.0">
+                     <children>
+                        <Label contentDisplay="CENTER" prefHeight="79.0" prefWidth="228.0" styleClass="navbar" stylesheets="@tournementbox.css" text="         Group E" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="26.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox fx:id="F" prefHeight="304.0" prefWidth="228.0">
+                     <children>
+                        <Label contentDisplay="CENTER" prefHeight="79.0" prefWidth="228.0" styleClass="navbar" stylesheets="@tournementbox.css" text="         Group F" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="26.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox fx:id="G" prefHeight="304.0" prefWidth="228.0">
+                     <children>
+                        <Label contentDisplay="CENTER" prefHeight="79.0" prefWidth="228.0" styleClass="navbar" stylesheets="@tournementbox.css" text="         Group G" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="26.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox fx:id="H" prefHeight="304.0" prefWidth="228.0">
+                     <children>
+                        <Label contentDisplay="CENTER" prefHeight="79.0" prefWidth="228.0" styleClass="navbar" stylesheets="@tournementbox.css" text="         Group H" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="26.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</FlowPane>

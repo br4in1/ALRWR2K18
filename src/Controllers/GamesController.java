@@ -61,9 +61,16 @@ public class GamesController implements Initializable {
 		
 		for (Game game : gamesList) {
 			switch (TeamCrud.findByName(game.getHomeTeam()).getWcGroup()) {
-				case "B":
-				
-					
+				case "A":	
+					if (a > 1) {
+						a = 0;
+						a1++;
+					}
+					groupA.add(match(TeamCrud.findByName(game.getHomeTeam()).getFlagPhoto(), TeamCrud.findByName(game.getAwayTeam()).getFlagPhoto(), game.getResult(), game.getStadium(), groupA.getChildren().size() + 1, game.getDate()), a, a);
+					a++;
+					groupA.getChildren().get(groupA.getChildren().size() - 1).setStyle("-fx-padding: 10 20 0 10;");
+					break;
+				case "B":	
 					if (b > 1) {
 						b = 0;
 						b1++;
@@ -71,7 +78,7 @@ public class GamesController implements Initializable {
 					groupB.add(match(TeamCrud.findByName(game.getHomeTeam()).getFlagPhoto(), TeamCrud.findByName(game.getAwayTeam()).getFlagPhoto(), game.getResult(), game.getStadium(), groupB.getChildren().size() + 1, game.getDate()), b, b1);
 					b++;
 					groupB.getChildren().get(groupB.getChildren().size() - 1).setStyle("-fx-padding: 10 20 0 10;");
-
+					break;
 			}
 
 		}
@@ -93,7 +100,8 @@ public class GamesController implements Initializable {
 		homeT.setFitHeight(53);
 		homeT.setFitWidth(95);
 		Label res = new Label(result);
-		res.setStyle("-fx-padding: 20 20 0 20;");
+		res.setStyle("-fx-padding: 16 20 0 20;");
+		res.setFont(new Font("Dusha V5", 18));
 		ImageView awayT = new ImageView(AwayTeam);
 		awayT.setFitHeight(53);
 		awayT.setFitWidth(95);

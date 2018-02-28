@@ -61,7 +61,7 @@ public class FrontEndController implements Initializable {
     private Circle profilepic;
     private String current_page;
     VBox userBox, gallerybox, articlesBox, teamBox, MapBox, gamesBox;
-    Pane games, add, gallery, profile, teams, editProfile, showArticles, interfaceMap, interfaceHotel, interfaceStade, interfaceResto, translate, livescore;
+    Pane streaming,groups,games, add, gallery, profile, teams, editProfile, showArticles, interfaceMap, interfaceHotel, interfaceStade, interfaceResto, translate, livescore;
     @FXML
     private AnchorPane sidebar;
     @FXML
@@ -477,7 +477,8 @@ public class FrontEndController implements Initializable {
             gamesBox = FXMLLoader.load(getClass().getResource("/Views/FrontGamesBox.fxml"));
             games = FXMLLoader.load(getClass().getResource("/Views/Games.fxml"));
             livescore = FXMLLoader.load(getClass().getResource("/Views/LiveScore.fxml"));
-
+			groups = FXMLLoader.load(getClass().getResource("/Views/Groups.fxml"));
+			streaming= FXMLLoader.load(getClass().getResource("/Views/Streaming.fxml"));
             for (Node node : gamesBox.getChildren()) {
                 node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
                     switch (node.getId()) {
@@ -493,17 +494,17 @@ public class FrontEndController implements Initializable {
                             FrontGamesBoxController.selected = "liveScore";
                             setContentNode(livescore);
                             break;
-                        case "prediction":
+                        case "streaming":
                             FrontGamesBoxController.thisController.unhighlightAll();
-                            FrontGamesBoxController.thisController.highlightPrediction(k);
-                            FrontGamesBoxController.selected = "prediction";
-                            setContentNode(games);
+                            FrontGamesBoxController.thisController.highlightStreaming(k);
+                            FrontGamesBoxController.selected = "streaming";
+                            setContentNode(streaming);
                             break;
                         case "groups":
                             FrontGamesBoxController.thisController.unhighlightAll();
                             FrontGamesBoxController.thisController.highlightGroups(k);
                             FrontGamesBoxController.selected = "groups";
-                            setContentNode(games);
+                            setContentNode(groups);
                             break;
                     }
                 });
