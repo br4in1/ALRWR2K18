@@ -148,8 +148,6 @@ public class TeamFrontController implements Initializable {
 			///in order to display the player information using 
 			//this id 
 
-			System.out.println("id player list " + listPlayers.get(i).getId());
-			System.out.println("id player Hbox " + vboxNav1.getId());
 			vboxNav1.setSpacing(25);
 			vboxNav1.getChildren().add(plPhotoLabel);
 			vboxNav1.getChildren().add(plNameLabel);
@@ -165,7 +163,7 @@ public class TeamFrontController implements Initializable {
 						-> {
 					Player DisPlayer = PlayerCrud.findById(Integer.parseInt(vboxNav1.getId()));
 
-					System.out.println("id player vbox2 " + vboxNav1.getId());
+					
 					try {
 						
 						PlayerFrontController.current_player_id = Integer.parseInt(vboxNav1.getId());
