@@ -29,6 +29,6 @@ public class LiveScoreController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		wv.getEngine().load("http://alrwr-2k18.eb2a.com/");
+		wv.getEngine().load("https://www.livescore.in");
 	}
 }

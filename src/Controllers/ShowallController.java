@@ -10,6 +10,7 @@ import Entities.Likes;
 import Entities.SimpleUser;
 import Services.GalleryCrud;
 import Services.LikesCrud;
+import Services.NotificationsCrud;
 import static com.google.maps.PlacesApi.photo;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -105,8 +106,7 @@ public class ShowallController implements Initializable {
 		for (int i = 0; i < Liste.size(); i++) {
 
 			if ("1".equals(Liste.get(i).getEtat())) {
-				
-				
+
 				X = 260 * (aze);
 				if (aze == 3) {
 					aze = 0;
@@ -170,6 +170,7 @@ public class ShowallController implements Initializable {
 									if (btn.getImage() == im33) {
 										Likes Liked = new Likes(SimpleUser.current_user.getId(), photo);
 										LikesCrud.Like(Liked);
+										NotificationsCrud.AddNotification(SimpleUser.current_user.getUsername() + " liked one of your photos !", GalleryCrud.GetOwnerId(photo));
 										Total.setText("            " + (nbre + 1));
 										thisController.nbre++;
 										btn.setImage(im44);

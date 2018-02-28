@@ -34,7 +34,7 @@ public class UserCrud {
 
 	public static Boolean findUserByUsername(String username) {
 		Connection con = DataSource.getInstance().getCon();
-		String query = "select * from User where username = '" + username + "'";
+		String query = "select * from User where BINARY username = '" + username + "'";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
@@ -49,7 +49,7 @@ public class UserCrud {
 
 	public static SimpleUser getSimpleUserByUsername(String username) {
 		Connection con = DataSource.getInstance().getCon();
-		String query = "select * from User where username = '" + username + "'";
+		String query = "select * from User where BINARY username = '" + username + "'";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
@@ -110,7 +110,7 @@ public class UserCrud {
 		User u = null;
 		Boolean found = false;
 		Connection con = DataSource.getInstance().getCon();
-		String query = "select * from User where username = '" + username + "'";
+		String query = "select * from User where BINARY username = '" + username + "'";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
@@ -150,7 +150,7 @@ public class UserCrud {
 
 	public static String getConfirmationToken(String username) {
 		Connection con = DataSource.getInstance().getCon();
-		String query = "select * from User where username = '" + username + "'";
+		String query = "select * from User where BINARY username = '" + username + "'";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
@@ -190,7 +190,7 @@ public class UserCrud {
 
 	public static SimpleUser GetMyData_SimpleUser(SimpleUser u) {
 		Connection con = DataSource.getInstance().getCon();
-		String query = "select * from User where username = '" + u.getUsername() + "'";
+		String query = "select * from User where BINARY username = '" + u.getUsername() + "'";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
@@ -214,7 +214,7 @@ public class UserCrud {
 
 	public static Moderator GetMyData_Moderator(Moderator u) {
 		Connection con = DataSource.getInstance().getCon();
-		String query = "select * from User where username = '" + u.getUsername() + "'";
+		String query = "select * from User where BINARY username = '" + u.getUsername() + "'";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
@@ -231,7 +231,7 @@ public class UserCrud {
 
 	public static Admin GetMyData_Admin(Admin u) {
 		Connection con = DataSource.getInstance().getCon();
-		String query = "select * from User where username = '" + u.getUsername() + "'";
+		String query = "select * from User where BINARY username = '" + u.getUsername() + "'";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
@@ -462,7 +462,7 @@ public class UserCrud {
 	
 	public static Boolean CheckUserPassword(String username,String password){
 		Connection con = DataSource.getInstance().getCon();
-		String query = "select password from User where username = '"+username+"'";
+		String query = "select password from User where BINARY username = '"+username+"'";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);

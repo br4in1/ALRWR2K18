@@ -1,10 +1,12 @@
 package Services;
 
 
+import Controllers.Login_formController;
 import Entities.Notification;
 import Services.UserCrud;
 import Utils.BCrypt;
 import Utils.DataSource;
+import Utils.TokenGenerator;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,6 +53,19 @@ public class NotificationsCrud {
 		try {
 			PreparedStatement ste = con.prepareStatement(query);
 			ste.setInt(1, id);
+			ste.executeUpdate();
+		} catch (SQLException ex) {
+			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+	
+	public static void AddNotification(String Text,int idUser){
+		Connection con = DataSource.getInstance().getCon();
+		String query = "insert into notifications(idUser,text,state) values(?,?,0)";
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+			ste.setInt(1, idUser);
+			ste.setString(2, Text);
 			ste.executeUpdate();
 		} catch (SQLException ex) {
 			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);

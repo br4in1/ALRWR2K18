@@ -141,4 +141,21 @@ public class GalleryCrud {
 		return null;
 	}
 
+	public static Integer GetOwnerId(int idPhoto){
+		Connection con = DataSource.getInstance().getCon();
+		List<Gallery> list = new ArrayList<>();
+		try {
+
+			String req = "SELECT idUser FROM `gallery` where id = "+idPhoto;
+			PreparedStatement ste = con.prepareStatement(req);
+			ResultSet result = ste.executeQuery();
+			if (result.next()) {
+				return result.getInt("idUser");
+			}
+			return null;
+		} catch (SQLException ex) {
+			Logger.getLogger(GalleryCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
 }
