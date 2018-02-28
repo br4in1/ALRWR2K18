@@ -42,6 +42,7 @@
                         <JFXButton onMouseClicked="#newGame" prefHeight="44.0" prefWidth="139.0" text="New Game" />
                      </children>
                   </HBox>
+                  <JFXTextField fx:id="searchfield" layoutX="55.0" layoutY="21.0" onKeyReleased="#search" promptText="Search" />
                </children>
             </Pane>
          </top>
