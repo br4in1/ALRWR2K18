@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="362.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PlayerFrontController">
+   <center>
+      <Pane prefHeight="314.0" prefWidth="687.0" styleClass="body" stylesheets="@dashboard.css" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane fx:id="playerSP" layoutX="58.0" layoutY="260.0" prefHeight="87.0" prefWidth="168.0" />
+            <ImageView fx:id="PlayerImageView" fitHeight="172.0" fitWidth="229.0" layoutX="19.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
+            <VBox layoutX="254.0" layoutY="19.0" prefHeight="171.0" prefWidth="431.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="name" contentDisplay="CENTER" maxWidth="-Infinity" prefHeight="55.0" prefWidth="177.0" text="Name" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="Ubuntu" size="47.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lastName" contentDisplay="CENTER" maxWidth="-Infinity" prefHeight="55.0" prefWidth="241.0" text="Last Name" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="Ubuntu" size="47.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Separator orientation="VERTICAL" prefHeight="170.0" prefWidth="0.0" />
+                  <VBox prefHeight="135.0" prefWidth="507.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="290.0">
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="104.0" text="Nation">
+                                 <font>
+                                    <Font name="Ubuntu Bold Italic" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Nation" prefHeight="17.0" prefWidth="161.0" text="Nation" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="50.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="302.0">
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="103.0" text="Club">
+                                 <font>
+                                    <Font name="Ubuntu Bold Italic" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Club" prefHeight="17.0" prefWidth="137.0" text="Club" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="84.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="263.0">
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="106.0" text="Age">
+                                 <font>
+                                    <Font name="Ubuntu Bold Italic" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Age" prefHeight="17.0" prefWidth="80.0" text="Age" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="118.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="287.0">
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="107.0" text="Height">
+                                 <font>
+                                    <Font name="Ubuntu Bold Italic" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Height" prefHeight="17.0" prefWidth="103.0" text="Height" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="152.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="295.0">
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="109.0" text="Weight">
+                                 <font>
+                                    <Font name="Ubuntu Bold Italic" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Weigth" prefHeight="17.0" prefWidth="114.0" text="Weight" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <JFXComboBox fx:id="id" layoutX="104.0" layoutY="210.0" />
+         </children>
+      </Pane>
+   </center>
+   <top>
+      <Pane prefHeight="50.0" prefWidth="600.0" styleClass="topbar" stylesheets="@dashboard.css" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="243.0" layoutY="11.0" text="Player Information" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+</BorderPane>

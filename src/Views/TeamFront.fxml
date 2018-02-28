@@ -157,7 +157,7 @@
          <children>
             <ScrollPane prefHeight="200.0" prefWidth="200.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="338.0" prefWidth="2331.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="338.0" prefWidth="1679.0">
                      <children>
                         <JFXDialog fx:id="TeamSP" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="1500.0" AnchorPane.topAnchor="10.0" />
                         <HBox fx:id="hboxNav" prefHeight="183.0" prefWidth="954.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
@@ -181,6 +181,7 @@
             </Label>
          </children>
       </StackPane>
+      <JFXDialog fx:id="DiaTeam" />
    </children>
    <padding>
       <Insets right="20.0" />

@@ -6,6 +6,7 @@
 package Controllers;
 
 import static Controllers.FrontTeamBoxController.list;
+import static Controllers.TeamsCrudController.x;
 import Entities.Player;
 import Entities.Team;
 import Services.PlayerCrud;
@@ -14,14 +15,20 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
@@ -32,6 +39,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -66,18 +74,20 @@ public class TeamFrontController implements Initializable {
 	private SwingNode staticSwigNode;
 
 	public static Integer current_team_id = 1;
-	public Integer current_player_id=1 ;
+
 	@FXML
 	private ImageView TeamImageView;
 	public static List<Player> listPlayers;
-	
+
 	@FXML
 	private Label players;
-	
+
 	@FXML
 	private HBox hboxNav;
 	@FXML
 	private JFXDialog TeamSP;
+	@FXML
+	private JFXDialog DiaTeam;
 
 	/**
 	 * Initializes the controller class.
@@ -113,32 +123,68 @@ public class TeamFrontController implements Initializable {
 		);
 
 		listPlayers = PlayerCrud.findPlayersByNationFront(t.getName());
+		if (listPlayers.isEmpty()) {
+			Label l = new Label("No Players in this Team ! ");
+			VBox vboxNav1 = new VBox();
+			vboxNav1.setSpacing(25);
+			vboxNav1.getChildren().add(l);
+			hboxNav.getChildren().add(vboxNav1);
+
+		}
 		for (int i = 0; i < listPlayers.size(); i++) {
 			Label plPhotoLabel = new Label();
-			Label plNameLabel = new Label() ;
-			plNameLabel.setText(listPlayers.get(i).getName()+" " + listPlayers.get(i).getLastName());
-			
+			Label plNameLabel = new Label();
+			plNameLabel.setText(listPlayers.get(i).getName() + " " + listPlayers.get(i).getLastName());
+
 			ImageView im = new ImageView(listPlayers.get(i).getProfilePhoto());
 			im.setFitHeight(140);
 			im.setFitWidth(120);
 			plPhotoLabel.setGraphic(im);
 			plPhotoLabel.setId(String.valueOf(listPlayers.get(i).getId()));
-			
-			
+
 			VBox vboxNav1 = new VBox();
+
+			vboxNav1.setId(Integer.toString(listPlayers.get(i).getId()));// set the id of the every vbox element
+			///in order to display the player information using 
+			//this id 
+
+			System.out.println("id player list " + listPlayers.get(i).getId());
+			System.out.println("id player Hbox " + vboxNav1.getId());
 			vboxNav1.setSpacing(25);
 			vboxNav1.getChildren().add(plPhotoLabel);
 			vboxNav1.getChildren().add(plNameLabel);
-		
-			
-			
+
 			hboxNav.getChildren().add(vboxNav1);
 			hboxNav.setSpacing(30);
 			//pl.setId(String.valueOf(listPlayers.get(i).getName()));
 			//nav.getChildren().add(plPhotoLabel);
 			//hnav.getChildren().add(pl);
+
+			for (Node n : vboxNav1.getChildren()) {
+				n.setOnMouseClicked((MouseEvent e)
+						-> {
+					Player DisPlayer = PlayerCrud.findById(Integer.parseInt(vboxNav1.getId()));
+
+					System.out.println("id player vbox2 " + vboxNav1.getId());
+					try {
+						
+						PlayerFrontController.current_player_id = Integer.parseInt(vboxNav1.getId());
+						
+						FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/PlayerFront.fxml"));
+						Parent root = (Parent) fxmlLoader.load();
+						Stage stage = new Stage();
+						stage.setScene(new Scene(root));
+						stage.show();
+
+					} catch (IOException exx) {
+						exx.printStackTrace();
+					}
+
+				});
+
+			}
 		}
-		
+
 	}
 
 	private static PieDataset createDataset(int x) {
