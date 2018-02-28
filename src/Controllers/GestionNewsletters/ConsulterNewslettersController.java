@@ -12,22 +12,9 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXScrollPane;
-import facebook4j.Account;
-import facebook4j.Comment;
 import facebook4j.Facebook;
-import facebook4j.FacebookException;
-import facebook4j.FacebookFactory;
-import facebook4j.PagableList;
-import facebook4j.Post;
-import facebook4j.PostUpdate;
-import facebook4j.Reading;
-import facebook4j.ResponseList;
-import facebook4j.auth.AccessToken;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -85,11 +72,6 @@ public class ConsulterNewslettersController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        facebook = new FacebookFactory().getInstance();
-        //      facebook.setOAuthAppId("191604434666665", "a002b0a24ae998e350f9d9e8ecaeb511");
-        //    facebook.setOAuthPermissions("email,public_profile,publish_pages,publish_actions,manage_pages,pages_messaging,publish_actions");
-        //facebook.setOAuthAccessToken(new AccessToken("EAACuQ2JEBKkBAMOk5zkxQlMzcaZCPaTNZA1UbaPulEn16V3B6wLd1OcUHD6rvg863wL1yyYArfkl78ZBpVzhyKv9EBZAjTCZCBV4rIDUQSUEWU8pCQ4aVLsCK3ImikalSBxQZC80aTxIac3bsTk7cLRqiflU3CMobbrA5qMEHxnUKmQTEmZAo3TdeesQeGg41IZD", null));
-//facebook.setOAuthAccessToken(new AccessToken("191604434666665|UgyDHBd3HK8SnWqetkBZi-eWoXg", null));
         newsletterList.refresh();
         webEngine = webView.getEngine();
         data = FXCollections.observableArrayList();

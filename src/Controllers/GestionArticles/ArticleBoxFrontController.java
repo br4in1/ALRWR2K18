@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -91,27 +92,5 @@ public class ArticleBoxFrontController implements Initializable {
     private void stadiumsHighlight(MouseEvent event) {
         stadiumLabel.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 3px; -fx-text-fill: #fff;");
     }
-
-    @FXML
-    private void AllClicked(MouseEvent event) throws IOException {
-        ShowArticlesFrontController.content2Display = 1;
-    }
-
-    @FXML
-    private void GamesClicked(MouseEvent event) throws IOException {
-        ShowArticlesFrontController.content2Display = 2;
-    }
-
-    @FXML
-    private void TeamsClicked(MouseEvent event) throws IOException {
-        ShowArticlesFrontController.content2Display = 3;
-
-    }
-
-    @FXML
-    private void StadiumsClicked(MouseEvent event) {
-        ShowArticlesFrontController.content2Display = 4;
-    }
-
 
 }

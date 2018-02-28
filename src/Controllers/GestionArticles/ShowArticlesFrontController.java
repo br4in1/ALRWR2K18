@@ -3,28 +3,16 @@ package Controllers.GestionArticles;
 import Entities.Article;
 import Entities.User;
 import Services.ArticleCrud;
-import Services.UserCrud;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import java.io.IOException;
 import java.net.URL;
 import java.util.AbstractMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -38,7 +26,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
 import org.jsoup.Jsoup;
 
 /**
@@ -96,9 +83,6 @@ public class ShowArticlesFrontController implements Initializable {
 
     }
 
-    public void clearContent() {
-        vBig.getChildren().clear();
-    }
 
     public void setContent() {
         vBig.getChildren().clear();

@@ -95,7 +95,6 @@ public class ConsulterArticlesController implements Initializable {
         webEngine = webView.getEngine();
 
         data = FXCollections.observableArrayList();
-//        ArticleCrud.findAll().forEach((e) -> data.add(e));
         TableColumn dateColumn = new TableColumn("Date de publication");
         dateColumn.setCellValueFactory(new PropertyValueFactory<Article, Date>("datePublication"));
 
@@ -104,8 +103,6 @@ public class ConsulterArticlesController implements Initializable {
 
         titreColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         titreColumn.setOnEditCommit((TableColumn.CellEditEvent<Article, String> t) -> {
-            //Article a = new Article(t.getTableView().getItems().get(t.getTablePosition().getRow()));
-            //a.setTitre(t.getNewValue());
             if (ArticleCrud.update(t.getTableView().getItems().get(t.getTablePosition().getRow()).getId(), "titre", t.getNewValue()) != null) {
                 showDialog("Success", "L'article a ete MAJ");
             } else {
@@ -162,14 +159,6 @@ public class ConsulterArticlesController implements Initializable {
     private void clickTable(MouseEvent event) {
         btVisualiser.setDisable(false);
         btModifier.setDisable(false);
-        /*TableRow<Article> row = new TableRow<>();
-           row.setOnMouseClicked(eventt -> {
-                if (!row.isEmpty() && eventt.getButton() == MouseButton.PRIMARY
-                        && eventt.getClickCount() == 1) {
-                    Article clickedRow = row.getItem();
-                }
-            });*/
-
     }
 
     @FXML
@@ -219,7 +208,7 @@ public class ConsulterArticlesController implements Initializable {
                     webEngine.loadContent("");
                     articlesList.setItems(data);
                     articlesList.refresh();
-                    
+
                 } else {
                     showDialog("Erreur !!!", "L'article n'a pas pu etre supprimer, veuillez ressayer plus tard");
                 }
