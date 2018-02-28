@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -15,7 +18,18 @@
                   <Font name="Ubuntu" size="29.0" />
                </font>
             </Label>
-            <WebView fx:id="wv" prefHeight="551.0" prefWidth="973.0" />
+            <ScrollPane prefHeight="549.0" prefWidth="970.0" style="-fx-border-radius: 7;">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="546.0" prefWidth="970.0">
+                     <children>
+                        <WebView fx:id="wv" prefHeight="551.0" prefWidth="973.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+               <VBox.margin>
+                  <Insets right="3.0" />
+               </VBox.margin>
+            </ScrollPane>
          </children>
       </VBox>
    </children>

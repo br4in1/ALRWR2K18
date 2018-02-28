@@ -522,6 +522,9 @@ public class Login_formController implements Initializable {
 				check_data.show();
 			} else {
 				UserCrud.ChangePasswordForUser(Mail2ChangePassword, pass1forgot.getText());
+				forgotform.setVisible(false);
+				signupform.setVisible(false);
+				loginform.setVisible(true);
 			}
 		}
 	}

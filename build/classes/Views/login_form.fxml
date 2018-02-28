@@ -30,10 +30,9 @@
                   </JFXTextField>
                   <JFXPasswordField fx:id="password_login" focusColor="#6fa840" labelFloat="true" layoutX="56.0" layoutY="99.0" onKeyReleased="#loginUserByKeyboard" prefHeight="27.0" prefWidth="418.0" promptText="Mot de passe" />
                   <JFXButton fx:id="loginbtn" alignment="CENTER" layoutX="131.0" layoutY="168.0" onAction="#loginUser" prefHeight="27.0" prefWidth="270.0" ripplerFill="#62b518" style="-fx-background-color: #6fa840;" text="Se connecter" textFill="WHITE" />
-                  <JFXButton alignment="CENTER" layoutX="131.0" layoutY="294.0" onAction="#showSignUpForm" prefHeight="27.0" prefWidth="96.0" ripplerFill="#62862b" style="-fx-background-color: #6fa840;" text="S'inscrire" textFill="WHITE" />
+                  <JFXButton alignment="CENTER" layoutX="131.0" layoutY="276.0" onAction="#showSignUpForm" prefHeight="27.0" prefWidth="96.0" ripplerFill="#62862b" style="-fx-background-color: #6fa840;" text="S'inscrire" textFill="WHITE" />
                   <JFXButton alignment="CENTER" layoutX="131.0" layoutY="209.0" onAction="#AuthWithFacebook" prefHeight="27.0" prefWidth="270.0" ripplerFill="#2b5284" style="-fx-background-color: #2b5284;" text="Se connecter via Facebook" textAlignment="JUSTIFY" textFill="WHITE" />
-                  <JFXButton layoutX="131.0" layoutY="251.0" prefHeight="27.0" prefWidth="270.0" ripplerFill="#bb4949" style="-fx-background-color: #bb4949;" text="Se connecter via Google" textFill="WHITE" />
-                  <JFXButton fx:id="forgotpassword" alignment="CENTER" layoutX="236.0" layoutY="294.0" onAction="#showForgotForm" prefHeight="27.0" prefWidth="165.0" ripplerFill="#62862b" style="-fx-background-color: #6fa840;" text="Mot de passe oublié ?" textFill="WHITE" />
+                  <JFXButton fx:id="forgotpassword" alignment="CENTER" layoutX="236.0" layoutY="276.0" onAction="#showForgotForm" prefHeight="27.0" prefWidth="165.0" ripplerFill="#bb4949" style="-fx-background-color: #bb4949;" text="Mot de passe oublié ?" textFill="WHITE" />
                </children>
             </Pane>
             <Pane fx:id="signupform" prefHeight="363.0" prefWidth="531.0" visible="false">
