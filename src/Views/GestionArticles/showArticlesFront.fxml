@@ -61,19 +61,27 @@
                         </StackPane>
                         <VBox prefHeight="200.0" prefWidth="222.0">
                            <children>
-                              <Label fx:id="lbDateArticle" alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="223.0" text="Article Crée le ">
+                              <Label fx:id="lbDateArticle" alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="223.0" text="Written By">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lbArticleAuteur" alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="215.0" text="dsqsdq" textAlignment="RIGHT">
+                              <Label fx:id="lbArticleAuteur" alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="215.0" textAlignment="RIGHT">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </Label>
                            </children>
                         </VBox>
-                        <WebView fx:id="wvArticleContenu" prefHeight="254.0" prefWidth="438.0" />
+                        <StackPane prefHeight="254.0" prefWidth="431.0" style="-fx-border-width: 1; -fx-border-insets: 3; -fx-border-style: solid inside; -fx-border-radius: 5;">
+                           <children>
+                              <ScrollPane>
+                                 <content>
+                                    <WebView fx:id="wvArticleContenu" prefHeight="246.0" prefWidth="404.0" />
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </StackPane>
                      </children>
                      <opaqueInsets>
                         <Insets left="5.0" />

@@ -9,8 +9,14 @@ import Entities.Admin;
 import Entities.Article;
 import Entities.Game;
 import Entities.Moderator;
+import Entities.Player;
+import Entities.Stade;
+import Entities.Team;
 import Services.ArticleCrud;
 import Services.GameCrud;
+import Services.PlayerCrud;
+import Services.StadeCRUD;
+import Services.TeamCrud;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.jfoenix.controls.JFXButton;
@@ -26,6 +32,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +48,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -70,7 +76,7 @@ public class AjouterArticleController implements Initializable {
     @FXML
     private JFXComboBox<String> typeEntite;
     @FXML
-    private JFXComboBox<Game> idEntite;
+    private JFXComboBox idEntite;
     @FXML
     private JFXTextField tfTitre;
     @FXML
@@ -90,6 +96,7 @@ public class AjouterArticleController implements Initializable {
     private ImageView ivImageArticle;
     @FXML
     private StackPane IvStackPane;
+    private String noneChosen = null;
 
     /**
      * Initializes the controller class.
@@ -103,7 +110,7 @@ public class AjouterArticleController implements Initializable {
         contenu.prefHeightProperty().bind(contenuPane.heightProperty());
 
         cloudinary = new Cloudinary("cloudinary://187685892358282:rL27N346tuXqVQyA5sR1oDLFJag@pidev");
-        ObservableList<String> entitesList = FXCollections.observableArrayList("Match", "Joueur", "Equipe", "Evenement", "Stade", "None");
+        ObservableList<String> entitesList = FXCollections.observableArrayList("Match", "Joueur", "Equipe", "Stade");
         typeEntite.setItems(entitesList);
 
         checkPublier.selectedProperty().addListener(new ChangeListener<Boolean>() {
@@ -120,52 +127,112 @@ public class AjouterArticleController implements Initializable {
     }
 
     @FXML
-    private void choixEntite(ActionEvent event) {
+    private void choixEntite(ActionEvent event) throws SQLException {
         idEntite.setDisable(false);
-        if (typeEntite.getValue() != null) {
-            switch (typeEntite.getValue()) {
-                case "Match":
-                    idEntite.setConverter(new StringConverter<Game>() {
-                        @Override
-                        public String toString(Game object) {
-                            return "Game " + object.getId() + " : [" + object.getHomeTeam() + "] VS [" + object.getAwayTeam() + "]";
-                        }
-
-                        @Override
-                        public Game fromString(String string) {
-                            return null;
-                        }
-                    });
-                    GameCrud gc = new GameCrud();
-                    List<Game> games = gc.findAllGames();
-                    for (Game game : games) {
-                        idEntite.getItems().add(game);
+        if (!idEntite.getItems().isEmpty()) {
+            idEntite.getItems().clear();
+        }
+        switch (typeEntite.getValue()) {
+            case "Match":
+                idEntite.setConverter(new StringConverter<Game>() {
+                    @Override
+                    public String toString(Game object) {
+                        return "Game " + object.getId() + " : [" + object.getHomeTeam() + "] VS [" + object.getAwayTeam() + "]";
                     }
-                    break;
-                case "Joueur":
-                    break;
-                case "Equipe":
-                    break;
-                case "Evenement":
-                    break;
-                case "Stade":
-                    break;
-                case "None":
-                    break;
-            }
-        } else {
+
+                    @Override
+                    public Game fromString(String string) {
+                        return null;
+                    }
+                });
+                GameCrud gc = new GameCrud();
+                List<Game> games = gc.findAllGames();
+                for (Game game : games) {
+                    idEntite.getItems().add(game);
+                }
+                break;
+            case "Joueur":
+                idEntite.setConverter(new StringConverter<Player>() {
+                    @Override
+                    public String toString(Player object) {
+                        return "Player [" + object.getId() + "] : " + object.getFullName();
+                    }
+
+                    @Override
+                    public Player fromString(String string) {
+                        return null;
+                    }
+                });
+                PlayerCrud pc = new PlayerCrud();
+                List<Player> players = pc.findAllPlayers();
+                for (Player pl : players) {
+                    idEntite.getItems().add(pl);
+                }
+                break;
+
+            case "Equipe":
+                idEntite.setConverter(new StringConverter<Team>() {
+                    @Override
+                    public String toString(Team object) {
+                        return "Player [" + object.getId() + "] : " + object.getName();
+                    }
+
+                    @Override
+                    public Team fromString(String string) {
+                        return null;
+                    }
+                });
+                TeamCrud tc = new TeamCrud();
+                List<Team> teams = tc.findAllTeam();
+                for (Team tm : teams) {
+                    idEntite.getItems().add(tm);
+                }
+                break;
+            case "Stade":
+                idEntite.setConverter(new StringConverter<Stade>() {
+                    @Override
+                    public String toString(Stade object) {
+                        return "Player [" + object.getId() + "] : " + object.getNom();
+                    }
+
+                    @Override
+                    public Stade fromString(String string) {
+                        return null;
+                    }
+                });
+                StadeCRUD sc = new StadeCRUD();
+                List<Stade> stades = sc.AfficherTousLesStades();
+                for (Stade st : stades) {
+                    idEntite.getItems().add(st);
+                }
+                break;
+         
         }
     }
 
     @FXML
     private void ajouterArticle(MouseEvent event) throws IOException {
+
         if (idEntite.getValue() == null || contenu.getHtmlText() == null || contenu.getHtmlText().equals("") || tfTitre.getText().equals("") || tfTitre.getText() == null || !checkPublier.isSelected() || tfImageArticle.getText() == null || tfImageArticle.getText().equals("") || ivImageArticle.getImage() == null) {
             showDialog("Error", "Veuillez verifier que vous avez remplis tous les champs");
         } else {
+            Article a = null;
             image = new File(tfImageArticle.getText());
             Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap());
+            if (idEntite.getValue().getClass() == Game.class) {
+                Game g = (Game) idEntite.getValue();
+                a = new Article(1, tfTitre.getText(), contenu.getHtmlText(), g.getId(), typeEntite.getValue(), new Date(Calendar.getInstance().getTime().getTime()), null, 0, (String) uploadResult.get("url"));
+            } else if (idEntite.getValue().getClass() == Stade.class) {
+                Stade g = (Stade) idEntite.getValue();
+                a = new Article(1, tfTitre.getText(), contenu.getHtmlText(), g.getId(), typeEntite.getValue(), new Date(Calendar.getInstance().getTime().getTime()), null, 0, (String) uploadResult.get("url"));
+            } else if (idEntite.getValue().getClass() == Player.class) {
+                Player g = (Player) idEntite.getValue();
+                a = new Article(1, tfTitre.getText(), contenu.getHtmlText(), g.getId(), typeEntite.getValue(), new Date(Calendar.getInstance().getTime().getTime()), null, 0, (String) uploadResult.get("url"));
+            } else if (idEntite.getValue().getClass() == Team.class) {
+                Team g = (Team) idEntite.getValue();
+                a = new Article(1, tfTitre.getText(), contenu.getHtmlText(), g.getId(), typeEntite.getValue(), new Date(Calendar.getInstance().getTime().getTime()), null, 0, (String) uploadResult.get("url"));
+            } 
 
-            Article a = new Article(1, tfTitre.getText(), contenu.getHtmlText(), idEntite.getValue().getId(), typeEntite.getValue(), new Date(Calendar.getInstance().getTime().getTime()), null, 0, (String) uploadResult.get("url"));
             if (Admin.current_user != null) {
                 a.setAuteur(Admin.current_user.getId());
             } else {

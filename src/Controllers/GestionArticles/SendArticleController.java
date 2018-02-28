@@ -28,7 +28,6 @@ import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;

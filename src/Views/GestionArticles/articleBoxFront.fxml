@@ -52,7 +52,7 @@
          </children>
       </HBox>
       <Separator prefHeight="17.0" prefWidth="288.0" />
-      <Label fx:id="allLabel" accessibleText="allLabel" onMouseClicked="#AllClicked" onMouseEntered="#allHighlight" onMouseExited="#allUnhighlight" prefHeight="34.0" prefWidth="277.0" text="  All">
+      <Label fx:id="allLabel" accessibleText="allLabel" onMouseEntered="#allHighlight" onMouseExited="#allUnhighlight" prefHeight="34.0" prefWidth="277.0" text="  All">
          <font>
             <Font size="15.0" />
          </font>
@@ -60,7 +60,7 @@
             <Insets left="25.0" />
          </padding>
       </Label>
-      <Label fx:id="gamesLabel" accessibleText="gamesLabel" onMouseClicked="#GamesClicked" onMouseEntered="#gamesHighlight" onMouseExited="#gamesUnhighlight" prefHeight="33.0" prefWidth="278.0" text="  Games">
+      <Label fx:id="gamesLabel" accessibleText="gamesLabel" onMouseEntered="#gamesHighlight" onMouseExited="#gamesUnhighlight" prefHeight="33.0" prefWidth="278.0" text="  Games">
          <font>
             <Font size="15.0" />
          </font>
@@ -68,7 +68,7 @@
             <Insets left="25.0" />
          </padding>
       </Label>
-      <Label fx:id="teamsLabel" accessibleText="teamLabel" onMouseClicked="#TeamsClicked" onMouseEntered="#teamsHighlight" onMouseExited="#teamsUnhightlight" prefHeight="34.0" prefWidth="280.0" text="  Teams">
+      <Label fx:id="teamsLabel" accessibleText="teamLabel" onMouseEntered="#teamsHighlight" onMouseExited="#teamsUnhightlight" prefHeight="34.0" prefWidth="280.0" text="  Teams">
          <font>
             <Font size="15.0" />
          </font>
@@ -76,7 +76,7 @@
             <Insets left="25.0" />
          </padding>
       </Label>
-      <Label fx:id="stadiumLabel" accessibleText="stadiumLabel" onMouseClicked="#StadiumsClicked" onMouseEntered="#stadiumsHighlight" onMouseExited="#stadiumsUnhighlight" prefHeight="33.0" prefWidth="281.0" text="  Stadiums">
+      <Label fx:id="stadiumLabel" accessibleText="stadiumLabel" onMouseEntered="#stadiumsHighlight" onMouseExited="#stadiumsUnhighlight" prefHeight="33.0" prefWidth="281.0" text="  Stadiums">
          <font>
             <Font size="15.0" />
          </font>
