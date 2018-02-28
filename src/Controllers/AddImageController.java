@@ -273,9 +273,13 @@ public class AddImageController implements Initializable {
 			alert.setHeaderText("voulez vous vraiment Ajouter cette photo?");
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK) {
+
 				Gallery g1 = new Gallery(SimpleUser.current_user.getId(), villeCombo.getValue(), Li.getText(), Dc.getText(), (String) uploadResult.get("url"), "0");
 				GalleryCrud.AddImage(g1);
+
 				Opinions o1 = new Opinions(SimpleUser.current_user.getId(), Av.getText(), rat.getText());
+				OpinionsCrud.AddOpinion(o1);
+
 				JFXDialogLayout content = new JFXDialogLayout();
 				content.setHeading(new Text(""));
 				content.setBody(new Text("Ajout fait avec succés"));

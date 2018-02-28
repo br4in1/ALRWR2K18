@@ -85,9 +85,6 @@ public class ShowallController implements Initializable {
 	@FXML
 	private StackPane mainStack;
 	public Gallery current_shown_Gallery;
-
-	private TextToSpeech tts = new TextToSpeech();
-	private float VoiceVolume;
 	int nbre, aze = 0, ligne = 0;
 
 	/**
@@ -102,38 +99,38 @@ public class ShowallController implements Initializable {
 
 		Gallery ga = new Gallery();
 		GalleryCrud g = new GalleryCrud();
-		int y = 1;
+		int X = 1;
 		List<Gallery> Liste = g.DisplayAll();
 		anch.getChildren().clear();
-
 		for (int i = 0; i < Liste.size(); i++) {
 
 			if ("1".equals(Liste.get(i).getEtat())) {
-				y = 230 * (aze);
+				
+				
+				X = 260 * (aze);
 				if (aze == 3) {
 					aze = 0;
-					ligne = ligne + 200;
-					y = 1;
+					ligne = ligne + 220;
+					X = 1;
 				} else {
 					aze++;
 				}
 
-				
 				Image im = new Image(Liste.get(i).getImage());
 				ImageView img2 = new ImageView(im);
 
-				img2.setLayoutX(50.0 + y);
+				img2.setLayoutX(50.0 + X);
 				img2.setLayoutY(ligne);
-				img2.setFitHeight(170);
-				img2.setFitWidth(170);
+				img2.setFitHeight(200);
+				img2.setFitWidth(200);
 
 				Line line = new Line();
-				line.setStartX(175);
+				line.setStartX(200);
 				line.setStartY(0);
 				line.setEndX(0);
 				line.setEndY(0);
-				line.setLayoutX(45.0 + y);
-				line.setLayoutY(ligne + 178);
+				line.setLayoutX(50.0 + X);
+				line.setLayoutY(ligne + 210);
 				line.setStroke(Color.rgb(178, 61, 61));
 				line.setStyle("-fx-stroke-width:" + 3);
 
@@ -171,9 +168,6 @@ public class ShowallController implements Initializable {
 								btn.setOnMouseClicked((event) -> {
 
 									if (btn.getImage() == im33) {
-										tts.setVoice("dfki-poppy-hsmm");
-										VoiceVolume = 2;
-										tts.speak("You have liked this photo ", VoiceVolume, false, false);
 										Likes Liked = new Likes(SimpleUser.current_user.getId(), photo);
 										LikesCrud.Like(Liked);
 										Total.setText("            " + (nbre + 1));
@@ -182,9 +176,6 @@ public class ShowallController implements Initializable {
 
 									} else {
 										try {
-											tts.setVoice("dfki-poppy-hsmm");
-											VoiceVolume = 2;
-											tts.speak("You have disliked this photo ", VoiceVolume, false, false);
 											LikesCrud.Unlike(SimpleUser.current_user.getId(), photo);
 											Total.setText("            " + (nbre - 1));
 											thisController.nbre--;

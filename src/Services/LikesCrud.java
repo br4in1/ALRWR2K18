@@ -59,7 +59,7 @@ public class LikesCrud {
 			if (set.next()) {
 				return true;
 			}
-			return false;
+			
 		} catch (SQLException ex) {
 			Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
 		}

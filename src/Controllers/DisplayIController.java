@@ -139,7 +139,7 @@ public class DisplayIController implements Initializable {
 		etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
 
 		ObservableList<Gallery> ol = FXCollections.observableArrayList(GalleryCrud.DisplayAll());
-		tableView.setItems(ol);
+		tableView.setItems(ol); // a revoir
 	}
 
 	@FXML
@@ -152,7 +152,7 @@ public class DisplayIController implements Initializable {
 		Id.setText(id);
 		String id1 = Integer.toString(g.getId());
 		iD.setText(id1);
-				Image im = new Image(g.getImage());
+		Image im = new Image(g.getImage());
 		img_view.setImage(im);
         
 

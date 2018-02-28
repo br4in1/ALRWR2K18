@@ -19,7 +19,7 @@
 <AnchorPane id="AnchorPane" prefHeight="612.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DispalyOController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="572.0" layoutX="36.0" layoutY="31.0" stroke="#b23d3d" strokeLineCap="ROUND" strokeWidth="4.0" width="966.0" />
-      <TableView fx:id="table_view2" editable="true" layoutX="355.0" layoutY="55.0" onMouseClicked="#click" prefHeight="502.0" prefWidth="302.0" style="-fx-border-color: #b23d3d;">
+      <TableView fx:id="table_view2" editable="true" layoutX="355.0" layoutY="55.0" onMouseClicked="#click" prefHeight="266.0" prefWidth="302.0" style="-fx-border-color: #b23d3d;">
         <columns>
           <TableColumn fx:id="id" prefWidth="75.0" text="Id" />
           <TableColumn fx:id="idUser" prefWidth="75.0" text="IdUser" />
@@ -27,8 +27,8 @@
             <TableColumn fx:id="notes" prefWidth="75.0" text="Notes" />
         </columns>
       </TableView>
-      <Line endX="100.0" endY="500.0" layoutX="229.0" layoutY="-102.0" opacity="0.83" startX="100.0" startY="200.0" stroke="#b23d3d" strokeMiterLimit="5.0" strokeWidth="4.0" />
-      <Line endX="100.0" endY="500.0" layoutX="575.0" layoutY="-102.0" opacity="0.83" startX="100.0" startY="200.0" stroke="#b23d3d" strokeMiterLimit="5.0" strokeWidth="4.0" />
+      <Line endX="100.0" endY="500.0" layoutX="238.0" layoutY="-169.0" opacity="0.83" startX="100.0" startY="200.0" stroke="#b23d3d" strokeMiterLimit="5.0" strokeWidth="4.0" />
+      <Line endX="100.0" endY="500.0" layoutX="574.0" layoutY="-169.0" opacity="0.83" startX="100.0" startY="200.0" stroke="#b23d3d" strokeMiterLimit="5.0" strokeWidth="4.0" />
       <JFXTextArea fx:id="Avis" editable="false" focusColor="#b23d3d" layoutX="50.0" layoutY="61.0" prefHeight="218.0" prefWidth="258.0" unFocusColor="#b23d3d" />
       <Line endX="100.0" layoutX="179.0" layoutY="293.0" startX="-100.0" stroke="#b23d3d" strokeWidth="4.0" />
       <Label layoutX="55.0" layoutY="47.0" text="Avis :">
@@ -36,20 +36,20 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="56.0" layoutY="336.0" text="Id avis :">
+      <Label layoutX="688.0" layoutY="78.0" text="Id avis :">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="Id" editable="false" layoutX="55.0" layoutY="362.0" />
-      <Line endX="100.0" layoutX="185.0" layoutY="398.0" startX="-100.0" stroke="#b23d3d" strokeWidth="4.0" />
-      <JFXButton fx:id="supprimer" layoutX="227.0" layoutY="458.0" onAction="#suprimerO" prefHeight="25.0" prefWidth="81.0" style="-fx-background-color: #b23d3d;" text="Supprimer" />
-      <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="152.0" layoutY="443.0" pickOnBounds="true" preserveRatio="true">
+      <TextField fx:id="Id" editable="false" layoutX="767.0" layoutY="74.0" />
+      <Line endX="100.0" layoutX="833.0" layoutY="118.0" startX="-100.0" stroke="#b23d3d" strokeWidth="4.0" />
+      <JFXButton fx:id="supprimer" layoutX="866.0" layoutY="228.0" onAction="#suprimerO" prefHeight="25.0" prefWidth="81.0" style="-fx-background-color: #b23d3d;" text="Supprimer" />
+      <ImageView fitHeight="74.0" fitWidth="97.0" layoutX="751.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/téléchargé.png" />
          </image>
       </ImageView>
-      <LineChart fx:id="line" layoutX="657.0" layoutY="325.0" prefHeight="266.0" prefWidth="339.0" title="Rating de la rubrique(par utilisateur)">
+      <LineChart fx:id="line" layoutX="26.0" layoutY="325.0" prefHeight="266.0" prefWidth="949.0" title="Rating de la rubrique(par utilisateur)">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -57,6 +57,6 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </LineChart>
-      <JFXButton fx:id="actualiser" layoutX="576.0" layoutY="566.0" onAction="#Actu" prefHeight="25.0" prefWidth="81.0" style="-fx-background-color: #b23d3d;" text="Actualiser" />
+      <JFXButton fx:id="actualiser" layoutX="617.0" layoutY="573.0" onAction="#Actu" prefHeight="25.0" prefWidth="81.0" style="-fx-background-color: #b23d3d;" text="Actualiser" />
    </children>
 </AnchorPane>
