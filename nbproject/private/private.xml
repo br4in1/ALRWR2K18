@@ -3,22 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/GalleryController.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Services/NotificationsCrud.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/FrontEndController.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Services/GalleryCrud.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/GestionArticles/ShowArticlesFrontController.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Services/OpinionsCrud.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Views/GestionArticles/showArticlesFront.fxml</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Utils/RunnableDemo.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/ShowallController.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Services/UserCrud.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/FrontGalleryBoxController.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/LiveScoreController.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Views/FrontEnd.fxml</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/Login_formController.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Utils/DataSource.java</file>
-            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/DisplayIController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/TeamsCrudController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/TeamFrontController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/PlayerFrontController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/AddformPlayerController.java</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/PlayerFront.fxml</file>
+            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/UpdateFormPlayerController.java</file>
         </group>
     </open-files>
 </project-private>
