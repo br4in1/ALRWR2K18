@@ -200,7 +200,7 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 						MarkerOptions markerOptions1 = new MarkerOptions();
 						markerOptions1.position(Location)
 								.visible(true)
-								.icon(MarkerImageFactory.createMarkerImage("/assets/resto.png", "png"))
+								//.icon(MarkerImageFactory.createMarkerImage("/assets/resto.png", "png"))
 								.title(LisStade.get(i).getNom());
 
 						Marker joeSmithMarker = new Marker(markerOptions1);
@@ -211,7 +211,7 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 					MarkerOptions markerOptions1 = new MarkerOptions();
 					markerOptions1.position(Location)
 							.visible(true)
-							.icon(MarkerImageFactory.createMarkerImage("/assets/resto.png", "png"))
+							//.icon(MarkerImageFactory.createMarkerImage("/assets/resto.png", "png"))
 							.title(LisStade.get(i).getNom());
 
 					Marker joeSmithMarker = new Marker(markerOptions1);
@@ -239,7 +239,7 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 						MarkerOptions markerOptions1 = new MarkerOptions();
 						markerOptions1.position(Location)
 								.visible(true)
-								.icon(MarkerImageFactory.createMarkerImage("/assets/stade.png", "png"))
+								//.icon(MarkerImageFactory.createMarkerImage("/assets/stade.png", "png"))
 								.title(LisStade.get(i).getNom());
 
 						Marker joeSmithMarker = new Marker(markerOptions1);
@@ -251,7 +251,7 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 					MarkerOptions markerOptions1 = new MarkerOptions();
 					markerOptions1.position(Location)
 							.visible(true)
-							.icon(MarkerImageFactory.createMarkerImage("/assets/stade.png", "png"))
+							//.icon(MarkerImageFactory.createMarkerImage("/assets/stade.png", "png"))
 							.title(LisStade.get(i).getNom());
 
 					Marker joeSmithMarker = new Marker(markerOptions1);
@@ -281,7 +281,7 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 								//.icon(new File("/assets/hotel.png").toURI().toURL().toExternalForm())
 
 								.visible(true)
-								.icon(MarkerImageFactory.createMarkerImage("/assets/hotel_1.png", "png"))
+								//.icon(MarkerImageFactory.createMarkerImage("/assets/hotel_1.png", "png"))
 								.title(Lis.get(i).getNom() + "distance :" + x);
 						Marker joeSmithMarker = new Marker(markerOptions1);
 						col.add(joeSmithMarker);
@@ -295,7 +295,7 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 							//.icon(new File("/assets/hotel.png").toURI().toURL().toExternalForm())
 
 							.visible(true)
-							.icon(MarkerImageFactory.createMarkerImage("/assets/hotel_1.png", "png"))
+							//.icon(MarkerImageFactory.createMarkerImage("/assets/hotel_1.png", "png"))
 							.title(Lis.get(i).getNom());
 					Marker joeSmithMarker = new Marker(markerOptions1);
 					col.add(joeSmithMarker);

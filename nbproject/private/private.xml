@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/TeamsCrudController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/TeamFrontController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/PlayerFrontController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/AddformPlayerController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/PlayerFront.fxml</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/UpdateFormPlayerController.java</file>
+            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/FrontTeamBoxController.java</file>
+            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Views/FrontTeamBoxController.java</file>
+            <file>file:/Users/br4in/Documents/GitHub/Pidev-Russia-2018-Desktop/src/Controllers/FrontEndController.java</file>
         </group>
     </open-files>
 </project-private>
