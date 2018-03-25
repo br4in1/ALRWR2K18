@@ -153,7 +153,7 @@ public class AddFormTeamController implements Initializable {
 							Map uploadResult3 = cloudinary.uploader().upload(image4, ObjectUtils.emptyMap());//descriptionphoto
 							TeamCrud.addTeam(new Team(name.getText(), coach.getText(), president.getText(), area.getText(), Integer.parseInt(participation.getText()), Date.valueOf(date.getValue()), wcgroupe.getText(), Integer.parseInt(fifarank.getText()), (String) uploadResult.get("url"), (String) uploadResult2.get("url"), (String) uploadResult1.get("url"), (String) uploadResult3.get("url"), description.getText(), website.getText(), video.getText()));
 							Properties props = new Properties();
-							props.put("mail.smtp.host", "smtp.gmail.com");
+						/*	props.put("mail.smtp.host", "smtp.gmail.com");
 							props.put("mail.smtp.socketFactory.port", "465");
 							props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 							props.put("mail.smtp.auth", "true");
@@ -177,7 +177,7 @@ public class AddFormTeamController implements Initializable {
 
 							} catch (Exception e) {
 								JOptionPane.showMessageDialog(null, e);
-							}
+							}*/
 
 // *TeamCrud.addTeam(new Team(name.getText(),coach.getText(),president.getText(),area.getText(),Integer.parseInt(participation.getText()),Date.valueOf(date.getValue()),wcgroupe.getText(),Integer.parseInt(fifarank.getText()),flagphoto.getText(),logophoto.getText(),squadphoto.getText(),descriptionphoto.getText(),description.getText(),website.getText(),video.getText()));
 							Notifications notificationBuilder

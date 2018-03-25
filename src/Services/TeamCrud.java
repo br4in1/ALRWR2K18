@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,10 +29,12 @@ public class TeamCrud {
 
 	public static void addTeam(Team t) {
 		Connection con = DataSource.getInstance().getCon();
-		String query = "INSERT INTO `Team`(`name`, `Coach`, `President`, `Area`, `Participations`, `FifaDate`, `WcGroup`,`FifaRank` ,`FlagPhoto`, `LogoPhoto`, `SquadPhoto`, `DescriptionPhoto`, `Description`, `Website`, `Video`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO `Team`(`name`, `Coach`, `President`, `Area`, `Participations`, `FifaDate`, `WcGroup`,`FifaRank` ,`FlagPhoto`, `LogoPhoto`, `SquadPhoto`, `DescriptionPhoto`, `Description`, `Website`, `Video`,`id`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement ste = con.prepareStatement(query);
+				
 
+			Random rand = new Random();
 			ste.setString(1, t.getName());
 			ste.setString(2, t.getCoach());
 			ste.setString(3, t.getPresident());
@@ -47,6 +50,7 @@ public class TeamCrud {
 			ste.setString(13, t.getDescription());
 			ste.setString(14, t.getWebsite());
 			ste.setString(15, t.getVideo());
+			ste.setInt(16, rand.nextInt(9000) + 100);
 
 			ste.executeUpdate();
 		} catch (SQLException ex) {
