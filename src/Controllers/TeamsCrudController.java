@@ -441,7 +441,7 @@ public class TeamsCrudController implements Initializable {
 			}
 		}
 
-		FileOutputStream fileOut = new FileOutputStream("/Users/simo/Desktop/workbook.xls");
+		FileOutputStream fileOut = new FileOutputStream("workbook.xls");
 		workbook.write(fileOut);
 		fileOut.close();
 	}
