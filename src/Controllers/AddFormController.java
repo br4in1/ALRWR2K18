@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -64,6 +65,7 @@ public class AddFormController implements Initializable {
 	@FXML
 	private JFXTextField Referee;
 	private HashMap<String, Integer> map1;
+	private List<String > listTeam ;
 	private HashMap<String, Integer> map2;
 	Cloudinary cloudinary;
 	private File image;
@@ -79,9 +81,11 @@ public class AddFormController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		cloudinary = new Cloudinary("cloudinary://212894137142756:7Coi2BsCet7rXqPmDAuBi08ONfQ@dbs7hg9cy");
 		map1 = TeamCrud.GetNameIdMap();
+		listTeam = TeamCrud.GetNamelist() ;
+		
 		map2 = StadiumCrud.GetNameIdMap();
-		HomeTeam.setItems(FXCollections.observableArrayList(map1.keySet()));
-		AwayTeam.setItems(FXCollections.observableArrayList(map1.keySet()));
+		HomeTeam.setItems(FXCollections.observableArrayList(listTeam));
+		AwayTeam.setItems(FXCollections.observableArrayList(listTeam));
 		Stadium.setItems(FXCollections.observableArrayList(map2.keySet()));
 	}
 
@@ -94,7 +98,8 @@ public class AddFormController implements Initializable {
 		} else {
 
 			Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap());
-			GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), String.valueOf(map1.get(HomeTeam.getSelectionModel().getSelectedItem())), String.valueOf(map1.get(AwayTeam.getSelectionModel().getSelectedItem())), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"), Highlights.getText(), Referee.getText()));
+			//GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), String.valueOf(map1.get(HomeTeam.getSelectionModel().getSelectedItem())), String.valueOf(map1.get(AwayTeam.getSelectionModel().getSelectedItem())), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"), Highlights.getText(), Referee.getText()));
+GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), HomeTeam.getValue(), AwayTeam.getValue(), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"), Highlights.getText(), Referee.getText()));
 
 			Node source = (Node) event.getSource();
 			Stage stage = (Stage) source.getScene().getWindow();

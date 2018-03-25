@@ -184,7 +184,7 @@ public class UpdateFormPlayerController implements Initializable {
 							PlayerCrud.updateTeam(new Player(id.getValue(), name.getText(), lastName.getText(), Integer.parseInt(age.getText()), club.getText(), nation.getValue(), Double.parseDouble(height.getText()), Double.parseDouble(weight.getText()), position.getValue(), Integer.parseInt(goals.getText()), description.getText(), (String) uploadResult.get("url"), (String) uploadResult1.get("url"), (String) uploadResult2.get("url"), fbLink.getText(), twitterLink.getText(), Integer.parseInt(shirtNb.getText()), video.getText()));
 							Notifications notificationBuilder
 					= Notifications.create().title("Avertissment")
-							.text("Your team has been added ")
+							.text("Your Player has been added ")
 							.hideAfter(Duration.seconds(3))
 							.position(Pos.TOP_RIGHT)
 							.onAction((ActionEvent event1) -> {
