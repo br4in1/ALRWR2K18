@@ -83,7 +83,7 @@ public class GamesCrudController implements Initializable {
 	
 	private List<String > listTeam ;
 	
-	//ObservableList<Game> OL = FXCollections.observableList(GameCrud.findAllGames());
+	
 	@FXML
 	private JFXTextField searchfield;
 
@@ -111,9 +111,7 @@ public class GamesCrudController implements Initializable {
 				new PropertyValueFactory<>("highlights"));
 		referee.setCellValueFactory(
 				new PropertyValueFactory<>("referee"));
-		//tablev.setItems(OL);
 		ObservableList<Game> OL = FXCollections.observableList(GameCrud.findAllGames());
-		//ObservableList<Game> OL = FXCollections.observableList(GameCrud.findAllGames());
 		tablev.setItems(OL);
 		
 	}
@@ -122,7 +120,9 @@ public class GamesCrudController implements Initializable {
 		map1 = TeamCrud.GetNameIdMap();
 		listTeam = TeamCrud.GetNamelist() ;
 		map2 = StadiumCrud.GetNameIdMap();
-		ObservableList<String> teams = FXCollections.observableArrayList(map1.keySet());
+		//old -- ObservableList<String> teams = FXCollections.observableArrayList(map1.keySet());
+		ObservableList<String> teams = FXCollections.observableArrayList(listTeam);
+		
 		ObservableList<String> stadiums = FXCollections.observableArrayList(map2.keySet());
 
 		home.setCellFactory(ComboBoxTableCell.forTableColumn(teams));
@@ -213,7 +213,9 @@ public class GamesCrudController implements Initializable {
 					else 
 					{
 						((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setAwayTeam(t.getNewValue());
-						GameCrud.update("AwayTeam", map1.get(t.getNewValue()), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+					//	GameCrud.update("AwayTeam", map1.get(t.getNewValue()), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+						GameCrud.update("AwayTeam", t.getNewValue(), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+					
 					}
 				} else {
 					refresh();
@@ -240,7 +242,9 @@ public class GamesCrudController implements Initializable {
 					else 
 					{
 						((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setAwayTeam(t.getNewValue());
-						GameCrud.update("HomeTeam", map1.get(t.getNewValue()), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+						// GameCrud.update("HomeTeam", map1.get(t.getNewValue()), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+						 GameCrud.update("HomeTeam", t.getNewValue(), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+					
 					}
 				} else {
 					refresh();
@@ -333,7 +337,7 @@ public class GamesCrudController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		display();
-		//update();
+		update();
 
 	}
 
@@ -353,12 +357,10 @@ public class GamesCrudController implements Initializable {
 
 	@FXML
 	private void refresh(MouseEvent event) {
-	//	OL = FXCollections.observableList(GameCrud.findAllGames());
 		display();
 	}
 
 	private void refresh() {
-//		OL = FXCollections.observableList(GameCrud.findAllGames());
 		display();
 	}
 
