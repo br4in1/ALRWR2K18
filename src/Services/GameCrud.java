@@ -53,13 +53,14 @@ public class GameCrud {
 	public static List<Game> findAllGames() {
 		Connection con = DataSource.getInstance().getCon();
 		List result = new ArrayList<Game>();
-		//String query = "select g.*,t1.name 'nomaway',t2.name 'nomhome',s.name 'nomstade' from Game g join Team t1 on t1.id = g.HomeTeam join Team t2 on t2.id = g.AwayTeam join Stadium s on s.id = g.Stadium ORDER BY Date ";
-		String query = "select g.*,t1.name 'nomaway',t2.name 'nomhome',s.name 'nomstade' from Game g join Team t1 on t1.id = g.HomeTeam join Team t2 on t2.id = g.AwayTeam join Stadium s on s.id = g.Stadium ORDER BY Date ";
+		
+		String query = "SELECT * from `Game` ";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
 			while (set.next()) {
-				Game g = new Game(set.getDate("Date"), set.getString("nomhome"), set.getString("nomaway"), set.getString("Result"), set.getString("nomstade"), set.getString("Summary"), set.getString("SummaryPhoto"), set.getString("Highlights"), set.getString("Referee"));
+				
+				Game g = new Game(set.getDate("Date"), set.getString("HomeTeam"), set.getString("AwayTeam"), set.getString("Result"), set.getString("Stadium"), set.getString("Summary"), set.getString("SummaryPhoto"), set.getString("Highlights"), set.getString("Referee"));
 
 				g.setId(set.getInt("id"));
 				result.add(g);

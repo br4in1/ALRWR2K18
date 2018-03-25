@@ -17,6 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -79,7 +80,10 @@ public class GamesCrudController implements Initializable {
 	private TableColumn<Game, Integer> id;
 	private HashMap<String, Integer> map1;
 	private HashMap<String, Integer> map2;
-	ObservableList<Game> OL = FXCollections.observableList(GameCrud.findAllGames());
+	
+	private List<String > listTeam ;
+	
+	//ObservableList<Game> OL = FXCollections.observableList(GameCrud.findAllGames());
 	@FXML
 	private JFXTextField searchfield;
 
@@ -107,11 +111,16 @@ public class GamesCrudController implements Initializable {
 				new PropertyValueFactory<>("highlights"));
 		referee.setCellValueFactory(
 				new PropertyValueFactory<>("referee"));
+		//tablev.setItems(OL);
+		ObservableList<Game> OL = FXCollections.observableList(GameCrud.findAllGames());
+		//ObservableList<Game> OL = FXCollections.observableList(GameCrud.findAllGames());
 		tablev.setItems(OL);
+		
 	}
 
 	void update() {
 		map1 = TeamCrud.GetNameIdMap();
+		listTeam = TeamCrud.GetNamelist() ;
 		map2 = StadiumCrud.GetNameIdMap();
 		ObservableList<String> teams = FXCollections.observableArrayList(map1.keySet());
 		ObservableList<String> stadiums = FXCollections.observableArrayList(map2.keySet());
@@ -324,7 +333,7 @@ public class GamesCrudController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		display();
-		update();
+		//update();
 
 	}
 
@@ -344,12 +353,12 @@ public class GamesCrudController implements Initializable {
 
 	@FXML
 	private void refresh(MouseEvent event) {
-		OL = FXCollections.observableList(GameCrud.findAllGames());
+	//	OL = FXCollections.observableList(GameCrud.findAllGames());
 		display();
 	}
 
 	private void refresh() {
-		OL = FXCollections.observableList(GameCrud.findAllGames());
+//		OL = FXCollections.observableList(GameCrud.findAllGames());
 		display();
 	}
 

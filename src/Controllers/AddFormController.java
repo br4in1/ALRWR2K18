@@ -98,8 +98,8 @@ public class AddFormController implements Initializable {
 		} else {
 
 			Map uploadResult = cloudinary.uploader().upload(image, ObjectUtils.emptyMap());
-			//GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), String.valueOf(map1.get(HomeTeam.getSelectionModel().getSelectedItem())), String.valueOf(map1.get(AwayTeam.getSelectionModel().getSelectedItem())), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"), Highlights.getText(), Referee.getText()));
-GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), HomeTeam.getValue(), AwayTeam.getValue(), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"), Highlights.getText(), Referee.getText()));
+			// old add -- GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), String.valueOf(map1.get(HomeTeam.getSelectionModel().getSelectedItem())), String.valueOf(map1.get(AwayTeam.getSelectionModel().getSelectedItem())), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"), Highlights.getText(), Referee.getText()));
+			GameCrud.InsertGame(new Game(Date.valueOf(GameDate.getValue()), HomeTeam.getValue(), AwayTeam.getValue(), Result.getText(), String.valueOf(map2.get(Stadium.getSelectionModel().getSelectedItem())), Summary.getText(), (String) uploadResult.get("url"), Highlights.getText(), Referee.getText()));
 
 			Node source = (Node) event.getSource();
 			Stage stage = (Stage) source.getScene().getWindow();
