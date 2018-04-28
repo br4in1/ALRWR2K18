@@ -88,7 +88,7 @@ public class UserCrud {
 			ste.setString(3, u.getEmail());
 			ste.setString(4, u.getEmail());
 			ste.setInt(5, (u.getEnabled()) ? 1 : 0);
-			ste.setString(6, BCrypt.hashpw(u.getPassword(), BCrypt.gensalt(12)));
+			ste.setString(6, BCrypt.hashpw(u.getPassword(), BCrypt.gensalt(11)));
 			ste.setString(7, u.getRoles());
 			ste.setDate(8, u.getBirthdate());
 			ste.setDate(9, u.getRegistrationdate());
@@ -115,7 +115,7 @@ public class UserCrud {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
 			if (set.next()) {
-				if (set.getString("roles").equals("ROLE_USER")) {
+				if (set.getString("roles").equals("a:0:{}")) {
 					found = true;
 					u = new SimpleUser(set.getDate("birth_date"), set.getDate("registration_date"), set.getString("nationality"), true, set.getInt("fidelity_points"), set.getString("profile_picture"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
 					String q = "update User set loggedin = 1,last_login = ? where username = ?";
@@ -127,14 +127,16 @@ public class UserCrud {
 					} catch (SQLException ex) {
 						Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
 					}
-				} else if (set.getString("roles").equals("ROLE_MODERATOR")) {
+				} else if (set.getString("roles").equals("a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}")) {
 					found = true;
 					u = new Moderator(set.getString("phone_number"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
 				} else {
 					found = true;
 					u = new Admin(set.getString("phone_number"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
 				}
-				if (found && BCrypt.checkpw(password, u.getPassword())) {
+				StringBuilder p = new StringBuilder(u.getPassword());
+				p.setCharAt(2, 'a');
+				if (found && BCrypt.checkpw(password, p.toString())) {
 					u.setId(set.getInt("id"));
 					return u;
 				} else {

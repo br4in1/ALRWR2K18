@@ -2,25 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/TeamFrontController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/PlayerFrontController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Services/GameCrud.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/GamesController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/AddFormController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/UpdateFormPlayerController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Services/PlayerCrud.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/TeamsCrudController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/Login_formController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/AddformPlayerController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Utils/BCrypt.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Entities/Player.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Services/GalleryCrud.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Views/PlayerFront.fxml</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/AddFormTeamController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Controllers/FrontEndController.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Entities/Game.java</file>
-            <file>file:/Users/macbook/Documents/GitHub/ALRWR2K18/src/Services/UserCrud.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
