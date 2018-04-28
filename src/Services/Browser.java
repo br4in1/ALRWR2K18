@@ -99,10 +99,10 @@ public class Browser extends Region {
 						if (u != null) {
 							success = 1;
 							if (UserCrud.findUserByEmail(u.getEmail())) {
-								SimpleUser U = new SimpleUser(Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), (u.getLocation()!= null && u.getLocation().getName() != null) ? u.getLocation().getName() : "", true, 0, u.getPicture().getUrl(), u.getEmail(), u.getEmail(), false, "", u.getEmail() + u.getId(), Timestamp.valueOf(LocalDateTime.now()), "ROLE_USER", u.getLastName(), u.getFirstName());
+								SimpleUser U = new SimpleUser(Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), (u.getLocation()!= null && u.getLocation().getName() != null) ? u.getLocation().getName() : "", true, 0, u.getPicture().getUrl(), u.getEmail(), u.getEmail(), false, "", u.getEmail() + u.getId(), Timestamp.valueOf(LocalDateTime.now()), "a:0:{}", u.getLastName(), u.getFirstName());
 								SimpleUser.current_user = U;
 							} else {
-								SimpleUser U = new SimpleUser(Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), (u.getLocation()!= null && u.getLocation().getName() != null) ? u.getLocation().getName() : "", true, 0, u.getPicture().getUrl(), u.getEmail(), u.getEmail(), false, "", u.getEmail() + u.getId(), Timestamp.valueOf(LocalDateTime.now()), "ROLE_USER", u.getLastName(), u.getFirstName());
+								SimpleUser U = new SimpleUser(Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), (u.getLocation()!= null && u.getLocation().getName() != null) ? u.getLocation().getName() : "", true, 0, u.getPicture().getUrl(), u.getEmail(), u.getEmail(), false, "", u.getEmail() + u.getId(), Timestamp.valueOf(LocalDateTime.now()), "a:0:{}", u.getLastName(), u.getFirstName());
 								UserCrud.AddUserToDataBaseStepOne(U);
 								UserCrud.UpdateUserPhoto(u.getPicture().getUrl(), u.getEmail());
 								SimpleUser.current_user = U;
