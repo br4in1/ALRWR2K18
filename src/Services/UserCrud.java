@@ -88,7 +88,7 @@ public class UserCrud {
 			ste.setString(3, u.getEmail());
 			ste.setString(4, u.getEmail());
 			ste.setInt(5, (u.getEnabled()) ? 1 : 0);
-			ste.setString(6, BCrypt.hashpw(u.getPassword(), BCrypt.gensalt(12)));
+			ste.setString(6, BCrypt.hashpw(u.getPassword(), BCrypt.gensalt(11)));
 			ste.setString(7, u.getRoles());
 			ste.setDate(8, u.getBirthdate());
 			ste.setDate(9, u.getRegistrationdate());
@@ -115,7 +115,7 @@ public class UserCrud {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
 			if (set.next()) {
-				if (set.getString("roles").equals("ROLE_USER")) {
+				if (set.getString("roles").equals("a:0:{}")) {
 					found = true;
 					u = new SimpleUser(set.getDate("birth_date"), set.getDate("registration_date"), set.getString("nationality"), true, set.getInt("fidelity_points"), set.getString("profile_picture"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
 					String q = "update User set loggedin = 1,last_login = ? where username = ?";
@@ -127,14 +127,16 @@ public class UserCrud {
 					} catch (SQLException ex) {
 						Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
 					}
-				} else if (set.getString("roles").equals("ROLE_MODERATOR")) {
+				} else if (set.getString("roles").equals("a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}")) {
 					found = true;
 					u = new Moderator(set.getString("phone_number"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
 				} else {
 					found = true;
 					u = new Admin(set.getString("phone_number"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
 				}
-				if (found && BCrypt.checkpw(password, u.getPassword())) {
+				StringBuilder p = new StringBuilder(u.getPassword());
+				p.setCharAt(2, 'a');
+				if (found && BCrypt.checkpw(password, p.toString())) {
 					u.setId(set.getInt("id"));
 					return u;
 				} else {
@@ -249,7 +251,7 @@ public class UserCrud {
 	public static List<SimpleUser> getAllSimpleUsers() {
 		Connection con = DataSource.getInstance().getCon();
 		List users = new ArrayList<SimpleUser>();
-		String query = "select * from User where roles = 'ROLE_USER'";
+		String query = "select * from User where roles = 'a:0:{}'";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
@@ -302,7 +304,7 @@ public class UserCrud {
 
 	public static int GetLoggedInNumber() {
 		Connection con = DataSource.getInstance().getCon();
-		String query = "select count(*) as nb from User where roles='ROLE_USER' and loggedin = 1";
+		String query = "select count(*) as nb from User where roles='a:0:{}' and loggedin = 1";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
@@ -318,7 +320,7 @@ public class UserCrud {
 	public static HashMap<String, Integer> GetCountriesChartData() {
 		Connection con = DataSource.getInstance().getCon();
 		HashMap<String, Integer> ret = new HashMap<String, Integer>();
-		String query = "select nationality,count(*) as nb from User where roles='ROLE_USER' group by nationality having nationality != '' limit 5";
+		String query = "select nationality,count(*) as nb from User where roles='a:0:{}' group by nationality having nationality != '' limit 5";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
@@ -335,7 +337,7 @@ public class UserCrud {
 	public static HashMap<Integer, Integer> GetAgesChartData() {
 		Connection con = DataSource.getInstance().getCon();
 		HashMap<Integer, Integer> ret = new HashMap<Integer, Integer>();
-		String query = "select YEAR(STR_TO_DATE(birth_date, '%Y-%m-%d')) as year,count(*) as nb from User where roles='ROLE_USER' group by YEAR(STR_TO_DATE(birth_date, '%Y-%m-%d')) having year IS NOT NULL limit 5";
+		String query = "select YEAR(STR_TO_DATE(birth_date, '%Y-%m-%d')) as year,count(*) as nb from User where roles='a:0:{}' group by YEAR(STR_TO_DATE(birth_date, '%Y-%m-%d')) having year IS NOT NULL limit 5";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
@@ -352,12 +354,12 @@ public class UserCrud {
 	public static List<Moderator> getAllModerators() {
 		Connection con = DataSource.getInstance().getCon();
 		List users = new ArrayList<Moderator>();
-		String query = "select * from User where roles = 'ROLE_MODERATOR'";
+		String query = "select * from User where roles = 'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}'";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
 			while (set.next()) {
-				Moderator u = new Moderator(set.getString("phone_number"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), "", "", set.getTimestamp("last_login"), "ROLE_MODERATOR", set.getString("firstname"), set.getString("lastname"));
+				Moderator u = new Moderator(set.getString("phone_number"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), "", "", set.getTimestamp("last_login"), "a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}", set.getString("firstname"), set.getString("lastname"));
 				users.add(u);
 			}
 			return users;
@@ -417,12 +419,12 @@ public class UserCrud {
 	public static List<SimpleUser> searchSimpleUsers(String term) {
 		Connection con = DataSource.getInstance().getCon();
 		List users = new ArrayList<Moderator>();
-		String query = "select * from User where roles = 'ROLE_USER' and (email like '%" + term + "%' or username like '%" + term + "%' or nationality like '%" + term + "%' or firstname like '%" + term + "%' or lastname like '%" + term + "%')";
+		String query = "select * from User where roles = 'a:0:{}' and (email like '%" + term + "%' or username like '%" + term + "%' or nationality like '%" + term + "%' or firstname like '%" + term + "%' or lastname like '%" + term + "%')";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);
 			while (set.next()) {
-				SimpleUser u = new SimpleUser(set.getDate("birth_date"), set.getDate("registration_date"), set.getString("nationality"), true, set.getInt("fidelity_points"), set.getString("profile_picture"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
+				SimpleUser u = new SimpleUser(set.getDate("birth_date"), set.getDate("registration_date"), set.getString("nationality"), set.getBoolean("loggedin"), set.getInt("fidelity_points"), set.getString("profile_picture"), set.getString("username"), set.getString("email"), set.getBoolean("enabled"), null, set.getString("password"), Timestamp.valueOf(LocalDateTime.now()), set.getString("roles"), set.getString("firstname"), set.getString("lastname"));
 				users.add(u);
 			}
 			return users;
@@ -434,7 +436,7 @@ public class UserCrud {
 	
 	public static Integer getNumberOfUsers(){
 		Connection con = DataSource.getInstance().getCon();
-		String query = "select count(*) as nb from User where roles = 'ROLE_USER'";
+		String query = "select count(*) as nb from User where roles = 'a:0:{}'";
 		try {
 			Statement ste = con.createStatement();
 			ResultSet set = ste.executeQuery(query);

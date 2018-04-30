@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
 
-<VBox fx:id="nav" prefHeight="700.0" prefWidth="284.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontTeamBoxController">
-   <padding>
-      <Insets left="20.0" top="10.0" />
-   </padding>
+<VBox xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.FrontTeamBoxController">
+   <children>
+      <ScrollPane prefHeight="700.0" prefWidth="291.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1889.0" prefWidth="300.0">
+               <children>
+                  <VBox fx:id="nav" prefHeight="700.0" prefWidth="284.0">
+                     <padding>
+                        <Insets left="20.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
 </VBox>

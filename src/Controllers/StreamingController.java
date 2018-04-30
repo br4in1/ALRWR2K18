@@ -31,7 +31,7 @@ public class StreamingController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		wv1.getEngine().load("file:///Users/simo/Downloads/test.html");
+		wv1.getEngine().loadContent("<html><iframe width=\"972\" height=\"316\" src=\"https://www.youtube.com/embed/WoeBleqcc2E\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe></html>", "text/html");
 		wv2.getEngine().load("http://us20.chatzy.com/28652836672604");
 	}	
 	

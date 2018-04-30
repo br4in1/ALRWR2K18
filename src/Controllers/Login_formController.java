@@ -273,7 +273,7 @@ public class Login_formController implements Initializable {
 		Boolean B3 = CheckPassword();
 		if (!B1 && !B2 && B3) {
 			Date today = Date.valueOf(LocalDate.now());
-			SimpleUser u = new SimpleUser(Date.valueOf(birthdate.getValue()), today, nationality.getSelectionModel().getSelectedItem(), false, 0, null, username.getText(), email.getText(), false, null, password.getText(), null, "ROLE_USER", firstname.getText(), lastname.getText());
+			SimpleUser u = new SimpleUser(Date.valueOf(birthdate.getValue()), today, nationality.getSelectionModel().getSelectedItem(), false, 0, null, username.getText(), email.getText(), false, null, password.getText(), null, "a:0:{}", firstname.getText(), lastname.getText());
 			UserCrud.AddUserToDataBaseStepOne(u);
 			JFXDialogLayout content = new JFXDialogLayout();
 			content.setHeading(new Text("Tout est prêt ... ou presque !"));
@@ -301,11 +301,11 @@ public class Login_formController implements Initializable {
 			JFXDialog check_data = new JFXDialog(welcomeSP, content, JFXDialog.DialogTransition.CENTER);
 			check_data.show();
 		} else if (u != null) {
-			if (u.getRoles().equals("ROLE_ADMIN")) {
+			if (u.getRoles().equals("a:1:{i:0;s:10:\"ROLE_ADMIN\";}")) {
 				Admin.current_user = (Admin) (u);
 				Admin.current_user = UserCrud.GetMyData_Admin(Admin.current_user);
 				ShowDashboard();
-			} else if (u.getRoles().equals("ROLE_MODERATOR")) {
+			} else if (u.getRoles().equals("a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}")) {
 				if (u.getEnabled()) {
 					Moderator.current_user = (Moderator) (u);
 					Moderator.current_user = UserCrud.GetMyData_Moderator(Moderator.current_user);

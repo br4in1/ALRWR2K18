@@ -11,11 +11,13 @@ import Services.GameCrud;
 import Services.StadiumCrud;
 import Services.TeamCrud;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -36,6 +38,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -77,7 +80,12 @@ public class GamesCrudController implements Initializable {
 	private TableColumn<Game, Integer> id;
 	private HashMap<String, Integer> map1;
 	private HashMap<String, Integer> map2;
-	ObservableList<Game> OL = FXCollections.observableList(GameCrud.findAllGames());
+	
+	private List<String > listTeam ;
+	
+	
+	@FXML
+	private JFXTextField searchfield;
 
 	/**
 	 * Initializes the controller class.
@@ -103,13 +111,18 @@ public class GamesCrudController implements Initializable {
 				new PropertyValueFactory<>("highlights"));
 		referee.setCellValueFactory(
 				new PropertyValueFactory<>("referee"));
+		ObservableList<Game> OL = FXCollections.observableList(GameCrud.findAllGames());
 		tablev.setItems(OL);
+		
 	}
 
 	void update() {
 		map1 = TeamCrud.GetNameIdMap();
+		listTeam = TeamCrud.GetNamelist() ;
 		map2 = StadiumCrud.GetNameIdMap();
-		ObservableList<String> teams = FXCollections.observableArrayList(map1.keySet());
+		//old -- ObservableList<String> teams = FXCollections.observableArrayList(map1.keySet());
+		ObservableList<String> teams = FXCollections.observableArrayList(listTeam);
+		
 		ObservableList<String> stadiums = FXCollections.observableArrayList(map2.keySet());
 
 		home.setCellFactory(ComboBoxTableCell.forTableColumn(teams));
@@ -200,7 +213,9 @@ public class GamesCrudController implements Initializable {
 					else 
 					{
 						((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setAwayTeam(t.getNewValue());
-						GameCrud.update("AwayTeam", map1.get(t.getNewValue()), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+					//	GameCrud.update("AwayTeam", map1.get(t.getNewValue()), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+						GameCrud.update("AwayTeam", t.getNewValue(), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+					
 					}
 				} else {
 					refresh();
@@ -227,7 +242,9 @@ public class GamesCrudController implements Initializable {
 					else 
 					{
 						((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).setAwayTeam(t.getNewValue());
-						GameCrud.update("HomeTeam", map1.get(t.getNewValue()), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+						// GameCrud.update("HomeTeam", map1.get(t.getNewValue()), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+						 GameCrud.update("HomeTeam", t.getNewValue(), ((Game) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+					
 					}
 				} else {
 					refresh();
@@ -340,12 +357,10 @@ public class GamesCrudController implements Initializable {
 
 	@FXML
 	private void refresh(MouseEvent event) {
-		OL = FXCollections.observableList(GameCrud.findAllGames());
 		display();
 	}
 
 	private void refresh() {
-		OL = FXCollections.observableList(GameCrud.findAllGames());
 		display();
 	}
 
@@ -385,7 +400,7 @@ public class GamesCrudController implements Initializable {
 			}
 		}
 
-		FileOutputStream fileOut = new FileOutputStream("/Users/simo/Desktop/MyBackup.xls");
+		FileOutputStream fileOut = new FileOutputStream("/Users/macbook/Desktop/MyBackup.xls");
 		workbook.write(fileOut);
 		fileOut.close();
 
@@ -397,6 +412,34 @@ public class GamesCrudController implements Initializable {
 		alert.setContentText(text);
 
 		alert.showAndWait();
+	}
+
+	@FXML
+	private void search(KeyEvent event) {
+		tablev.getItems().clear();
+		id.setCellValueFactory(
+				new PropertyValueFactory<>("id"));
+		date.setCellValueFactory(
+				new PropertyValueFactory<>("date"));
+		home.setCellValueFactory(
+				new PropertyValueFactory<>("HomeTeam"));
+		away.setCellValueFactory(
+				new PropertyValueFactory<>("AwayTeam"));
+		result.setCellValueFactory(
+				new PropertyValueFactory<>("result"));
+		stadium.setCellValueFactory(
+				new PropertyValueFactory<>("stadium"));
+		summary.setCellValueFactory(
+				new PropertyValueFactory<>("summary"));
+		summaryPhoto.setCellValueFactory(
+				new PropertyValueFactory<>("summaryPhoto"));
+		highlights.setCellValueFactory(
+				new PropertyValueFactory<>("highlights"));
+		referee.setCellValueFactory(
+				new PropertyValueFactory<>("referee"));
+		ObservableList<Game> OBL = FXCollections.observableList(GameCrud.searchGames(searchfield.getText()));
+		tablev.setItems(OBL);
+		
 	}
 
 }

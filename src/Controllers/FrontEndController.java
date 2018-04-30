@@ -26,6 +26,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import Controllers.TeamFrontController;
+import Views.FrontTeamBoxController;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
@@ -310,7 +311,7 @@ public class FrontEndController implements Initializable {
         if (teams_loaded == 0) {
             teams = FXMLLoader.load(getClass().getResource("/Views/TeamFront.fxml"));
             teamBox = FXMLLoader.load(getClass().getResource("/Views/FrontTeamBox.fxml"));
-            for (Node node : teamBox.getChildren()) {
+            for (Node node : FrontTeamBoxController.thisController.nav.getChildren()) {
                 node.addEventHandler(MouseEvent.MOUSE_CLICKED, (k) -> {
                     if (TeamFrontController.current_team_id != Integer.parseInt(node.getId())) {
                         TeamFrontController.current_team_id = Integer.parseInt(node.getId());

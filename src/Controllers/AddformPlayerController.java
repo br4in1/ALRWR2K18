@@ -181,10 +181,11 @@ public class AddformPlayerController implements Initializable {
 					Notifications notificationBuilder
 								= Notifications.create().title("Avertissment")
 										.text("the player has been added ! ")
-										.hideAfter(Duration.seconds(3))
+										.hideAfter(Duration.seconds(5))
 										.position(Pos.TOP_RIGHT)
 										.onAction((ActionEvent event1) -> {
 											// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+										System.out.println("Clicked on notification !");
 										});
 										
 						notificationBuilder.showInformation();
