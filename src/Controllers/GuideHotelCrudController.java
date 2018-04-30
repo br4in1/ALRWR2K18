@@ -90,7 +90,7 @@ public class GuideHotelCrudController implements Initializable, MapComponentInit
 
 	private GoogleMap map;
 	private GeocodingService geocodingService;
-	ObservableList<String> TypeDate = FXCollections.observableArrayList("Hotel", "Stade", "Divertissement", "Event");
+	ObservableList<String> TypeDate = FXCollections.observableArrayList("Hotel", "Stade", "Divertissement");
 
 	@FXML
 	private GoogleMapView mapView;
