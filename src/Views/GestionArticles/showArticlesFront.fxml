@@ -75,9 +75,9 @@
                         </VBox>
                         <StackPane prefHeight="254.0" prefWidth="431.0" style="-fx-border-width: 1; -fx-border-insets: 3; -fx-border-style: solid inside; -fx-border-radius: 5;">
                            <children>
-                              <ScrollPane>
+                              <ScrollPane prefHeight="276.0" prefWidth="423.0">
                                  <content>
-                                    <WebView fx:id="wvArticleContenu" prefHeight="246.0" prefWidth="404.0" />
+                                    <WebView fx:id="wvArticleContenu" prefHeight="244.0" prefWidth="419.0" />
                                  </content>
                               </ScrollPane>
                            </children>
