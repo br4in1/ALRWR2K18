@@ -174,7 +174,7 @@ public class AjouterArticleController implements Initializable {
                 idEntite.setConverter(new StringConverter<Team>() {
                     @Override
                     public String toString(Team object) {
-                        return "Player [" + object.getId() + "] : " + object.getName();
+                        return "Equipe [" + object.getId() + "] : " + object.getName();
                     }
 
                     @Override
@@ -192,7 +192,7 @@ public class AjouterArticleController implements Initializable {
                 idEntite.setConverter(new StringConverter<Stade>() {
                     @Override
                     public String toString(Stade object) {
-                        return "Player [" + object.getId() + "] : " + object.getNom();
+                        return "Stade [" + object.getId() + "] : " + object.getNom();
                     }
 
                     @Override

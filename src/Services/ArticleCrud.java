@@ -236,7 +236,7 @@ public class ArticleCrud {
         try {
             PreparedStatement ste = conn.prepareStatement(req);
             ste.setString(1, cat);
-            ResultSet result = ste.executeQuery();// select
+            ResultSet result = ste.executeQuery();
             while (result.next()) {
                 list.add(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
                         result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),

@@ -221,12 +221,13 @@ public class ConsulterArticlesController implements Initializable {
         facebook = new FacebookFactory().getInstance();
         facebook.setOAuthAppId("", "");
         // TODO : Change Token
-        String accessTokenString = "EAACEdEose0cBAFiqKz8mHBFVb0HqGBdzx8bqXHhFiWot2Qkpe54bA9Prm6JWzOBXN32mxe442Kd6wgYefZARMPb2phpvkgJ7omWI5aw0nvMhJuRBpOnCge55bJTXsnv6PbbXhz7b21FZBBIZBmZCTJyX0DSvNtvB5Xh9HtQkF3XeoGoNpfe7O82uoSZAj5eOXa3huSAThEemnK0Tp7YxW";
+        String accessTokenString = "EAACEdEose0cBALZCk18JqYE5TgPJ1ADZAzptwVjfzxXCCfJ4SA4YZBZCryu0Jy0NqsCs5yA8gcRexSpHMVlamRNGUd7JEYI2QtJX7ZCBWjgTpGIKm3l9rWJeIUo0LKlYLm9nZBklKKsxou5wRPZAT0R8QpbTeNS8v69I3OZBNcMkZCO9gF62TgTKJn9kdjMZC0nNQ04DaNbhLrIrZBZBzA8u65Nk";
         AccessToken at = new AccessToken(accessTokenString);
         // Set access token.
         facebook.setOAuthAccessToken(at);
         ResponseList<Account> accounts = facebook.getAccounts();
         Account yourPageAccount = accounts.get(0);  // if index 0 is your page account.
+        //System.out.println(accounts);
         String pageAccessToken = yourPageAccount.getAccessToken();
 
         /*PostUpdate post = new PostUpdate(new URL("http://facebook4j.org"))
@@ -235,7 +236,7 @@ public class ConsulterArticlesController implements Initializable {
                 .caption(toVisualize.getTitre())
                 .description(toVisualize.getContenu());
         facebook.postFeed(post);*/
-        facebook.postStatusMessage(toVisualize.getTitre());
+        facebook.postStatusMessage("Article: " + toVisualize.getTitre() + " \n About : " + toVisualize.getTypeEntity());
 
     }
 
