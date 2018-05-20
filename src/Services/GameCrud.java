@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Entities.Game;
+import Entities.Team;
 import Utils.DataSource;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -93,23 +94,53 @@ public class GameCrud {
 		}
 		return null;
 	}
-
-	public static List<Date> findDatesByTeams(int team1, int team2) {
-		Connection con = DataSource.getInstance().getCon();
+//public static Da findDatesByTeams(String team1, String team2) {
+	public static List<Date> findDatesByTeams(String team1, String team2) {
+		/*Connection con = DataSource.getInstance().getCon();
+		
 		List result = new ArrayList<Date>();
 		String strSQLQuery = String.format("select date from game where HomeTeam= %s and awayTeam= %s", team1, team2);
 		try {
-			Statement ste = con.createStatement();
-			ResultSet set = ste.executeQuery(strSQLQuery);
-			while (set.next()) {
-				result.add(set.getDate("Date"));
+		Statement ste = con.createStatement();
+		ResultSet set = ste.executeQuery(strSQLQuery);
+		System.out.println("cccccc " + set);
+		while (set.next()) {
+		System.out.println(set.getDate("date") + "aaaaaaaaaa");
+		result.add(set.getDate("date"));
+		System.out.println(result + "bbbbbb");
+		}
+		System.out.println(result);
+		return result;
+		} catch (SQLException ex) {
+		Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;*/
+		
+		
+		
+		Connection con = DataSource.getInstance().getCon();
+		String query = "SELECT date from `game` where HomeTeam = ? and AwayTeam = ?";
+		List<Date> l = new ArrayList<Date>();
+		try {
+			PreparedStatement ste = con.prepareStatement(query);
+			ste.setString(1, team1);
+			ste.setString(2, team2);
+
+			ResultSet result = ste.executeQuery();
+
+			while (result.next()) {
+				l.add(result.getDate("date"));
+
+				//return new Team(result.getString("name"), result.getString("coach"), result.getString("president"), result.getString("area"), result.getInt("gamesPlayed"), result.getInt("goalScored"), result.getInt("goalAgainst"), result.getInt("participations"), result.getDate("fifaDate"), result.getString("wcGroup"), result.getInt("win"), result.getInt("loose"), result.getInt("draw"), result.getInt("points"), result.getInt("fifaRank"), result.getString("flagPhoto"), result.getString("logoPhoto"), result.getString("squadPhoto"), result.getString("descriptionPhoto"), result.getString("description"), result.getString("website"), result.getString("video"));
 			}
-			System.out.println(result);
-			return result;
+			return l ;
 		} catch (SQLException ex) {
 			Logger.getLogger(GameCrud.class.getName()).log(Level.SEVERE, null, ex);
+
 		}
 		return null;
+		
+		
 	}
 
 	public static void update(String row, String value, int id) {

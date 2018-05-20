@@ -296,7 +296,7 @@ public class TeamCrud {
 		}
 		return null;
 	}
-
+	
 	public static List<String> GetNamelist() {
 
 		List<String> list = new ArrayList<>();

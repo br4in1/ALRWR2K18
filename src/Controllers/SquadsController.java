@@ -26,6 +26,7 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -90,6 +91,7 @@ public class SquadsController implements Initializable {
 	private ImageView field;
 
 	HashMap<String, Integer> map;
+	List<String> lTeam ;
 	HashMap<String, Entry<Integer, Integer>> exist;
 
 	double orgSceneX, orgSceneY, orgTranslateX, orgTranslateY;
@@ -148,7 +150,7 @@ public class SquadsController implements Initializable {
 
 		exist = new HashMap<String, Entry<Integer, Integer>>();
 		map = TeamCrud.GetNameIdMap();
-
+		//lTeam = TeamCrud.GetNamelist();
 		HomeTeam.setItems(FXCollections.observableArrayList(map.keySet()));
 		AwayTeam.setItems(FXCollections.observableArrayList(map.keySet()));
 
@@ -251,8 +253,14 @@ public class SquadsController implements Initializable {
 	private void snap(MouseEvent event) throws IOException, ParseException {
 		Format formatter = new SimpleDateFormat("yyyy-MM-dd");
 		List<String> choices = new ArrayList<>();
-		List<Date> dates = new ArrayList<>(GameCrud.findDatesByTeams(map.get(HomeTeam.getSelectionModel().getSelectedItem()), map.get(AwayTeam.getSelectionModel().getSelectedItem())));
+		
+		System.out.println("HomeTeam " + TeamCrud.findById(map.get(HomeTeam.getSelectionModel().getSelectedItem())).getName());
+				System.out.println("awayTeam " + TeamCrud.findById(map.get(AwayTeam.getSelectionModel().getSelectedItem())).getName());
+
+		List<Date> dates = new ArrayList<>(GameCrud.findDatesByTeams(TeamCrud.findById(map.get(HomeTeam.getSelectionModel().getSelectedItem())).getName(),TeamCrud.findById(map.get(AwayTeam.getSelectionModel().getSelectedItem())).getName()));
+		//map.get(HomeTeam.getSelectionModel().getSelectedItem())
 		for (Date date : dates) {
+			System.out.println(date);
 			choices.add(formatter.format(date));
 		}
 		ChoiceDialog<String> dialog = new ChoiceDialog<>("Date", choices);
@@ -263,7 +271,9 @@ public class SquadsController implements Initializable {
 		if (result.isPresent()) {
 
 			BufferedImage bufferedImage = new BufferedImage(550, 400, BufferedImage.TYPE_INT_ARGB);
-			File file = new File("/Users/simo/Desktop/myfile.png");
+			File file = new File("/Users/macbook/Desktop/myfile.png");
+			//
+			
 			WritableImage snapshot = middle.snapshot(new SnapshotParameters(), null);
 			BufferedImage image;
 			image = javafx.embed.swing.SwingFXUtils.fromFXImage(snapshot, bufferedImage);
