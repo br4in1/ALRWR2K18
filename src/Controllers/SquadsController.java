@@ -271,7 +271,7 @@ public class SquadsController implements Initializable {
 		if (result.isPresent()) {
 
 			BufferedImage bufferedImage = new BufferedImage(550, 400, BufferedImage.TYPE_INT_ARGB);
-			File file = new File("/Users/macbook/Desktop/myfile.png");
+			File file = new File("/Applications/MAMP/htdocs/projet/ALRWC2K18/web/myfile.png");
 			//
 			
 			WritableImage snapshot = middle.snapshot(new SnapshotParameters(), null);

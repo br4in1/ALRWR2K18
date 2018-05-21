@@ -199,8 +199,8 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 					LatLong Location = new LatLong(LisStade.get(i).getGeolat(), LisStade.get(i).getGeolong());
 				MarkerOptions markerOptions1 = new MarkerOptions();
 				markerOptions1.position(Location)
-						.visible(true)
-						.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/resto.png", "png"))
+						//.visible(true)
+						//.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/resto.png", "png"))
 						.title(LisStade.get(i).getNom());
 
 				Marker joeSmithMarker = new Marker(markerOptions1);
@@ -212,8 +212,8 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 					LatLong Location = new LatLong(LisStade.get(i).getGeolat(), LisStade.get(i).getGeolong());
 				MarkerOptions markerOptions1 = new MarkerOptions();
 				markerOptions1.position(Location)
-						.visible(true)
-						.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/resto.png", "png"))
+						//.visible(true)
+						//.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/resto.png", "png"))
 						.title(LisStade.get(i).getNom());
 
 				Marker joeSmithMarker = new Marker(markerOptions1);
@@ -241,8 +241,8 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 				LatLong Location = new LatLong(LisStade.get(i).getGeolat(), LisStade.get(i).getGeolong());
 				MarkerOptions markerOptions1 = new MarkerOptions();
 				markerOptions1.position(Location)
-						.visible(true)
-						.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/stade.png", "png"))
+						//.visible(true)
+						//.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/stade.png", "png"))
 						.title(LisStade.get(i).getNom());
 
 				Marker joeSmithMarker = new Marker(markerOptions1);
@@ -254,8 +254,8 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 				LatLong Location = new LatLong(LisStade.get(i).getGeolat(), LisStade.get(i).getGeolong());
 				MarkerOptions markerOptions1 = new MarkerOptions();
 				markerOptions1.position(Location)
-						.visible(true)
-						.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/stade.png", "png"))
+						//.visible(true)
+						//.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/stade.png", "png"))
 						.title(LisStade.get(i).getNom());
 
 				Marker joeSmithMarker = new Marker(markerOptions1);
@@ -285,8 +285,8 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 				markerOptions1.position(Location)
 						//.icon(new File("/assets/hotel.png").toURI().toURL().toExternalForm())
 
-						.visible(true)
-						.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/hotel.png", "png"))
+						//.visible(true)
+						//.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/hotel.png", "png"))
 						.title(Lis.get(i).getNom()+"distance :"+x);
 				Marker joeSmithMarker = new Marker(markerOptions1);
 				col.add(joeSmithMarker);
@@ -300,8 +300,8 @@ public class GuideAffichageMapController implements Initializable, MapComponentI
 				markerOptions1.position(Location)
 						//.icon(new File("/assets/hotel.png").toURI().toURL().toExternalForm())
 
-						.visible(true)
-						.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/hotel.png", "png"))
+						//.visible(true)
+						//.icon(MarkerImageFactory.createMarkerImage("file:///C:/Users/hotel.png", "png"))
 						.title(Lis.get(i).getNom());
 				Marker joeSmithMarker = new Marker(markerOptions1);
 				col.add(joeSmithMarker);
