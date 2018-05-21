@@ -83,7 +83,10 @@ public class FrontEndController implements Initializable {
         current_page = "home";
         homebutton.setStyle("-fx-background-color: #66ae2e; -fx-background-radius : 25px; -fx-text-fill: #fff;");
         firstlastname.setText(SimpleUser.current_user.getUsername());
-        profilepic.setFill(new ImagePattern(new Image(SimpleUser.current_user.getProfilepicture())));
+		if(SimpleUser.current_user.getProfilepicture() == null){
+			profilepic.setFill(new ImagePattern(new Image("/assets/default_profile_picture.png")));
+		}
+		else profilepic.setFill(new ImagePattern(new Image(SimpleUser.current_user.getProfilepicture())));
         try {
             homeClicked(null);
         } catch (IOException ex) {
