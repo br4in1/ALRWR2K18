@@ -9,11 +9,13 @@ import Entities.Article;
 import Entities.User;
 import Utils.DataSource;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import static java.util.Collections.list;
 import java.util.HashMap;
@@ -51,16 +53,25 @@ public class ArticleCrud {
             conn = DataSource.getInstance().getCon();
         }
         try {
-            String sql = "INSERT INTO articles (titre, contenu, idEntity, typeEntity, datePublication, derniereModification, Auteur, articleImage) VALUES (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO articles (titre, contenu, idEntity, typeEntity, datePublication, derniereModification, Auteur, articleImage,permalink,is_commentable,num_comments) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ste = conn.prepareStatement(sql);
+
             ste.setString(1, n.getTitre());
             ste.setString(2, n.getContenu());
-            ste.setInt(3, n.getIdEntity());
+
+            if (n.getTypeEntity().equals("Private")) {
+                ste.setString(3, null);
+            } else {
+                ste.setInt(3, n.getIdEntity());
+            }
             ste.setString(4, n.getTypeEntity());
             ste.setDate(5, n.getDatePublication());
             ste.setDate(6, n.getDerniereModification());
             ste.setInt(7, n.getAuteur());
             ste.setString(8, n.getArticleImage());
+            ste.setString(9, n.getPermalink());
+            ste.setInt(10, n.getIs_commentable());
+            ste.setInt(11, 0);
             ste.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -80,9 +91,17 @@ public class ArticleCrud {
             PreparedStatement ste = conn.prepareStatement(req);
             ResultSet result = ste.executeQuery();// select
             while (result.next()) {
-                list.add(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+                Article a = new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
                         result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
-                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage")));
+                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage"));
+                a.setPermalink(result.getString("permalink"));
+                a.setNum_comments(result.getInt("num_comments"));
+                a.setLast_comment_at(result.getDate("last_comment_at"));
+                a.setIs_commentable(result.getInt("is_commentable"));
+                /*list.add(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+                        result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
+                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage")));*/
+                list.add(a);
             }
             return list;
         } catch (SQLException e) {
@@ -102,9 +121,20 @@ public class ArticleCrud {
             PreparedStatement ste = conn.prepareStatement(req);
             ResultSet result = ste.executeQuery();// select
             while (result.next()) {
-                list.add(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+                if (!result.getString("typeEntity").equals("Private")) {
+                    Article a = new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+                            result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
+                            result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage"));
+                    a.setPermalink(result.getString("permalink"));
+                    a.setNum_comments(result.getInt("num_comments"));
+                    a.setLast_comment_at(result.getDate("last_comment_at"));
+                    a.setIs_commentable(result.getInt("is_commentable"));
+
+                    /*list.add(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
                         result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
-                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage")));
+                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage")));*/
+                    list.add(a);
+                }
             }
             return list;
         } catch (SQLException e) {
@@ -123,9 +153,18 @@ public class ArticleCrud {
             ste.setInt(1, id);
             ResultSet result = ste.executeQuery();
             if (result.next()) {
-                return new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+                Article a = new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
                         result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
                         result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage"));
+                a.setPermalink(result.getString("permalink"));
+                a.setNum_comments(result.getInt("num_comments"));
+                a.setLast_comment_at(result.getDate("last_comment_at"));
+                a.setIs_commentable(result.getInt("is_commentable"));
+
+                /*return new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+                        result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
+                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage"));*/
+                return a;
             } else {
                 return null;
             }
@@ -238,9 +277,21 @@ public class ArticleCrud {
             ste.setString(1, cat);
             ResultSet result = ste.executeQuery();
             while (result.next()) {
-                list.add(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+                if (!result.getString("typeEntity").equals("Private")) {
+
+                    Article a = new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+                            result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
+                            result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage"));
+                    a.setPermalink(result.getString("permalink"));
+                    a.setNum_comments(result.getInt("num_comments"));
+                    a.setLast_comment_at(result.getDate("last_comment_at"));
+                    a.setIs_commentable(result.getInt("is_commentable"));
+
+                    /*list.add(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
                         result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
-                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage")));
+                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage")));*/
+                    list.add(a);
+                }
             }
             return list;
         } catch (SQLException e) {
@@ -253,17 +304,24 @@ public class ArticleCrud {
         if (article == null) {
             conn = DataSource.getInstance().getCon();
         }
-        String req = "select u.id 'userId', u.firstname 'userFirstname', u.lastname 'userLastname', a.id, a.titre, a.contenu, a.idEntity, a.typeEntity, a.datePublication, a.derniereModification, a.auteur, a.articleImage from User u INNER JOIN Articles a on u.id = a.auteur where a.id = ?";
+        String req = "select u.id 'userId', u.firstname 'userFirstname', u.lastname 'userLastname', a.id, a.titre, a.contenu, a.idEntity, a.typeEntity, a.datePublication, a.derniereModification, a.auteur, a.articleImage, a.permalink, a.is_commentable, a.num_comments, a.last_comment_at from User u INNER JOIN Articles a on u.id = a.auteur where a.id = ?";
         try {
             PreparedStatement ste = conn.prepareStatement(req);
             ste.setInt(1, id);
             ResultSet result = ste.executeQuery();
             if (result.next()) {
-               return new AbstractMap.SimpleEntry<Article, User>(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+                Article a = new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
                         result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
-                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage")), new User(null, null,null, null,null,null,null,result.getString("userFirstname"), result.getString("userLastname")));
-            }
-            else {
+                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage"));
+                a.setPermalink(result.getString("permalink"));
+                a.setNum_comments(result.getInt("num_comments"));
+                a.setLast_comment_at(result.getDate("last_comment_at"));
+                a.setIs_commentable(result.getInt("is_commentable"));
+                return new AbstractMap.SimpleEntry<Article, User>(a, new User(null, null, null, null, null, null, null, result.getString("userFirstname"), result.getString("userLastname")));
+                /*return new AbstractMap.SimpleEntry<Article, User>(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+                        result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
+                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage")), new User(null, null, null, null, null, null, null, result.getString("userFirstname"), result.getString("userLastname")));*/
+            } else {
                 return null;
             }
 
@@ -272,6 +330,7 @@ public class ArticleCrud {
             return null;
         }
     }
+
     public static List<Article> findAllByKeyword(String keyword) {
         if (article == null) {
             conn = DataSource.getInstance().getCon();
@@ -281,19 +340,65 @@ public class ArticleCrud {
         String req = "select * from articles where titre like ? or contenu like ?";
         try {
             PreparedStatement ste = conn.prepareStatement(req);
-            ste.setString(1, "%" + keyword +"%");
-            ste.setString(2,"%" + keyword +"%");
+            ste.setString(1, "%" + keyword + "%");
+            ste.setString(2, "%" + keyword + "%");
 
             ResultSet result = ste.executeQuery();// select
             while (result.next()) {
-                list.add(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+                Article a = new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
                         result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
-                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage")));
+                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage"));
+                a.setPermalink(result.getString("permalink"));
+                a.setNum_comments(result.getInt("num_comments"));
+                a.setLast_comment_at(result.getDate("last_comment_at"));
+                a.setIs_commentable(result.getInt("is_commentable"));
+
+                /*list.add(new Article(result.getInt("id"), result.getString("titre"), result.getString("contenu"),
+                        result.getInt("idEntity"), result.getString("typeEntity"), result.getDate("datePublication"),
+                        result.getDate("derniereModification"), result.getInt("auteur"), result.getString("articleImage")));*/
+                list.add(a);
             }
             return list;
         } catch (SQLException e) {
             System.out.println(e);
             return null;
         }
+    }
+
+    public static boolean updatePrivateComments(int id, int is_commentable, String prive) {
+        if (article == null) {
+            conn = DataSource.getInstance().getCon();
+        }
+        String req = null;
+        Date currDate = new Date(Calendar.getInstance().getTime().getTime());
+        if (prive.equals("Private")) {
+            req = "UPDATE articles set is_commentable = ?,typeEntity='Private',idEntity=null,derniereModification = ? where id = ?";
+            try {
+                PreparedStatement ste = conn.prepareStatement(req);
+                ste.setInt(1, is_commentable);
+                ste.setDate(2, currDate);
+                ste.setInt(3, id);
+                ste.executeUpdate();
+                return true;
+            } catch (SQLException e) {
+                System.out.println(e);
+                return false;
+            }
+        } else {
+            req = "UPDATE articles set is_commentable = ?,derniereModification = ? where id = ?";
+            try {
+                PreparedStatement ste = conn.prepareStatement(req);
+                ste.setInt(1, is_commentable);
+                ste.setDate(2, currDate);
+                ste.setInt(3, id);
+                ste.executeUpdate();
+                return true;
+            } catch (SQLException e) {
+                System.out.println(e);
+                return false;
+            }
+
+        }
+
     }
 }

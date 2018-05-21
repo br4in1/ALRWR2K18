@@ -86,6 +86,14 @@ public class ConsulterArticlesController implements Initializable {
     private JFXButton btRefresh;
     @FXML
     private ImageView ivArticleImage;
+    @FXML
+    private JFXCheckBox checkPrivate;
+    @FXML
+    private JFXCheckBox checkComments;
+    private int is_commentable = 0;
+    private int is_private = 0;
+    @FXML
+    private JFXButton btUpdate;
 
     /**
      * Initializes the controller class.
@@ -132,6 +140,16 @@ public class ConsulterArticlesController implements Initializable {
                     Article clickedRow = row.getItem();
                     toVisualize = row.getItem();
                     ivArticleImage.setImage(new Image(toVisualize.getArticleImage()));
+                    if (toVisualize.getTypeEntity().equals("Private")) {
+                        checkPrivate.setSelected(true);
+                    } else {
+                        checkPrivate.setSelected(false);
+                    }
+                    if (toVisualize.getIs_commentable() == 1) {
+                        checkComments.setSelected(true);
+                    } else {
+                        checkComments.setSelected(false);
+                    }
                 }
             });
             return row;
@@ -144,6 +162,26 @@ public class ConsulterArticlesController implements Initializable {
                     btSupprimer.setDisable(false);
                 } else {
                     btSupprimer.setDisable(true);
+                }
+            }
+        });
+        checkComments.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (checkComments.isSelected()) {
+                    is_commentable = 1;
+                } else {
+                    is_commentable = 0;
+                }
+            }
+        });
+        checkPrivate.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (checkPrivate.isSelected()) {
+                    is_private = 1;
+                } else {
+                    is_private = 0;
                 }
             }
         });
@@ -251,6 +289,27 @@ public class ConsulterArticlesController implements Initializable {
         });
         articlesList.setItems(data);
         articlesList.refresh();
+    }
+
+    @FXML
+    private void updateClicked(MouseEvent event) {
+        boolean updated = false;
+        if (toVisualize == null) {
+            showDialog("Errorr !!!", "Veuillez choisir un article a MAJ");
+        } else {
+            if (is_private == 1) {
+                updated = ArticleCrud.updatePrivateComments(toVisualize.getId(), is_commentable, "Private");
+            } else {
+                updated = ArticleCrud.updatePrivateComments(toVisualize.getId(), is_commentable, "not");
+            }
+            if (updated) {
+                showDialog("Successs", "L'article a ete MAJ avec success");
+                articlesList.setItems(data);
+                articlesList.refresh();
+            } else {
+                showDialog("Erreur !!!", "L'article n'a pas pu etre mAJ, veuillez ressayer plus tard");
+            }
+        }
     }
 
 }

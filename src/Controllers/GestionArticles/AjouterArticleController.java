@@ -97,7 +97,12 @@ public class AjouterArticleController implements Initializable {
     @FXML
     private StackPane IvStackPane;
     private String noneChosen = null;
-
+    @FXML
+    private JFXCheckBox checkComments;
+    @FXML
+    private JFXCheckBox checkPrivate;
+    private int is_commentable = 0;
+    private int is_private = 0;
     /**
      * Initializes the controller class.
      */
@@ -122,7 +127,26 @@ public class AjouterArticleController implements Initializable {
                     btAjouter.setDisable(true);
                 }
             }
-
+        });
+        checkComments.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (checkComments.isSelected()) {
+                    is_commentable = 1;
+                } else {
+                    is_commentable = 0;
+                }
+            }
+        });
+        checkPrivate.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (checkPrivate.isSelected()) {
+                    is_private = 1;
+                } else {
+                    is_private = 0;
+                }
+            }
         });
     }
 
@@ -212,7 +236,6 @@ public class AjouterArticleController implements Initializable {
 
     @FXML
     private void ajouterArticle(MouseEvent event) throws IOException {
-
         if (idEntite.getValue() == null || contenu.getHtmlText() == null || contenu.getHtmlText().equals("") || tfTitre.getText().equals("") || tfTitre.getText() == null || !checkPublier.isSelected() || tfImageArticle.getText() == null || tfImageArticle.getText().equals("") || ivImageArticle.getImage() == null) {
             showDialog("Error", "Veuillez verifier que vous avez remplis tous les champs");
         } else {
@@ -237,6 +260,13 @@ public class AjouterArticleController implements Initializable {
                 a.setAuteur(Admin.current_user.getId());
             } else {
                 a.setAuteur(Moderator.current_user.getId());
+            }
+            a.setPermalink("http://localhost/russie2k18/web/app_dev.php/admin/articles/new");
+            a.setNum_comments(0);
+            a.setIs_commentable(is_commentable);
+            
+            if (is_private == 1){
+                a.setTypeEntity("Private");
             }
             if (ArticleCrud.getRepository().add(a)) {
                 showDialog("Success", "Votre articles a ete ajouter avec success");

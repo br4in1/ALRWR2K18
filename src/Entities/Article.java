@@ -22,8 +22,12 @@ public class Article {
     private Date derniereModification;
     private int auteur;
     private String articleImage;
+    private String permalink;
+    private int is_commentable;
+    private int num_comments;
+    private Date last_comment_at;
 
-    public Article(int id, String titre, String contenu, int idEntity, String typeEntity, Date datePublication, Date derniereModification, int auteur,String articleImage) {
+    public Article(int id, String titre, String contenu, int idEntity, String typeEntity, Date datePublication, Date derniereModification, int auteur, String articleImage) {
         this.id = id;
         this.titre = titre;
         this.contenu = contenu;
@@ -122,10 +126,41 @@ public class Article {
         this.articleImage = articleImage;
     }
 
-    @Override
-    public String toString() {
-        return "Article{" + "id=" + id + ", titre=" + titre + ", contenu=" + contenu + ", idEntity=" + idEntity + ", typeEntity=" + typeEntity + ", datePublication=" + datePublication + ", derniereModification=" + derniereModification + ", auteur=" + auteur + ", articleImage=" + articleImage + '}';
+    public String getPermalink() {
+        return permalink;
     }
 
- 
+    public void setPermalink(String permalink) {
+        this.permalink = permalink;
+    }
+
+    public int getIs_commentable() {
+        return is_commentable;
+    }
+
+    public void setIs_commentable(int is_commentable) {
+        this.is_commentable = is_commentable;
+    }
+
+    public int getNum_comments() {
+        return num_comments;
+    }
+
+    public void setNum_comments(int num_comments) {
+        this.num_comments = num_comments;
+    }
+
+    public Date getLast_comment_at() {
+        return last_comment_at;
+    }
+
+    public void setLast_comment_at(Date last_comment_at) {
+        this.last_comment_at = last_comment_at;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" + "id=" + id + ", titre=" + titre + ", contenu=" + contenu + ", idEntity=" + idEntity + ", typeEntity=" + typeEntity + ", datePublication=" + datePublication + ", derniereModification=" + derniereModification + ", auteur=" + auteur + ", articleImage=" + articleImage + ", permalink=" + permalink + ", is_commentable=" + is_commentable + ", num_comments=" + num_comments + ", last_comment_at=" + last_comment_at + '}';
+    }
+
 }

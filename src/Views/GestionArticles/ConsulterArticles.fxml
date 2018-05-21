@@ -88,6 +88,17 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
+                  <JFXCheckBox fx:id="checkPrivate" checkedColor="#b24622" layoutX="763.0" layoutY="307.0" text="Make Private?">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </JFXCheckBox>
+                  <JFXCheckBox fx:id="checkComments" layoutX="763.0" layoutY="346.0" text="Allow Comments" />
+                  <JFXButton fx:id="btUpdate" buttonType="RAISED" layoutX="765.0" layoutY="384.0" onMouseClicked="#updateClicked" prefHeight="30.0" prefWidth="106.0" style="-fx-background-color: #b12b2b;" text="Update" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
                     </children>
                 </Pane>
             </center>
